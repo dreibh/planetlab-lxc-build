@@ -15,7 +15,7 @@ DEFAULT_FCDISTRO=f20
 DEFAULT_PLDISTRO=planetlab
 DEFAULT_PERSONALITY=linux64
 DEFAULT_BASE="@DATE@--@PLDISTRO@-@FCDISTRO@-@PERSONALITY@"
-DEFAULT_BUILD_SCM_URL="git://git.onelab.eu/build"
+DEFAULT_BUILD_SCM_URL="git://github.com/dreibh/planetlab-lxc"
 
 # default gpg path used in signing yum repo
 DEFAULT_GPGPATH="/etc/planetlab"
@@ -689,7 +689,12 @@ function main () {
 	    GIT_REPO=$(echo $BUILD_SCM_URL | cut -d@ -f1)
 	    GIT_TAG=$(echo $BUILD_SCM_URL | cut -s -d@ -f2)
 	    GIT_TAG=${GIT_TAG:-master}
-	    mkdir -p $tmpdir; git archive --remote=$GIT_REPO $GIT_TAG | tar -C $tmpdir -xf -
+# 	    mkdir -p $tmpdir; git archive --remote=$GIT_REPO $GIT_TAG | tar -C $tmpdir -xf -
+     mkdir -p $tmpdir
+     git clone $GIT_REPO $tmpdir
+     cd $tmpdir
+     git checkout $GIT_TAG
+     cd -
 
             # Create lxc vm
 	    cd $tmpdir
