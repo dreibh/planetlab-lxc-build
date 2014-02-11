@@ -434,16 +434,16 @@ function fedora_configure_yum () {
 
     cat > $lxc_root/etc/yum.repos.d/building.repo <<EOF
 [fedora]
-name=Fedora \$releasever - \$arch
-baseurl=$FEDORA_MIRROR_BASE/releases/\$releasever/Everything/\$arch/os/
+name=Fedora \$releasever - \$basearch
+baseurl=$FEDORA_MIRROR_BASE/releases/\$releasever/Everything/\$basearch/os/
 enabled=1
 metadata_expire=7d
 gpgcheck=1
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-fedora-\$releasever-\$basearch
 
 [updates]
-name=Fedora \$releasever - \$arch - Updates
-baseurl=$FEDORA_MIRROR_BASE/updates/\$releasever/\$arch/
+name=Fedora \$releasever - \$basearch - Updates
+baseurl=$FEDORA_MIRROR_BASE/updates/\$releasever/\$basearch/
 enabled=1
 metadata_expire=7d
 gpgcheck=1

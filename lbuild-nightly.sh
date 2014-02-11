@@ -705,7 +705,7 @@ function main () {
 	    # Extract build again - in the vm
 	    [ -n "$SSH_KEY" ] && setupssh ${BASE} ${SSH_KEY}
 	    # xxx not working as of now - waiting for Sapan to look into this
-	    virsh -c lxc:/// lxc-enter-namespace $BASE --noseclabel /bin/bash -c "git clone $GIT_REPO /build; cd /build; git checkout $GIT_TAG"
+	    virsh -c lxc:/// lxc-enter-namespace $BASE --noseclabel /bin/bash -c "ping -c5 github.com ; git clone $GIT_REPO /build; cd /build; git checkout $GIT_TAG"
 	fi
 	echo "XXXXXXXXXX $COMMAND: preparation of vm $BASE done" $(date)
 
