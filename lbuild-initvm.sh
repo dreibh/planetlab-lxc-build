@@ -434,20 +434,20 @@ function fedora_configure_yum () {
 
     cat > $lxc_root/etc/yum.repos.d/building.repo <<EOF
 [fedora]
-name=Fedora $release - $arch
-baseurl=$FEDORA_MIRROR_BASE/releases/$release/Everything/$arch/os/
+name=Fedora \$release - \$arch
+baseurl=$FEDORA_MIRROR_BASE/releases/\$release/Everything/\$arch/os/
 enabled=1
 metadata_expire=7d
 gpgcheck=1
-gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-fedora-$releasever-$basearch
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-fedora-\$releasever-\$basearch
 
 [updates]
-name=Fedora $release - $arch - Updates
-baseurl=$FEDORA_MIRROR_BASE/updates/$release/$arch/
+name=Fedora \$release - \$arch - Updates
+baseurl=$FEDORA_MIRROR_BASE/updates/\$release/\$arch/
 enabled=1
 metadata_expire=7d
 gpgcheck=1
-gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-fedora-$releasever-$basearch
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-fedora-\$releasever-\$basearch
 EOF
 
     # for using vtest-init-lxc.sh as a general-purpose lxc creation wrapper
