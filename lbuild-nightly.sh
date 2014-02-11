@@ -28,9 +28,9 @@ RUN_LOG_EXTRAS=""
 
 # for publishing results, and the tests settings
 DEFAULT_WEBPATH="/build/@PLDISTRO@/"
-DEFAULT_TESTBUILDURL="http://build.onelab.eu/"
+DEFAULT_TESTBUILDURL="http://localhost/"
 # this is where the buildurl is pointing towards
-DEFAULT_WEBROOT="/build/"
+DEFAULT_WEBROOT="/webroot/"
 DEFAULT_TESTMASTER="testmaster.onelab.eu"
 
 ####################
@@ -642,11 +642,11 @@ function main () {
 	    # start in case e.g. we just rebooted
 	    virsh -c lxc:/// start ${BASE} || :
 	    # retrieve environment from the previous run
-	    FCDISTRO=$(virsh -c lxc:/// lxc-enter-namespace ${BASE} /build/getdistroname.sh)
-	    BUILD_SCM_URL=$(virsh -c lxc:/// lxc-enter-namespace ${BASE} /bin/bash -c "make --no-print-directory -C /build stage1=skip +build-GITPATH")
+	    FCDISTRO=$(virsh -c lxc:/// lxc-enter-namespace ${BASE} --noseclabel /build/getdistroname.sh)
+	    BUILD_SCM_URL=$(virsh -c lxc:/// lxc-enter-namespace ${BASE} --noseclabel /bin/bash -c "make --no-print-directory -C /build stage1=skip +build-GITPATH")
 	    # for efficiency, crop everything in one make run
 	    tmp=/tmp/${BASE}-env.sh
-	    virsh -c lxc:/// lxc-enter-namespace ${BASE} /bin/bash -c "make --no-print-directory -C /build stage1=skip \
+	    virsh -c lxc:/// lxc-enter-namespace ${BASE} --noseclabel /bin/bash -c "make --no-print-directory -C /build stage1=skip \
 		++PLDISTRO ++PLDISTROTAGS ++PERSONALITY ++MAILTO ++WEBPATH ++TESTBUILDURL ++WEBROOT" > $tmp
 	    . $tmp
 	    rm -f $tmp
@@ -737,8 +737,8 @@ function main () {
 	    cp $COMMANDPATH $(rootdir ${BASE})/build/
 
 	    # invoke this command in the vm for building (-T)
-	    virsh -c lxc:/// lxc-enter-namespace ${BASE} /bin/bash -c "chmod +x /build/$COMMAND"
-	    virsh -c lxc:/// lxc-enter-namespace ${BASE} /build/$COMMAND "${options[@]}" -b "${BASE}" "${MAKEVARS[@]}" "${MAKETARGETS[@]}"
+	    virsh -c lxc:/// lxc-enter-namespace ${BASE} --noseclabel /bin/bash -c "chmod +x /build/$COMMAND"
+	    virsh -c lxc:/// lxc-enter-namespace ${BASE} --noseclabel /build/$COMMAND "${options[@]}" -b "${BASE}" "${MAKEVARS[@]}" "${MAKETARGETS[@]}"
 	fi
 
 	# publish to the web so run_log can find them
