@@ -432,7 +432,7 @@ function fedora_configure_yum () {
     echo "Initializing yum.repos.d in $lxc"
     rm -f $lxc_root/etc/yum.repos.d/*
 
-    cat > $lxc_root/etc/yum.repos.d/building.repo.in <<EOF
+    cat > $lxc_root/etc/yum.repos.d/building.repo <<EOF
 [fedora]
 name=Fedora $release - $arch
 baseurl=FEDORA_MIRROR_BASE/releases/$release/Everything/$arch/os/
@@ -443,14 +443,12 @@ gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-fedora-$releasever-$basearch
 
 [updates]
 name=Fedora $release - $arch - Updates
-baseurl=FEDORA_MIRROR_BASE/updates/$release/$arch/
+baseurl=$FEDORA_MIRROR_BASE/updates/$release/$arch/
 enabled=1
 metadata_expire=7d
 gpgcheck=1
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-fedora-$releasever-$basearch
 EOF
-    sed -e "s/FEDORA_MIRROR_BASE/$FEDORA_MIRROR_BASE/g" <$lxc_root/etc/yum.repos.d/building.repo.in >$lxc_root/etc/yum.repos.d/building.repo
-    rm -f $lxc_root/etc/yum.repos.d/building.repo.in
 
     # for using vtest-init-lxc.sh as a general-purpose lxc creation wrapper
     # just mention 'none' as the repo url
