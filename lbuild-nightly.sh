@@ -304,7 +304,7 @@ function run_log () {
     ssh -n ${testmaster_ssh} rm -rf ${testdir} ${testdir}.git
 
     # check it out in the build
-    virsh -c lxc:/// lxc-enter-namespace $BASE /bin/bash -c "make -C /build tests-module"
+    virsh -c lxc:/// lxc-enter-namespace $BASE --noseclabel /bin/bash -c "make -C /build tests-module"
     
     # push it onto the testmaster - just the 'system' subdir is enough
     rsync --verbose --archive $(rootdir $BASE)/build/MODULES/tests/system/ ${testmaster_ssh}:${BASE}
@@ -652,7 +652,7 @@ function main () {
 	    rm -f $tmp
 	    # update build
 	    [ -n "$SSH_KEY" ] && setupssh ${BASE} ${SSH_KEY}
-	    virsh -c lxc:/// lxc-enter-namespace $BASE /bin/bash -c "cd /build; git pull; make tests-clean"
+	    virsh -c lxc:/// lxc-enter-namespace $BASE --noseclabel /bin/bash -c "cd /build; git pull; make tests-clean"
 	    # make sure we refresh the tests place in case it has changed
 	    rm -f /build/MODULES/tests
 	    options=(${options[@]} -d $PLDISTRO -t $PLDISTROTAGS -s $BUILD_SCM_URL)
@@ -705,7 +705,7 @@ function main () {
 	    # Extract build again - in the vm
 	    [ -n "$SSH_KEY" ] && setupssh ${BASE} ${SSH_KEY}
 	    # xxx not working as of now - waiting for Sapan to look into this
-	    virsh -c lxc:/// lxc-enter-namespace $BASE /bin/bash -c "git clone $GIT_REPO /build; cd /build; git checkout $GIT_TAG"
+	    virsh -c lxc:/// lxc-enter-namespace $BASE --noseclabel /bin/bash -c "git clone $GIT_REPO /build; cd /build; git checkout $GIT_TAG"
 	fi
 	echo "XXXXXXXXXX $COMMAND: preparation of vm $BASE done" $(date)
 
@@ -753,7 +753,7 @@ function main () {
 	else
 	    # run scanpackages so we can use apt-get on this
 	    # (not needed on fedora b/c this is done by the regular build already)
-	    virsh -c lxc:/// lxc-enter-namespace $BASE /bin/bash -c "(cd /build ; dpkg-scanpackages DEBIAN/ | gzip -9c > Packages.gz)"
+	    virsh -c lxc:/// lxc-enter-namespace $BASE --noseclabel /bin/bash -c "(cd /build ; dpkg-scanpackages DEBIAN/ | gzip -9c > Packages.gz)"
 	    webpublish mkdir -p $WEBPATH/$BASE/DEBIAN
 	    webpublish_rsync_files $WEBPATH/$BASE/DEBIAN/ $(rootdir $BASE)/build/DEBIAN/*.deb 
 	    webpublish_rsync_files $WEBPATH/$BASE/ $(rootdir $BASE)/build/Packages.gz
