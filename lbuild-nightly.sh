@@ -30,7 +30,7 @@ RUN_LOG_EXTRAS=""
 DEFAULT_WEBPATH="/build/@PLDISTRO@/"
 DEFAULT_TESTBUILDURL="http://localhost/"
 # this is where the buildurl is pointing towards
-DEFAULT_WEBROOT="/webroot/"
+DEFAULT_WEBROOT="/build/"
 DEFAULT_TESTMASTER="testmaster.onelab.eu"
 
 ####################
