@@ -31,6 +31,7 @@ PUBLIC_BRIDGE=br0
 VIF_GUEST=eth0
 
 ##########
+FEDORA_MIRROR_BASE="http://fedora.uib.no/fedora/linux"
 FEDORA_PREINSTALLED="yum initscripts passwd rsyslog vim-minimal dhclient chkconfig rootfiles policycoreutils openssh-server openssh-clients"
 DEBIAN_PREINSTALLED="openssh-server openssh-client"
 
@@ -276,7 +277,7 @@ function fedora_download() {
       sed -i "s/\$basearch/$arch/g; s/\$releasever/$release/g;" $f
     done 
 
-    MIRROR_URL=http://mirror.onelab.eu/fedora/releases/$release/Everything/$arch/os
+    MIRROR_URL=$FEDORA_MIRROR_BASE/releases/$release/Everything/$arch/os
     RELEASE_URL1="$MIRROR_URL/Packages/fedora-release-$release-1.noarch.rpm"
     # with fedora18 the rpms are scattered by first name
     RELEASE_URL2="$MIRROR_URL/Packages/f/fedora-release-$release-1.noarch.rpm"
@@ -431,24 +432,26 @@ function fedora_configure_yum () {
     echo "Initializing yum.repos.d in $lxc"
     rm -f $lxc_root/etc/yum.repos.d/*
 
-    cat > $lxc_root/etc/yum.repos.d/building.repo <<EOF
+    cat > $lxc_root/etc/yum.repos.d/building.repo.in <<EOF
 [fedora]
 name=Fedora $release - $arch
-baseurl=http://mirror.onelab.eu/fedora/releases/$release/Everything/$arch/os/
+baseurl=FEDORA_MIRROR_BASE/releases/$release/Everything/$arch/os/
 enabled=1
 metadata_expire=7d
 gpgcheck=1
-gpgkey=http://mirror.onelab.eu/keys/RPM-GPG-KEY-fedora-$release-primary
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-fedora-$releasever-$basearch
 
 [updates]
 name=Fedora $release - $arch - Updates
-baseurl=http://mirror.onelab.eu/fedora/updates/$release/$arch/
+baseurl=FEDORA_MIRROR_BASE/updates/$release/$arch/
 enabled=1
 metadata_expire=7d
 gpgcheck=1
-gpgkey=http://mirror.onelab.eu/keys/RPM-GPG-KEY-fedora-$release-primary
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-fedora-$releasever-$basearch
 EOF
-    
+    sed -e "s/FEDORA_MIRROR_BASE/$FEDORA_MIRROR_BASE/g" <$lxc_root/etc/yum.repos.d/building.repo.in >$lxc_root/etc/yum.repos.d/building.repo
+    rm -f $lxc_root/etc/yum.repos.d/building.repo.in
+
     # for using vtest-init-lxc.sh as a general-purpose lxc creation wrapper
     # just mention 'none' as the repo url
     if [ -n "$REPO_URL" ] ; then
