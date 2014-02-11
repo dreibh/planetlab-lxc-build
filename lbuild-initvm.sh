@@ -435,7 +435,7 @@ function fedora_configure_yum () {
     cat > $lxc_root/etc/yum.repos.d/building.repo <<EOF
 [fedora]
 name=Fedora $release - $arch
-baseurl=FEDORA_MIRROR_BASE/releases/$release/Everything/$arch/os/
+baseurl=$FEDORA_MIRROR_BASE/releases/$release/Everything/$arch/os/
 enabled=1
 metadata_expire=7d
 gpgcheck=1
