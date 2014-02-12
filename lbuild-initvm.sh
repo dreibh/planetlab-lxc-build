@@ -32,7 +32,7 @@ VIF_GUEST=eth0
 
 ##########
 FEDORA_MIRROR_BASE="http://fedora.uib.no/fedora/linux"
-FEDORA_PREINSTALLED="yum initscripts passwd rsyslog vim-minimal dhclient chkconfig rootfiles policycoreutils openssh-server openssh-clients"
+FEDORA_PREINSTALLED="yum initscripts passwd rsyslog vim-minimal dhclient chkconfig rootfiles policycoreutils openssh-server openssh-clients netcf-devel"
 DEBIAN_PREINSTALLED="openssh-server openssh-client"
 
 ##############################

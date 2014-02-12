@@ -31,7 +31,7 @@ DEFAULT_WEBPATH="/build/@PLDISTRO@/"
 DEFAULT_TESTBUILDURL="http://localhost/"
 # this is where the buildurl is pointing towards
 DEFAULT_WEBROOT="/build/"
-DEFAULT_TESTMASTER="testmaster.onelab.eu"
+DEFAULT_TESTMASTER="localhost"
 
 ####################
 # assuming vm runs in UTC
@@ -281,7 +281,12 @@ function run_log () {
     url=""
     for a in i386 i686 x86_64; do
 	archdir=$(rootdir $BASE)/build/RPMS/$a
-	if [ -d $archdir ] ; then
+	echo "**************************"
+	echo "TEST: $archdir   BASE=$BASE"
+	pwd
+	uname -a
+ echo "**************************"
+ 	if [ -d $archdir ] ; then
 	    # where was that installed
 	    url=$(echo $archdir | sed -e "s,$(rootdir $BASE)/build,${WEBPATH}/${BASE},")
 	    url=$(echo $url | sed -e "s,${WEBROOT},${TESTBUILDURL},")
