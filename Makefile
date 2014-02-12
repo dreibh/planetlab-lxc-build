@@ -370,7 +370,7 @@ MODULES/$(1):
 	cd MODULES && \
 	$(if $($(1)-SVNPATH),\
 	  svn export $($(1)-SVNPATH) $(1),\
-	  mkdir $(1) ; (git archive --remote=$($(1).gitrepo) $($(1).gittag) | tar -C $(1) -xf - ) \
+	  mkdir $(1) ; ( git clone $($(1).gitrepo) $(1) ; cd  $(1) ; git checkout $($(1).gittag) ) \
 	   || { rm -rf $(1); false; } )
 	@(echo -n "XXXXXXXXXXXXXXX -- END MODULE $(1) : $@ " ; date)
 
