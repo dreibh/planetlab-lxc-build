@@ -28,10 +28,10 @@ RUN_LOG_EXTRAS=""
 
 # for publishing results, and the tests settings
 DEFAULT_WEBPATH="/build/@PLDISTRO@/"
-DEFAULT_TESTBUILDURL="http://localhost/"
+DEFAULT_TESTBUILDURL="http://benlomond.simula.nornet/"
 # this is where the buildurl is pointing towards
 DEFAULT_WEBROOT="/build/"
-DEFAULT_TESTMASTER="localhost"
+DEFAULT_TESTMASTER="earnslaw.simula.nornet"
 
 ####################
 # assuming vm runs in UTC
