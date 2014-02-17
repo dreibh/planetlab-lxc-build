@@ -15,7 +15,7 @@ DEFAULT_FCDISTRO=f20
 DEFAULT_PLDISTRO=planetlab
 DEFAULT_PERSONALITY=linux64
 DEFAULT_BASE="@DATE@--@PLDISTRO@-@FCDISTRO@-@PERSONALITY@"
-DEFAULT_BUILD_SCM_URL="git://github.com/dreibh/planetlab-lxc"
+DEFAULT_BUILD_SCM_URL="git://github.com/dreibh/planetlab-lxc-build"
 
 # default gpg path used in signing yum repo
 DEFAULT_GPGPATH="/etc/planetlab"
