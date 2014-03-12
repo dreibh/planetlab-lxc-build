@@ -1,6 +1,4 @@
-# !!!!!!!!!!!!!!!! FIXME!
-lxc-userspace-GITPATH           := git://git.planet-lab.org/lxc-userspace.git@b99ff9b37b2c77f668a7c00e56ded34c7f69a0fc
-# !!!!!!!!!!!!!!!! master
+lxc-userspace-GITPATH           := git://git.planet-lab.org/lxc-userspace.git@master
 transforward-GITPATH            := git://git.planet-lab.org/transforward.git@transforward-0.1-4
 procprotect-GITPATH             := git://git.planet-lab.org/procprotect.git@master
 ipfw-GITPATH                    := git://git.code.sf.net/p/dummynet/code@ipfw-20130423-1
@@ -54,4 +52,4 @@ sfa-GITPATH                     := git://git.planet-lab.org/sfa.git@sfa-3.1-2
 myslice-GITPATH			:= git://git.onelab.eu/myslice.git@master
 manifold-GITPATH		:= git://git.onelab.eu/manifold.git@devel
 #
-tests-GITPATH                   := git://github.com/dreibh/planetlab-lxc-tests.git@master
+tests-GITPATH                   := git://git.onelab.eu/tests.git@master

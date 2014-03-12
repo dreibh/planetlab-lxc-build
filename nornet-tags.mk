@@ -1,6 +1,4 @@
-# !!!!!!!!!!!!!!!! FIXME!
-lxc-userspace-GITPATH           := git://git.planet-lab.org/lxc-userspace.git@b99ff9b37b2c77f668a7c00e56ded34c7f69a0fc
-# !!!!!!!!!!!!!!!! master
+lxc-userspace-GITPATH           := git://git.planet-lab.org/lxc-userspace.git@master
 transforward-GITPATH            := git://git.planet-lab.org/transforward.git@transforward-0.1-4
 procprotect-GITPATH             := git://git.planet-lab.org/procprotect.git@master
 ipfw-GITPATH                    := git://git.code.sf.net/p/dummynet/code@ipfw-20130423-1
@@ -14,7 +12,8 @@ nodemanager-GITPATH             := git://git.planet-lab.org/nodemanager.git@mast
 pl_sshd-SVNPATH			:= http://svn.planet-lab.org/svn/pl_sshd/tags/pl_sshd-1.0-11
 codemux-GITPATH			:= git://git.planet-lab.org/codemux.git@codemux-0.1-15
 fprobe-ulog-GITPATH             := git://git.planet-lab.org/fprobe-ulog.git@fprobe-ulog-1.1.4-3
-# libvirt - temporarily set in lxc.mk
+libvirt-GITPATH			:= git://git.onelab.eu/libvirt.git@1.2.1
+libvirt-python-GITPATH		:= git://git.onelab.eu/libvirt-python.git@1.2.1
 pf2slice-SVNPATH		:= http://svn.planet-lab.org/svn/pf2slice/tags/pf2slice-1.0-2
 mom-GITPATH                     := git://git.planet-lab.org/mom.git@mom-2.3-5
 inotify-tools-GITPATH		:= git://git.planet-lab.org/inotify-tools.git@inotify-tools-3.13-2
@@ -53,4 +52,4 @@ sfa-GITPATH                     := git://git.planet-lab.org/sfa.git@sfa-3.1-2
 myslice-GITPATH			:= git://git.onelab.eu/myslice.git@master
 manifold-GITPATH		:= git://git.onelab.eu/manifold.git@devel
 #
-tests-GITPATH                   := git://github.com/dreibh/planetlab-lxc-tests.git@master
+tests-GITPATH                   := git://git.onelab.eu/tests.git@master
