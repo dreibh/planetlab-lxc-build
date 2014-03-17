@@ -8,6 +8,44 @@
 # see doc in Makefile  
 #
 
+
+# ###### NorNet customisation ###############################################
+
+#
+# netperfmeter
+#
+netperfmeter-MODULES := netperfmeter
+netperfmeter-SPEC := rpm/netperfmeter.spec
+ALL += netperfmeter
+IN_NODEIMAGE += netperfmeter
+
+#
+# rsplib
+#
+rsplib-MODULES := rsplib
+rsplib-SPEC := rpm/rsplib.spec
+ALL += rsplib
+IN_NODEIMAGE += rsplib
+
+#
+# subnetcalc
+#
+subnetcalc-MODULES := subnetcalc
+subnetcalc-SPEC := rpm/subnetcalc.spec
+ALL += subnetcalc
+IN_NODEIMAGE += subnetcalc
+
+#
+# tsctp
+#
+tsctp-MODULES := tsctp
+tsctp-SPEC := rpm/tsctp.spec
+ALL += tsctp
+IN_NODEIMAGE += tsctp
+
+# ###########################################################################
+
+
 ### the madwifi drivers ship with fedora16's kernel rpm
 
 #

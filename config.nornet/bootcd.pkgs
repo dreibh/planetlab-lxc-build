@@ -90,3 +90,7 @@ precious: boot/initrd-boot*
 precious: boot/kernel-boot*
 precious: boot/grub
 precious<=f8 precious<=centos5: usr/lib/locale/en_US.utf8
+
+# ###### NorNet customisation ###############################################
+package: joe
+# ###########################################################################

@@ -1,3 +1,10 @@
+# ###### NorNet customisation ###############################################
+netperfmeter                    := git://github.com/dreibh/netperfmeter.git@master
+rsplib                          := git://github.com/dreibh/rsplib.git@master
+subnetcalc                      := git://github.com/dreibh/subnetcalc.git@master
+tsctp                           := git://github.com/dreibh/tsctp.git@master
+# ###########################################################################
+
 lxc-userspace-GITPATH           := git://git.planet-lab.org/lxc-userspace.git@master
 transforward-GITPATH            := git://git.planet-lab.org/transforward.git@transforward-0.1-4
 procprotect-GITPATH             := git://git.planet-lab.org/procprotect.git@master

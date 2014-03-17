@@ -43,3 +43,29 @@ package: ipfwslice
 
 # convenience
 package: less emacs-nox
+
+
+# ###### NorNet customisation ###############################################
+package: bind-utils
+package: colordiff
+package: ethtool
+package: git
+package: joe
+package: htop
+package: idn
+# package: kernel-modules-extra
+package: lksctp-tools
+package: net-snmp-tools
+package: nfs-utils
+package: nmap
+package: nuttcp
+package: tcpdump
+package: tftp
+package: whois
+package: xauth
+
+package: netperfmeter
+package: rsplib
+package: subnetcalc
+package: tsctp
+# ###########################################################################
