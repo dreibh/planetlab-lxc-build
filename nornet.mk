@@ -19,7 +19,7 @@ ifeq "$(HOSTARCH)" "i386"
 else
    kernel-RPMFLAGS:= --target $(HOSTARCH)
 endif
-kernel-SPECVARS += kernelconfig=planetlab
+# kernel-SPECVARS += kernelconfig=planetlab
 KERNELS += kernel
 kernel-STOCK-DEVEL-RPMS += elfutils-libelf-devel
 
