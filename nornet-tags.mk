@@ -1,8 +1,8 @@
 # ###### NorNet customisation ###############################################
-netperfmeter                    := git://github.com/dreibh/netperfmeter.git@master
-rsplib                          := git://github.com/dreibh/rsplib.git@master
-subnetcalc                      := git://github.com/dreibh/subnetcalc.git@master
-tsctp                           := git://github.com/dreibh/tsctp.git@master
+netperfmeter-GITPATH            := git://github.com/dreibh/netperfmeter.git@master
+rsplib-GITPATH                  := git://github.com/dreibh/rsplib.git@master
+subnetcalc-GITPATH              := git://github.com/dreibh/subnetcalc.git@master
+tsctp-GITPATH                   := git://github.com/dreibh/tsctp.git@master
 # ###########################################################################
 
 lxc-userspace-GITPATH           := git://git.planet-lab.org/lxc-userspace.git@master
