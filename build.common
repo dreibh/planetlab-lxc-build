@@ -665,7 +665,6 @@ __footer
 
 
 function build_fetch () {
-    echo CURL
     curl --fail --silent --max-time 60 --output /dev/null "$1" 
 }
 
