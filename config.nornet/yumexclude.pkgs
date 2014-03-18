@@ -1,7 +1,8 @@
-# with our kernel rebuilt for fedora14
-plcyumexclude:		drupal
+plcyumexclude: drupal
 
-# fedora14
-nodeyumexclude=f14:	kernel* util-vserver* linux-firmware
 
-# fedora16 - nothing to hide for now
+# ###### NorNet customisation ###############################################
+
+nodeyumexclude>=f18:  kernel*
+
+# ###########################################################################

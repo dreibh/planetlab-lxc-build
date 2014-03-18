@@ -105,7 +105,8 @@ package>=f8:inotify-tools-devel
 ##########
 # openvswitch
 # starting with f16 we use the stock kernel, and openvswitch needs kernel-devel
-package>=f16: kernel-devel
+# ????? package>=f16: kernel-devel
+# ????? NorNet: commented out !!!!!
 ##########
 # zabbix/monitor
 package=centos5: krb5-devel.@arch@ e2fsprogs-devel.@arch@ libidn-devel.@arch@

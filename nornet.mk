@@ -11,6 +11,27 @@
 
 # ###### NorNet customisation ###############################################
 
+kernel-MODULES := linux
+kernel-SPEC := kernel.spec
+kernel-BUILD-FROM-SRPM := yes
+ifeq "$(HOSTARCH)" "i386"
+   kernel-RPMFLAGS:= --target i686
+else
+   kernel-RPMFLAGS:= --target $(HOSTARCH)
+endif
+kernel-SPECVARS += kernelconfig=planetlab
+KERNELS += kernel
+kernel-STOCK-DEVEL-RPMS += elfutils-libelf-devel
+
+kernels: $(KERNELS)
+kernels-clean: $(foreach package,$(KERNELS),$(package)-clean)
+
+ALL += $(KERNELS)
+# this is to mark on which image a given rpm is supposed to go
+IN_BOOTCD += $(KERNELS)
+#IN_SLICEIMAGE += $(KERNELS)
+IN_NODEIMAGE += $(KERNELS)
+
 #
 # netperfmeter
 #
@@ -62,6 +83,12 @@ IN_NODEIMAGE += lxc-userspace
 #
 transforward-MODULES := transforward
 transforward-SPEC := transforward.spec
+# ?????
+transforward-LOCAL-DEVEL-RPMS += kernel-devel
+transforward-SPECVARS = kernel_version=$(kernel.rpm-version) \
+        kernel_release=$(kernel.rpm-release) \
+        kernel_arch=$(kernel.rpm-arch)
+# ?????
 ALL += transforward
 IN_NODEIMAGE += transforward
 
@@ -70,6 +97,12 @@ IN_NODEIMAGE += transforward
 #
 procprotect-MODULES := procprotect
 procprotect-SPEC := procprotect.spec
+# ?????
+procprotect-LOCAL-DEVEL-RPMS += kernel-devel
+procprotect-SPECVARS = kernel_version=$(kernel.rpm-version) \
+        kernel_release=$(kernel.rpm-release) \
+        kernel_arch=$(kernel.rpm-arch)
+# ?????
 ALL += procprotect
 IN_NODEIMAGE += procprotect
 
@@ -80,11 +113,23 @@ IN_NODEIMAGE += procprotect
 ifeq "$(DISTRONAME)" "f18"
 ipfwroot-MODULES := ipfw
 ipfwroot-SPEC := planetlab/ipfwroot.spec
+# ?????
+ipfwroot-LOCAL-DEVEL-RPMS += kernel-devel
+ipfwroot-SPECVARS = kernel_version=$(kernel.rpm-version) \
+        kernel_release=$(kernel.rpm-release) \
+        kernel_arch=$(kernel.rpm-arch)
+# ?????
 ALL += ipfwroot
 IN_NODEIMAGE += ipfwroot
 
 ipfwslice-MODULES := ipfw
 ipfwslice-SPEC := planetlab/ipfwslice.spec
+# ?????
+ipfwslice-LOCAL-DEVEL-RPMS += kernel-devel
+ipfwslice-SPECVARS = kernel_version=$(kernel.rpm-version) \
+        kernel_release=$(kernel.rpm-release) \
+        kernel_arch=$(kernel.rpm-arch)
+# ?????
 ALL += ipfwslice
 endif
 

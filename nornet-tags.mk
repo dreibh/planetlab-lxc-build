@@ -1,4 +1,5 @@
 # ###### NorNet customisation ###############################################
+kernel-GITPATH                  := git://github.com/dreibh/planetlab-kernel.git@master
 netperfmeter-GITPATH            := git://github.com/dreibh/netperfmeter.git@master
 rsplib-GITPATH                  := git://github.com/dreibh/rsplib.git@master
 subnetcalc-GITPATH              := git://github.com/dreibh/subnetcalc.git@master
