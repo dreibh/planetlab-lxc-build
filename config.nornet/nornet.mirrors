@@ -2,7 +2,7 @@
 # used to be hard-wired in build.common / mkfedora
 
 # ###### NorNet customisation ###############################################
-mirror: http://fedora.uib.no/
+mirror: http://ftp.uio.no/pub/linux/fedora/
 # ###########################################################################
 
 # mirror: http://mirror.onelab.eu/
