@@ -122,3 +122,13 @@ package: python-lxml
 package: libxml2-devel
 # myplc-docs
 package>=f18: texlive-ec
+
+
+# ###### NorNet customisation ###############################################
+package: lksctp-tools-devel
+package: valgrind-devel
+package: bzip2-devel
+package: glib2-devel
+package: GeoIP-devel
+package: qt-devel
+# ###########################################################################
