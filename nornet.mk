@@ -11,7 +11,7 @@
 
 # ###### NorNet customisation ###############################################
 
-kernel-MODULES := kernel
+kernel-MODULES := linux
 kernel-SPEC := kernel.spec
 kernel-BUILD-FROM-SRPM := yes
 ifeq "$(HOSTARCH)" "i386"
