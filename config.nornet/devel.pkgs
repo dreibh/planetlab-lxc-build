@@ -132,4 +132,14 @@ package: bzip2-devel
 package: glib2-devel
 package: GeoIP-devel
 package: qt-devel
+
+# The following packages are needed to build the 3.11+ kernel:
+package: hmaccalc
+package: net-tools
+package: bc
+package: elfutils-devel
+package: audit-libs-devel
+package: gettext
+package: pesign
+package: openssl
 # ###########################################################################
