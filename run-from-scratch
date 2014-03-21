@@ -1,0 +1,8 @@
+#!/bin/bash
+
+(
+ export HOME=/root
+ make PLDISTRO=nornet stage1=true distclean
+ make PLDISTRO=nornet stage1=true
+ make PLDISTRO=nornet
+) >output.log 2>&1
