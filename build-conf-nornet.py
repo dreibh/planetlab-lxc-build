@@ -71,7 +71,7 @@ __default_build__ = {
     'sh':'/bin/bash',
     'mailto':'dreibh@simula.no',
     'build-script':'lbuild-nightly.sh',
-    'webpath':'/vservers/build.planet-lab.org/var/www/html/install-rpms/archive',
+    'webpath':'/home/nornetpp/archive',
     'pldistro':'lxc',
     'date': __today__(),
     'scmpath':'git://github.com/dreibh/planetlab-lxc-build.git',
