@@ -1,8 +1,10 @@
 #!/bin/bash
 
+D=lxc
+
 (
  export HOME=/root
- make PLDISTRO=nornet stage1=true distclean
- make PLDISTRO=nornet stage1=true
- make PLDISTRO=nornet
+ make PLDISTRO=$D stage1=true distclean
+ make PLDISTRO=$D stage1=true
+ make PLDISTRO=$D
 ) >output.log 2>&1
