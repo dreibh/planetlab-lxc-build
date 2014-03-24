@@ -1,0 +1,22 @@
+#!/bin/bash -e
+
+BUILD_DIRECTORY="/root/nightly-builds"
+BUILD_REPOSITORY="git://github.com/dreibh/planetlab-lxc-build.git"
+MAILTO=""
+
+
+# ====== Prepare repository =================================================
+export LANG=C
+rm -rf "$BUILD_DIRECTORY"
+git clone --depth 1 "$BUILD_REPOSITORY" "$BUILD_DIRECTORY"
+cd "$BUILD_DIRECTORY"
+
+
+# ====== Run the builds =====================================================
+# LXC:
+./lbuild-nightly.sh -m "$MAILTO" -d lxc -f f18 -p linux64 -c default -c no_omf || true
+./lbuild-nightly.sh -m "$MAILTO" -d lxc -f f20 -p linux64 -c default -c no_omf || true
+
+# NorNet:
+#./lbuild-nightly.sh -m "$MAILTO" -d nornet -f f18 -p linux64 -c default -c no_omf || true
+#./lbuild-nightly.sh -m "$MAILTO" -d nornet -f f20 -p linux64 -c default -c no_omf || true
