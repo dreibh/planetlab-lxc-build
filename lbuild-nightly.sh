@@ -689,7 +689,10 @@ function main () {
 	    GIT_REPO=$(echo $BUILD_SCM_URL | cut -d@ -f1)
 	    GIT_TAG=$(echo $BUILD_SCM_URL | cut -s -d@ -f2)
 	    GIT_TAG=${GIT_TAG:-master}
-	    mkdir -p $tmpdir ; git clone $GIT_REPO $tmpdir &&  cd $tmpdir && git checkout $GIT_TAG && rm -rf .git && cd -
+	    mkdir -p $tmpdir 
+            ( git archive --remote=$GIT_REPO $GIT_TAG | tar -C $tmpdir -xf -) || \
+		( echo "==================== git archive FAILED, trying git clone instead" ; \
+		  git clone $GIT_REPO $tmpdir && cd $tmpdir && git checkout $GIT_TAG && rm -rf .git)
 
             # Create lxc vm
 	    cd $tmpdir
@@ -699,7 +702,6 @@ function main () {
 	    rm -rf $tmpdir
 	    # Extract build again - in the vm
 	    [ -n "$SSH_KEY" ] && setupssh ${BASE} ${SSH_KEY}
-	    # xxx not working as of now - waiting for Sapan to look into this
 	    virsh -c lxc:/// lxc-enter-namespace $BASE /bin/bash -c "git clone $GIT_REPO /build; cd /build; git checkout $GIT_TAG"
 	fi
 	echo "XXXXXXXXXX $COMMAND: preparation of vm $BASE done" $(date)
