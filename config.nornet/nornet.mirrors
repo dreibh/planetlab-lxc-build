@@ -5,5 +5,4 @@
 mirror: http://mirror.simula.nornet/
 # ###########################################################################
 
-# mirror: http://mirror.onelab.eu/
-# mirror: http://build.planet-lab.org/
+mirror: http://mirror.onelab.eu/
