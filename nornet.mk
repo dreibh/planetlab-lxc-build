@@ -20,7 +20,7 @@ else
    kernel-RPMFLAGS := --target $(HOSTARCH)
 endif
 kernel-RPMFLAGS += --without smp --without pae --without debug --without doc --without debuginfo --without perf
-kernel-WHITELIST-RPMS := kernel,kernel-headers,kernel-devel,kernel-bootwrapper,kernel-modules-extra,kernel-tools,kernel-tools-libs,kernel-tools-libs-devel
+kernel-WHITELIST-RPMS := kernel,kernel-headers,kernel-devel,kernel-modules-extra,kernel-tools,kernel-tools-libs,kernel-tools-libs-devel
 kernel-SPECVARS += kernelconfig=planetlab
 KERNELS += kernel
 kernel-STOCK-DEVEL-RPMS += elfutils-libelf-devel
