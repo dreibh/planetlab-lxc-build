@@ -135,10 +135,10 @@ package: ethtool
 package: git
 package: joe
 package: htop
-package: idn
+package: libidn
 package: kernel-modules-extra
 package: lksctp-tools
-package: net-snmp-tools
+package: net-snmp-utils
 package: nfs-utils
 package: nmap
 package: nuttcp

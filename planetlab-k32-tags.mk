@@ -17,7 +17,7 @@ util-vserver-pl-GITPATH		:= git://git.planet-lab.org/util-vserver-pl.git@util-vs
 nodeupdate-GITPATH		:= git://git.planet-lab.org/nodeupdate.git@nodeupdate-0.5-11
 PingOfDeath-SVNPATH		:= http://svn.planet-lab.org/svn/PingOfDeath/tags/PingOfDeath-2.2-1
 plnode-utils-GITPATH		:= git://git.onelab.eu/plnode-utils@plnode-utils-0.2-1
-nodemanager-GITPATH             := git://git.planet-lab.org/nodemanager.git@nodemanager-5.2-10
+nodemanager-GITPATH             := git://git.planet-lab.org/nodemanager.git@nodemanager-5.2-11
 # Trellis-specific NodeManager plugins
 nodemanager-topo-GITPATH	:= git://git.planet-lab.org/NodeManager-topo@master
 NodeManager-optin-SVNPATH	:= http://svn.planet-lab.org/svn/NodeManager-optin/trunk
@@ -45,7 +45,7 @@ omf-GITPATH                     := git://git.onelab.eu/omf.git@omf-5.3-11
 sfa-GITPATH                     := git://git.planet-lab.org/sfa.git@sfa-3.1-2
 sface-GITPATH                   := git://git.planet-lab.org/sface.git@sface-0.9-9
 nodeconfig-GITPATH              := git://git.planet-lab.org/nodeconfig.git@nodeconfig-5.2-4
-bootmanager-GITPATH             := git://git.planet-lab.org/bootmanager.git@bootmanager-5.2-2
+bootmanager-GITPATH             := git://git.planet-lab.org/bootmanager.git@bootmanager-5.2-3
 pypcilib-GITPATH		:= git://git.planet-lab.org/pypcilib.git@pypcilib-0.2-10
 pyplnet-GITPATH                 := git://git.planet-lab.org/pyplnet.git@pyplnet-4.3-18
 DistributedRateLimiting-SVNPATH	:= http://svn.planet-lab.org/svn/DistributedRateLimiting/tags/DistributedRateLimiting-0.1-1
