@@ -2,7 +2,7 @@
 
 BUILD_DIRECTORY="/root/nightly-builds"
 BUILD_REPOSITORY="git://github.com/dreibh/planetlab-lxc-build.git"
-MAILTO=""
+MAILTO="dreibh@simula.no"
 
 
 # ====== Prepare repository =================================================
