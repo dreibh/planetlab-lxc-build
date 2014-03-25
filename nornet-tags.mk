@@ -8,8 +8,8 @@ tsctp-GITPATH                   := git://github.com/dreibh/tsctp.git@master
 
 lxc-userspace-GITPATH           := git://git.planet-lab.org/lxc-userspace.git@master
 # ##### NorNet ########################
-transforward-GITPATH            := git://github.com/dreibh/transforward.git@master
-procprotect-GITPATH             := git://github.com/dreibh/procprotect.git@master
+transforward-GITPATH            := git://github.com/dreibh/planetlab-lxc-transforward.git@master
+procprotect-GITPATH             := git://github.com/dreibh/planetlab-lxc-procprotect.git@master
 # transforward-GITPATH            := git://git.planet-lab.org/transforward.git@transforward-0.1-4
 # procprotect-GITPATH             := git://git.planet-lab.org/procprotect.git@master
 # #####################################
