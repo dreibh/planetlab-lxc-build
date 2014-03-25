@@ -85,12 +85,12 @@ IN_NODEIMAGE += lxc-userspace
 #
 transforward-MODULES := transforward
 transforward-SPEC := transforward.spec
-# ?????
+# ##### NorNet ########################
 transforward-LOCAL-DEVEL-RPMS += kernel-devel
 transforward-SPECVARS = kernel_version=$(kernel.rpm-version) \
         kernel_release=$(kernel.rpm-release) \
         kernel_arch=$(kernel.rpm-arch)
-# ?????
+# #####################################
 ALL += transforward
 IN_NODEIMAGE += transforward
 
@@ -99,12 +99,12 @@ IN_NODEIMAGE += transforward
 #
 procprotect-MODULES := procprotect
 procprotect-SPEC := procprotect.spec
-# ?????
+# ##### NorNet ########################
 procprotect-LOCAL-DEVEL-RPMS += kernel-devel
 procprotect-SPECVARS = kernel_version=$(kernel.rpm-version) \
         kernel_release=$(kernel.rpm-release) \
         kernel_arch=$(kernel.rpm-arch)
-# ?????
+# #####################################
 ALL += procprotect
 IN_NODEIMAGE += procprotect
 
@@ -115,23 +115,23 @@ IN_NODEIMAGE += procprotect
 ifeq "$(DISTRONAME)" "f18"
 ipfwroot-MODULES := ipfw
 ipfwroot-SPEC := planetlab/ipfwroot.spec
-# ?????
+# ##### NorNet ########################
 ipfwroot-LOCAL-DEVEL-RPMS += kernel-devel
 ipfwroot-SPECVARS = kernel_version=$(kernel.rpm-version) \
         kernel_release=$(kernel.rpm-release) \
         kernel_arch=$(kernel.rpm-arch)
-# ?????
+# #####################################
 ALL += ipfwroot
 IN_NODEIMAGE += ipfwroot
 
 ipfwslice-MODULES := ipfw
 ipfwslice-SPEC := planetlab/ipfwslice.spec
-# ?????
+# ##### NorNet ########################
 ipfwslice-LOCAL-DEVEL-RPMS += kernel-devel
 ipfwslice-SPECVARS = kernel_version=$(kernel.rpm-version) \
         kernel_release=$(kernel.rpm-release) \
         kernel_arch=$(kernel.rpm-arch)
-# ?????
+# #####################################
 ALL += ipfwslice
 endif
 
