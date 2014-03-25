@@ -15,11 +15,11 @@ kernel-MODULES := linux
 kernel-SPEC := kernel.spec
 kernel-BUILD-FROM-SRPM := yes
 ifeq "$(HOSTARCH)" "i386"
-   kernel-RPMFLAGS:= --target i686
+   kernel-RPMFLAGS := --target i686
 else
-   kernel-RPMFLAGS:= --target $(HOSTARCH)
+   kernel-RPMFLAGS := --target $(HOSTARCH)
 endif
-kernel-RPMFLAGS := --without-smp --without-pae --without-debug --without-doc --without debuginfo --without perf
+kernel-RPMFLAGS += --without smp --without pae --without debug --without doc --without debuginfo --without perf
 kernel-WHITELIST-RPMS := kernel,kernel-headers,kernel-devel,kernel-bootwrapper,kernel-modules-extra,kernel-tools,kernel-tools-libs,kernel-tools-libs-devel
 kernel-SPECVARS += kernelconfig=planetlab
 KERNELS += kernel

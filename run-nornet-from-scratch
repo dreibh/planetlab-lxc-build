@@ -1,6 +1,6 @@
 #!/bin/bash
 
-D=lxc
+D=nornet
 
 (
  export HOME=/root
