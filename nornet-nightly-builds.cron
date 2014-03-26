@@ -1,0 +1,1 @@
+0 1 * * *	root	flock -x -n /var/lock/nornet-nightly-builds-1.lock -c "cd /root && ./run-nornet-nightly-builds" >>/var/log/nornet-nightly-builds.log 2>&1

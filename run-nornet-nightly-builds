@@ -3,6 +3,9 @@
 BUILD_DIRECTORY="/root/nightly-builds"
 BUILD_REPOSITORY="git://github.com/dreibh/planetlab-lxc-build.git"
 MAILTO="dreibh@simula.no"
+BASE="@DATE@--nightly--@PLDISTRO@-@FCDISTRO@-@PERSONALITY@"
+
+echo -e "\x1b[1;34m`date +%FT%H:%M:%S`: Starting nightly builds ...\x1b[0m"
 
 
 # ====== Prepare repository =================================================
@@ -14,9 +17,12 @@ cd "$BUILD_DIRECTORY"
 
 # ====== Run the builds =====================================================
 # LXC:
-./lbuild-nightly.sh -m "$MAILTO" -d lxc -f f18 -p linux64 -c default -c no_omf || true
-./lbuild-nightly.sh -m "$MAILTO" -d lxc -f f20 -p linux64 -c default -c no_omf || true
+./lbuild-nightly.sh -m "$MAILTO" -b "$BASE" -d lxc -f f18 -p linux64 -c default -c no_omf || true
+./lbuild-nightly.sh -m "$MAILTO" -b "$BASE" -d lxc -f f20 -p linux64 -c default -c no_omf || true
 
 # NorNet:
-#./lbuild-nightly.sh -m "$MAILTO" -d nornet -f f18 -p linux64 -c default -c no_omf || true
-#./lbuild-nightly.sh -m "$MAILTO" -d nornet -f f20 -p linux64 -c default -c no_omf || true
+./lbuild-nightly.sh -m "$MAILTO" -b "$BASE" -d nornet -f f18 -p linux64 -c default -c no_omf || true
+./lbuild-nightly.sh -m "$MAILTO" -b "$BASE" -d nornet -f f20 -p linux64 -c default -c no_omf || true
+
+
+echo -e "\x1b[1;34m`date +%FT%H:%M:%S`: Finished nightly builds!\x1b[0m"
