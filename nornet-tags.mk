@@ -9,13 +9,13 @@ tsctp-GITPATH                   := git://github.com/dreibh/tsctp.git@master
 # ##### NorNet ########################
 # transforward-GITPATH            := git://github.com/dreibh/planetlab-lxc-transforward.git@master
 # procprotect-GITPATH             := git://github.com/dreibh/planetlab-lxc-procprotect.git@master
-ipfw-GITPATH                    := git://github.com/dreibh/planetlab-lxc-ipfw.git@master
+# ipfw-GITPATH                    := git://github.com/dreibh/planetlab-lxc-ipfw.git@master
 # #####################################
 
 lxc-userspace-GITPATH           := git://git.planet-lab.org/lxc-userspace.git@lxc-userspace-1.0-9
-transforward-GITPATH            := git://git.planet-lab.org/transforward.git@transforward-0.1-5
-procprotect-GITPATH             := git://git.planet-lab.org/procprotect.git@procprotect-0.4-3
-# ????? ipfw-GITPATH                    := git://git.code.sf.net/p/dummynet/code@ipfw-20130423-1
+transforward-GITPATH            := git://git.planet-lab.org/transforward.git@943d173d4cd9ef5f4f4053ec16e54fc4c71d396a
+procprotect-GITPATH             := git://git.planet-lab.org/procprotect.git@822cc14ef32049a10016bc8ff31d5f5d3652662f
+ipfw-GITPATH                    := git://git.code.sf.net/p/dummynet/code@70d9e5d0845b049da8e5c666f4ca84d4dd1c1486
 comgt-SVNPATH			:= http://svn.onelab.eu/comgt/imports/0.3
 planetlab-umts-tools-GITPATH    := git://git.onelab.eu/planetlab-umts-tools.git@planetlab-umts-tools-0.7-1
 nodeupdate-GITPATH              := git://git.planet-lab.org/nodeupdate.git@nodeupdate-0.5-11
