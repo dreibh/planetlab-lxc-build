@@ -132,6 +132,9 @@ package: bzip2-devel
 package: glib2-devel
 package: GeoIP-devel
 package: qt-devel
+package: libpcap-devel
+package: libdnet-devel
+package: lua-devel
 
 # The following packages are needed to build the 3.11+ kernel:
 package: hmaccalc
