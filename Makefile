@@ -440,7 +440,7 @@ endif
 ### and to define them in makefiles
 # use the C code where it works as it's the original one, use the python code otherwise
 spec2make: spec2make.c
-	$(CC) -g -Wall $< -o $@ -lrpm -lrpmbuild -lrpmio -lpopt || ln -s spec2make.py $@
+	$(CC) -g -Wall $< -o $@ -lrpm -lrpmbuild -lrpmio -lpopt || if [ ! -e $@ ] ; then ln -s spec2make.py $@ ; fi
 
 ### run spec2make on the spec file and include the result
 # usage: spec2make package
