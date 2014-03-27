@@ -145,6 +145,7 @@ package: nuttcp
 package: tcpdump
 package: tftp
 package: whois
+package: wireshark
 package: xauth
 
 package: open-vm-tools
@@ -153,5 +154,6 @@ package: smartmontools
 package: netperfmeter
 package: rsplib
 package: subnetcalc
+package: tracebox
 package: tsctp
 # ###########################################################################

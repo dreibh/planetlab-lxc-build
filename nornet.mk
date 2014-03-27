@@ -59,6 +59,14 @@ ALL += subnetcalc
 IN_NODEIMAGE += subnetcalc
 
 #
+# tracebox
+#
+tracebox-MODULES := tracebox
+tracebox-SPEC := rpm/tracebox.spec
+ALL += tracebox
+IN_NODEIMAGE += tracebox
+
+#
 # tsctp
 #
 tsctp-MODULES := tsctp
