@@ -455,19 +455,20 @@ endef
 $(foreach package,$(ALL),$(eval $(call target_mk,$(package))))
 
 # stores env variables in a file
-# this is done at stage1. later run wont get confused
-SAVED_VARS=PLDISTRO PLDISTROTAGS build-GITPATH PERSONALITY MAILTO BASE WEBPATH TESTBUILDURL WEBROOT
-# also remember variable settings in alias, like sfa-GITPATH=git://git.f-lab.fr/sfa.git@generic
-# but don't save stage1
-ASSIGNS=$(foreach chunk,$(MAKEFLAGS),$(if $(findstring =,$(chunk)),$(if $(findstring stage1,$(chunk)),,$(chunk)),))
+# this is done at stage1. later run won't get confused
+STATIC_VARS=PLDISTRO PLDISTROTAGS build-GITPATH PERSONALITY MAILTO BASE WEBPATH TESTBUILDURL WEBROOT
+# find out names for variables set on the command line
+define assigned_varname
+$(if $(findstring =,$(1)),$(firstword $(subst =, ,$(1))) )
+endef
+ASSIGNED=$(filter-out stage1 stage1iter,$(foreach flag,$(MAKEFLAGS),$(call assigned_varname,$(flag))))
+SAVED_VARS=$(sort $(STATIC_VARS) $(ASSIGNED))
 envfrompreviousrun.mk:
 	@echo "# do not edit" > $@
 	@$(foreach var,$(SAVED_VARS),echo "$(var):=$($(var))" >> $@ ;)
-	@$(foreach chunk,$(ASSIGNS),echo "override $(chunk)" | sed -e s,=,:=, >> $@;)
 	@echo "# do not edit" > aliases
 	@echo -n "alias m=\"make " >> aliases
 	@$(foreach var,$(SAVED_VARS),echo -n " $(var)=$($(var))" >> aliases ;)
-	@echo -n $(ASSIGNS) >> aliases
 	@echo "\"" >> aliases
 	@echo "alias m1=\"m stage1=true\"" >> aliases
 
@@ -482,7 +483,7 @@ all: envfrompreviousrun
 define stage2_variables
 ### devel dependencies
 $(1).rpmbuild = $(RPMBUILD) $($(1)-RPMFLAGS)
-$(1).all-devel-rpm-paths := $(foreach rpm,$($(1)-LOCAL-DEVEL-RPMS) $($(1)-LOCAL-DEVEL-RPMS-CRUCIAL),$($(rpm).rpm-path))
+$(1).all-local-devel-rpm-paths := $(foreach rpm,$($(1)-LOCAL-DEVEL-RPMS) $($(1)-LOCAL-DEVEL-RPMS-CRUCIAL),$($(rpm).rpm-path))
 $(1).depend-devel-packages := $(sort $(foreach rpm,$($(1)-LOCAL-DEVEL-RPMS),$($(rpm).package)))
 ALL-STOCK-DEVEL-RPMS += $($(1)-LOCAL-DEVEL-RPMS)
 endef
@@ -559,7 +560,7 @@ RPMYUM-UNINSTALL-STOCK := rpm -e
 ### these macro handles the LOCAL-DEVEL-RPMS and LOCAL-DEVEL-RPMS-CRUCIAL tags for a given package
 # before building : rpm-install LOCAL-DEVEL-RPMS 
 define rpmyum_install_local_rpms 
-	$(if $($(1).all-devel-rpm-paths), echo "Installing for $(1)-LOCAL-DEVEL-RPMS" ; $(RPMYUM-INSTALL-LOCAL) $($(1).all-devel-rpm-paths)) 
+	$(if $($(1).all-local-devel-rpm-paths), echo "Installing for $(1)-LOCAL-DEVEL-RPMS" ; $(RPMYUM-INSTALL-LOCAL) $($(1).all-local-devel-rpm-paths)) 
 endef
 
 # install stock rpms if defined
@@ -568,19 +569,25 @@ define rpmyum_install_stock_rpms
 endef
 
 define rpmyum_uninstall_stock_rpms
-	-$(if $($(1)-LOCAL-DEVEL-RPMS), echo "Unstalling for $(1)-LOCAL-DEVEL-RPMS" ; $(RPMYUM-UNINSTALL-STOCK) $($(1)-LOCAL-DEVEL-RPMS))
+	-$(if $($(1)-STOCK-DEVEL-RPMS), echo "Unstalling for $(1)-STOCK-DEVEL-RPMS" ; $(RPMYUM-UNINSTALL-STOCK) $($(1)-STOCK-DEVEL-RPMS))
 endef
 
-# similar for debian 
+# similar for debians
+# gdebi acts like yum localinstall; gdebi-core should be mentioned in develdeb.pkgs
+DPKGAPT-INSTALL-LOCAL := gdebi
 DPKGAPT-INSTALL-STOCK := apt-get -y install
 DPKGAPT-UNINSTALL-STOCK := echo WARNING uninstalling stock debs not implemented
+
+define dpkgapt_install_local_debs 
+	$(if $($(1)-LOCAL-DEVEL-DEBS), echo "Installing for $(1)-LOCAL-DEVEL-DEBS" ; $(foreach debname,$($(1)-LOCAL-DEVEL-DEBS),$(DPKGAPT-INSTALL-LOCAL) $(wildcard DEBIAN/$(debname)_*.deb);))
+endef
 
 define dpkgapt_install_stock_debs 
 	$(if $($(1)-STOCK-DEVEL-DEBS), echo "Installing for $(1)-STOCK-DEVEL-DEBS" ; $(DPKGAPT-INSTALL-STOCK) $($(1)-STOCK-DEVEL-DEBS))
 endef
 
 define dpkgapt_uninstall_stock_debs
-	-$(if $($(1)-LOCAL-DEVEL-DEBS), echo "Unstalling for $(1)-LOCAL-DEVEL-DEBS" ; $(DPKGAPT-UNINSTALL-STOCK) $($(1)-LOCAL-DEVEL-DEBS))
+	-$(if $($(1)-STOCK-DEVEL-DEBS), echo "Unstalling for $(1)-STOCK-DEVEL-DEBS" ; $(DPKGAPT-UNINSTALL-STOCK) $($(1)-STOCK-DEVEL-DEBS))
 endef
 
 
@@ -698,6 +705,11 @@ endef
 $(foreach package,$(ALL),$(eval $(call target_depends,$(package))))
 
 ####################
+# debian meta-target
+ALL-DEBIAN := $(foreach target,$(ALL),$(target)-debian)
+debian: $(ALL-DEBIAN)
+
+####################
 # very rough for now (one module per package), targets only sfa for now
 # the general idea here is, changing the specfile (for version number and all) is enough, and this
 # gets passed to "make debian" in the module
@@ -706,6 +718,7 @@ $(foreach package,$(ALL),$(eval $(call target_depends,$(package))))
 # so I'm reverting to simplicity
 define target_debian
 $(1)-debian: $(1)-tarball
+	$(call dpkgapt_install_local_debs,$(1))
 	$(call dpkgapt_install_stock_debs,$(1))
 	mkdir -p DEBIAN/$(1)
 	rsync -a MODULES/$(1)/ DEBIAN/$(1)/
@@ -775,7 +788,7 @@ clean-help:
 distclean1:
 	rm -rf envfrompreviousrun.mk .rpmmacros spec2make header.spec SPECS MAKE $(DISTCLEANS)
 distclean2:
-	rm -rf MODULES SOURCES BUILD BUILDROOT RPMS SRPMS tmp
+	rm -rf MODULES SOURCES BUILD BUILDROOT RPMS SRPMS DEBIAN tmp
 distclean: distclean1 distclean2
 .PHONY: distclean1 distclean2 distclean
 

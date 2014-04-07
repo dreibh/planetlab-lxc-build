@@ -14,7 +14,7 @@ util-vserver-pl-GITPATH         := git://git.onelab.eu/util-vserver-pl.git@util-
 nodeupdate-GITPATH              := git://git.onelab.eu/nodeupdate.git@nodeupdate-0.5-11
 PingOfDeath-SVNPATH		:= http://svn.planet-lab.org/svn/PingOfDeath/tags/PingOfDeath-2.2-1
 plnode-utils-GITPATH            := git://git.onelab.eu/plnode-utils.git@plnode-utils-0.2-2
-nodemanager-GITPATH             := git://git.onelab.eu/nodemanager.git@nodemanager-5.2-11
+nodemanager-GITPATH             := git://git.onelab.eu/nodemanager.git@nodemanager-5.2-12
 pl_sshd-SVNPATH			:= http://svn.planet-lab.org/svn/pl_sshd/tags/pl_sshd-1.0-11
 codemux-GITPATH			:= git://git.onelab.eu/codemux.git@codemux-0.1-15
 fprobe-ulog-GITPATH             := git://git.onelab.eu/fprobe-ulog.git@fprobe-ulog-1.1.4-3
@@ -52,10 +52,7 @@ DistributedRateLimiting-SVNPATH	:= http://svn.planet-lab.org/svn/DistributedRate
 
 #
 sfa-BRANCH			:= geni-v3
-sfa-GITPATH                     := git://git.planet-lab.org/sfa.git@sfa-3.1-2
-#sface-GITPATH                   := git://git.onelab.eu/sface.git@sface-0.9-9
+sfa-GITPATH                     := git://git.planet-lab.org/sfa.git@geni-v3
 #
-myslice-GITPATH			:= git://git.onelab.eu/myslice.git@master
-manifold-GITPATH		:= git://git.onelab.eu/manifold.git@devel
 # locating the right test directory - see make tests_gitpath
-tests-GITPATH                   := git://git.onelab.eu/tests.git@tests-5.3-2
+tests-GITPATH                   := git://git.onelab.eu/tests.git@master
