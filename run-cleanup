@@ -1,0 +1,21 @@
+#!/bin/bash
+
+for driver in lxc:/// qemu:///system ; do
+   vmList=`virsh -c $driver list --all | sed -n "3,1000000p" | awk '{ print $2; }'`
+
+   for vm in $vmList ; do
+      echo "Removing VM $vm ..."
+   
+      #if [ "`find /vservers/ -maxdepth 1 -a -name "$vm" -a -type d`" != "" ]; then
+      #   echo " existing"
+      #fi
+
+      virsh -c $driver destroy $vm  >/dev/null 2>&1 || true
+      virsh -c $driver undefine $vm >/dev/null 2>&1 || true
+      rm -rf /vservers/$vm
+   done
+done
+
+echo "Removing remaining files"
+rm -f /vservers/*.txt
+find /root -maxdepth 1 -type d -name '20*' | xargs --no-run-if-empty rm -rf

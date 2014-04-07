@@ -59,7 +59,8 @@ package: libnl
 package: lsof
 package: mailcap
 package: nano
-package: nc
+package<=f18: nc
+package>=f20: nmap-ncat
 package: openssh-clients
 package: parted
 package: pciutils
