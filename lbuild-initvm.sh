@@ -32,7 +32,7 @@ PUBLIC_BRIDGE=br0
 VIF_GUEST=eth0
 
 ##########
-FEDORA_MIRROR_BASE="http://mirror.simula.nornet/fedora"   # "http://fedora.uib.no/fedora/linux"
+FEDORA_MIRROR_BASE="http://mirror.simula.nornet/fedora"   # http://mirror.onelab.eu/fedora/
 FEDORA_PREINSTALLED="yum initscripts passwd rsyslog vim-minimal dhclient chkconfig rootfiles policycoreutils openssh-server openssh-clients netcf-devel"
 DEBIAN_PREINSTALLED="openssh-server openssh-client"
 
@@ -378,8 +378,8 @@ function debian_install () {
     debootstrap --arch $arch $fcdistro $lxc_root $mirror
     # just like with fedora we ensure a few packages get installed as well
     # not started yet
-    #virsh -c lxc:/// lxc-enter-namespace $lxc --noseclabel /bin/bash -c "apt-get update"
-    #virsh -c lxc:/// lxc-enter-namespace $lxc --noseclabel /bin/bash -c "apt-get -y install $DEBIAN_PREINSTALLED"
+    #virsh -c lxc:/// lxc-enter-namespace $lxc /bin/bash -c "apt-get update"
+    #virsh -c lxc:/// lxc-enter-namespace $lxc /bin/bash -c "apt-get -y install $DEBIAN_PREINSTALLED"
     chroot $lxc_root apt-get update
     chroot $lxc_root apt-get -y install $DEBIAN_PREINSTALLED
     # configure hostname
@@ -616,7 +616,7 @@ function devel_or_vtest_tools () {
 	    fi
 	    for package in $packages ; do
 		# container not started yet
-	        #virsh -c lxc:/// lxc-enter-namespace $lxc --noseclabel /bin/bash -c "apt-get install -y $package" || :
+	        #virsh -c lxc:/// lxc-enter-namespace $lxc /bin/bash -c "apt-get install -y $package" || :
 		chroot $lxc_root apt-get install -y $package || :
 	    done
 	    ### xxx todo install groups with apt..
@@ -636,7 +636,7 @@ function post_install () {
 	post_install_build $lxc $personality
 	virsh -c lxc:/// start $lxc
 	# manually run dhclient in guest - somehow this network won't start on its own
-	virsh -c lxc:/// lxc-enter-namespace $lxc --noseclabel /bin/bash -c "dhclient $VIF_GUEST"
+	virsh -c lxc:/// lxc-enter-namespace $lxc /bin/bash -c "dhclient $VIF_GUEST"
     else
 	post_install_myplc $lxc $personality
 	virsh -c lxc:/// start $lxc
