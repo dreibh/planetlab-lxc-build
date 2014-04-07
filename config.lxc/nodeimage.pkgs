@@ -17,7 +17,7 @@ package: bridge-utils
 package: dnsmasq
 package: bash-completion
 package: kernel
-# ??? package: kernel-firmware
+package: kernel-firmware
 package: systemd
 package: basesystem
 package: filesystem
