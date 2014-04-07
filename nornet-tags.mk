@@ -22,7 +22,7 @@ planetlab-umts-tools-GITPATH    := git://git.onelab.eu/planetlab-umts-tools.git@
 nodeupdate-GITPATH              := git://git.planet-lab.org/nodeupdate.git@nodeupdate-0.5-11
 PingOfDeath-SVNPATH		:= http://svn.planet-lab.org/svn/PingOfDeath/tags/PingOfDeath-2.2-1
 plnode-utils-GITPATH            := git://git.planet-lab.org/plnode-utils.git@plnode-utils-0.2-2
-nodemanager-GITPATH             := git://git.planet-lab.org/nodemanager.git@nodemanager-5.2-11
+nodemanager-GITPATH             := git://git.planet-lab.org/nodemanager.git@nodemanager-5.2-12
 #
 pl_sshd-SVNPATH			:= http://svn.planet-lab.org/svn/pl_sshd/tags/pl_sshd-1.0-11
 codemux-GITPATH			:= git://git.planet-lab.org/codemux.git@codemux-0.1-15
@@ -65,10 +65,6 @@ myplc-GITPATH                   := git://git.planet-lab.org/myplc.git@myplc-5.3-
 
 #
 sfa-BRANCH			:= geni-v3
-sfa-GITPATH                     := git://git.planet-lab.org/sfa.git@sfa-3.1-2
-#sface-GITPATH                   := git://git.planet-lab.org/sface.git@sface-0.9-9
+sfa-GITPATH                     := git://git.planet-lab.org/sfa.git@geni-v3
 #
-myslice-GITPATH			:= git://git.onelab.eu/myslice.git@master
-manifold-GITPATH		:= git://git.onelab.eu/manifold.git@devel
-#
-tests-GITPATH                   := git://git.onelab.eu/tests.git@tests-5.3-2
+tests-GITPATH                   := git://git.onelab.eu/tests.git@master
