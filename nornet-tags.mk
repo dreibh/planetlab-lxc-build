@@ -1,3 +1,19 @@
+# /=========================================================================\
+# =             #     #                 #     #                             =
+# =             ##    #   ####   #####  ##    #  ######   #####             =
+# =             # #   #  #    #  #    # # #   #  #          #               =
+# =             #  #  #  #    #  #    # #  #  #  #####      #               =
+# =             #   # #  #    #  #####  #   # #  #          #               =
+# =             #    ##  #    #  #   #  #    ##  #          #               =
+# =             #     #   ####   #    # #     #  ######     #               =
+# =                                                                         =
+# =             A Real-World, Large-Scale Multi-Homing Testbed              =
+# =                          https://www.nntb.no/                           =
+# =                                                                         =
+# = Contact: Thomas Dreibholz                                               =
+# =          dreibh@simula.no, https://www.simula.no/people/dreibh          =
+# \=========================================================================/
+
 # ###### NorNet customisation ###############################################
 linux-GITPATH                   := git://github.com/dreibh/planetlab-kernel.git@master
 netperfmeter-GITPATH            := git://github.com/dreibh/netperfmeter.git@master

@@ -1,3 +1,19 @@
+# /=========================================================================\
+# =             #     #                 #     #                             =
+# =             ##    #   ####   #####  ##    #  ######   #####             =
+# =             # #   #  #    #  #    # # #   #  #          #               =
+# =             #  #  #  #    #  #    # #  #  #  #####      #               =
+# =             #   # #  #    #  #####  #   # #  #          #               =
+# =             #    ##  #    #  #   #  #    ##  #          #               =
+# =             #     #   ####   #    # #     #  ######     #               =
+# =                                                                         =
+# =             A Real-World, Large-Scale Multi-Homing Testbed              =
+# =                          https://www.nntb.no/                           =
+# =                                                                         =
+# = Contact: Thomas Dreibholz                                               =
+# =          dreibh@simula.no, https://www.simula.no/people/dreibh          =
+# \=========================================================================/
+
 #
 # declare the packages to be built and their dependencies
 # initial version from Mark Huang
