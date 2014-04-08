@@ -33,7 +33,7 @@ VIF_GUEST=eth0
 
 ##########
 FEDORA_MIRROR_BASE="http://mirror.simula.nornet/fedora"   # http://mirror.onelab.eu/fedora/
-FEDORA_PREINSTALLED="yum initscripts passwd rsyslog vim-minimal dhclient chkconfig rootfiles policycoreutils openssh-server openssh-clients netcf-devel"
+FEDORA_PREINSTALLED="yum initscripts passwd rsyslog vim-minimal dhclient chkconfig rootfiles policycoreutils openssh-server openssh-clients"
 DEBIAN_PREINSTALLED="openssh-server openssh-client"
 
 ########## networking utilities
