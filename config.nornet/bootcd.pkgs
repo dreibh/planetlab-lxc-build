@@ -5,7 +5,6 @@ yumexclude: @NODEYUMEXCLUDE@
 # define packages
 package: btrfs-progs
 package: filesystem
-package<=f18: udev
 package: dhclient
 package: bash
 package: coreutils
@@ -91,6 +90,8 @@ precious: boot/kernel-boot*
 precious: boot/grub
 precious<=f8 precious<=centos5: usr/lib/locale/en_US.utf8
 
+
 # ###### NorNet customisation ###############################################
 package: joe
+package: less 
 # ###########################################################################
