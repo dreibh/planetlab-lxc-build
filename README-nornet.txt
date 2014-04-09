@@ -1,3 +1,20 @@
+/=========================================================================\
+=             #     #                 #     #                             =
+=             ##    #   ####   #####  ##    #  ######   #####             =
+=             # #   #  #    #  #    # # #   #  #          #               =
+=             #  #  #  #    #  #    # #  #  #  #####      #               =
+=             #   # #  #    #  #####  #   # #  #          #               =
+=             #    ##  #    #  #   #  #    ##  #          #               =
+=             #     #   ####   #    # #     #  ######     #               =
+=                                                                         =
+=             A Real-World, Large-Scale Multi-Homing Testbed              =
+=                          https://www.nntb.no/                           =
+=                                                                         =
+= Contact: Thomas Dreibholz                                               =
+=          dreibh@simula.no, https://www.simula.no/people/dreibh          =
+\=========================================================================/
+
+
 The distribution "nornet" is the software for the NorNet research testbed on multi-homed systems. Its aim is to provide a research possibility on systems that are connected to multiple ISPs simultaneously, both with IPv4 and IPv6. The "nornet" distribution is therefore based on "lxc", with the possibility of having own IP addresses per slice. Particularly, slices may have multiple IPv4 and IPv6 addresses.
 
 
