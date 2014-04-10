@@ -59,6 +59,14 @@ ALL += netperfmeter
 IN_NODEIMAGE += netperfmeter
 
 #
+# nornet-nn
+#
+nornet-nn-MODULES := nornet-nn
+nornet-nn-SPEC := rpm/nornet-nn.spec
+ALL += nornet-nn
+IN_NODEIMAGE += nornet-nn
+
+#
 # rsplib
 #
 rsplib-MODULES := rsplib
