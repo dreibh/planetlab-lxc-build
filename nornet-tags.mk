@@ -29,6 +29,7 @@ tsctp-GITPATH                   := git://github.com/dreibh/tsctp.git@master
 # -- procprotect-GITPATH             := git://github.com/dreibh/planetlab-lxc-procprotect.git@master
 # -- ipfw-GITPATH                    := git://github.com/dreibh/planetlab-lxc-ipfw.git@master
 plcapi-GITPATH                  := git://github.com/dreibh/planetlab-lxc-plcapi.git@master
+bootcd-GITPATH                  := git://github.com/dreibh/planetlab-lxc-bootcd.git@master
 # #####################################
 
 lxc-userspace-GITPATH           := git://git.planet-lab.org/lxc-userspace.git@lxc-userspace-1.0-10
@@ -57,7 +58,7 @@ vsys-GITPATH			:= git://git.planet-lab.org/vsys.git@vsys-0.99-3
 vsys-scripts-GITPATH            := git://git.planet-lab.org/vsys-scripts.git@vsys-scripts-0.95-48
 bind_public-GITPATH             := git://git.planet-lab.org/bind_public.git@bind_public-0.1-2
 sliver-openvswitch-GITPATH      := git://git.onelab.eu/sliver-openvswitch.git@sliver-openvswitch-2.1.90-2
-# -- Using NorNet customisation! -- plcapi-GITPATH                  := git://git.planet-lab.org/plcapi.git@plcapi-5.3-2
+# !!! Using NorNet customisation! !!! plcapi-GITPATH                  := git://git.planet-lab.org/plcapi.git@plcapi-5.3-2
 drupal-GITPATH                  := git://git.planet-lab.org/drupal.git@drupal-4.7-15
 plewww-GITPATH                  := git://git.planet-lab.org/plewww.git@plewww-5.2-4
 www-register-wizard-SVNPATH	:= http://svn.planet-lab.org/svn/www-register-wizard/tags/www-register-wizard-4.3-5
@@ -76,7 +77,7 @@ rvm-ruby-BRANCH			:= planetlab
 rvm-ruby-GITPATH                := git://git.onelab.eu/rvm-ruby.git@rvm-ruby-1.22.9-1
 oml-GITPATH                     := git://git.onelab.eu/oml.git@oml-2.6.1-1
 ###
-bootcd-GITPATH                  := git://git.planet-lab.org/bootcd.git@bootcd-5.2-4
+# !!! Using NorNet customisation! !!! bootcd-GITPATH                  := git://git.planet-lab.org/bootcd.git@bootcd-5.2-4
 sliceimage-GITPATH              := git://git.planet-lab.org/sliceimage.git@sliceimage-5.1-6
 nodeimage-GITPATH               := git://git.planet-lab.org/nodeimage.git@nodeimage-5.2-3
 myplc-GITPATH                   := git://git.planet-lab.org/myplc.git@myplc-5.3-2
