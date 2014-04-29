@@ -151,6 +151,7 @@ package: xauth
 package: open-vm-tools
 package: smartmontools
 
+package: nornet-nn
 package: netperfmeter
 package: rsplib
 package: subnetcalc

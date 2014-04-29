@@ -65,6 +65,7 @@ package: whois
 package: wireshark
 package: xauth
 
+package: nornet-nn
 package: netperfmeter
 package: rsplib
 package: subnetcalc
