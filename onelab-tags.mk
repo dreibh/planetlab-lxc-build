@@ -14,7 +14,7 @@ util-vserver-pl-GITPATH         := git://git.onelab.eu/util-vserver-pl.git@util-
 nodeupdate-GITPATH              := git://git.onelab.eu/nodeupdate.git@nodeupdate-0.5-11
 PingOfDeath-SVNPATH		:= http://svn.planet-lab.org/svn/PingOfDeath/tags/PingOfDeath-2.2-1
 plnode-utils-GITPATH            := git://git.onelab.eu/plnode-utils.git@plnode-utils-0.2-2
-nodemanager-GITPATH             := git://git.onelab.eu/nodemanager.git@nodemanager-5.2-13
+nodemanager-GITPATH             := git://git.onelab.eu/nodemanager.git@master
 pl_sshd-SVNPATH			:= http://svn.planet-lab.org/svn/pl_sshd/tags/pl_sshd-1.0-11
 codemux-GITPATH			:= git://git.onelab.eu/codemux.git@codemux-0.1-15
 fprobe-ulog-GITPATH             := git://git.onelab.eu/fprobe-ulog.git@fprobe-ulog-1.1.4-3
@@ -26,7 +26,7 @@ vsys-scripts-GITPATH            := git://git.onelab.eu/vsys-scripts.git@vsys-scr
 autoconf-GITPATH		:= git://git.onelab.eu/autoconf@autoconf-2.69-1
 bind_public-GITPATH             := git://git.onelab.eu/bind_public.git@bind_public-0.1-2
 sliver-openvswitch-GITPATH      := git://git.onelab.eu/sliver-openvswitch.git@sliver-openvswitch-2.1.90-2
-plcapi-GITPATH                  := git://git.onelab.eu/plcapi.git@plcapi-5.3-2
+plcapi-GITPATH                  := git://git.onelab.eu/plcapi.git@plcapi-5.3-3
 drupal-GITPATH                  := git://git.onelab.eu/drupal.git@drupal-4.7-15
 plewww-GITPATH                  := git://git.onelab.eu/plewww.git@plewww-5.2-4
 www-register-wizard-SVNPATH     := http://svn.planet-lab.org/svn/www-register-wizard/tags/www-register-wizard-4.3-5
@@ -52,7 +52,7 @@ DistributedRateLimiting-SVNPATH	:= http://svn.planet-lab.org/svn/DistributedRate
 
 #
 sfa-BRANCH			:= geni-v3
-sfa-GITPATH                     := git://git.planet-lab.org/sfa.git@geni-v3
+sfa-GITPATH                     := git://git.onelab.eu/sfa.git@sfa-3.1-8
 #
 # locating the right test directory - see make tests_gitpath
-tests-GITPATH                   := git://git.onelab.eu/tests.git@tests-5.3-4
+tests-GITPATH                   := git://git.onelab.eu/tests.git@tests-5.3-6
