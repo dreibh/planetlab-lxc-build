@@ -285,8 +285,8 @@ ifeq "$(separate_libvirt_python)" "true"
 libvirt-python-MODULES := libvirt-python
 libvirt-python-SPEC    := libvirt-python.spec
 libvirt-python-BUILD-FROM-SRPM := yes
-libvirt-python-STOCK-DEVEL-RPMS += gnutls-utils pm-utils 
-libvirt-python-LOCAL-DEVEL-RPMS += libvirt-devel libvirt-docs libvirt-client gettext
+libvirt-python-STOCK-DEVEL-RPMS += gnutls-utils pm-utils gettext
+libvirt-python-LOCAL-DEVEL-RPMS += libvirt-devel libvirt-docs libvirt-client
 libvirt-python-RPMFLAGS :=     --define 'packager PlanetLab'
 ALL += libvirt-python
 IN_NODEREPO += libvirt-python
