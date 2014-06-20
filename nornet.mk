@@ -270,7 +270,7 @@ libvirt-STOCK-DEVEL-RPMS += ceph-devel numactl-devel libcap-ng-devel scrub
 libvirt-STOCK-DEVEL-RPMS += libblkid-devel glusterfs-api-devel glusterfs-devel
 # strictly speaking fuse-devel is not required anymore but we might wish to turn fuse back on again in the future
 libvirt-STOCK-DEVEL-RPMS += fuse-devel libssh2-devel dbus-devel numad 
-libvirt-STOCK-DEVEL-RPMS += systemd-devel libnl3-devel libgcrypt-devel netcf-devel
+libvirt-STOCK-DEVEL-RPMS += systemd-devel libnl3-devel iptables-ipv6 libgcrypt-devel netcf-devel
 ALL += libvirt
 IN_NODEREPO += libvirt
 IN_NODEIMAGE += libvirt
@@ -285,7 +285,7 @@ ifeq "$(separate_libvirt_python)" "true"
 libvirt-python-MODULES := libvirt-python
 libvirt-python-SPEC    := libvirt-python.spec
 libvirt-python-BUILD-FROM-SRPM := yes
-libvirt-python-STOCK-DEVEL-RPMS += gnutls-utils pm-utils gettext
+libvirt-python-STOCK-DEVEL-RPMS += gnutls-utils nc pm-utils
 libvirt-python-LOCAL-DEVEL-RPMS += libvirt-devel libvirt-docs libvirt-client
 libvirt-python-RPMFLAGS :=     --define 'packager PlanetLab'
 ALL += libvirt-python
