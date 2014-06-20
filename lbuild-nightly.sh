@@ -692,8 +692,8 @@ function main () {
 	    GIT_TAG=$(echo $BUILD_SCM_URL | cut -s -d@ -f2)
 	    GIT_TAG=${GIT_TAG:-master}
 	    mkdir -p $tmpdir 
-            ( git archive --remote=$GIT_REPO $GIT_TAG | tar -C $tmpdir -xf -) || \
-		( echo "==================== git archive FAILED, trying git clone instead" ; \
+            ( [[ ! "$GIT_REPO" =~ ^git:\/\/github.com\/.*$ ]] && git archive --remote=$GIT_REPO $GIT_TAG | tar -C $tmpdir -xf - ) || \
+		( echo "==================== Trying git clone instead of git archive" ; \
 		  git clone $GIT_REPO $tmpdir && cd $tmpdir && git checkout $GIT_TAG && rm -rf .git)
 
             # Create lxc vm
