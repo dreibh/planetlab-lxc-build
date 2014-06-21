@@ -21,10 +21,12 @@ rm -f /vservers/*.txt
 find /vservers/ -maxdepth 1 -type d -name '20*' | xargs --no-run-if-empty rm -rf
 find /root/     -maxdepth 1 -type d -name '20*' | xargs --no-run-if-empty rm -rf
 
-find /build/ -maxdepth 2 -type f -name '*.ko' | (
-   while read ko ; do
-      echo "KO=$ko"
-      directory=`echo "$ko" | sed -e "s/\.ko$//g"`
-      rm -rf "$ko" "$directory"
-   done
-)
+if [ -e /build/ ] ; then
+   find /build/ -maxdepth 2 -type f -name '*.ko' | (
+      while read ko ; do
+         echo "KO=$ko"
+         directory=`echo "$ko" | sed -e "s/\.ko$//g"`
+         rm -rf "$ko" "$directory"
+      done
+   )
+fi
