@@ -37,8 +37,7 @@ lxc-userspace-GITPATH           := git://git.onelab.eu/lxc-userspace.git@lxc-use
 transforward-GITPATH            := git://git.onelab.eu/transforward.git@21207c76f1d8981ab7be454920ce33ffb6411df0
 procprotect-GITPATH             := git://git.onelab.eu/procprotect.git@a1c2dda3b27875e90b731f31f42d80da53e42801
 ipfw-GITPATH                    := git://git.code.sf.net/p/dummynet/code@155b6cd31089b4763297d579e9c9945393f00c40
-# !!!
-comgt-SVNPATH			:= http://svn.onelab.eu/comgt/imports/0.3
+comgt-GITPATH			:= git://git.onelab.eu/comgt.git@0.3
 planetlab-umts-tools-GITPATH    := git://git.onelab.eu/planetlab-umts-tools.git@planetlab-umts-tools-0.7-1
 nodeupdate-GITPATH              := git://git.onelab.eu/nodeupdate.git@nodeupdate-0.5-11
 PingOfDeath-SVNPATH		:= http://svn.planet-lab.org/svn/PingOfDeath/tags/PingOfDeath-2.2-1
