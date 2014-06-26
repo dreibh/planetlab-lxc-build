@@ -7,7 +7,9 @@ planetlab-umts-tools-GITPATH    := git://git.onelab.eu/planetlab-umts-tools.git@
 nodeupdate-GITPATH              := git://git.onelab.eu/nodeupdate.git@nodeupdate-0.5-11
 PingOfDeath-SVNPATH		:= http://svn.planet-lab.org/svn/PingOfDeath/tags/PingOfDeath-2.2-1
 plnode-utils-GITPATH            := git://git.onelab.eu/plnode-utils.git@plnode-utils-0.2-2
-nodemanager-GITPATH             := git://git.onelab.eu/nodemanager.git@master
+# !!!!
+nodemanager-GITPATH             := git://github.com/dreibh/planetlab-lxc-nodemanager.git@master
+# git://git.onelab.eu/nodemanager.git@master
 #
 pl_sshd-SVNPATH			:= http://svn.planet-lab.org/svn/pl_sshd/tags/pl_sshd-1.0-11
 codemux-GITPATH			:= git://git.onelab.eu/codemux.git@codemux-0.1-15
@@ -43,7 +45,9 @@ pcucontrol-GITPATH              := git://git.onelab.eu/pcucontrol.git@pcucontrol
 oml-GITPATH                     := git://git.onelab.eu/oml.git@oml-2.6.1-1
 ###
 bootcd-GITPATH                  := git://git.onelab.eu/bootcd.git@bootcd-5.2-4
-sliceimage-GITPATH              := git://git.onelab.eu/sliceimage.git@sliceimage-5.1-7
+# !!!!!!
+sliceimage-GITPATH              := git://github.com/dreibh/planetlab-lxc-sliceimage.git@master
+# git://git.onelab.eu/sliceimage.git@sliceimage-5.1-7
 nodeimage-GITPATH               := git://git.onelab.eu/nodeimage.git@nodeimage-5.2-3
 myplc-GITPATH                   := git://git.onelab.eu/myplc.git@myplc-5.3-2
 
