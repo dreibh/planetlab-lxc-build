@@ -21,8 +21,8 @@ fprobe-ulog-GITPATH             := git://git.onelab.eu/fprobe-ulog.git@fprobe-ul
 
 libvirt-BRANCH	                := v1.2.6-rc1
 libvirt-GITPATH                 := git://libvirt.org/libvirt.git@v1.2.6-rc1
-libvirt-python-BRANCH           := v1.2.6-rc1 
-libvirt-python-GITPATH          := git://libvirt.org/libvirt.git@v1.2.6-rc1
+libvirt-python-BRANCH           := v1.2.5
+libvirt-python-GITPATH          := git://libvirt.org/libvirt-python.git@v1.2.5
 
 pf2slice-SVNPATH		:= http://svn.planet-lab.org/svn/pf2slice/tags/pf2slice-1.0-2
 mom-GITPATH                     := git://git.onelab.eu/mom.git@mom-2.3-5
