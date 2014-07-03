@@ -17,12 +17,12 @@ cd "$BUILD_DIRECTORY"
 
 # ====== Run the builds =====================================================
 # LXC:
-./lbuild-nightly.sh -m "$MAILTO" -b "$BASE" -d lxc -f f18 -p linux64 -c default -c no_omf || true
-./lbuild-nightly.sh -m "$MAILTO" -b "$BASE" -d lxc -f f20 -p linux64 -c default -c no_omf || true
+./lbuild-nightly.sh -m "$MAILTO" -b "$BASE" -d lxc -f f18 -p linux64 -c default || true
+./lbuild-nightly.sh -m "$MAILTO" -b "$BASE" -d lxc -f f20 -p linux64 -c default || true
 
 # NorNet:
-./lbuild-nightly.sh -m "$MAILTO" -b "$BASE" -d nornet -f f18 -p linux64 -c default -c no_omf || true
-./lbuild-nightly.sh -m "$MAILTO" -b "$BASE" -d nornet -f f20 -p linux64 -c default -c no_omf || true
+./lbuild-nightly.sh -m "$MAILTO" -b "$BASE" -d nornet -f f18 -p linux64 -c default || true
+./lbuild-nightly.sh -m "$MAILTO" -b "$BASE" -d nornet -f f20 -p linux64 -c default || true
 
 
 echo -e "\x1b[1;34m`date +%FT%H:%M:%S`: Finished nightly builds!\x1b[0m"
