@@ -52,7 +52,8 @@ package: git
 package: joe
 package: htop
 package: libidn
-# package: kernel-modules-extra
+# NOTE: kernel-modules-extra is needed for /lib/modules/`uname -r`/build/include!
+package: kernel-modules-extra
 package: lksctp-tools
 package: man
 package: net-snmp-utils
