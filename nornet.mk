@@ -364,10 +364,10 @@ ALL += vsys-wrapper
 #
 # bind_public
 #
-bind_public-MODULES := bind_public
-bind_public-SPEC := bind_public.spec
-IN_SLICEIMAGE += bind_public
-ALL += bind_public
+# bind_public-MODULES := bind_public
+# bind_public-SPEC := bind_public.spec
+# IN_SLICEIMAGE += bind_public
+# ALL += bind_public
 
 #
 # sliver-openvswitch
