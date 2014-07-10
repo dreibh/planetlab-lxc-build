@@ -383,9 +383,7 @@ endef
 #   $(1)/ gets cleaned up if job cannot be done
 define fetch_git_module
 	mkdir $(1) ; \
-	(git archive --remote=$($(1).gitrepo) $($(1).gittag) | tar -C $(1) -xf - ) || \
-	(echo "==================== git archive FAILED, trying git clone instead" ; \
-         git clone $($(1).gitrepo) $(1); cd $(1) ; git checkout $($(1).gittag) ; rm -rf .git ) || \
+	( git clone $($(1).gitrepo) $(1); cd $(1) ; git checkout $($(1).gittag) ; rm -rf .git ) || \
 	{ rm -rf $(1); false; }
 endef
 
@@ -439,8 +437,8 @@ endif
 ### this utility allows to extract various info from a spec file
 ### and to define them in makefiles
 # use the C code where it works as it's the original one, use the python code otherwise
-spec2make: spec2make.c
-	$(CC) -g -Wall $< -o $@ -lrpm -lrpmbuild -lrpmio -lpopt || if [ ! -e $@ ] ; then ln -s spec2make.py $@ ; fi
+spec2make: spec2make.py
+	ln -s spec2make.py $@
 
 ### run spec2make on the spec file and include the result
 # usage: spec2make package
