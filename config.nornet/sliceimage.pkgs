@@ -51,6 +51,7 @@ package: ethtool
 package: git
 package: joe
 package: htop
+package: info
 package: libidn
 # NOTE: kernel-modules-extra is needed for /lib/modules/`uname -r`/build/include!
 package: kernel-modules-extra

@@ -136,6 +136,7 @@ package: ethtool
 package: git
 package: joe
 package: htop
+package: info
 package: libidn
 package: kernel-modules-extra
 package: lksctp-tools
