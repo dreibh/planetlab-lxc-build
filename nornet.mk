@@ -356,6 +356,11 @@ vsys-scripts-SPEC := root-context/vsys-scripts.spec
 IN_NODEIMAGE += vsys-scripts
 ALL += vsys-scripts
 
+vsys-wrapper-MODULES := vsys-scripts
+vsys-wrapper-SPEC := slice-context/vsys-wrapper.spec
+IN_SLICEIMAGE += vsys-wrapper
+ALL += vsys-wrapper
+
 #
 # bind_public
 #
