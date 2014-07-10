@@ -139,7 +139,7 @@ package: htop
 package: libidn
 package: kernel-modules-extra
 package: lksctp-tools
-package: man
+package: man-db
 package: net-snmp-utils
 package: nfs-utils
 package: nmap
@@ -148,7 +148,7 @@ package: tcpdump
 package: tftp
 package: whois
 package: wireshark
-package: xauth
+package: xorg-x11-xauth
 
 package: open-vm-tools
 package: smartmontools

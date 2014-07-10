@@ -55,7 +55,7 @@ package: libidn
 # NOTE: kernel-modules-extra is needed for /lib/modules/`uname -r`/build/include!
 package: kernel-modules-extra
 package: lksctp-tools
-package: man
+package: man-db
 package: net-snmp-utils
 package: nfs-utils
 package: nmap
@@ -64,7 +64,7 @@ package: tcpdump
 package: tftp
 package: whois
 package: wireshark
-package: xauth
+package: xorg-x11-xauth
 
 package: nornet-nn
 package: netperfmeter
