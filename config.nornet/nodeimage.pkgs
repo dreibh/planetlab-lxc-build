@@ -80,7 +80,7 @@ package: yum
 package: curl
 package: gzip
 package: iptables
-package: iptables-ipv6
+package: iptables-services
 package: dracut
 package: ntp
 package: perl

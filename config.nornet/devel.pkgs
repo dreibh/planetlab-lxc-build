@@ -134,7 +134,7 @@ package: qt-devel
 package: libpcap-devel
 package: libdnet-devel
 package: lua-devel
-package: iptables-ipv6 
+package: iptables-services 
 package: nmap-ncat
 package: xauth
 
