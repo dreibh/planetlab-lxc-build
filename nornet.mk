@@ -85,11 +85,11 @@ IN_NODEIMAGE += subnetcalc
 #
 # tracebox
 #
-tracebox-MODULES := tracebox
-tracebox-SPEC := rpm/tracebox.spec
-tracebox-STOCK-DEVEL-RPMS := fakeroot
-ALL += tracebox
-IN_NODEIMAGE += tracebox
+# tracebox-MODULES := tracebox
+# tracebox-SPEC := rpm/tracebox.spec
+# tracebox-STOCK-DEVEL-RPMS := fakeroot
+# ALL += tracebox
+# IN_NODEIMAGE += tracebox
 
 #
 # tsctp

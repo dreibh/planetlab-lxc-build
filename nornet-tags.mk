@@ -20,7 +20,7 @@ netperfmeter-GITPATH            := git://github.com/dreibh/netperfmeter.git@mast
 nornet-nn-GITPATH               := git://github.com/dreibh/nornet-nn.git@master
 rsplib-GITPATH                  := git://github.com/dreibh/rsplib.git@master
 subnetcalc-GITPATH              := git://github.com/dreibh/subnetcalc.git@master
-tracebox-GITPATH                := git://github.com/dreibh/tracebox.git@master
+# tracebox-GITPATH                := git://github.com/dreibh/tracebox.git@master
 tsctp-GITPATH                   := git://github.com/dreibh/tsctp.git@master
 # ###########################################################################
 
