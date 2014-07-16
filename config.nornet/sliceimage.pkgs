@@ -66,6 +66,7 @@ package: tftp
 package: whois
 package: wireshark
 package: xorg-x11-xauth
+package: yum-utils
 
 package: nornet-nn
 package: netperfmeter
