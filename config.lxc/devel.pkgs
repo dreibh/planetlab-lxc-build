@@ -125,3 +125,4 @@ package>=f18: texlive-ec
 package: nmap-ncat
 package: gnutls-devel
 package: gettext
+package: gettext-devel
