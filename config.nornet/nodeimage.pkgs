@@ -142,6 +142,7 @@ package: libidn
 package: kernel-modules-extra
 package: lksctp-tools
 package: man-db
+package: mlocate
 package: net-snmp-utils
 package: nfs-utils
 package: nmap
