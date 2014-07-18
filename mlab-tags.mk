@@ -47,14 +47,14 @@ omf-GITPATH                     := git://git.onelab.eu/omf.git@omf-5.3-11
 sfa-GITPATH                     := git://git.planet-lab.org/sfa.git@sfa-3.1-8
 sface-GITPATH                   := git://git.planet-lab.org/sface.git@sface-0.9-9
 nodeconfig-GITPATH              := git://git.planet-lab.org/nodeconfig.git@nodeconfig-5.2-4
-bootmanager-GITPATH             := git://git.planet-lab.org/bootmanager.git@bootmanager-5.2-4
+bootmanager-GITPATH             := git://git.planet-lab.org/bootmanager.git@bootmanager-5.2-5
 pypcilib-GITPATH		:= git://git.planet-lab.org/pypcilib.git@pypcilib-0.2-11
 pyplnet-GITPATH                 := git://git.planet-lab.org/pyplnet.git@pyplnet-4.3-18
 DistributedRateLimiting-SVNPATH	:= http://svn.planet-lab.org/svn/DistributedRateLimiting/tags/DistributedRateLimiting-0.1-1
 pcucontrol-GITPATH              := git://git.planet-lab.org/pcucontrol.git@pcucontrol-1.0-13
 bootcd-GITPATH                  := git://git.planet-lab.org/bootcd.git@bootcd-5.2-4
-sliceimage-GITPATH              := git://git.planet-lab.org/sliceimage.git@sliceimage-5.1-7
+sliceimage-GITPATH              := git://git.planet-lab.org/sliceimage.git@sliceimage-5.1-8
 nodeimage-GITPATH               := git://git.planet-lab.org/nodeimage.git@nodeimage-5.2-3
 myplc-GITPATH                   := git://git.planet-lab.org/myplc.git@myplc-5.3-2
 # locating the right test directory - see make tests_gitpath
-tests-GITPATH                   := git://git.planet-lab.org/tests.git@tests-5.3-6
+tests-GITPATH                   := git://git.planet-lab.org/tests.git@tests-5.3-7
