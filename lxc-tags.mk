@@ -1,7 +1,7 @@
 lxc-userspace-GITPATH           := git://git.onelab.eu/lxc-userspace.git@lxc-userspace-1.0-12
 transforward-GITPATH            := git://git.onelab.eu/transforward.git@transforward-0.1-7
 procprotect-GITPATH             := git://git.onelab.eu/procprotect.git@procprotect-0.4-5
-ipfw-GITPATH                    := git://git.code.sf.net/p/dummynet/code@ipfw-20130423-1
+ipfw-GITPATH                    := git://git.code.sf.net/p/dummynet/code@155b6cd31089b4763297d579e9c9945393f00c40
 comgt-GITPATH			:= git://git.onelab.eu/comgt.git@0.3
 planetlab-umts-tools-GITPATH    := git://git.onelab.eu/planetlab-umts-tools.git@planetlab-umts-tools-0.7-1
 nodeupdate-GITPATH              := git://git.onelab.eu/nodeupdate.git@nodeupdate-0.5-11
@@ -44,7 +44,7 @@ pcucontrol-GITPATH              := git://git.onelab.eu/pcucontrol.git@pcucontrol
 oml-GITPATH                     := git://git.onelab.eu/oml.git@oml-2.6.1-1
 ###
 bootcd-GITPATH                  := git://git.onelab.eu/bootcd.git@bootcd-5.2-4
-sliceimage-GITPATH              := git://git.onelab.eu/sliceimage.git@sliceimage-5.1-8
+sliceimage-GITPATH              := git://git.onelab.eu/sliceimage.git@master
 nodeimage-GITPATH               := git://git.onelab.eu/nodeimage.git@nodeimage-5.2-3
 myplc-GITPATH                   := git://git.onelab.eu/myplc.git@myplc-5.3-2
 
