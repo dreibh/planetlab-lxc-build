@@ -39,7 +39,7 @@ kernel-RPMFLAGS += --without smp --without pae --without debug --without doc --w
 kernel-WHITELIST-RPMS := kernel,kernel-headers,kernel-devel,kernel-modules-extra,kernel-tools,kernel-tools-libs,kernel-tools-libs-devel
 kernel-SPECVARS += kernelconfig=planetlab
 KERNELS += kernel
-kernel-STOCK-DEVEL-RPMS += elfutils-libelf-devel
+#kernel-STOCK-DEVEL-RPMS +=
 
 kernels: $(KERNELS)
 kernels-clean: $(foreach package,$(KERNELS),$(package)-clean)
@@ -263,7 +263,7 @@ libvirt-MODULES := libvirt
 libvirt-SPEC    := libvirt.spec
 libvirt-BUILD-FROM-SRPM := yes
 # The --without options are breaking spec2make : hard-wired in the specfile instead
-libvirt-STOCK-DEVEL-RPMS += xhtml1-dtds libtasn1-devel
+libvirt-STOCK-DEVEL-RPMS += xhtml1-dtds
 libvirt-STOCK-DEVEL-RPMS += libattr-devel augeas libpciaccess-devel yajl-devel 
 libvirt-STOCK-DEVEL-RPMS += libpcap-devel radvd ebtables device-mapper-devel 
 libvirt-STOCK-DEVEL-RPMS += ceph-devel numactl-devel libcap-ng-devel scrub 
@@ -286,7 +286,7 @@ ifeq "$(separate_libvirt_python)" "true"
 libvirt-python-MODULES := libvirt-python
 libvirt-python-SPEC    := libvirt-python.spec
 libvirt-python-BUILD-FROM-SRPM := yes
-libvirt-python-STOCK-DEVEL-RPMS += gnutls-utils pm-utils
+libvirt-python-STOCK-DEVEL-RPMS += pm-utils
 libvirt-python-LOCAL-DEVEL-RPMS += libvirt-devel libvirt-docs libvirt-client
 libvirt-python-RPMFLAGS :=     --define 'packager PlanetLab'
 ALL += libvirt-python

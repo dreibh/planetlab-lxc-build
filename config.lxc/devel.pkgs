@@ -122,7 +122,11 @@ package: libxml2-devel
 # myplc-docs
 package>=f18: texlive-ec
 # libvirt
-package: nmap-ncat
-package: gnutls-devel
 package: gettext
 package: gettext-devel
+package: gnutls-devel
+package: gnutls-utils
+package: libgcrypt-devel
+package: libtasn1-devel
+package: nmap-ncat
+package: pkgconfig
