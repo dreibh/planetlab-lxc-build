@@ -17,6 +17,7 @@ package: bridge-utils
 package: dnsmasq
 package: bash-completion
 package: kernel
+package: kernel-modules-extra
 package: linux-firmware
 package: systemd
 package: basesystem
