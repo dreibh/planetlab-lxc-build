@@ -26,7 +26,9 @@ tsctp-GITPATH                   := git://github.com/dreibh/tsctp.git@master
 
 # ##### NorNet ########################
 # -- transforward-GITPATH            := git://github.com/dreibh/planetlab-lxc-transforward.git@master
-# -- procprotect-GITPATH             := git://github.com/dreibh/planetlab-lxc-procprotect.git@master
+# --
+procprotect-GITPATH             := git://github.com/dreibh/planetlab-lxc-procprotect.git@master
+# ????????????????????????????????
 # -- ipfw-GITPATH                    := git://github.com/dreibh/planetlab-lxc-ipfw.git@master
 plcapi-GITPATH                  := git://github.com/dreibh/planetlab-lxc-plcapi.git@master
 bootcd-GITPATH                  := git://github.com/dreibh/planetlab-lxc-bootcd.git@master
@@ -35,7 +37,7 @@ nodemanager-GITPATH             := git://github.com/dreibh/planetlab-lxc-nodeman
 
 lxc-userspace-GITPATH           := git://git.onelab.eu/lxc-userspace.git@lxc-userspace-1.0-12
 transforward-GITPATH            := git://git.onelab.eu/transforward.git@transforward-0.1-7
-procprotect-GITPATH             := git://git.onelab.eu/procprotect.git@procprotect-0.4-5
+#  ??????? procprotect-GITPATH             := git://git.onelab.eu/procprotect.git@procprotect-0.4-5
 # !!! ipfw still needs newer version! !!!
 ipfw-GITPATH                    := git://git.code.sf.net/p/dummynet/code@155b6cd31089b4763297d579e9c9945393f00c40
 comgt-GITPATH			:= git://git.onelab.eu/comgt.git@0.3
