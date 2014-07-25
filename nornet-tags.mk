@@ -15,27 +15,27 @@
 # \=========================================================================/
 
 # ###### NorNet customisation ###############################################
-linux-GITPATH                   := git://github.com/dreibh/planetlab-kernel.git@master
+linux-GITPATH                   := git://github.com/dreibh/planetlab-kernel.git@nornet-rel0.9.0
+nornet-nn-GITPATH               := git://github.com/dreibh/nornet-nn.git@nornet-rel0.9.0
 netperfmeter-GITPATH            := git://github.com/dreibh/netperfmeter.git@master
-nornet-nn-GITPATH               := git://github.com/dreibh/nornet-nn.git@master
 rsplib-GITPATH                  := git://github.com/dreibh/rsplib.git@master
 subnetcalc-GITPATH              := git://github.com/dreibh/subnetcalc.git@master
-# tracebox-GITPATH                := git://github.com/dreibh/tracebox.git@master
 tsctp-GITPATH                   := git://github.com/dreibh/tsctp.git@master
+# tracebox-GITPATH                := git://github.com/dreibh/tracebox.git@master
 # ###########################################################################
 
 # ##### NorNet ########################
 # -- transforward-GITPATH            := git://github.com/dreibh/planetlab-lxc-transforward.git@master
 # -- procprotect-GITPATH             := git://github.com/dreibh/planetlab-lxc-procprotect.git@master
 # -- ipfw-GITPATH                    := git://github.com/dreibh/planetlab-lxc-ipfw.git@master
-plcapi-GITPATH                  := git://github.com/dreibh/planetlab-lxc-plcapi.git@master
-bootcd-GITPATH                  := git://github.com/dreibh/planetlab-lxc-bootcd.git@master
-nodemanager-GITPATH             := git://github.com/dreibh/planetlab-lxc-nodemanager.git@master
+plcapi-GITPATH                  := git://github.com/dreibh/planetlab-lxc-plcapi.git@ornet-rel0.9.0
+bootcd-GITPATH                  := git://github.com/dreibh/planetlab-lxc-bootcd.git@ornet-rel0.9.0
+nodemanager-GITPATH             := git://github.com/dreibh/planetlab-lxc-nodemanager.git@ornet-rel0.9.0
 # #####################################
 
 lxc-userspace-GITPATH           := git://git.onelab.eu/lxc-userspace.git@lxc-userspace-1.0-12
-transforward-GITPATH            := git://git.onelab.eu/transforward.git@master
-procprotect-GITPATH             := git://git.onelab.eu/procprotect.git@master
+transforward-GITPATH            := git://git.onelab.eu/transforward.git@2058a6b920762fd90d67f5ad57296b5fd53ad3af
+procprotect-GITPATH             := git://git.onelab.eu/procprotect.git@5d514e9b7a3dc5f7017c5c6c03df883f32ee4aef
 ipfw-GITPATH                    := git://git.code.sf.net/p/dummynet/code@155b6cd31089b4763297d579e9c9945393f00c40
 comgt-GITPATH			:= git://git.onelab.eu/comgt.git@0.3
 planetlab-umts-tools-GITPATH    := git://git.onelab.eu/planetlab-umts-tools.git@planetlab-umts-tools-0.7-1
@@ -78,7 +78,7 @@ pcucontrol-GITPATH              := git://git.onelab.eu/pcucontrol.git@pcucontrol
 oml-GITPATH                     := git://git.onelab.eu/oml.git@oml-2.6.1-1
 ###
 # !!! Using NorNet customisation! !!! bootcd-GITPATH                  := git://git.planet-lab.org/bootcd.git@bootcd-5.2-4
-sliceimage-GITPATH              := git://git.onelab.eu/sliceimage.git@master
+sliceimage-GITPATH              := git://git.onelab.eu/sliceimage.git@fa1f64bfbdde37c6a2d788e621eb9d33f329f8fa
 nodeimage-GITPATH               := git://git.onelab.eu/nodeimage.git@nodeimage-5.2-4
 myplc-GITPATH                   := git://git.onelab.eu/myplc.git@myplc-5.3-2
 
