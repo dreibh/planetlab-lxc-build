@@ -1,0 +1,33 @@
+#!/bin/bash -e
+
+if [ "$1" == "" ] ; the
+   echo >&2 "Usage: $0 release"
+   exit 1
+fi
+
+BUILD_DIRECTORY="/root/nightly-builds"
+BUILD_REPOSITORY="git://github.com/dreibh/planetlab-lxc-build.git"
+MAILTO="dreibh@simula.no"
+BASE="$1--@PLDISTRO@-@FCDISTRO@-@PERSONALITY@"
+
+echo -e "\x1b[1;34m`date +%FT%H:%M:%S`: Starting release builds ...\x1b[0m"
+
+
+# ====== Prepare repository =================================================
+export LANG=C
+rm -rf "$BUILD_DIRECTORY"
+git clone --depth 1 "$BUILD_REPOSITORY" "$BUILD_DIRECTORY"
+cd "$BUILD_DIRECTORY"
+
+
+# ====== Run the builds =====================================================
+# LXC:
+#./lbuild-release.sh -m "$MAILTO" -b "$BASE" -d lxc -f f18 -p linux64 -c default || true
+#./lbuild-release.sh -m "$MAILTO" -b "$BASE" -d lxc -f f20 -p linux64 -c default || true
+
+# NorNet:
+./lbuild-release.sh -m "$MAILTO" -b "$BASE" -d nornet -f f18 -p linux64 -c default || true
+#./lbuild-release.sh -m "$MAILTO" -b "$BASE" -d nornet -f f20 -p linux64 -c default || true
+
+
+echo -e "\x1b[1;34m`date +%FT%H:%M:%S`: Finished release builds!\x1b[0m"
