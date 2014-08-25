@@ -1,4 +1,5 @@
-plcyumexclude: drupal
+# with our kernel rebuilt for fedora14
+plcyumexclude:		drupal
 
 
 # ###### NorNet customisation ###############################################
