@@ -155,6 +155,9 @@ libvirt-STOCK-DEVEL-RPMS += libblkid-devel glusterfs-api-devel glusterfs-devel
 # strictly speaking fuse-devel is not required anymore but we might wish to turn fuse back on again in the future
 libvirt-STOCK-DEVEL-RPMS += fuse-devel libssh2-devel dbus-devel numad 
 libvirt-STOCK-DEVEL-RPMS += systemd-devel libnl3-devel iptables-services netcf-devel
+# for 1.2.7:
+libvirt-STOCK-DEVEL-RPMS += xen-devel sanlock-devel avahi-devel cyrus-sasl-devel polkit-devel qemu-img lvm2 iscsi-initiator-utils parted-devel libwsman-devel audit-libs-devel nfs-utils
+
 ALL += libvirt
 IN_NODEREPO += libvirt
 IN_NODEIMAGE += libvirt
