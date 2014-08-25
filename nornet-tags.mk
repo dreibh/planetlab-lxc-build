@@ -28,14 +28,14 @@ tsctp-GITPATH                   := git://github.com/dreibh/tsctp.git@master
 # -- transforward-GITPATH            := git://github.com/dreibh/planetlab-lxc-transforward.git@master
 # -- procprotect-GITPATH             := git://github.com/dreibh/planetlab-lxc-procprotect.git@master
 # -- ipfw-GITPATH                    := git://github.com/dreibh/planetlab-lxc-ipfw.git@master
-plcapi-GITPATH                  := git://github.com/dreibh/planetlab-lxc-plcapi.git@ornet-rel0.9.0
+plcapi-GITPATH                  := git://github.com/dreibh/planetlab-lxc-plcapi.git@master
 bootcd-GITPATH                  := git://github.com/dreibh/planetlab-lxc-bootcd.git@ornet-rel0.9.0
 nodemanager-GITPATH             := git://github.com/dreibh/planetlab-lxc-nodemanager.git@ornet-rel0.9.0
 # #####################################
 
 lxc-userspace-GITPATH           := git://git.onelab.eu/lxc-userspace.git@lxc-userspace-1.0-12
-transforward-GITPATH            := git://git.onelab.eu/transforward.git@2058a6b920762fd90d67f5ad57296b5fd53ad3af
-procprotect-GITPATH             := git://git.onelab.eu/procprotect.git@5d514e9b7a3dc5f7017c5c6c03df883f32ee4aef
+transforward-GITPATH            := git://git.onelab.eu/transforward.git@master
+procprotect-GITPATH             := git://git.onelab.eu/procprotect.git@master
 ipfw-GITPATH                    := git://git.code.sf.net/p/dummynet/code@155b6cd31089b4763297d579e9c9945393f00c40
 comgt-GITPATH			:= git://git.onelab.eu/comgt.git@0.3
 planetlab-umts-tools-GITPATH    := git://git.onelab.eu/planetlab-umts-tools.git@planetlab-umts-tools-0.7-1
@@ -59,7 +59,7 @@ vsys-GITPATH			:= git://git.onelab.eu/vsys.git@vsys-0.99-3
 vsys-scripts-GITPATH            := git://git.onelab.eu/vsys-scripts.git@vsys-scripts-0.95-49
 bind_public-GITPATH             := git://git.onelab.eu/bind_public.git@bind_public-0.1-2
 sliver-openvswitch-GITPATH      := git://git.onelab.eu/sliver-openvswitch.git@sliver-openvswitch-2.2.90-1
-# !!! Using NorNet customisation! !!! plcapi-GITPATH                  := git://git.planet-lab.org/plcapi.git@plcapi-5.3-3
+# !!! Using NorNet customisation! !!! plcapi-GITPATH                  := git://git.planet-lab.org/plcapi.git@plcapi-5.3-5
 drupal-GITPATH                  := git://git.onelab.eu/drupal.git@drupal-4.7-15
 plewww-GITPATH                  := git://git.onelab.eu/plewww.git@plewww-5.2-4
 www-register-wizard-SVNPATH	:= http://svn.planet-lab.org/svn/www-register-wizard/tags/www-register-wizard-4.3-5
@@ -78,7 +78,7 @@ pcucontrol-GITPATH              := git://git.onelab.eu/pcucontrol.git@pcucontrol
 oml-GITPATH                     := git://git.onelab.eu/oml.git@oml-2.6.1-1
 ###
 # !!! Using NorNet customisation! !!! bootcd-GITPATH                  := git://git.planet-lab.org/bootcd.git@bootcd-5.2-4
-sliceimage-GITPATH              := git://git.onelab.eu/sliceimage.git@fa1f64bfbdde37c6a2d788e621eb9d33f329f8fa
+sliceimage-GITPATH              := git://git.onelab.eu/sliceimage.git@master
 nodeimage-GITPATH               := git://git.onelab.eu/nodeimage.git@nodeimage-5.2-4
 myplc-GITPATH                   := git://git.onelab.eu/myplc.git@myplc-5.3-2
 
@@ -86,4 +86,4 @@ myplc-GITPATH                   := git://git.onelab.eu/myplc.git@myplc-5.3-2
 sfa-BRANCH			:= geni-v3
 sfa-GITPATH                     := git://git.onelab.eu/sfa.git@sfa-3.1-10
 #
-tests-GITPATH                   := git://git.onelab.eu/tests.git@tests-5.3-8
+tests-GITPATH                   := git://git.onelab.eu/tests.git@master
