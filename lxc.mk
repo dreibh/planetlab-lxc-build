@@ -173,9 +173,9 @@ libvirt-python-MODULES := libvirt-python
 libvirt-python-SPEC    := libvirt-python.spec
 libvirt-python-BUILD-FROM-SRPM := yes
 libvirt-python-STOCK-DEVEL-RPMS += pm-utils
-libvirt-python-LOCAL-DEVEL-RPMS += libvirt-devel libvirt-docs libvirt-client
 # for 1.2.8:
-libvirt-python-LOCAL-DEVEL-RPMS += python-nose
+libvirt-python-STOCK-DEVEL-RPMS += python-nose
+libvirt-python-LOCAL-DEVEL-RPMS += libvirt-devel libvirt-docs libvirt-client
 libvirt-python-RPMFLAGS :=     --define 'packager PlanetLab'
 ALL += libvirt-python
 IN_NODEREPO += libvirt-python
