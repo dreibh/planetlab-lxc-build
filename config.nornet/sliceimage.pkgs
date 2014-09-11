@@ -75,4 +75,5 @@ package: rsplib
 package: subnetcalc
 # package: tracebox
 package: tsctp
+package: psmisc
 # ###########################################################################
