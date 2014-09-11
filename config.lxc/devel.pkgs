@@ -131,3 +131,5 @@ package: libgcrypt-devel
 package: libtasn1-devel
 package: nmap-ncat
 package: pkgconfig
+package: polkit-devel
+package: iscsi-initiator-utils
