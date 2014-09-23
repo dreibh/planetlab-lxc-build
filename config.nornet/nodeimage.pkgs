@@ -134,6 +134,7 @@ package>=f20: libvirt
 package: bind-utils
 package: colordiff
 package: ethtool
+package: file
 package: git
 package: joe
 package: htop

@@ -48,6 +48,7 @@ package: less emacs-nox
 package: bind-utils
 package: colordiff
 package: ethtool
+package: file
 package: git
 package: joe
 package: htop
