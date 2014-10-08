@@ -77,4 +77,5 @@ package: subnetcalc
 # package: tracebox
 package: tsctp
 package: psmisc
+package: lsof
 # ###########################################################################
