@@ -45,10 +45,14 @@ package: less emacs-nox
 
 
 # ###### NorNet customisation ###############################################
+package: autoconf
+package: automake
+package: libtool
 package: bind-utils
 package: colordiff
 package: ethtool
 package: file
+package: gcc-c++
 package: git
 package: joe
 package: htop
@@ -57,6 +61,7 @@ package: libidn
 # NOTE: kernel-modules-extra is needed for /lib/modules/`uname -r`/build/include!
 package: kernel-modules-extra
 package: lksctp-tools
+package: make
 package: man-db
 package: mlocate
 package: net-snmp-utils
