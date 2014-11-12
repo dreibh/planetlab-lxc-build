@@ -29,8 +29,8 @@ tsctp-GITPATH                   := git://github.com/dreibh/tsctp.git@master
 # -- procprotect-GITPATH             := git://github.com/dreibh/planetlab-lxc-procprotect.git@master
 # -- ipfw-GITPATH                    := git://github.com/dreibh/planetlab-lxc-ipfw.git@master
 plcapi-GITPATH                  := git://github.com/dreibh/planetlab-lxc-plcapi.git@master
-bootcd-GITPATH                  := git://github.com/dreibh/planetlab-lxc-bootcd.git@master
-nodemanager-GITPATH             := git://github.com/dreibh/planetlab-lxc-nodemanager.git@master
+bootcd-GITPATH                  := git://github.com/dreibh/planetlab-lxc-bootcd.git@nornet-rel0.9.0
+nodemanager-GITPATH             := git://github.com/dreibh/planetlab-lxc-nodemanager.git@nornet-rel0.9.0
 # #####################################
 
 lxc-userspace-GITPATH           := git://git.onelab.eu/lxc-userspace.git@lxc-userspace-1.0-12
