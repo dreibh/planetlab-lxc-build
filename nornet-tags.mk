@@ -48,16 +48,10 @@ pl_sshd-SVNPATH			:= http://svn.planet-lab.org/svn/pl_sshd/tags/pl_sshd-1.0-11
 codemux-GITPATH			:= git://git.onelab.eu/codemux.git@codemux-0.1-15
 fprobe-ulog-GITPATH             := git://git.onelab.eu/fprobe-ulog.git@fprobe-ulog-1.1.4-3
 
-# libvirt-BRANCH	                := 1.2.5
-# libvirt-GITPATH                 := git://git.onelab.eu/libvirt.git@libvirt-1.2.5-1
-# libvirt-python-BRANCH           := 1.2.5
-# libvirt-python-GITPATH          := git://git.onelab.eu/libvirt-python.git@libvirt-python-1.2.5-1
-# !!! libvirt update !!!
-libvirt-BRANCH	                := 1.2.10
-libvirt-GITPATH                 := git://github.com/dreibh/planetlab-lxc-libvirt.git@master
-libvirt-python-BRANCH           := 1.2.10
-libvirt-python-GITPATH          := git://github.com/dreibh/planetlab-lxc-libvirt-python.git@master
-# !!! libvirt update !!!
+libvirt-BRANCH	                := 1.2.5
+libvirt-GITPATH                 := git://git.onelab.eu/libvirt.git@libvirt-1.2.5-1
+libvirt-python-BRANCH           := 1.2.5
+libvirt-python-GITPATH          := git://git.onelab.eu/libvirt-python.git@libvirt-python-1.2.5-1
 
 pf2slice-SVNPATH		:= http://svn.planet-lab.org/svn/pf2slice/tags/pf2slice-1.0-2
 mom-GITPATH                     := git://git.onelab.eu/mom.git@mom-2.3-5
