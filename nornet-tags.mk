@@ -27,7 +27,7 @@ tsctp-GITPATH                   := git://github.com/dreibh/tsctp.git@master
 # ##### NorNet ########################
 # -- transforward-GITPATH            := git://github.com/dreibh/planetlab-lxc-transforward.git@master
 # -- procprotect-GITPATH             := git://github.com/dreibh/planetlab-lxc-procprotect.git@master
-# -- ipfw-GITPATH                    := git://github.com/dreibh/planetlab-lxc-ipfw.git@master
+# ????? ipfw-GITPATH                    := git://github.com/dreibh/planetlab-lxc-ipfw.git@master
 plcapi-GITPATH                  := git://github.com/dreibh/planetlab-lxc-plcapi.git@master
 bootcd-GITPATH                  := git://github.com/dreibh/planetlab-lxc-bootcd.git@nornet-rel0.9.0
 nodemanager-GITPATH             := git://github.com/dreibh/planetlab-lxc-nodemanager.git@nornet-rel0.9.0
@@ -36,7 +36,7 @@ nodemanager-GITPATH             := git://github.com/dreibh/planetlab-lxc-nodeman
 lxc-userspace-GITPATH           := git://git.onelab.eu/lxc-userspace.git@lxc-userspace-1.0-12
 transforward-GITPATH            := git://git.onelab.eu/transforward.git@master
 procprotect-GITPATH             := git://git.onelab.eu/procprotect.git@master
-ipfw-GITPATH                    := git://git.code.sf.net/p/dummynet/code@155b6cd31089b4763297d579e9c9945393f00c40
+# ipfw-GITPATH                    := git://git.code.sf.net/p/dummynet/code@155b6cd31089b4763297d579e9c9945393f00c40
 comgt-GITPATH			:= git://git.onelab.eu/comgt.git@0.3
 planetlab-umts-tools-GITPATH    := git://git.onelab.eu/planetlab-umts-tools.git@planetlab-umts-tools-0.7-1
 nodeupdate-GITPATH              := git://git.onelab.eu/nodeupdate.git@nodeupdate-0.5-11
