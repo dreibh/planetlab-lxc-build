@@ -246,6 +246,12 @@ IN_NODEIMAGE += codemux
 #
 fprobe-ulog-MODULES := fprobe-ulog
 fprobe-ulog-SPEC := fprobe-ulog.spec
+# ##### NorNet ########################
+fprobe-LOCAL-DEVEL-RPMS += kernel-devel
+fprobe-SPECVARS = kernel_version=$(kernel.rpm-version) \
+        kernel_release=$(kernel.rpm-release) \
+        kernel_arch=$(kernel.rpm-arch)
+# #####################################
 ALL += fprobe-ulog
 IN_NODEIMAGE += fprobe-ulog
 
