@@ -46,9 +46,7 @@ plnode-utils-GITPATH            := git://git.onelab.eu/plnode-utils.git@plnode-u
 #
 pl_sshd-SVNPATH			:= http://svn.planet-lab.org/svn/pl_sshd/tags/pl_sshd-1.0-11
 codemux-GITPATH			:= git://git.onelab.eu/codemux.git@codemux-0.1-15
-# !!! fprobe-ulog-GITPATH             := git://git.onelab.eu/fprobe-ulog.git@fprobe-ulog-1.1.4-3
-fprobe-ulog-GITPATH             := git://github.com/dreibh/planetlab-lxc-fprobe-ulog.git@master
-# !!!
+fprobe-ulog-GITPATH             := git://git.onelab.eu/fprobe-ulog.git@fprobe-ulog-1.1.4-3
 
 libvirt-BRANCH	                := 1.2.5
 libvirt-GITPATH                 := git://git.onelab.eu/libvirt.git@libvirt-1.2.5-1
