@@ -244,11 +244,13 @@ IN_NODEIMAGE += codemux
 #
 # fprobe-ulog
 #
+# xxx temporarily turning this off on f20 and f21
+ifneq "$(DISTRONAME)" "$(filter $(DISTRONAME),f20 f21)"
 fprobe-ulog-MODULES := fprobe-ulog
 fprobe-ulog-SPEC := fprobe-ulog.spec
-fprobe-ulog-LOCAL-DEVEL-RPMS += kernel-devel
 ALL += fprobe-ulog
 IN_NODEIMAGE += fprobe-ulog
+endif
 
 #################### libvirt version selection
 # settling with using version 1.2.1 on all fedoras
@@ -275,6 +277,9 @@ libvirt-STOCK-DEVEL-RPMS += libblkid-devel glusterfs-api-devel glusterfs-devel
 # strictly speaking fuse-devel is not required anymore but we might wish to turn fuse back on again in the future
 libvirt-STOCK-DEVEL-RPMS += fuse-devel libssh2-devel dbus-devel numad 
 libvirt-STOCK-DEVEL-RPMS += systemd-devel libnl3-devel iptables-services netcf-devel
+# 1.2.11
+libvirt-STOCK-DEVEL-RPMS += wireshark-devel
+libvirt-STOCK-DEVEL-RPMS += ceph-devel-compat
 ALL += libvirt
 IN_NODEREPO += libvirt
 IN_NODEIMAGE += libvirt
@@ -290,6 +295,16 @@ libvirt-python-MODULES := libvirt-python
 libvirt-python-SPEC    := libvirt-python.spec
 libvirt-python-BUILD-FROM-SRPM := yes
 libvirt-python-STOCK-DEVEL-RPMS += pm-utils
+# for 1.2.11
+libvirt-python-STOCK-DEVEL-RPMS += python-nose
+# it would make sense to do something like this if we wanted to
+# build against python3 as well, but for now I turned this feature off
+# in libvirt-python
+#ifeq "$(distro)" "Fedora"
+#xxx if $(distrorelease) > 18
+#libvirt-python-STOCK-DEVEL-RPMS += python3-devel python3-nose python3-lxml
+#endif
+#endif
 libvirt-python-LOCAL-DEVEL-RPMS += libvirt-devel libvirt-docs libvirt-client
 libvirt-python-RPMFLAGS :=     --define 'packager PlanetLab'
 ALL += libvirt-python
@@ -359,11 +374,15 @@ vsys-scripts-SPEC := root-context/vsys-scripts.spec
 IN_NODEIMAGE += vsys-scripts
 ALL += vsys-scripts
 
+# xxx temporarily turning this off on f21
+ifneq "$(DISTRONAME)" "$(filter $(DISTRONAME),f21)"
 vsys-wrapper-MODULES := vsys-scripts
 vsys-wrapper-SPEC := slice-context/vsys-wrapper.spec
 IN_SLICEIMAGE += vsys-wrapper
 ALL += vsys-wrapper
+endif
 
+# ##### NorNet ########################
 #
 # bind_public
 #
@@ -371,6 +390,7 @@ ALL += vsys-wrapper
 # bind_public-SPEC := bind_public.spec
 # IN_SLICEIMAGE += bind_public
 # ALL += bind_public
+# ##### NorNet ########################
 
 #
 # sliver-openvswitch
