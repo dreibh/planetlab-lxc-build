@@ -141,34 +141,17 @@ procprotect-SPECVARS = kernel_version=$(kernel.rpm-version) \
 ALL += procprotect
 IN_NODEIMAGE += procprotect
 
-# ?????
-# #
-# # ipfw: root context module, and slice companion
-# #
-# # this module won't build yet under f20
-# ifeq "$(DISTRONAME)" "f18"
-# ipfwroot-MODULES := ipfw
-# ipfwroot-SPEC := planetlab/ipfwroot.spec
-# # ##### NorNet ########################
-# ipfwroot-LOCAL-DEVEL-RPMS += kernel-devel
-# ipfwroot-SPECVARS = kernel_version=$(kernel.rpm-version) \
-#         kernel_release=$(kernel.rpm-release) \
-#         kernel_arch=$(kernel.rpm-arch)
-# # #####################################
-# ALL += ipfwroot
-# IN_NODEIMAGE += ipfwroot
-# 
-# ipfwslice-MODULES := ipfw
-# ipfwslice-SPEC := planetlab/ipfwslice.spec
-# # ##### NorNet ########################
-# ipfwslice-LOCAL-DEVEL-RPMS += kernel-devel
-# ipfwslice-SPECVARS = kernel_version=$(kernel.rpm-version) \
-#         kernel_release=$(kernel.rpm-release) \
-#         kernel_arch=$(kernel.rpm-arch)
-# # #####################################
-# ALL += ipfwslice
-# endif
-# ?????
+#
+# ipfw: root context module, and slice companion
+#
+ipfwroot-MODULES := ipfw
+ipfwroot-SPEC := planetlab/ipfwroot.spec
+ALL += ipfwroot
+IN_NODEIMAGE += ipfwroot
+
+ipfwslice-MODULES := ipfw
+ipfwslice-SPEC := planetlab/ipfwslice.spec
+ALL += ipfwslice
 
 #
 # comgt - a companion to umts tools
@@ -218,6 +201,7 @@ plnode-utils-SPEC := plnode-utils-lxc.spec
 ALL += plnode-utils
 IN_NODEIMAGE += plnode-utils
 
+#
 # nodemanager
 #
 nodemanager-MODULES := nodemanager
