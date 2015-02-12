@@ -84,6 +84,6 @@ nodeimage-GITPATH               := git://git.onelab.eu/nodeimage.git@nodeimage-5
 myplc-GITPATH                   := git://git.onelab.eu/myplc.git@myplc-5.3-2
 
 #
-sfa-GITPATH                     := git://git.onelab.eu/sfa.git@fa29584970509214e38235c4f14a6aacc906cf9b
+sfa-GITPATH                     := git://git.onelab.eu/sfa.git@sfa-3.1-13
 #
-tests-GITPATH                   := git://git.onelab.eu/tests.git@9e9cf0eee22a5c51ac200bd561edeb5139ddfc27
+tests-GITPATH                   := git://git.onelab.eu/tests.git@fa29584970509214e38235c4f14a6aacc906cf9b
