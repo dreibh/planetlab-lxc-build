@@ -166,13 +166,9 @@ function fedora_download() {
     RELEASE_URL1="$MIRROR_URL/Packages/fedora-release-$release-1.noarch.rpm"
     # with fedora18 the rpms are scattered by first name
     RELEASE_URL2="$MIRROR_URL/Packages/f/fedora-release-$release-1.noarch.rpm"
-    if [ "$release" == "21" ] ; then
-       # with fedora21 somehow this one came numbered -2
-       RELEASE_URL2="$MIRROR_URL/Packages/f/fedora-release-$release-2.noarch.rpm"
-    else
-       RELEASE_URL2="$MIRROR_URL/Packages/f/fedora-release-$release-1.noarch.rpm"
-    fi
-
+    # with fedora21 somehow this one came numbered -2
+    RELEASE_URL3="$MIRROR_URL/Packages/f/fedora-release-$release-2.noarch.rpm"
+   
     RELEASE_TARGET=$INSTALL_ROOT/fedora-release-$release.noarch.rpm
     found=""
     for attempt in $RELEASE_URL1 $RELEASE_URL2 $RELEASE_URL3; do
@@ -654,7 +650,10 @@ function post_install () {
 	if [ -n "$START_VM" ] ; then
 	    virsh -c lxc:/// start $lxc
 	    # manually run dhclient in guest - somehow this network won't start on its own
-            virsh -c lxc:/// lxc-enter-namespace $lxc /usr/bin/$personality /bin/bash -c "dhclient $VIF_GUEST"
+	    # we need the --noseclabel flag with recent libvirt's
+	    # was not required with f20/libvirt-1.2.5
+	    # but is now with f21/libvirt-1.2.9
+            virsh -c lxc:/// lxc-enter-namespace --noseclabel $lxc /usr/bin/$personality /bin/bash -c "dhclient $VIF_GUEST"
 	fi
     else
 	post_install_myplc $lxc $personality
