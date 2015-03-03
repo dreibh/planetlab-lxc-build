@@ -1,6 +1,6 @@
 lxc-userspace-GITPATH           := git://git.onelab.eu/lxc-userspace.git@lxc-userspace-1.0-12
-transforward-GITPATH            := git://git.onelab.eu/transforward.git@transforward-0.1-8
-procprotect-GITPATH             := git://git.onelab.eu/procprotect.git@procprotect-0.4-6
+transforward-GITPATH            := git://git.onelab.eu/transforward.git@master
+procprotect-GITPATH             := git://git.onelab.eu/procprotect.git@master
 ipfw-GITPATH                    := https://code.google.com/p/dummynet@e717cdd4bef764a4aa7babedc54220b35b04c777
 # this was known to work with f18 but not f20
 #ipfw-GITPATH                    := git://git.code.sf.net/p/dummynet/code@155b6cd31089b4763297d579e9c9945393f00c40
@@ -24,7 +24,7 @@ vsys-GITPATH			:= git://git.onelab.eu/vsys.git@vsys-0.99-3
 vsys-scripts-GITPATH            := git://git.onelab.eu/vsys-scripts.git@vsys-scripts-0.95-50
 bind_public-GITPATH             := git://git.onelab.eu/bind_public.git@bind_public-0.1-2
 sliver-openvswitch-GITPATH      := git://git.onelab.eu/sliver-openvswitch.git@sliver-openvswitch-2.2.90-1
-plcapi-GITPATH                  := git://git.onelab.eu/plcapi.git@plcapi-5.3-6
+plcapi-GITPATH                  := git://git.onelab.eu/plcapi.git@master
 drupal-GITPATH                  := git://git.onelab.eu/drupal.git@drupal-4.7-15
 plewww-GITPATH                  := git://git.onelab.eu/plewww.git@plewww-5.2-5
 www-register-wizard-SVNPATH	:= http://svn.planet-lab.org/svn/www-register-wizard/tags/www-register-wizard-4.3-5
