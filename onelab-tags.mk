@@ -14,7 +14,7 @@ util-vserver-pl-GITPATH         := git://git.onelab.eu/util-vserver-pl.git@util-
 nodeupdate-GITPATH              := git://git.onelab.eu/nodeupdate.git@nodeupdate-0.5-11
 PingOfDeath-SVNPATH		:= http://svn.planet-lab.org/svn/PingOfDeath/tags/PingOfDeath-2.2-1
 plnode-utils-GITPATH            := git://git.onelab.eu/plnode-utils.git@plnode-utils-0.2-2
-nodemanager-GITPATH             := git://git.onelab.eu/nodemanager.git@master
+nodemanager-GITPATH             := git://git.onelab.eu/nodemanager.git@nodemanager-5.2-15
 pl_sshd-SVNPATH			:= http://svn.planet-lab.org/svn/pl_sshd/tags/pl_sshd-1.0-11
 codemux-GITPATH			:= git://git.onelab.eu/codemux.git@codemux-0.1-15
 fprobe-ulog-GITPATH             := git://git.onelab.eu/fprobe-ulog.git@fprobe-ulog-1.1.4-3
@@ -22,13 +22,13 @@ pf2slice-SVNPATH		:= http://svn.planet-lab.org/svn/pf2slice/tags/pf2slice-1.0-2
 mom-GITPATH                     := git://git.onelab.eu/mom.git@mom-2.3-5
 inotify-tools-SVNPATH		:= http://svn.planet-lab.org/svn/inotify-tools/tags/inotify-tools-3.13-2
 vsys-GITPATH                    := git://git.onelab.eu/vsys.git@vsys-0.99-3
-vsys-scripts-GITPATH            := git://git.onelab.eu/vsys-scripts.git@vsys-scripts-0.95-49
+vsys-scripts-GITPATH            := git://git.onelab.eu/vsys-scripts.git@vsys-scripts-0.95-50
 autoconf-GITPATH		:= git://git.onelab.eu/autoconf@autoconf-2.69-1
 bind_public-GITPATH             := git://git.onelab.eu/bind_public.git@bind_public-0.1-2
 sliver-openvswitch-GITPATH      := git://git.onelab.eu/sliver-openvswitch.git@sliver-openvswitch-2.2.90-1
-plcapi-GITPATH                  := git://git.onelab.eu/plcapi.git@plcapi-5.3-5
+plcapi-GITPATH                  := git://git.onelab.eu/plcapi.git@master
 drupal-GITPATH                  := git://git.onelab.eu/drupal.git@drupal-4.7-15
-plewww-GITPATH                  := git://git.onelab.eu/plewww.git@plewww-5.2-4
+plewww-GITPATH                  := git://git.onelab.eu/plewww.git@plewww-5.2-5
 www-register-wizard-SVNPATH     := http://svn.planet-lab.org/svn/www-register-wizard/tags/www-register-wizard-4.3-5
 pcucontrol-GITPATH              := git://git.onelab.eu/pcucontrol.git@pcucontrol-1.0-13
 monitor-GITPATH                 := git://git.onelab.eu/monitor.git@monitor-3.1-6
@@ -45,14 +45,13 @@ rvm-ruby-GITPATH                := git://git.onelab.eu/rvm-ruby.git@rvm-ruby-1.2
 oml-GITPATH                     := git://git.onelab.eu/oml.git@oml-2.6.1-1
 ###
 bootcd-GITPATH                  := git://git.onelab.eu/bootcd.git@master
-sliceimage-GITPATH              := git://git.onelab.eu/sliceimage.git@master
-nodeimage-GITPATH               := git://git.onelab.eu/nodeimage.git@nodeimage-5.2-3
-myplc-GITPATH                   := git://git.onelab.eu/myplc.git@myplc-5.3-2
+sliceimage-GITPATH              := git://git.onelab.eu/sliceimage.git@sliceimage-5.1-10
+nodeimage-GITPATH               := git://git.onelab.eu/nodeimage.git@nodeimage-5.2-4
+myplc-GITPATH                   := git://git.onelab.eu/myplc.git@myplc-5.3-3
 DistributedRateLimiting-SVNPATH	:= http://svn.planet-lab.org/svn/DistributedRateLimiting/tags/DistributedRateLimiting-0.1-1
 
 #
-sfa-BRANCH			:= geni-v3
-sfa-GITPATH                     := git://git.onelab.eu/sfa.git@sfa-3.1-13
+sfa-GITPATH                     := git://git.onelab.eu/sfa.git@master
 #
 # locating the right test directory - see make tests_gitpath
 tests-GITPATH                   := git://git.onelab.eu/tests.git@master
