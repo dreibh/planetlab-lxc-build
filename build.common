@@ -750,3 +750,4 @@ function yumconf_exclude () {
     sed -i -e "/#baseurl=.*$/i\\
 $yumexclude_line" $repo
 }
+
