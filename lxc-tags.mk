@@ -24,7 +24,7 @@ vsys-GITPATH			:= git://git.onelab.eu/vsys.git@vsys-0.99-3
 vsys-scripts-GITPATH            := git://git.onelab.eu/vsys-scripts.git@vsys-scripts-0.95-50
 bind_public-GITPATH             := git://git.onelab.eu/bind_public.git@bind_public-0.1-2
 sliver-openvswitch-GITPATH      := git://git.onelab.eu/sliver-openvswitch.git@sliver-openvswitch-2.2.90-1
-plcapi-GITPATH                  := git://git.onelab.eu/plcapi.git@plcapi-5.3-7
+plcapi-GITPATH                  := git://git.onelab.eu/plcapi.git@master
 drupal-GITPATH                  := git://git.onelab.eu/drupal.git@drupal-4.7-15
 plewww-GITPATH                  := git://git.onelab.eu/plewww.git@plewww-5.2-5
 www-register-wizard-GITPATH	:= git://git.onelab.eu/www-register-wizard.git@www-register-wizard-4.3-5
@@ -33,7 +33,7 @@ PLCRT-GITPATH			:= git://git.onelab.eu/plcrt.git@PLCRT-1.0-11
 pyopenssl-GITPATH               := git://git.onelab.eu/pyopenssl.git@pyopenssl-0.9-2
 pyaspects-GITPATH               := git://git.onelab.eu/pyaspects.git@pyaspects-0.4.1-3
 nodeconfig-GITPATH              := git://git.onelab.eu/nodeconfig.git@nodeconfig-5.2-4
-bootmanager-GITPATH             := git://git.onelab.eu/bootmanager.git@bootmanager-5.2-5
+bootmanager-GITPATH             := git://git.onelab.eu/bootmanager.git@master
 pypcilib-GITPATH                := git://git.onelab.eu/pypcilib.git@pypcilib-0.2-11
 pyplnet-GITPATH                 := git://git.onelab.eu/pyplnet.git@pyplnet-4.3-18
 DistributedRateLimiting-GITPATH	:= git://git.onelab.eu/distributedratelimiting.git@DistributedRateLimiting-0.1-1
@@ -42,12 +42,12 @@ pcucontrol-GITPATH              := git://git.onelab.eu/pcucontrol.git@pcucontrol
 # omf-resctl now comes from yum and gem, no need for rvm-ruby anymore
 oml-GITPATH                     := git://git.onelab.eu/oml.git@oml-2.6.1-1
 ###
-bootcd-GITPATH                  := git://git.onelab.eu/bootcd.git@bootcd-5.2-5
+bootcd-GITPATH                  := git://git.onelab.eu/bootcd.git@bootcd-5.2-6
 sliceimage-GITPATH              := git://git.onelab.eu/sliceimage.git@sliceimage-5.1-10
 nodeimage-GITPATH               := git://git.onelab.eu/nodeimage.git@nodeimage-5.2-4
 myplc-GITPATH                   := git://git.onelab.eu/myplc.git@myplc-5.3-3
 
 #
-sfa-GITPATH                     := git://git.onelab.eu/sfa.git@sfa-3.1-14
+sfa-GITPATH                     := git://git.onelab.eu/sfa.git@sfa-3.1-15
 #
 tests-GITPATH                   := git://git.onelab.eu/tests.git@master
