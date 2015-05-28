@@ -30,6 +30,7 @@ tsctp-GITPATH                   := git://github.com/dreibh/tsctp.git@master
 plcapi-GITPATH                  := git://github.com/dreibh/planetlab-lxc-plcapi.git@master
 bootcd-GITPATH                  := git://github.com/dreibh/planetlab-lxc-bootcd.git@master
 nodemanager-GITPATH             := git://github.com/dreibh/planetlab-lxc-nodemanager.git@master
+tests-GITPATH                   := git://github.com/dreibh/planetlab-lxc-tests.git@master
 # #####################################
 
 lxc-userspace-GITPATH           := git://git.onelab.eu/lxc-userspace.git@lxc-userspace-1.0-12
@@ -85,4 +86,4 @@ myplc-GITPATH                   := git://git.onelab.eu/myplc.git@myplc-5.3-3
 #
 sfa-GITPATH                     := git://git.onelab.eu/sfa.git@master
 #
-tests-GITPATH                   := git://git.onelab.eu/tests.git@master
+# !!! Using NorNet customisation! !!! tests-GITPATH                   := git://git.onelab.eu/tests.git@master
