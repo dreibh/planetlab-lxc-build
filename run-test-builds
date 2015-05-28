@@ -3,7 +3,7 @@
 BUILD_DIRECTORY="/root/nightly-builds"
 BUILD_REPOSITORY="git://github.com/dreibh/planetlab-lxc-build.git"
 MAILTO="dreibh@simula.no"
-BASE="@DATE@--test--`hostname`-@PLDISTRO@-@FCDISTRO@-@PERSONALITY@"
+BASE="@DATE@--test-`hostname -a`--@PLDISTRO@-@FCDISTRO@-@PERSONALITY@"
 
 
 # ====== Get distribution and Fedora variant ================================
