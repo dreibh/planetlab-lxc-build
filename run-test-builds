@@ -1,0 +1,49 @@
+#!/bin/bash -e
+
+BUILD_DIRECTORY="/root/nightly-builds"
+BUILD_REPOSITORY="git://github.com/dreibh/planetlab-lxc-build.git"
+MAILTO="dreibh@simula.no"
+BASE="@DATE@--test--`hostname`-@PLDISTRO@-@FCDISTRO@-@PERSONALITY@"
+
+
+# ====== Get distribution and Fedora variant ================================
+PROGRAM="$0"
+DISTRIBUTION=""
+FEDORA=""
+while [ $# -gt 0 ] ; do
+   if [ "$1" = "f18" -o "$1" = "f20" -o "$1" = "f21" -o "$1" = "f22" ] ; then
+      FEDORA="$FEDORA $1"
+   elif [ "$1" = "lxc"  -o "$1" = "nornet" ] ; then
+      DISTRIBUTION="$DISTRIBUTION $1"
+   else
+      DISTRIBUTION=""
+      break
+   fi
+   shift
+done
+
+if [ "$DISTRIBUTION" = "" -o "$FEDORA" = "" ] ; then
+   echo >&2 "Usage: $PROGRAM [f18] [f20] [f21] ... [lxc] [nornet] ..."
+   exit 1
+fi
+
+
+# ====== Prepare repository =================================================
+export LANG=C
+rm -rf "$BUILD_DIRECTORY"
+git clone --depth 1 "$BUILD_REPOSITORY" "$BUILD_DIRECTORY"
+cd "$BUILD_DIRECTORY"
+
+
+# ====== Run the builds =====================================================
+echo -e "\x1b[1;34m`date +%FT%H:%M:%S`: Starting builds for base $BASE ...\x1b[0m"
+
+for distribution in $DISTRIBUTION ; do
+   for fedora in $FEDORA  ; do
+      echo -e "\x1b[1;34m`date +%FT%H:%M:%S`: Building $distribution with $fedora ...\x1b[0m"
+echo      ./lbuild-nightly.sh -m "$MAILTO" -b "$BASE" -d "$distribution" -f "$fedora" -p linux64 -c default || true
+   done
+done
+
+
+echo -e "\x1b[1;34m`date +%FT%H:%M:%S`: Finished builds!\x1b[0m"
