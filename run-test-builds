@@ -41,7 +41,8 @@ echo -e "\x1b[1;34m`date +%FT%H:%M:%S`: Starting builds for base $BASE ...\x1b[0
 for distribution in $DISTRIBUTION ; do
    for fedora in $FEDORA  ; do
       echo -e "\x1b[1;34m`date +%FT%H:%M:%S`: Building $distribution with $fedora ...\x1b[0m"
-      ./lbuild-nightly.sh -m "$MAILTO" -b "$BASE" -d "$distribution" -f "$fedora" -p linux64 -c default || true
+      #./lbuild-nightly.sh -m "$MAILTO" -b "$BASE" -d "$distribution" -f "$fedora" -p linux64 -c default || true
+      ./lbuild-nightly.sh -m "$MAILTO" -b "$BASE" -d "$distribution" -f "$fedora" -p linux64 -e check-initscripts || true
    done
 done
 
