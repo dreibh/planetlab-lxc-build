@@ -14,12 +14,8 @@ nodemanager-GITPATH             := git://git.onelab.eu/nodemanager.git@nodemanag
 pl_sshd-GITPATH			:= git://git.onelab.eu/pl_sshd.git@pl_sshd-1.0-11
 codemux-GITPATH			:= git://git.onelab.eu/codemux.git@codemux-0.1-15
 fprobe-ulog-GITPATH             := git://git.onelab.eu/fprobe-ulog.git@fprobe-ulog-1.1.4-3
-
-# !!! libvirt-GITPATH                 := git://git.onelab.eu/libvirt.git@libvirt-1.2.11-2
-libvirt-GITPATH                 := git://github.com/dreibh/planetlab-lxc-libvirt.git@master
-# !!! libvirt-python-GITPATH          := git://git.onelab.eu/libvirt-python.git@libvirt-1.2.11-2
-libvirt-python-GITPATH          := git://github.com/dreibh/planetlab-lxc-libvirt-python.git@master
-
+libvirt-GITPATH                 := git://git.onelab.eu/libvirt.git@libvirt-1.2.11-2
+libvirt-python-GITPATH          := git://git.onelab.eu/libvirt-python.git@libvirt-1.2.11-2
 pf2slice-GITPATH		:= git://git.onelab.eu/pf2slice.git@pf2slice-1.0-2
 mom-GITPATH                     := git://git.onelab.eu/mom.git@mom-2.3-5
 inotify-tools-GITPATH		:= git://git.onelab.eu/inotify-tools.git@inotify-tools-3.13-2
@@ -55,3 +51,8 @@ myplc-GITPATH                   := git://git.onelab.eu/myplc.git@myplc-5.3-3
 sfa-GITPATH                     := git://git.onelab.eu/sfa.git@sfa-3.1-17
 #
 tests-GITPATH                   := git://git.onelab.eu/tests.git@master
+
+
+# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+# libvirt-GITPATH                 := git://github.com/dreibh/planetlab-lxc-libvirt.git@master
+# libvirt-python-GITPATH          := git://github.com/dreibh/planetlab-lxc-libvirt-python.git@master
