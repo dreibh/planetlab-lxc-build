@@ -127,7 +127,7 @@ IN_NODEIMAGE += codemux
 # fprobe-ulog
 #
 # xxx temporarily turning this off on f20 and f21
-ifneq "$(DISTRONAME)" "$(filter $(DISTRONAME),f20 f21)"
+ifneq "$(DISTRONAME)" "$(filter $(DISTRONAME),f20 f21 f22)"
 fprobe-ulog-MODULES := fprobe-ulog
 fprobe-ulog-SPEC := fprobe-ulog.spec
 ALL += fprobe-ulog
