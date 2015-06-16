@@ -32,7 +32,7 @@ IN_NODEIMAGE += transforward
 #
 ### remove procprotect from the nodes on f21 now that it has 3.19
 ### as of beg apr 15 f20 also runs 3.19
-ifneq "$(DISTRONAME)" "$(filter $(DISTRONAME),f20 f21)"
+ifneq "$(DISTRONAME)" "$(filter $(DISTRONAME),f20 f21 f22)"
 procprotect-MODULES := procprotect
 procprotect-SPEC := procprotect.spec
 ALL += procprotect
