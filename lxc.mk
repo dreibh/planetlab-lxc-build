@@ -30,9 +30,8 @@ IN_NODEIMAGE += transforward
 #
 # procprotect: root context module for protecting against weaknesses in /proc
 #
-### remove procprotect from the nodes on f21 now that it has 3.19
-### as of beg apr 15 f20 also runs 3.19
-ifneq "$(DISTRONAME)" "$(filter $(DISTRONAME),f20 f21)"
+### remove procprotect from the nodes on f20 and above, needs more work starting with 3.19
+ifneq "$(DISTRONAME)" "$(filter $(DISTRONAME),f20 f21 f22)"
 procprotect-MODULES := procprotect
 procprotect-SPEC := procprotect.spec
 ALL += procprotect
@@ -126,8 +125,8 @@ IN_NODEIMAGE += codemux
 #
 # fprobe-ulog
 #
-# xxx temporarily turning this off on f20 and f21
-ifneq "$(DISTRONAME)" "$(filter $(DISTRONAME),f20 f21)"
+# xxx temporarily turning this off on f20 and above
+ifneq "$(DISTRONAME)" "$(filter $(DISTRONAME),f20 f21 f22)"
 fprobe-ulog-MODULES := fprobe-ulog
 fprobe-ulog-SPEC := fprobe-ulog.spec
 ALL += fprobe-ulog
@@ -135,11 +134,11 @@ IN_NODEIMAGE += fprobe-ulog
 endif
 
 #################### libvirt version selection
-# settling with using version 1.2.1 on all fedoras
-# although this does not solve the slice re-creation issue seen on f20
 
+# use fedora's libvirt starting with f22
+ifeq "$(DISTRONAME)" "$(filter $(DISTRONAME),f18 f20 f21)"
 local_libvirt=true
-separate_libvirt_python=true
+endif
 
 #
 # libvirt
@@ -166,13 +165,9 @@ ALL += libvirt
 IN_NODEREPO += libvirt
 IN_NODEIMAGE += libvirt
 
-endif
-
 #
 ## libvirt-python
 #
-ifeq "$(separate_libvirt_python)" "true"
-
 libvirt-python-MODULES := libvirt-python
 libvirt-python-SPEC    := libvirt-python.spec
 libvirt-python-BUILD-FROM-SRPM := yes
@@ -193,7 +188,7 @@ ALL += libvirt-python
 IN_NODEREPO += libvirt-python
 IN_NODEIMAGE += libvirt-python
 
-endif
+endif # local_libvirt
 
 #
 # DistributedRateLimiting
@@ -256,13 +251,10 @@ vsys-scripts-SPEC := root-context/vsys-scripts.spec
 IN_NODEIMAGE += vsys-scripts
 ALL += vsys-scripts
 
-# xxx temporarily turning this off on f21
-ifneq "$(DISTRONAME)" "$(filter $(DISTRONAME),f21)"
 vsys-wrapper-MODULES := vsys-scripts
 vsys-wrapper-SPEC := slice-context/vsys-wrapper.spec
 IN_SLICEIMAGE += vsys-wrapper
 ALL += vsys-wrapper
-endif
 
 #
 # bind_public
