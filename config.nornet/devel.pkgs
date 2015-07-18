@@ -27,7 +27,7 @@ package: zlib
 package: zlib-devel
 package: bison flex
 package: libtool 
-package: metadata 
+package<=f21: metadata 
 package: mysql mysql-devel mysql-server 
 package: python python-devel 
 package: doxygen  
@@ -132,6 +132,8 @@ package: libgcrypt-devel
 package: libtasn1-devel
 package: nmap-ncat
 package: pkgconfig
+package: polkit-devel
+package: iscsi-initiator-utils
 
 
 # ###### NorNet customisation ###############################################
