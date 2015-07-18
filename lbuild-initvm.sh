@@ -30,10 +30,10 @@ function lxcroot () {
 
 # XXX fixme : when creating a 32bits VM we need to call linux32 as appropriate...s
 
-DEFAULT_FCDISTRO=f21
+DEFAULT_FCDISTRO=f22
 DEFAULT_PLDISTRO=lxc
 DEFAULT_PERSONALITY=linux64
-DEFAULT_MEMORY=2048
+DEFAULT_MEMORY=3072
 
 ##########
 # constant
@@ -135,7 +135,7 @@ function fedora_install() {
             fedora_download $cache || { echo "Failed to download 'fedora base'"; return 1; }
         else
             echo "Updating cache $cache/rootfs ..."
-	    if ! yum --installroot $cache/rootfs -y --nogpgcheck update ; then
+	    if ! yum --installroot $cache/rootfs --releasever $release -y --nogpgcheck update ; then
                 echo "Failed to update 'fedora base', continuing with last known good cache"
             else
                 echo "Update finished"
@@ -214,7 +214,7 @@ function fedora_download() {
     # So ideally if we want to be able to build f12 images from f18 we need an rpm that has
     # this patch undone, like we have in place on our f14 boxes (our f14 boxes need a f18-like rpm)
 
-    YUM="yum --installroot=$INSTALL_ROOT --nogpgcheck -y"
+    YUM="yum --installroot=$INSTALL_ROOT --releasever=$release --nogpgcheck -y"
     echo "$YUM install $FEDORA_PREINSTALLED"
     $YUM install $FEDORA_PREINSTALLED || { echo "Failed to download rootfs, aborting." ; return 1; }
 
