@@ -44,7 +44,7 @@ planetlab-umts-tools-GITPATH    := git://git.onelab.eu/planetlab-umts-tools.git@
 nodeupdate-GITPATH              := git://git.onelab.eu/nodeupdate.git@nodeupdate-0.5-11
 PingOfDeath-GITPATH		:= git://git.onelab.eu/pingofdeath.git@PingOfDeath-2.2-1
 plnode-utils-GITPATH            := git://git.onelab.eu/plnode-utils.git@plnode-utils-0.2-2
-# !!! Using NorNet customisation! !!! nodemanager-GITPATH             := git://git.planet-lab.org/nodemanager.git@nodemanager-5.2-16
+# !!! Using NorNet customisation! !!! nodemanager-GITPATH             := git://git.planet-lab.org/nodemanager.git@nodemanager-5.2-17
 
 #
 pl_sshd-GITPATH			:= git://git.onelab.eu/pl_sshd.git@pl_sshd-1.0-11
@@ -57,19 +57,19 @@ mom-GITPATH                     := git://git.onelab.eu/mom.git@mom-2.3-5
 inotify-tools-GITPATH		:= git://git.onelab.eu/inotify-tools.git@inotify-tools-3.13-2
 openvswitch-GITPATH		:= git://git.onelab.eu/openvswitch.git@openvswitch-1.2-1
 vsys-GITPATH			:= git://git.onelab.eu/vsys.git@vsys-0.99-3
-vsys-scripts-GITPATH            := git://git.onelab.eu/vsys-scripts.git@vsys-scripts-0.95-50
-bind_public-GITPATH             := git://git.onelab.eu/bind_public.git@bind_public-0.1-2
+vsys-scripts-GITPATH            := git://git.onelab.eu/vsys-scripts.git@vsys-scripts-0.95-51
+bind_public-GITPATH             := git://git.onelab.eu/bind_public.git@bind_public-0.1-3
 sliver-openvswitch-GITPATH      := git://git.onelab.eu/sliver-openvswitch.git@sliver-openvswitch-2.2.90-1
-# !!! Using NorNet customisation! !!! plcapi-GITPATH                  := git://git.onelab.eu/plcapi.git@plcapi-5.3-7
+# !!! Using NorNet customisation! !!! plcapi-GITPATH                  := git://git.onelab.eu/plcapi.git@plcapi-5.3-9
 drupal-GITPATH                  := git://git.onelab.eu/drupal.git@drupal-4.7-15
-plewww-GITPATH                  := git://git.onelab.eu/plewww.git@plewww-5.2-5
+plewww-GITPATH                  := git://git.onelab.eu/plewww.git@plewww-5.2-6
 www-register-wizard-GITPATH	:= git://git.onelab.eu/www-register-wizard.git@www-register-wizard-4.3-5
 monitor-GITPATH			:= git://git.onelab.eu/monitor@monitor-3.1-6
 PLCRT-GITPATH			:= git://git.onelab.eu/plcrt.git@PLCRT-1.0-11
 pyopenssl-GITPATH               := git://git.onelab.eu/pyopenssl.git@pyopenssl-0.9-2
 pyaspects-GITPATH               := git://git.onelab.eu/pyaspects.git@pyaspects-0.4.1-3
 nodeconfig-GITPATH              := git://git.onelab.eu/nodeconfig.git@nodeconfig-5.2-4
-bootmanager-GITPATH             := git://git.onelab.eu/bootmanager.git@master
+bootmanager-GITPATH             := git://git.onelab.eu/bootmanager.git@bootmanager-5.3-1
 pypcilib-GITPATH                := git://git.onelab.eu/pypcilib.git@pypcilib-0.2-11
 pyplnet-GITPATH                 := git://git.onelab.eu/pyplnet.git@pyplnet-4.3-18
 DistributedRateLimiting-GITPATH	:= git://git.onelab.eu/distributedratelimiting.git@DistributedRateLimiting-0.1-1
@@ -78,9 +78,9 @@ pcucontrol-GITPATH              := git://git.onelab.eu/pcucontrol.git@pcucontrol
 # omf-resctl now comes from yum and gem, no need for rvm-ruby anymore
 oml-GITPATH                     := git://git.onelab.eu/oml.git@oml-2.6.1-1
 ###
-# !!! Using NorNet customisation! !!! bootcd-GITPATH                  := git://git.onelab.eu/bootcd.git@bootcd-5.2-6
+# !!! Using NorNet customisation! !!! bootcd-GITPATH                  := git://git.onelab.eu/bootcd.git@bootcd-5.3-1
 sliceimage-GITPATH              := git://git.onelab.eu/sliceimage.git@sliceimage-5.1-10
-nodeimage-GITPATH               := git://git.onelab.eu/nodeimage.git@nodeimage-5.2-4
+nodeimage-GITPATH               := git://git.onelab.eu/nodeimage.git@nodeimage-5.2-5
 myplc-GITPATH                   := git://git.onelab.eu/myplc.git@myplc-5.3-3
 
 #
