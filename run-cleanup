@@ -29,4 +29,14 @@ if [ -e /build/ ] ; then
          rm -rf "$ko" "$directory"
       done
    )
+   
+   find /build/ -maxdepth 2 -type f -name '*.pass' | (
+      while read name ; do
+         dirName=`echo "$name" | sed -e "s/\.pass$//g"`
+         if [ ! -d "$dirName" ] ; then
+            echo "N=$dirName"
+            rm -f "$name"
+         fi
+      done
+   )
 fi
