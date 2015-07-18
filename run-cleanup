@@ -30,7 +30,8 @@ if [ -e /build/ ] ; then
       done
    )
    
-   find /build/ -maxdepth 2 -type f -name '*.pass' | (
+   # Tests without corresponding directories
+   ( find /build/ -maxdepth 2 -type f -name '*.pass' ; find /build/ -maxdepth 2 -type f -name '*.warn' ) | (
       while read name ; do
          dirName=`echo "$name" | sed -e "s/\.pass$//g"`
          if [ ! -d "$dirName" ] ; then
@@ -39,4 +40,17 @@ if [ -e /build/ ] ; then
          fi
       done
    )
+   
+   # Untested directories
+   find /build/ -maxdepth 2 -type d -name '20*' | (
+      while read dirName ; do
+         if [ ! -e "$dirName.pass" ] ; then
+            if [ ! -e "$dirName.pass" ] ; then
+               echo "U=$dirName"
+               rm -rf "$dirName"
+            fi
+         fi
+      done
+   )
+
 fi
