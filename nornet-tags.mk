@@ -86,4 +86,4 @@ myplc-GITPATH                   := git://git.onelab.eu/myplc.git@myplc-5.3-3
 #
 sfa-GITPATH                     := git://git.onelab.eu/sfa.git@sfa-3.1-18
 #
-# !!! Using NorNet customisation! !!! tests-GITPATH                   := git://git.onelab.eu/tests.git@master
+# !!! Using NorNet customisation! !!! tests-GITPATH                   := git://git.onelab.eu/tests.git@tests-6.0-2
