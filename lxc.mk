@@ -41,10 +41,14 @@ endif
 #
 # ipfw: root context module, and slice companion
 #
+### starting August 2015, ipfw module won't build against fedora22
+# that comes with kernel 4.1.4
+ifneq "$(DISTRONAME)" "$(filter $(DISTRONAME),f22)"
 ipfwroot-MODULES := ipfw
 ipfwroot-SPEC := planetlab/ipfwroot.spec
 ALL += ipfwroot
 IN_NODEIMAGE += ipfwroot
+endif
 
 ipfwslice-MODULES := ipfw
 ipfwslice-SPEC := planetlab/ipfwslice.spec
