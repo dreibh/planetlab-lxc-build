@@ -4,7 +4,8 @@
 groupname: PlanetLab
 groupdesc: PlanetLab Node Root
 # our own modules
-package: ipfwroot
+# turned off - hopefully on a temporary basis
+#package: ipfwroot
 package: lxc-userspace
 package: transforward
 # temporarily turned off as it won't build on recent kernels
