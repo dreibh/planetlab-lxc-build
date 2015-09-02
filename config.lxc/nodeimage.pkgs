@@ -31,7 +31,7 @@ package: python
 package: cpio
 package: e2fsprogs
 package: ed
-package: file     
+package: file
 package: glibc
 package: hdparm
 package: initscripts
