@@ -5,7 +5,8 @@ yumexclude: @NODEYUMEXCLUDE@
 # define packages
 package: btrfs-progs
 package: filesystem
-package: dhclient
+package<=f21: dhclient
+package>=f22: dhcp-client
 package: bash
 package: coreutils
 package: iputils

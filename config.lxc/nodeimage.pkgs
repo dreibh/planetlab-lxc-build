@@ -4,7 +4,8 @@
 groupname: PlanetLab
 groupdesc: PlanetLab Node Root
 # our own modules
-package: ipfwroot
+# turned off on f21+f22 - hopefully on a temporary basis
+package<=f20: ipfwroot
 package: lxc-userspace
 package: transforward
 # temporarily turned off as it won't build on recent kernels
@@ -30,7 +31,7 @@ package: python
 package: cpio
 package: e2fsprogs
 package: ed
-package: file     
+package: file
 package: glibc
 package: hdparm
 package: initscripts
