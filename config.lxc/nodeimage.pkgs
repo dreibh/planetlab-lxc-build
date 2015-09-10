@@ -53,7 +53,8 @@ package: bc
 package: bind-utils
 package: bzip2
 package: crontabs
-package: dhclient
+package<=f21: dhclient
+package>=f22: dhcp-client
 package: diffutils
 package: ethtool
 package: logrotate
