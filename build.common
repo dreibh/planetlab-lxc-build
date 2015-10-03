@@ -23,7 +23,6 @@ function pl_getDistro() {
 	distro=$DISTRIB_CODENAME 
     elif [ -f /etc/debian_version ] ; then
 	case $(cat /etc/debian_version) in
-	    6.*) distro=squeeze ;;
 	    7.*) distro=wheezy  ;;
 	    # might be that I'm getting 'jessie'sid' just because it's still testing..
 	    8.*|jessie*) distro=jessie  ;;
@@ -66,7 +65,7 @@ function pl_getReleaseName () {
 	[Ss]L*)
 	    releasename=sl$release
 	    ;;
-	squeeze|wheezy|jessie|oneiric|precise|quantal|raring|saucy|trusty|utopic|vivid)
+	wheezy|jessie|precise|trusty|utopic|vivid|wily)
 	    releasename=$distro
 	    ;;
 	*)
