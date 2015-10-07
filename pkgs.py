@@ -38,6 +38,9 @@ known_arch = ['i386', 'i686', 'x86_64']
 default_fcdistro = 'f22'
 known_fcdistros = [
     'centos5', 'centos6',
+    # oldies but we have references to that in the pkgs files
+    'f8', 'f10', 'f12', 'f16',
+    # these ones are still relevant
     'f14', 'f18', 'f20', 'f21', 'f22',
     'sl6', 
     # debians
