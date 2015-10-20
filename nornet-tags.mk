@@ -15,7 +15,11 @@
 # \=========================================================================/
 
 # ###### NorNet customisation ###############################################
-linux-GITPATH                   := git://github.com/dreibh/planetlab-kernel.git@master
+
+# !!!!!!!!!! TEST BRANCH: kernel-v4.1
+linux-GITPATH                   := git://github.com/dreibh/planetlab-kernel.git@kernel-v4.1
+# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
 nornet-nn-GITPATH               := git://github.com/dreibh/nornet-nn.git@master
 netperfmeter-GITPATH            := git://github.com/dreibh/netperfmeter.git@master
 rsplib-GITPATH                  := git://github.com/dreibh/rsplib.git@master
