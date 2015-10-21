@@ -17,7 +17,7 @@
 # ###### NorNet customisation ###############################################
 
 # !!!!!!!!!! TEST BRANCH: kernel-v4.1
-linux-GITPATH                   := git://github.com/dreibh/planetlab-kernel.git@kernel-v4.1
+linux-GITPATH                   := git://github.com/dreibh/planetlab-kernel.git@kernel-from-fedora
 # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 nornet-nn-GITPATH               := git://github.com/dreibh/nornet-nn.git@master
