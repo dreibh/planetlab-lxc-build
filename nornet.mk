@@ -267,7 +267,7 @@ endif
 #################### libvirt version selection
 
 # use fedora's libvirt starting with f22
-ifeq "$(DISTRONAME)" "$(filter $(DISTRONAME),f18 f20 f21)"
+ifeq "$(DISTRONAME)" "$(filter $(DISTRONAME),f18 f20 f21 f22)"
 local_libvirt=true
 endif
 
