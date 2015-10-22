@@ -305,6 +305,8 @@ libvirt-python-BUILD-FROM-SRPM := yes
 libvirt-python-STOCK-DEVEL-RPMS += pm-utils
 # for 1.2.11
 libvirt-python-STOCK-DEVEL-RPMS += python-nose
+# 1.2.20
+libvirt-STOCK-DEVEL-RPMS += ceph-devel ceph-devel-compat
 # it would make sense to do something like this if we wanted to
 # build against python3 as well, but for now I turned this feature off
 # in libvirt-python
