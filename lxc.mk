@@ -5,7 +5,7 @@
 # Copyright (C) 2003-2006 The Trustees of Princeton University
 # rewritten by Thierry Parmentelat - INRIA Sophia Antipolis
 #
-# see doc in Makefile  
+# see doc in Makefile
 #
 
 ### the madwifi drivers ship with fedora16's kernel rpm
@@ -56,7 +56,7 @@ ALL += ipfwslice
 
 #
 # comgt - a companion to umts tools
-# 
+#
 comgt-MODULES := comgt
 comgt-SPEC := comgt.spec
 IN_NODEIMAGE += comgt
@@ -96,7 +96,7 @@ IN_NODEIMAGE += ipod
 
 #
 # plnode-utils
-# 
+#
 plnode-utils-MODULES := plnode-utils
 plnode-utils-SPEC := plnode-utils-lxc.spec
 ALL += plnode-utils
@@ -140,7 +140,7 @@ endif
 #################### libvirt version selection
 
 # use fedora's libvirt starting with f22
-ifeq "$(DISTRONAME)" "$(filter $(DISTRONAME),f18 f20 f21 f22)"
+ifeq "$(DISTRONAME)" "$(filter $(DISTRONAME),f18 f20 f21)"
 local_libvirt=true
 endif
 
@@ -154,13 +154,13 @@ libvirt-SPEC    := libvirt.spec
 libvirt-BUILD-FROM-SRPM := yes
 # The --without options are breaking spec2make : hard-wired in the specfile instead
 libvirt-STOCK-DEVEL-RPMS += xhtml1-dtds
-libvirt-STOCK-DEVEL-RPMS += libattr-devel augeas libpciaccess-devel yajl-devel 
-libvirt-STOCK-DEVEL-RPMS += libpcap-devel radvd ebtables device-mapper-devel 
-libvirt-STOCK-DEVEL-RPMS += ceph-devel numactl-devel libcap-ng-devel scrub 
+libvirt-STOCK-DEVEL-RPMS += libattr-devel augeas libpciaccess-devel yajl-devel
+libvirt-STOCK-DEVEL-RPMS += libpcap-devel radvd ebtables device-mapper-devel
+libvirt-STOCK-DEVEL-RPMS += ceph-devel numactl-devel libcap-ng-devel scrub
 # for 1.2.1 - first seen on f20, not sure for the other ones
 libvirt-STOCK-DEVEL-RPMS += libblkid-devel glusterfs-api-devel glusterfs-devel
 # strictly speaking fuse-devel is not required anymore but we might wish to turn fuse back on again in the future
-libvirt-STOCK-DEVEL-RPMS += fuse-devel libssh2-devel dbus-devel numad 
+libvirt-STOCK-DEVEL-RPMS += fuse-devel libssh2-devel dbus-devel numad
 libvirt-STOCK-DEVEL-RPMS += systemd-devel libnl3-devel iptables-services netcf-devel
 # 1.2.11
 libvirt-STOCK-DEVEL-RPMS += wireshark-devel
@@ -288,7 +288,7 @@ IN_MYPLC += plcapi
 
 #
 # drupal
-# 
+#
 drupal-MODULES := drupal
 drupal-SPEC := drupal.spec
 drupal-BUILD-FROM-SRPM := yes
@@ -371,7 +371,7 @@ IN_MYPLC += bootmanager
 
 #
 # pypcilib : used in bootcd
-# 
+#
 pypcilib-MODULES := pypcilib
 pypcilib-SPEC := pypcilib.spec
 ALL += pypcilib
@@ -391,7 +391,7 @@ IN_BOOTCD += pyplnet
 # OML measurement library
 #
 oml-MODULES := oml
-oml-STOCK-DEVEL-RPMS += sqlite-devel 
+oml-STOCK-DEVEL-RPMS += sqlite-devel
 oml-SPEC := liboml.spec
 ALL += oml
 
@@ -419,7 +419,7 @@ IN_NODEIMAGE += sliceimage
 
 #
 # lxc-specific sliceimage initialization
-# 
+#
 lxc-sliceimage-MODULES	:= sliceimage
 lxc-sliceimage-SPEC	:= lxc-sliceimage.spec
 lxc-sliceimage-RPMDATE	:= yes
@@ -485,7 +485,7 @@ myplc-DEPEND-FILES := myplc-release RPMS/yumgroups.xml
 ALL += myplc
 
 # myplc-docs only contains docs for PLCAPI and NMAPI, but
-# we still need to pull MyPLC, as it is where the specfile lies, 
+# we still need to pull MyPLC, as it is where the specfile lies,
 # together with the utility script docbook2drupal.sh
 myplc-docs-MODULES := myplc plcapi nodemanager monitor
 myplc-docs-SPEC := myplc-docs.spec
