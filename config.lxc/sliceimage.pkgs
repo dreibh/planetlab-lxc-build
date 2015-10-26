@@ -30,7 +30,8 @@ package: openssh-server
 package: net-tools
 
 # required for lxc-based nodes
-package: dhclient
+package<=f21: dhclient
+package>=f22: dhcp-client
 # a PL-specific, also required on lxc-based nodes
 package: bind_public
 
