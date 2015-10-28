@@ -1,0 +1,7 @@
+#!/bin/bash
+
+MACHINES="earnslaw.simula.nornet benlomond.simula.nornet wakatipu.simula.nornet bjordammen.simula.nornet"
+for m in $MACHINES ; do
+   ssh -4 -oStrictHostKeyChecking=no root@$m hostname
+   ssh -6 -oStrictHostKeyChecking=no root@$m hostname
+done
