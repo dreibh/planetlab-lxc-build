@@ -426,6 +426,19 @@ export HOME := $(FAKEROOT)
 else
 export HOME := $(PWD)
 endif
+
+# rpm macros
+# build.common (getrpmmacros.sh) defines some utilities we want in place on our images
+# in addition to these we set a few others for the build
+###
+# note for fedora23 (and onwards, probably)
+# many rpms wouldn't build as-is and issue an weird error
+##
+# Processing files: pl_sshd-debuginfo-1.0-11.lxc.x86_64
+# error: Empty %files file /longbuildroot/BUILD/pl_sshd-1.0/debugfiles.list
+##
+# so to work around that we define debug_package as being nil
+# only for f23 for now, let's see what this gives us..
 .rpmmacros:
 ifeq "$(shell pwd)" "/build"
 	rm -f $(FAKEROOT) ; ln -s $(REALROOT) $(FAKEROOT)
@@ -434,6 +447,9 @@ endif
 	echo "%_topdir $(HOME)" >> $@
 	echo "%_tmppath $(HOME)/tmp" >> $@
 	echo "%__spec_install_pre %{___build_pre}" >> $@
+ifeq "$(DISTRONAME)""$(filter $(DISTRONAME),f23)"
+	echo "%define debug_package %{nil}" >> $@
+endif
 	./getrpmmacros.sh >> $@
 
 ### this utility allows to extract various info from a spec file
