@@ -45,7 +45,7 @@ pyplnet-GITPATH                 := git://git.onelab.eu/pyplnet.git@pyplnet-4.3-1
 ###
 rvm-ruby-BRANCH			:= planetlab
 rvm-ruby-GITPATH                := git://git.onelab.eu/rvm-ruby.git@rvm-ruby-1.22.9-1
-oml-GITPATH                     := git://git.onelab.eu/oml.git@oml-2.6.1-1
+oml-GITPATH                     := git://git.onelab.eu/oml.git@master
 ###
 bootcd-GITPATH                  := git://git.onelab.eu/bootcd.git@master
 sliceimage-GITPATH              := git://git.onelab.eu/sliceimage.git@sliceimage-5.1-10
