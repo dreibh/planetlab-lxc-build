@@ -581,11 +581,11 @@ endef
 
 # install stock rpms if defined
 define rpmyum_install_stock_rpms 
-	$(if $($(1)-STOCK-DEVEL-RPMS), echo "Installing for $(1)-STOCK-DEVEL-RPMS" ; $(RPMYUM-INSTALL-STOCK) $($(1)-STOCK-DEVEL-RPMS))
+	$(if $($(1)-STOCK-DEVEL-RPMS), echo "Installing for $(1)-STOCK-DEVEL-RPMS" ; $(RPMYUM-INSTALL-STOCK) $($(1)-STOCK-DEVEL-RPMS) || true)
 endef
 
 define rpmyum_uninstall_stock_rpms
-	-$(if $($(1)-STOCK-DEVEL-RPMS), echo "Unstalling for $(1)-STOCK-DEVEL-RPMS" ; $(RPMYUM-UNINSTALL-STOCK) $($(1)-STOCK-DEVEL-RPMS))
+	-$(if $($(1)-STOCK-DEVEL-RPMS), echo "Unstalling for $(1)-STOCK-DEVEL-RPMS" ; $(RPMYUM-UNINSTALL-STOCK) $($(1)-STOCK-DEVEL-RPMS) || true)
 endef
 
 # similar for debians
@@ -599,11 +599,11 @@ define dpkgapt_install_local_debs
 endef
 
 define dpkgapt_install_stock_debs 
-	$(if $($(1)-STOCK-DEVEL-DEBS), echo "Installing for $(1)-STOCK-DEVEL-DEBS" ; $(DPKGAPT-INSTALL-STOCK) $($(1)-STOCK-DEVEL-DEBS))
+	$(if $($(1)-STOCK-DEVEL-DEBS), echo "Installing for $(1)-STOCK-DEVEL-DEBS" ; $(DPKGAPT-INSTALL-STOCK) $($(1)-STOCK-DEVEL-DEBS) || true)
 endef
 
 define dpkgapt_uninstall_stock_debs
-	-$(if $($(1)-STOCK-DEVEL-DEBS), echo "Unstalling for $(1)-STOCK-DEVEL-DEBS" ; $(DPKGAPT-UNINSTALL-STOCK) $($(1)-STOCK-DEVEL-DEBS))
+	-$(if $($(1)-STOCK-DEVEL-DEBS), echo "Unstalling for $(1)-STOCK-DEVEL-DEBS" ; $(DPKGAPT-UNINSTALL-STOCK) $($(1)-STOCK-DEVEL-DEBS) || true)
 endef
 
 
