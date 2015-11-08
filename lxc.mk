@@ -385,6 +385,7 @@ IN_NODEIMAGE += pyplnet
 IN_MYPLC += pyplnet
 IN_BOOTCD += pyplnet
 
+ifneq "$(DISTRONAME)" "$(filter $(DISTRONAME),f23)"
 #
 # OML measurement library
 #
@@ -392,6 +393,7 @@ oml-MODULES := oml
 oml-STOCK-DEVEL-RPMS += sqlite-devel 
 oml-SPEC := liboml.spec
 ALL += oml
+endif
 
 #
 # bootcd
