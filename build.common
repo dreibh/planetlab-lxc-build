@@ -7,8 +7,8 @@
 # Copyright (C) 2007 The Trustees of Princeton University
 # Thierry Parmentelat <thierry.parmentelat@inria.fr> INRIA
 #
-# supported distros f12 f14 f16 f18 f20 f21 f22
-# and debians/ubuntus to a lesser extent
+# supported distros fedoras, and debians/ubuntus to a lesser extent
+# centos's and scientific linux's have been used too quite a while ago
 #
 # for locating pkgs.py
 export PATH=.:$PATH

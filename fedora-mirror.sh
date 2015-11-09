@@ -16,8 +16,8 @@ root=/mirror/
 us_fedora_url=rsync://mirrors.kernel.org/fedora
 eu_fedora_url=rsync://mirror1.hs-esslingen.de/fedora/linux
 
-default_distroname="f22"
-all_distronames="f21 f22"
+default_distroname="f23"
+all_distronames="f21 f22 f23"
 
 global_arch="x86_64"
 
@@ -100,7 +100,7 @@ function run () {
 function main () {
     distronames=""
     archs="$global_arch"
-    while getopts "nvlc:u:sef:Fh" opt ; do
+    while getopts "nvlcu:sef:Fh" opt ; do
 	case $opt in
 	    n) dry_run=--dry-run ;;
 	    v) verbose= ;;
