@@ -45,10 +45,10 @@ procprotect-GITPATH             := git://git.onelab.eu/procprotect.git@procprote
 ipfw-GITPATH                    := git://git.onelab.eu/ipfw-google.git@e717cdd4bef764a4aa7babedc54220b35b04c777
 comgt-GITPATH			:= git://git.onelab.eu/comgt.git@0.3
 planetlab-umts-tools-GITPATH    := git://git.onelab.eu/planetlab-umts-tools.git@planetlab-umts-tools-0.7-1
-nodeupdate-GITPATH              := git://git.onelab.eu/nodeupdate.git@nodeupdate-0.5-11
+nodeupdate-GITPATH              := git://git.onelab.eu/nodeupdate.git@master
 PingOfDeath-GITPATH		:= git://git.onelab.eu/pingofdeath.git@PingOfDeath-2.2-1
 plnode-utils-GITPATH            := git://git.onelab.eu/plnode-utils.git@plnode-utils-0.2-2
-# !!! Using NorNet customisation! !!! nodemanager-GITPATH             := git://git.planet-lab.org/nodemanager.git@nodemanager-5.2-17
+# !!! Using NorNet customisation! !!! nodemanager-GITPATH             := git://git.planet-lab.org/nodemanager.git@master
 
 #
 pl_sshd-GITPATH			:= git://git.onelab.eu/pl_sshd.git@pl_sshd-1.0-11
@@ -79,14 +79,14 @@ PLCRT-GITPATH			:= git://git.onelab.eu/plcrt.git@PLCRT-1.0-11
 pyopenssl-GITPATH               := git://git.onelab.eu/pyopenssl.git@pyopenssl-0.9-2
 pyaspects-GITPATH               := git://git.onelab.eu/pyaspects.git@pyaspects-0.4.1-3
 nodeconfig-GITPATH              := git://git.onelab.eu/nodeconfig.git@master
-bootmanager-GITPATH             := git://git.onelab.eu/bootmanager.git@bootmanager-5.3-1
+bootmanager-GITPATH             := git://git.onelab.eu/bootmanager.git@master
 pypcilib-GITPATH                := git://git.onelab.eu/pypcilib.git@pypcilib-0.2-11
 pyplnet-GITPATH                 := git://git.onelab.eu/pyplnet.git@pyplnet-4.3-18
 DistributedRateLimiting-GITPATH	:= git://git.onelab.eu/distributedratelimiting.git@DistributedRateLimiting-0.1-1
 pcucontrol-GITPATH              := git://git.onelab.eu/pcucontrol.git@pcucontrol-1.0-13
 ###
 # omf-resctl now comes from yum and gem, no need for rvm-ruby anymore
-oml-GITPATH                     := git://git.onelab.eu/oml.git@oml-2.6.1-1
+oml-GITPATH                     := git://git.onelab.eu/oml.git@master
 ###
 # !!! Using NorNet customisation! !!! bootcd-GITPATH                  := git://git.onelab.eu/bootcd.git@bootcd-5.3-1
 sliceimage-GITPATH              := git://git.onelab.eu/sliceimage.git@sliceimage-5.1-10
@@ -96,4 +96,4 @@ myplc-GITPATH                   := git://git.onelab.eu/myplc.git@myplc-5.3-3
 #
 sfa-GITPATH                     := git://git.onelab.eu/sfa.git@sfa-3.1-18
 #
-# !!! Using NorNet customisation! !!! tests-GITPATH                   := git://git.onelab.eu/tests.git@tests-6.0-2
+# !!! Using NorNet customisation! !!! tests-GITPATH                   := git://git.onelab.eu/tests.git@master
