@@ -35,6 +35,9 @@ package: net-tools
 # required for lxc-based nodes
 package<=f21: dhclient
 package>=f22: dhcp-client
+# we need /etc/sysconfig/network-scripts
+# which won't show up on its own in f23
+package>=f23: initscripts
 # a PL-specific, also required on lxc-based nodes
 package: bind_public
 
