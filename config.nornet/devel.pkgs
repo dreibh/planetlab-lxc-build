@@ -3,8 +3,7 @@ groupname: PlanetLabDevel
 groupdesc: Building PlanetLab
 #
 # general utilities
-# !!! NorNet uses postfix !!! package: sendmail
-package: postfix mailx 
+package: sendmail sendmail-cf mailx 
 package: make git
 package: glibc glibc-common 
 package: bzip2 gzip

@@ -4,7 +4,7 @@
 groupname: PlanetLab
 groupdesc: PlanetLab Node Root
 # our own modules
-# turned off on f21+f22 - hopefully on a temporary basis
+# turned off on >=f21 - hopefully on a temporary basis
 package<=f20: ipfwroot
 package: lxc-userspace
 package: transforward
@@ -19,6 +19,7 @@ package: bridge-utils
 package: dnsmasq
 package: bash-completion
 package: kernel
+package: kernel-modules-extra
 package: linux-firmware
 package: systemd
 package: basesystem
@@ -71,8 +72,7 @@ package: psacct
 package: quota
 package: rsh
 package: rsync
-# !!! NorNet uses postfix !!! package: sendmail
-package: postfix
+package: sendmail
 package: sudo
 package: telnet
 package: traceroute
@@ -85,7 +85,6 @@ package: yum
 package: curl
 package: gzip
 package: iptables
-package: iptables-services
 package: dracut
 package: ntp
 package: perl
@@ -151,7 +150,6 @@ package: joe
 package: htop
 package: info
 package: libidn
-package: kernel-modules-extra
 package: lksctp-tools
 package: man-db
 package: mlocate
