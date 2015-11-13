@@ -16,10 +16,10 @@ ALL := $(filter-out iproute,$(ALL))
 util-vserver-GITPATH            := git://git.planet-lab.org/util-vserver.git@util-vserver-0.30.216-21
 libnl-GITPATH			:= git://git.planet-lab.org/libnl.git@libnl-1.1-2
 util-vserver-pl-GITPATH		:= git://git.planet-lab.org/util-vserver-pl.git@util-vserver-pl-0.4-29
-nodeupdate-GITPATH		:= git://git.planet-lab.org/nodeupdate.git@nodeupdate-0.5-11
+nodeupdate-GITPATH		:= git://git.planet-lab.org/nodeupdate.git@nodeupdate-0.5-12
 plnode-utils-GITPATH        	:= git://git.planet-lab.org/plnode-utils.git@plnode-utils-0.2-2
 PingOfDeath-GITPATH             := git://git.planet-lab.org/pingofdeath.git@PingOfDeath-2.2-1
-nodemanager-GITPATH             := git://git.planet-lab.org/nodemanager.git@master
+nodemanager-GITPATH             := git://git.planet-lab.org/nodemanager.git@nodemanager-5.2-18
 # Trellis-specific NodeManager plugins
 nodemanager-topo-GITPATH	:= git://git.planet-lab.org/NodeManager-topo@master
 NodeManager-optin-SVNPATH	:= http://svn.planet-lab.org/svn/NodeManager-optin/trunk
@@ -46,15 +46,15 @@ omf-GITPATH                     := git://git.onelab.eu/omf.git@omf-5.3-11
 ###
 sfa-GITPATH                     := git://git.planet-lab.org/sfa.git@sfa-3.1-13
 sface-GITPATH                   := git://git.planet-lab.org/sface.git@sface-0.9-9
-nodeconfig-GITPATH              := git://git.planet-lab.org/nodeconfig.git@nodeconfig-5.2-4
-bootmanager-GITPATH             := git://git.planet-lab.org/bootmanager.git@bootmanager-5.3-1
+nodeconfig-GITPATH              := git://git.planet-lab.org/nodeconfig.git@nodeconfig-5.2-5
+bootmanager-GITPATH             := git://git.planet-lab.org/bootmanager.git@bootmanager-5.3-2
 pypcilib-GITPATH		:= git://git.planet-lab.org/pypcilib.git@pypcilib-0.2-11
 pyplnet-GITPATH                 := git://git.planet-lab.org/pyplnet.git@pyplnet-4.3-18
 DistributedRateLimiting-GITPATH	:= git://git.planet-lab.org/distributedratelimiting.git@DistributedRateLimiting-0.1-1
 pcucontrol-GITPATH              := git://git.planet-lab.org/pcucontrol.git@pcucontrol-1.0-13
-bootcd-GITPATH                  := git://git.planet-lab.org/bootcd.git@bootcd-5.3-1
+bootcd-GITPATH                  := git://git.planet-lab.org/bootcd.git@bootcd-5.3-2
 sliceimage-GITPATH              := git://git.planet-lab.org/sliceimage.git@sliceimage-5.1-8
-nodeimage-GITPATH               := git://git.planet-lab.org/nodeimage.git@nodeimage-5.2-5
+nodeimage-GITPATH               := git://git.planet-lab.org/nodeimage.git@nodeimage-5.2-6
 myplc-GITPATH                   := git://git.planet-lab.org/myplc.git@myplc-5.3-3
 # locating the right test directory - see make tests_gitpath
-tests-GITPATH                   := git://git.planet-lab.org/tests.git@tests-6.0-2
+tests-GITPATH                   := git://git.planet-lab.org/tests.git@tests-6.0-3

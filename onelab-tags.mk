@@ -14,10 +14,10 @@ planetlab-umts-tools-GITPATH    := git://git.onelab.eu/planetlab-umts-tools.git@
 util-vserver-GITPATH            := git://git.onelab.eu/util-vserver.git@util-vserver-0.30.216-21
 libnl-GITPATH			:= git://git.onelab.eu/libnl.git@libnl-1.1-2
 util-vserver-pl-GITPATH         := git://git.onelab.eu/util-vserver-pl.git@util-vserver-pl-0.4-29
-nodeupdate-GITPATH              := git://git.onelab.eu/nodeupdate.git@master
+nodeupdate-GITPATH              := git://git.onelab.eu/nodeupdate.git@nodeupdate-0.5-12
 PingOfDeath-GITPATH		:= git://git.onelab.eu/pingofdeath.git@PingOfDeath-2.2-1
 plnode-utils-GITPATH            := git://git.onelab.eu/plnode-utils.git@plnode-utils-0.2-2
-nodemanager-GITPATH             := git://git.onelab.eu/nodemanager.git@nodemanager-5.2-17
+nodemanager-GITPATH             := git://git.onelab.eu/nodemanager.git@nodemanager-5.2-18
 pl_sshd-GITPATH			:= git://git.onelab.eu/pl_sshd.git@pl_sshd-1.0-11
 codemux-GITPATH			:= git://git.onelab.eu/codemux.git@codemux-0.1-15
 fprobe-ulog-GITPATH             := git://git.onelab.eu/fprobe-ulog.git@fprobe-ulog-1.1.4-3
@@ -38,8 +38,8 @@ monitor-GITPATH                 := git://git.onelab.eu/monitor.git@monitor-3.1-6
 PLCRT-GITPATH			:= git://git.onelab.eu/plcrt.git@PLCRT-1.0-11
 pyopenssl-GITPATH               := git://git.onelab.eu/pyopenssl.git@pyopenssl-0.9-2
 pyaspects-GITPATH               := git://git.onelab.eu/pyaspects.git@pyaspects-0.4.1-3
-nodeconfig-GITPATH              := git://git.onelab.eu/nodeconfig.git@master
-bootmanager-GITPATH             := git://git.onelab.eu/bootmanager.git@master
+nodeconfig-GITPATH              := git://git.onelab.eu/nodeconfig.git@nodeconfig-5.2-5
+bootmanager-GITPATH             := git://git.onelab.eu/bootmanager.git@bootmanager-5.3-2
 pypcilib-GITPATH                := git://git.onelab.eu/pypcilib.git@pypcilib-0.2-11
 pyplnet-GITPATH                 := git://git.onelab.eu/pyplnet.git@pyplnet-4.3-18
 ###
@@ -47,9 +47,9 @@ rvm-ruby-BRANCH			:= planetlab
 rvm-ruby-GITPATH                := git://git.onelab.eu/rvm-ruby.git@rvm-ruby-1.22.9-1
 oml-GITPATH                     := git://git.onelab.eu/oml.git@master
 ###
-bootcd-GITPATH                  := git://git.onelab.eu/bootcd.git@master
+bootcd-GITPATH                  := git://git.onelab.eu/bootcd.git@bootcd-5.3-2
 sliceimage-GITPATH              := git://git.onelab.eu/sliceimage.git@sliceimage-5.1-10
-nodeimage-GITPATH               := git://git.onelab.eu/nodeimage.git@master
+nodeimage-GITPATH               := git://git.onelab.eu/nodeimage.git@nodeimage-5.2-6
 myplc-GITPATH                   := git://git.onelab.eu/myplc.git@myplc-5.3-3
 DistributedRateLimiting-GITPATH	:= git://git.onelab.eu/distributedratelimiting.git@DistributedRateLimiting-0.1-1
 
@@ -57,4 +57,4 @@ DistributedRateLimiting-GITPATH	:= git://git.onelab.eu/distributedratelimiting.g
 sfa-GITPATH                     := git://git.onelab.eu/sfa.git@sfa-3.1-18
 #
 # locating the right test directory - see make tests_gitpath
-tests-GITPATH                   := git://git.onelab.eu/tests.git@master
+tests-GITPATH                   := git://git.onelab.eu/tests.git@tests-6.0-3
