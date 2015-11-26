@@ -46,7 +46,7 @@ DistributedRateLimiting-GITPATH	:= git://git.onelab.eu/distributedratelimiting.g
 pcucontrol-GITPATH              := git://git.onelab.eu/pcucontrol.git@pcucontrol-1.0-13
 ###
 # omf-resctl now comes from yum and gem, no need for rvm-ruby anymore
-oml-GITPATH                     := git://git.onelab.eu/oml.git@master
+oml-GITPATH                     := git://git.onelab.eu/oml.git@oml-2.6.1-1
 ###
 bootcd-GITPATH                  := git://git.onelab.eu/bootcd.git@bootcd-5.3-2
 sliceimage-GITPATH              := git://git.onelab.eu/sliceimage.git@sliceimage-5.1-10
@@ -54,7 +54,7 @@ nodeimage-GITPATH               := git://git.onelab.eu/nodeimage.git@nodeimage-5
 myplc-GITPATH                   := git://git.onelab.eu/myplc.git@myplc-5.3-3
 
 #
-sfa-GITPATH                     := git://git.onelab.eu/sfa.git@sfa-3.1-18
+sfa-GITPATH                     := git://git.onelab.eu/sfa.git@master
 #
 
 # !!! tests-GITPATH                   := git://git.onelab.eu/tests.git@master

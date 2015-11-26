@@ -45,7 +45,7 @@ pyplnet-GITPATH                 := git://git.onelab.eu/pyplnet.git@pyplnet-4.3-1
 ###
 rvm-ruby-BRANCH			:= planetlab
 rvm-ruby-GITPATH                := git://git.onelab.eu/rvm-ruby.git@rvm-ruby-1.22.9-1
-oml-GITPATH                     := git://git.onelab.eu/oml.git@master
+oml-GITPATH                     := git://git.onelab.eu/oml.git@oml-2.6.1-1
 ###
 bootcd-GITPATH                  := git://git.onelab.eu/bootcd.git@bootcd-5.3-2
 sliceimage-GITPATH              := git://git.onelab.eu/sliceimage.git@sliceimage-5.1-10
@@ -54,7 +54,7 @@ myplc-GITPATH                   := git://git.onelab.eu/myplc.git@myplc-5.3-3
 DistributedRateLimiting-GITPATH	:= git://git.onelab.eu/distributedratelimiting.git@DistributedRateLimiting-0.1-1
 
 #
-sfa-GITPATH                     := git://git.onelab.eu/sfa.git@sfa-3.1-18
+sfa-GITPATH                     := git://git.onelab.eu/sfa.git@master
 #
 # locating the right test directory - see make tests_gitpath
 tests-GITPATH                   := git://git.onelab.eu/tests.git@tests-6.0-3
