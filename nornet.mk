@@ -39,7 +39,9 @@ kernel-RPMFLAGS += --without smp --without pae --without debug --without doc --w
 kernel-WHITELIST-RPMS := kernel,kernel-headers,kernel-devel,kernel-modules-extra,kernel-tools,kernel-tools-libs,kernel-tools-libs-devel
 kernel-SPECVARS += kernelconfig=planetlab
 KERNELS += kernel
-#kernel-STOCK-DEVEL-RPMS +=
+ifneq "$(DISTRONAME)" "$(filter $(DISTRONAME),f23)"
+ kernel-STOCK-DEVEL-RPMS += pesign-rh-test-certs
+fi
 
 kernels: $(KERNELS)
 kernels-clean: $(foreach package,$(KERNELS),$(package)-clean)
