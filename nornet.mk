@@ -41,7 +41,7 @@ kernel-SPECVARS += kernelconfig=planetlab
 KERNELS += kernel
 ifneq "$(DISTRONAME)" "$(filter $(DISTRONAME),f23)"
  kernel-STOCK-DEVEL-RPMS += pesign-rh-test-certs
-fi
+endif
 
 kernels: $(KERNELS)
 kernels-clean: $(foreach package,$(KERNELS),$(package)-clean)
