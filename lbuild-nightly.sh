@@ -37,7 +37,7 @@ DEFAULT_TESTMASTER="earnslaw.simula.nornet"
 ####################
 # assuming vm runs in UTC
 DATE=$(date +'%Y.%m.%d')
-TIME=$(date +'%H:%M')
+TIME=$(date +'%H.%M')
 BUILD_BEG=$(date +'%H:%M')
 BUILD_BEG_S=$(date +'%s')
 
