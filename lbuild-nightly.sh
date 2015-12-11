@@ -37,6 +37,7 @@ DEFAULT_TESTMASTER="earnslaw.simula.nornet"
 ####################
 # assuming vm runs in UTC
 DATE=$(date +'%Y.%m.%d')
+TIME=$(date +'%H:%M')
 BUILD_BEG=$(date +'%H:%M')
 BUILD_BEG_S=$(date +'%s')
 
@@ -608,10 +609,10 @@ function main () {
     
 	
     if [ -n "$OVERBASE" ] ; then
-	sedargs="-e s,@DATE@,${DATE},g"
+	sedargs="-e s,@DATE@,${DATE},g -e s,@TIME@,${TIME},g"
 	BASE=$(echo ${OVERBASE} | sed $sedargs)
     else
-	sedargs="-e s,@DATE@,${DATE},g -e s,@FCDISTRO@,${FCDISTRO},g -e s,@PLDISTRO@,${PLDISTRO},g -e s,@PERSONALITY@,${PERSONALITY},g"
+	sedargs="-e s,@DATE@,${DATE},g -e s,@TIME@,${TIME},g -e s,@FCDISTRO@,${FCDISTRO},g -e s,@PLDISTRO@,${PLDISTRO},g -e s,@PERSONALITY@,${PERSONALITY},g"
 	BASE=$(echo ${BASE} | sed $sedargs)
     fi
 
@@ -738,7 +739,7 @@ function main () {
 	# redirect log again
 	exec >> $LOG 2>&1 
 
-	sedargs="-e s,@DATE@,${DATE},g -e s,@FCDISTRO@,${FCDISTRO},g -e s,@PLDISTRO@,${PLDISTRO},g -e s,@PERSONALITY@,${PERSONALITY},g"
+	sedargs="-e s,@DATE@,${DATE},g -e s,@TIME@,${TIME},g -e s,@FCDISTRO@,${FCDISTRO},g -e s,@PLDISTRO@,${PLDISTRO},g -e s,@PERSONALITY@,${PERSONALITY},g"
 	WEBPATH=$(echo ${WEBPATH} | sed $sedargs)
 	webpublish mkdir -p ${WEBPATH}
 
