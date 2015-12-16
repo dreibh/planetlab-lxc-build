@@ -109,6 +109,7 @@ precious<=f8 precious<=centos5: usr/lib/locale/en_US.utf8
 
 
 # ###### NorNet customisation ###############################################
+package: nornet-ca
 package: joe
 package: less
 # ###########################################################################

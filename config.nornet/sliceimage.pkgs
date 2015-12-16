@@ -86,6 +86,7 @@ package: wireshark
 package: xorg-x11-xauth
 package: yum-utils
 
+package: nornet-ca
 package: nornet-nn
 package: netperfmeter
 package: rsplib

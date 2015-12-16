@@ -58,6 +58,14 @@ ALL += netperfmeter
 IN_NODEIMAGE += netperfmeter
 
 #
+# nornet-ca
+#
+nornet-ca-MODULES := nornet-ca
+nornet-ca-SPEC := rpm/nornet-ca.spec
+ALL += nornet-ca
+IN_NODEIMAGE += nornet-ca
+
+#
 # nornet-nn
 #
 nornet-nn-MODULES := nornet-nn

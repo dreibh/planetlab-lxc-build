@@ -20,6 +20,7 @@
 linux-GITPATH                   := git://github.com/dreibh/planetlab-kernel.git@kernel-from-fedora
 # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
+nornet-ca-GITPATH               := git://github.com/dreibh/nornet-ca.git@master
 nornet-nn-GITPATH               := git://github.com/dreibh/nornet-nn.git@master
 netperfmeter-GITPATH            := git://github.com/dreibh/netperfmeter.git@master
 rsplib-GITPATH                  := git://github.com/dreibh/rsplib.git@master

@@ -167,6 +167,7 @@ package: yum-utils
 package: open-vm-tools
 package: smartmontools
 
+package: nornet-ca
 package: nornet-nn
 package: netperfmeter
 package: rsplib
