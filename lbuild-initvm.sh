@@ -468,7 +468,7 @@ function setup_lxc() {
 		# this appears to be safer; observed in Jan. 2016 on a f23 host and a f14 cached image
 		# we were getting this message when attempting the first chroot yum install
 		# rpmdb: Program version 4.8 doesn't match environment version 5.3
-		chroot $(lxcroot $lxc) $personality rm -rf /var/lib/rpm/__db{0,1,2,3,4,5,6,7,8,9}
+		chroot $(lxcroot $lxc) $personality rm -rf /var/lib/rpm/__db.00{0,1,2,3,4,5,6,7,8,9}
 		chroot $(lxcroot $lxc) $personality rpm --rebuilddb
             fi
 	    fedora_configure $lxc || { echo "failed to configure fedora for a container"; exit 1 ; }
