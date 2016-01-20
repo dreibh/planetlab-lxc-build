@@ -30,7 +30,7 @@ autoconf-GITPATH		:= git://git.onelab.eu/autoconf@autoconf-2.69-1
 bind_public-GITPATH             := git://git.onelab.eu/bind_public.git@bind_public-0.1-3
 sliver-openvswitch-GITPATH      := git://git.onelab.eu/sliver-openvswitch.git@sliver-openvswitch-2.2.90-1
 plcapi-GITPATH                  := git://git.onelab.eu/plcapi.git@plcapi-5.3-9
-drupal-GITPATH                  := git://git.onelab.eu/drupal.git@master
+drupal-GITPATH                  := git://git.onelab.eu/drupal.git@drupal-4.7-16
 plewww-GITPATH                  := git://git.onelab.eu/plewww.git@plewww-5.2-6
 www-register-wizard-GITPATH	:= git://git.onelab.eu/www-register-wizard.git@www-register-wizard-4.3-5
 pcucontrol-GITPATH              := git://git.onelab.eu/pcucontrol.git@pcucontrol-1.0-13
@@ -48,7 +48,7 @@ rvm-ruby-GITPATH                := git://git.onelab.eu/rvm-ruby.git@rvm-ruby-1.2
 oml-GITPATH                     := git://git.onelab.eu/oml.git@oml-2.6.1-1
 ###
 bootcd-GITPATH                  := git://git.onelab.eu/bootcd.git@bootcd-5.3-3
-sliceimage-GITPATH              := git://git.onelab.eu/sliceimage.git@sliceimage-5.1-10
+sliceimage-GITPATH              := git://git.onelab.eu/sliceimage.git@sliceimage-5.1-11
 nodeimage-GITPATH               := git://git.onelab.eu/nodeimage.git@nodeimage-5.2-6
 myplc-GITPATH                   := git://git.onelab.eu/myplc.git@myplc-5.3-3
 DistributedRateLimiting-GITPATH	:= git://git.onelab.eu/distributedratelimiting.git@DistributedRateLimiting-0.1-1
