@@ -156,6 +156,5 @@ package: elfutils-devel
 package: elfutils-libelf-devel
 package: audit-libs-devel
 package: pesign
-package: pesign-rh-test-certs
 package: openssl
 # ###########################################################################
