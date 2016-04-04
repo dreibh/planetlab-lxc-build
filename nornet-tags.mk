@@ -17,11 +17,11 @@
 # ###### NorNet customisation ###############################################
 
 # !!!!!!!!!! TEST BRANCH: kernel-v4.1
-linux-GITPATH                   := git://github.com/dreibh/planetlab-kernel.git@kernel-from-fedora
+linux-GITPATH                   := git://github.com/dreibh/planetlab-kernel.git@master
 # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-nornet-ca-GITPATH               := git://github.com/dreibh/nornet-ca.git@master
-nornet-nn-GITPATH               := git://github.com/dreibh/nornet-nn.git@master
+nornet-ca-GITPATH               := git://github.com/dreibh/nornet-ca.git@nornet-rel0.9.7
+nornet-nn-GITPATH               := git://github.com/dreibh/nornet-nn.git@nornet-rel0.9.7
 netperfmeter-GITPATH            := git://github.com/dreibh/netperfmeter.git@master
 rsplib-GITPATH                  := git://github.com/dreibh/rsplib.git@master
 subnetcalc-GITPATH              := git://github.com/dreibh/subnetcalc.git@master
@@ -32,10 +32,10 @@ tsctp-GITPATH                   := git://github.com/dreibh/tsctp.git@master
 # ##### NorNet ########################
 # -- transforward-GITPATH            := git://github.com/dreibh/planetlab-lxc-transforward.git@master
 # -- procprotect-GITPATH             := git://github.com/dreibh/planetlab-lxc-procprotect.git@master
-plcapi-GITPATH                  := git://github.com/dreibh/planetlab-lxc-plcapi.git@master
-bootcd-GITPATH                  := git://github.com/dreibh/planetlab-lxc-bootcd.git@master
-nodemanager-GITPATH             := git://github.com/dreibh/planetlab-lxc-nodemanager.git@master
-tests-GITPATH                   := git://github.com/dreibh/planetlab-lxc-tests.git@master
+plcapi-GITPATH                  := git://github.com/dreibh/planetlab-lxc-plcapi.git@nornet-rel0.9.7
+bootcd-GITPATH                  := git://github.com/dreibh/planetlab-lxc-bootcd.git@nornet-rel0.9.7
+nodemanager-GITPATH             := git://github.com/dreibh/planetlab-lxc-nodemanager.git@nornet-rel0.9.7
+tests-GITPATH                   := git://github.com/dreibh/planetlab-lxc-tests.git@nornet-rel0.9.7
 # #####################################
 
 lxc-userspace-GITPATH           := git://git.onelab.eu/lxc-userspace.git@lxc-userspace-1.0-12
@@ -89,6 +89,6 @@ nodeimage-GITPATH               := git://git.onelab.eu/nodeimage.git@nodeimage-5
 myplc-GITPATH                   := git://git.onelab.eu/myplc.git@myplc-5.3-3
 
 #
-sfa-GITPATH                     := git://git.onelab.eu/sfa.git@master
+sfa-GITPATH                     := git://git.onelab.eu/sfa.git@dfafd9825fecddbbd1ea4c7093766c386f660c29
 #
 # !!! Using NorNet customisation! !!! tests-GITPATH                   := git://git.onelab.eu/tests.git@master
