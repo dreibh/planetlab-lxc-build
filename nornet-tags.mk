@@ -25,7 +25,7 @@ tsctp-GITPATH                   := git://github.com/dreibh/tsctp.git@tsctp-0.6.2
 # ###########################################################################
 
 # ##### NorNet ########################
-linux-GITPATH                   := git://github.com/dreibh/planetlab-kernel.git@nornet-rel0.9.7
+linux-GITPATH                   := git://github.com/dreibh/planetlab-kernel.git@nornet-rel0.9.7.0001
 # -- transforward-GITPATH            := git://github.com/dreibh/planetlab-lxc-transforward.git@master
 # -- procprotect-GITPATH             := git://github.com/dreibh/planetlab-lxc-procprotect.git@master
 plcapi-GITPATH                  := git://github.com/dreibh/planetlab-lxc-plcapi.git@nornet-rel0.9.7
