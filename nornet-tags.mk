@@ -16,7 +16,7 @@
 
 # ###### NorNet customisation ###############################################
 nornet-ca-GITPATH               := git://github.com/dreibh/nornet-ca.git@nornet-rel0.9.7
-nornet-nn-GITPATH               := git://github.com/dreibh/nornet-nn.git@nornet-rel0.9.7.0002
+nornet-nn-GITPATH               := git://github.com/dreibh/nornet-nn.git@nornet-rel0.9.7.0003
 
 netperfmeter-GITPATH            := git://github.com/dreibh/netperfmeter.git@netperfmeter-1.5.5
 rsplib-GITPATH                  := git://github.com/dreibh/rsplib.git@rsplib-3.1.1
@@ -31,7 +31,7 @@ linux-GITPATH                   := git://github.com/dreibh/planetlab-kernel.git@
 plcapi-GITPATH                  := git://github.com/dreibh/planetlab-lxc-plcapi.git@nornet-rel0.9.7
 plewww-GITPATH                  := git://github.com/dreibh/planetlab-lxc-plewww@nornet-rel0.9.7
 bootcd-GITPATH                  := git://github.com/dreibh/planetlab-lxc-bootcd.git@nornet-rel0.9.7.0001
-nodemanager-GITPATH             := git://github.com/dreibh/planetlab-lxc-nodemanager.git@nornet-rel0.9.7
+nodemanager-GITPATH             := git://github.com/dreibh/planetlab-lxc-nodemanager.git@nornet-rel0.9.7.0001
 tests-GITPATH                   := git://github.com/dreibh/planetlab-lxc-tests.git@nornet-rel0.9.7
 # #####################################
 
