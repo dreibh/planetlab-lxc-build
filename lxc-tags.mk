@@ -9,7 +9,7 @@ planetlab-umts-tools-GITPATH    := git://git.onelab.eu/planetlab-umts-tools.git@
 nodeupdate-GITPATH              := git://git.onelab.eu/nodeupdate.git@nodeupdate-0.5-14
 PingOfDeath-GITPATH		:= git://git.onelab.eu/pingofdeath.git@PingOfDeath-2.2-1
 plnode-utils-GITPATH            := git://git.onelab.eu/plnode-utils.git@plnode-utils-0.2-2
-nodemanager-GITPATH             := git://git.onelab.eu/nodemanager.git@nodemanager-5.2-18
+nodemanager-GITPATH             := git://git.onelab.eu/nodemanager.git@master
 #
 pl_sshd-GITPATH			:= git://git.onelab.eu/pl_sshd.git@pl_sshd-1.0-11
 codemux-GITPATH			:= git://git.onelab.eu/codemux.git@codemux-0.1-15
@@ -26,7 +26,7 @@ bind_public-GITPATH             := git://git.onelab.eu/bind_public.git@bind_publ
 sliver-openvswitch-GITPATH      := git://git.onelab.eu/sliver-openvswitch.git@sliver-openvswitch-2.2.90-1
 plcapi-GITPATH                  := git://git.onelab.eu/plcapi.git@plcapi-5.3-9
 drupal-GITPATH                  := git://git.onelab.eu/drupal.git@drupal-4.7-16
-plewww-GITPATH                  := git://git.onelab.eu/plewww.git@plewww-5.2-6
+plewww-GITPATH                  := git://git.onelab.eu/plewww.git@master
 www-register-wizard-GITPATH	:= git://git.onelab.eu/www-register-wizard.git@www-register-wizard-4.3-5
 monitor-GITPATH			:= git://git.onelab.eu/monitor@monitor-3.1-6
 PLCRT-GITPATH			:= git://git.onelab.eu/plcrt.git@PLCRT-1.0-11
