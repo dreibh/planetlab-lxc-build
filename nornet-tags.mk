@@ -29,10 +29,10 @@ linux-GITPATH                   := git://github.com/dreibh/planetlab-kernel.git@
 # -- transforward-GITPATH            := git://github.com/dreibh/planetlab-lxc-transforward.git@master
 # -- procprotect-GITPATH             := git://github.com/dreibh/planetlab-lxc-procprotect.git@master
 plcapi-GITPATH                  := git://github.com/dreibh/planetlab-lxc-plcapi.git@nornet-rel0.9.7
-plewww-GITPATH                  := git://github.com/dreibh/planetlab-lxc-plewww@nornet-rel0.9.7
+plewww-GITPATH                  := git://github.com/dreibh/planetlab-lxc-plewww@master
 bootcd-GITPATH                  := git://github.com/dreibh/planetlab-lxc-bootcd.git@nornet-rel0.9.7.0001
-nodemanager-GITPATH             := git://github.com/dreibh/planetlab-lxc-nodemanager.git@nornet-rel0.9.7.0001
-tests-GITPATH                   := git://github.com/dreibh/planetlab-lxc-tests.git@nornet-rel0.9.7
+nodemanager-GITPATH             := git://github.com/dreibh/planetlab-lxc-nodemanager.git@master
+tests-GITPATH                   := git://github.com/dreibh/planetlab-lxc-tests.git@master
 # #####################################
 
 lxc-userspace-GITPATH           := git://git.onelab.eu/lxc-userspace.git@lxc-userspace-1.0-12
@@ -86,6 +86,6 @@ nodeimage-GITPATH               := git://git.onelab.eu/nodeimage.git@nodeimage-5
 myplc-GITPATH                   := git://git.onelab.eu/myplc.git@myplc-5.3-3
 
 #
-sfa-GITPATH                     := git://git.onelab.eu/sfa.git@dfafd9825fecddbbd1ea4c7093766c386f660c29
+sfa-GITPATH                     := git://git.onelab.eu/sfa.git@master
 #
 # !!! Using NorNet customisation! !!! tests-GITPATH                   := git://git.onelab.eu/tests.git@master
