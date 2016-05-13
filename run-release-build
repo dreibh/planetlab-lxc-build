@@ -15,6 +15,7 @@ echo -e "\x1b[1;34m`date +%FT%H:%M:%S`: Starting release builds ...\x1b[0m"
 
 # ====== Prepare repository =================================================
 export LANG=C
+export LANGUAGE=en
 rm -rf "$BUILD_DIRECTORY"
 git clone --depth 1 "$BUILD_REPOSITORY" "$BUILD_DIRECTORY"
 cd "$BUILD_DIRECTORY"

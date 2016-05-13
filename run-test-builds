@@ -32,6 +32,7 @@ fi
 
 # ====== Prepare repository =================================================
 export LANG=C
+export LANGUAGE=en
 rm -rf "$BUILD_DIRECTORY"
 git clone --depth 1 "$BUILD_REPOSITORY" "$BUILD_DIRECTORY"
 cd "$BUILD_DIRECTORY"
