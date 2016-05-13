@@ -18,7 +18,7 @@
 nornet-ca-GITPATH               := git://github.com/dreibh/nornet-ca.git@nornet-rel0.9.7
 nornet-nn-GITPATH               := git://github.com/dreibh/nornet-nn.git@master
 
-netperfmeter-GITPATH            := git://github.com/dreibh/netperfmeter.git@netperfmeter-1.5.5
+netperfmeter-GITPATH            := git://github.com/dreibh/netperfmeter.git@master
 rsplib-GITPATH                  := git://github.com/dreibh/rsplib.git@rsplib-3.1.1
 subnetcalc-GITPATH              := git://github.com/dreibh/subnetcalc.git@subnetcalc-2.4.4
 tsctp-GITPATH                   := git://github.com/dreibh/tsctp.git@tsctp-0.6.2
