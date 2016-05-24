@@ -89,7 +89,7 @@ function package_method () {
     case $fcdistro in
 	f[0-9]*|centos[0-9]*|sl[0-9]*)
 	    echo yum ;;
-	wheezy|jessie|precise|trusty|utopic|vivid|wily)
+	wheezy|jessie|precise|trusty|utopic|vivid|wily|xenial)
 	    echo debootstrap ;;
 	*)
 	    echo Unknown distro $fcdistro ;;
@@ -400,7 +400,7 @@ function debian_mirror () {
     case $fcdistro in
 	wheezy|jessie) 
 	    echo http://ftp2.fr.debian.org/debian/ ;;
-	precise|trusty|utopic|vivid|wily) 
+	precise|trusty|utopic|vivid|wily|xenial) 
 #	    echo http://mir1.ovh.net/ubuntu/ubuntu/ ;;
 	    echo http://www-ftp.lip6.fr/pub/linux/distributions/Ubuntu/archive/ ;;
 	*) echo unknown distro $fcdistro; exit 1;;

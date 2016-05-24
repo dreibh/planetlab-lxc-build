@@ -51,6 +51,7 @@ known_fcdistros = [
     'utopic',  # 14.10
     'vivid',   # 15.04
     'wily',    # 15.10
+    'xenial',  # 16.04
 ]
 default_pldistro='onelab'
 
