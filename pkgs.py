@@ -35,13 +35,13 @@ import re
 
 default_arch='x86_64'
 known_arch = ['i386', 'i686', 'x86_64']
-default_fcdistro = 'f23'
+default_fcdistro = 'f24'
 known_fcdistros = [
     'centos5', 'centos6',
     # oldies but we have references to that in the pkgs files
     'f8', 'f10', 'f12', 'f16',
     # these ones are still relevant
-    'f14', 'f18', 'f20', 'f21', 'f22', 'f23',
+    'f14', 'f18', 'f20', 'f21', 'f22', 'f23', 'f24',
     'sl6', 
     # debians
     'wheezy','jessie',
