@@ -1,0 +1,16 @@
+[fedora]
+name=Fedora 24 - $basearch
+baseurl=@MIRRORURL@/fedora/releases/24/Everything/$basearch/os/
+enabled=1
+metadata_expire=7d
+gpgcheck=1
+gpgkey=http://mirror.onelab.eu/keys/RPM-GPG-KEY-fedora-24-primary
+
+[updates]
+name=Fedora 24 - $basearch - Updates
+baseurl=@MIRRORURL@/fedora/updates/24/$basearch/
+enabled=1
+metadata_expire=7d
+gpgcheck=1
+gpgkey=http://mirror.onelab.eu/keys/RPM-GPG-KEY-fedora-24-primary
+
