@@ -30,7 +30,7 @@ function lxcroot () {
 
 # XXX fixme : when creating a 32bits VM we need to call linux32 as appropriate...s
 
-DEFAULT_FCDISTRO=f23
+DEFAULT_FCDISTRO=f24
 DEFAULT_PLDISTRO=lxc
 DEFAULT_PERSONALITY=linux64
 DEFAULT_MEMORY=3072
@@ -127,7 +127,7 @@ function fedora_install() {
     lxc=$1; shift
     lxc_root=$(lxcroot $lxc)
 
-    cache=/var/cache/lxc/fedora/$arch/$release
+    cache=/var/cache/lxc/fedora/$arch/${fedora_release}
     mkdir -p $cache
     
     (
@@ -138,7 +138,7 @@ function fedora_install() {
             fedora_download $cache || { echo "Failed to download 'fedora base'"; return 1; }
         else
             echo "Updating cache $cache/rootfs ..."
-	    if ! yum --installroot $cache/rootfs --releasever $release -y --nogpgcheck update ; then
+	    if ! yum --installroot $cache/rootfs --releasever ${fedora_release} -y --nogpgcheck update ; then
                 echo "Failed to update 'fedora base', continuing with last known good cache"
             else
                 echo "Update finished"
@@ -178,19 +178,19 @@ function fedora_download() {
     cp /etc/yum.conf $INSTALL_ROOT/etc/
     cp /etc/yum.repos.d/fedora* $INSTALL_ROOT/etc/yum.repos.d/
 
-    # append fedora repo files with desired $release and $basearch
+    # append fedora repo files with desired ${fedora_release} and $basearch
     for f in $INSTALL_ROOT/etc/yum.repos.d/* ; do
-      sed -i "s/\$basearch/$arch/g; s/\$releasever/$release/g;" $f
+      sed -i "s/\$basearch/$arch/g; s/\$releasever/${fedora_release}/g;" $f
     done 
 
-    MIRROR_URL=$FEDORA_MIRROR_BASE/releases/$release/Everything/$arch/os
-    RELEASE_URL1="$MIRROR_URL/Packages/fedora-release-$release-1.noarch.rpm"
+    MIRROR_URL=$FEDORA_MIRROR_BASE/releases/${fedora_release}/Everything/$arch/os
+    RELEASE_URL1="$MIRROR_URL/Packages/fedora-release-${fedora_release}-1.noarch.rpm"
     # with fedora18 the rpms are scattered by first name
     # first try the second version of fedora-release first
-    RELEASE_URL2="$MIRROR_URL/Packages/f/fedora-release-$release-2.noarch.rpm"
-    RELEASE_URL3="$MIRROR_URL/Packages/f/fedora-release-$release-1.noarch.rpm"
+    RELEASE_URL2="$MIRROR_URL/Packages/f/fedora-release-${fedora_release}-2.noarch.rpm"
+    RELEASE_URL3="$MIRROR_URL/Packages/f/fedora-release-${fedora_release}-1.noarch.rpm"
    
-    RELEASE_TARGET=$INSTALL_ROOT/fedora-release-$release.noarch.rpm
+    RELEASE_TARGET=$INSTALL_ROOT/fedora-release-${fedora_release}.noarch.rpm
     found=""
     for attempt in $RELEASE_URL1 $RELEASE_URL2 $RELEASE_URL3; do
 	if curl -f $attempt -o $RELEASE_TARGET ; then
@@ -206,7 +206,7 @@ function fedora_download() {
     mkdir -p $INSTALL_ROOT/var/lib/rpm
     rpm --root $INSTALL_ROOT  --initdb
     # when installing f12 this apparently is already present, so ignore result
-    rpm --root $INSTALL_ROOT -ivh $INSTALL_ROOT/fedora-release-$release.noarch.rpm || :
+    rpm --root $INSTALL_ROOT -ivh $INSTALL_ROOT/fedora-release-${fedora_release}.noarch.rpm || :
     # however f12 root images won't get created on a f18 host
     # (the issue here is the same as the one we ran into when dealing with a vs-box)
     # in a nutshell, in f12 the glibc-common and filesystem rpms have an apparent conflict
@@ -217,7 +217,7 @@ function fedora_download() {
     # So ideally if we want to be able to build f12 images from f18 we need an rpm that has
     # this patch undone, like we have in place on our f14 boxes (our f14 boxes need a f18-like rpm)
 
-    YUM="yum --installroot=$INSTALL_ROOT --releasever=$release --nogpgcheck -y"
+    YUM="yum --installroot=$INSTALL_ROOT --releasever=${fedora_release} --nogpgcheck -y"
     echo "$YUM install $FEDORA_PREINSTALLED"
     $YUM install $FEDORA_PREINSTALLED || { echo "Failed to download rootfs, aborting." ; return 1; }
 
@@ -357,7 +357,7 @@ baseurl=$FEDORA_MIRROR_BASE/releases/\$releasever/Everything/\$basearch/os/
 enabled=1
 metadata_expire=7d
 gpgcheck=1
-gpgkey=$FEDORA_MIRROR_KEYS/RPM-GPG-KEY-fedora-$release-primary
+gpgkey=$FEDORA_MIRROR_KEYS/RPM-GPG-KEY-fedora-${fedora_release}-primary
 
 [updates]
 name=Fedora \$releasever - \$basearch - Updates
@@ -365,8 +365,12 @@ baseurl=$FEDORA_MIRROR_BASE/updates/\$releasever/\$basearch/
 enabled=1
 metadata_expire=7d
 gpgcheck=1
-gpgkey=$FEDORA_MIRROR_KEYS/RPM-GPG-KEY-fedora-$release-primary
+gpgkey=$FEDORA_MIRROR_KEYS/RPM-GPG-KEY-fedora-${fedora_release}-primary
 EOF
+
+    # import fedora key so that gpgckeck does not whine or require stdin
+    # required since fedora24
+    rpm --root $lxc_root --import $FEDORA_MIRROR_KEYS/RPM-GPG-KEY-fedora-${fedora_release}-primary
 
     # for using this script as a general-purpose lxc creation wrapper
     # just mention 'none' as the repo url
@@ -656,10 +660,19 @@ function devel_or_test_tools () {
 
     case "$pkg_method" in
 	yum)
-	    [ -n "$packages" ] && chroot ${lxc_root} $personality yum -y install $packages
+	    # --allowerasing required starting with fedora24
+	    dnf=$(chroot ${lxc_root} $personality type -p dnf)
+	    if [ -n "$dnf" ]; then
+		pkg_installer="dnf -y install --allowerasing"
+		grp_installer="dnf -y groupinstall --allowerasing"
+	    else
+		pkg_installer="yum -y install"
+		grp_installer="yum -y groupinstall"
+	    fi
+	    [ -n "$packages" ] && chroot ${lxc_root} $personality $pkg_installer $packages
 	    for group_plus in $groups; do
 		group=$(echo $group_plus | sed -e "s,+++, ,g")
-		chroot ${lxc_root} $personality yum -y groupinstall "$group"
+		chroot ${lxc_root} $personality $grp_installer "$group"
 	    done
 	    # store current rpm list in /init-lxc.rpms in case we need to check the contents
 	    chroot ${lxc_root} $personality rpm -aq > $lxc_root/init-lxc.rpms
@@ -930,7 +943,7 @@ function main () {
     fi
 
     ##########
-    release=$(echo $fcdistro | cut -df -f2)
+    fedora_release=$(echo $fcdistro | cut -df -f2)
 
     if [ "$personality" == "linux32" ]; then
         arch=i386
