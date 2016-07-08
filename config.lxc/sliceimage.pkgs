@@ -5,6 +5,7 @@ groupdesc: PlanetLab Slice Reference Image
 yumexclude: @NODEYUMEXCLUDE@
 
 package: filesystem bash coreutils
+package>=f24: systemd-udev
 package: findutils diffutils
 package: crontabs logrotate passwd sudo
 package: gzip bzip2 tar rsync
