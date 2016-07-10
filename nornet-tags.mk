@@ -71,7 +71,7 @@ pyaspects-GITPATH               := git://git.onelab.eu/pyaspects.git@pyaspects-0
 nodeconfig-GITPATH              := git://git.onelab.eu/nodeconfig.git@nodeconfig-5.2-5
 bootmanager-GITPATH             := git://git.onelab.eu/bootmanager.git@bootmanager-5.3-4
 pypcilib-GITPATH                := git://git.onelab.eu/pypcilib.git@pypcilib-0.2-11
-pyplnet-GITPATH                 := git://git.onelab.eu/pyplnet.git@pyplnet-4.3-18
+pyplnet-GITPATH                 := git://git.onelab.eu/pyplnet.git@pyplnet-4.3-19
 DistributedRateLimiting-GITPATH	:= git://git.onelab.eu/distributedratelimiting.git@DistributedRateLimiting-0.1-1
 pcucontrol-GITPATH              := git://git.onelab.eu/pcucontrol.git@pcucontrol-1.0-13
 ###
