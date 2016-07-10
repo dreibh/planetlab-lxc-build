@@ -458,7 +458,8 @@ IN_BOOTCD += pyplnet
 rvm-ruby-MODULES := rvm-ruby
 rvm-ruby-SPEC := rpm/rvm-ruby.spec
 rvm-ruby-STOCK-DEVEL-RPMS := chrpath libyaml-devel libffi-devel libxslt-devel
-ALL += rvm-ruby
+# July 2016 : this is not working on fedora14 anymore....
+#ALL += rvm-ruby
 
 #
 # OML measurement library
@@ -466,7 +467,8 @@ ALL += rvm-ruby
 oml-MODULES := oml
 oml-STOCK-DEVEL-RPMS += sqlite-devel 
 oml-SPEC := liboml.spec
-ALL += oml
+# July 2016 : not use for this one either then
+# ALL += oml
 
 #
 # bootcd
