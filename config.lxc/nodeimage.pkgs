@@ -21,6 +21,7 @@ package: bash-completion
 package: kernel
 package: linux-firmware
 package: systemd
+package>=f24: systemd-container
 package: basesystem
 package: filesystem
 package: lvm2
