@@ -6,6 +6,7 @@ yumexclude: @NODEYUMEXCLUDE@
 
 package: filesystem bash coreutils
 package>=f24: systemd-udev
+package>=f24: systemd-container
 package: findutils diffutils
 package: crontabs logrotate passwd sudo
 package: gzip bzip2 tar rsync
