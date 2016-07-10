@@ -655,11 +655,15 @@ function devel_or_test_tools () {
     case "$pkg_method" in
 	yum)
 	    # --allowerasing required starting with fedora24
-	    dnf=$(chroot ${lxc_root} $personality type -p dnf)
-	    if [ -n "$dnf" ]; then
+	    #
+	    has_dnf=""
+	    chroot ${lxc_root} $personality dnf --version && has_dnf=true
+	    if [ -n "$has_dnf" ]; then
+		echo "container has dnf - invoking with --allowerasing"
 		pkg_installer="dnf -y install --allowerasing"
 		grp_installer="dnf -y groupinstall --allowerasing"
 	    else
+		echo "container has only yum"
 		pkg_installer="yum -y install"
 		grp_installer="yum -y groupinstall"
 	    fi
