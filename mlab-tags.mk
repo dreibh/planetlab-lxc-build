@@ -19,7 +19,7 @@ util-vserver-pl-GITPATH		:= git://git.planet-lab.org/util-vserver-pl.git@util-vs
 nodeupdate-GITPATH		:= git://git.planet-lab.org/nodeupdate.git@nodeupdate-0.5-14
 plnode-utils-GITPATH        	:= git://git.planet-lab.org/plnode-utils.git@plnode-utils-0.2-2
 PingOfDeath-GITPATH             := git://git.planet-lab.org/pingofdeath.git@PingOfDeath-2.2-1
-nodemanager-GITPATH             := git://git.planet-lab.org/nodemanager.git@nodemanager-5.2-18
+nodemanager-GITPATH             := git://git.planet-lab.org/nodemanager.git@nodemanager-5.2-19
 # Trellis-specific NodeManager plugins
 nodemanager-topo-GITPATH	:= git://git.planet-lab.org/NodeManager-topo@master
 NodeManager-optin-SVNPATH	:= http://svn.planet-lab.org/svn/NodeManager-optin/trunk
@@ -33,15 +33,15 @@ inotify-tools-GITPATH		:= git://git.planet-lab.org/inotify-tools.git@inotify-too
 openvswitch-GITPATH		:= git://git.planet-lab.org/openvswitch.git@master
 vsys-GITPATH			:= git://git.planet-lab.org/vsys.git@vsys-0.99-3
 vsys-scripts-GITPATH		:= git://git.planet-lab.org/vsys-scripts@vsys-scripts-0.95-51
-plcapi-GITPATH                  := git://git.planet-lab.org/plcapi.git@plcapi-5.3-9
+plcapi-GITPATH                  := git://git.planet-lab.org/plcapi.git@plcapi-5.3-10
 drupal-GITPATH                  := git://git.planet-lab.org/drupal.git@drupal-4.7-16
-plewww-GITPATH                  := git://git.planet-lab.org/plewww.git@plewww-5.2-6
+plewww-GITPATH                  := git://git.planet-lab.org/plewww.git@plewww-5.2-7
 www-register-wizard-GITPATH	:= git://git.planet-lab.org/www-register-wizard.git@www-register-wizard-4.3-5
 monitor-GITPATH			:= git://git.planet-lab.org/monitor@monitor-3.1-6
 PLCRT-GITPATH			:= git://git.planet-lab.org/plcrt.git@PLCRT-1.0-11
 pyopenssl-GITPATH               := git://git.planet-lab.org/pyopenssl.git@pyopenssl-0.9-2
 ###
-pyaspects-GITPATH		:= git://git.planet-lab.org/pyaspects.git@pyaspects-0.4.1-3
+pyaspects-GITPATH		:= git://git.planet-lab.org/pyaspects.git@pyaspects-0.4.1-4
 omf-GITPATH                     := git://git.onelab.eu/omf.git@omf-5.3-11
 ###
 sfa-GITPATH                     := git://git.planet-lab.org/sfa.git@sfa-3.1-13
@@ -49,12 +49,12 @@ sface-GITPATH                   := git://git.planet-lab.org/sface.git@sface-0.9-
 nodeconfig-GITPATH              := git://git.planet-lab.org/nodeconfig.git@nodeconfig-5.2-5
 bootmanager-GITPATH             := git://git.planet-lab.org/bootmanager.git@bootmanager-5.3-4
 pypcilib-GITPATH		:= git://git.planet-lab.org/pypcilib.git@pypcilib-0.2-11
-pyplnet-GITPATH                 := git://git.planet-lab.org/pyplnet.git@pyplnet-4.3-18
+pyplnet-GITPATH                 := git://git.planet-lab.org/pyplnet.git@pyplnet-4.3-19
 DistributedRateLimiting-GITPATH	:= git://git.planet-lab.org/distributedratelimiting.git@DistributedRateLimiting-0.1-1
 pcucontrol-GITPATH              := git://git.planet-lab.org/pcucontrol.git@pcucontrol-1.0-13
-bootcd-GITPATH                  := git://git.planet-lab.org/bootcd.git@bootcd-5.3-3
+bootcd-GITPATH                  := git://git.planet-lab.org/bootcd.git@bootcd-5.4-1
 sliceimage-GITPATH              := git://git.planet-lab.org/sliceimage.git@sliceimage-5.1-8
-nodeimage-GITPATH               := git://git.planet-lab.org/nodeimage.git@nodeimage-5.2-6
+nodeimage-GITPATH               := git://git.planet-lab.org/nodeimage.git@nodeimage-5.2-7
 myplc-GITPATH                   := git://git.planet-lab.org/myplc.git@myplc-5.3-3
 # locating the right test directory - see make tests_gitpath
-tests-GITPATH                   := git://git.planet-lab.org/tests.git@tests-6.0-3
+tests-GITPATH                   := git://git.planet-lab.org/tests.git@tests-6.0-4

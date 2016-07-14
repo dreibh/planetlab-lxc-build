@@ -11,6 +11,7 @@ package: bash
 package: coreutils
 package: iputils
 package: kernel
+package>=f24: systemd-udev
 package: bzip2
 package: diffutils
 package: logrotate
