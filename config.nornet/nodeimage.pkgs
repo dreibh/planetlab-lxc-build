@@ -22,6 +22,7 @@ package: kernel
 package: kernel-modules-extra
 package: linux-firmware
 package: systemd
+package>=f24: systemd-container
 package: basesystem
 package: filesystem
 package: lvm2

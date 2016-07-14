@@ -5,6 +5,10 @@ groupdesc: PlanetLab Slice Reference Image
 yumexclude: @NODEYUMEXCLUDE@
 
 package: filesystem bash coreutils
+package>=f24: systemd-udev
+# adding this seems to create a dangling btrfs subvolume in
+# /vservers/<>/var/lib/machines
+# package>=f24: systemd-container
 package: findutils diffutils
 package: crontabs logrotate passwd sudo
 package: gzip bzip2 tar rsync
