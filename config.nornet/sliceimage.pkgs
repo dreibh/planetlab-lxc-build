@@ -85,6 +85,7 @@ package: nmap
 package: nuttcp
 package: tcpdump
 package: tftp
+package: virt-what
 package: whois
 package: wireshark
 package: xorg-x11-xauth
