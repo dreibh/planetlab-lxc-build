@@ -78,7 +78,6 @@ IN_NODEIMAGE += nornet-nn
 #
 rsplib-MODULES := rsplib
 rsplib-SPEC := rpm/rsplib.spec
-rsplib-STOCK-DEVEL-RPMS += qt5-qtbase-devel qtchooser
 ALL += rsplib
 IN_NODEIMAGE += rsplib
 
