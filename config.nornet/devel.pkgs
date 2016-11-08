@@ -141,6 +141,8 @@ package: bzip2-devel
 package: glib2-devel
 package: GeoIP-devel
 package: qt-devel
+package: qt5-qtbase-devel
+package: qtchooser
 package: libpcap-devel
 package: libdnet-devel
 package: lua-devel
