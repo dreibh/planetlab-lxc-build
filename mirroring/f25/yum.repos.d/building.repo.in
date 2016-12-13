@@ -1,0 +1,16 @@
+[fedora]
+name=Fedora 25 - $basearch
+baseurl=@MIRRORURL@/fedora/releases/25/Everything/$basearch/os/
+enabled=1
+metadata_expire=7d
+gpgcheck=1
+gpgkey=http://mirror.onelab.eu/keys/RPM-GPG-KEY-fedora-25-primary
+
+[updates]
+name=Fedora 25 - $basearch - Updates
+baseurl=@MIRRORURL@/fedora/updates/25/$basearch/
+enabled=1
+metadata_expire=7d
+gpgcheck=1
+gpgkey=http://mirror.onelab.eu/keys/RPM-GPG-KEY-fedora-25-primary
+
