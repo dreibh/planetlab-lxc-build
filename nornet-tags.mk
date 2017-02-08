@@ -25,6 +25,7 @@ tsctp-GITPATH                   := git://github.com/dreibh/tsctp.git@tsctp-0.6.3
 # ###########################################################################
 
 # ##### NorNet ########################
+bootmanager-GITPATH             := git://github.com/dreibh/planetlab-bootmanager.git@master
 linux-GITPATH                   := git://github.com/dreibh/planetlab-kernel.git@nornet-rel1.1.1
 plcapi-GITPATH                  := git://github.com/dreibh/planetlab-lxc-plcapi.git@nornet-rel1.1.0
 plewww-GITPATH                  := git://github.com/dreibh/planetlab-lxc-plewww@nornet-rel1.1.0
@@ -69,7 +70,7 @@ PLCRT-GITPATH			:= git://git.onelab.eu/plcrt.git@PLCRT-1.0-11
 pyopenssl-GITPATH               := git://git.onelab.eu/pyopenssl.git@pyopenssl-0.9-2
 pyaspects-GITPATH               := git://git.onelab.eu/pyaspects.git@pyaspects-0.4.1-4
 nodeconfig-GITPATH              := git://git.onelab.eu/nodeconfig.git@nodeconfig-5.2-5
-bootmanager-GITPATH             := git://git.onelab.eu/bootmanager.git@bootmanager-5.3-4
+# !!! Using NorNet customisation! !!! bootmanager-GITPATH             := git://git.onelab.eu/bootmanager.git@bootmanager-5.3-4
 pypcilib-GITPATH                := git://git.onelab.eu/pypcilib.git@pypcilib-0.2-11
 pyplnet-GITPATH                 := git://git.onelab.eu/pyplnet.git@pyplnet-4.3-19
 DistributedRateLimiting-GITPATH	:= git://git.onelab.eu/distributedratelimiting.git@DistributedRateLimiting-0.1-1
