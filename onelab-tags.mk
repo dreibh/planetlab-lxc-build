@@ -29,7 +29,10 @@ vsys-scripts-GITPATH            := git://git.onelab.eu/vsys-scripts.git@vsys-scr
 autoconf-GITPATH		:= git://git.onelab.eu/autoconf@autoconf-2.69-1
 bind_public-GITPATH             := git://git.onelab.eu/bind_public.git@bind_public-0.1-3
 sliver-openvswitch-GITPATH      := git://git.onelab.eu/sliver-openvswitch.git@sliver-openvswitch-2.2.90-1
-plcapi-GITPATH                  := git://git.onelab.eu/plcapi.git@plcapi-5.3-11
+# we're building this only for historical reasons (PLE still runs f14!)
+# this distro is stuck to using plcapi 5.3-11 because after that
+# we take out its companion xmlrpc (the <nil/> extension is now supported mainstream)
+plcapi-GITPATH                  := git://git.onelab.eu/plcapi.git@plcapi-5.3-11 # DO NOT UPGRADE
 drupal-GITPATH                  := git://git.onelab.eu/drupal.git@drupal-4.7-16
 plewww-GITPATH                  := git://git.onelab.eu/plewww.git@plewww-5.2-7
 www-register-wizard-GITPATH	:= git://git.onelab.eu/www-register-wizard.git@www-register-wizard-4.3-5
