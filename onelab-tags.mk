@@ -53,7 +53,7 @@ oml-GITPATH                     := git://git.onelab.eu/oml.git@oml-2.6.1-1
 bootcd-GITPATH                  := git://git.onelab.eu/bootcd.git@bootcd-5.4-1
 sliceimage-GITPATH              := git://git.onelab.eu/sliceimage.git@sliceimage-5.1-11
 nodeimage-GITPATH               := git://git.onelab.eu/nodeimage.git@master
-myplc-GITPATH                   := git://git.onelab.eu/myplc.git@myplc-5.3-3
+myplc-GITPATH                   := git://git.onelab.eu/myplc.git@master
 DistributedRateLimiting-GITPATH	:= git://git.onelab.eu/distributedratelimiting.git@DistributedRateLimiting-0.1-1
 
 #
