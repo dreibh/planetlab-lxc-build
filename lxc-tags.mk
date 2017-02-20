@@ -1,5 +1,5 @@
 lxc-userspace-GITPATH           := git://git.onelab.eu/lxc-userspace.git@lxc-userspace-1.0-12
-transforward-GITPATH            := git://git.onelab.eu/transforward.git@transforward-0.1-10
+transforward-GITPATH            := git://git.onelab.eu/transforward.git@master
 procprotect-GITPATH             := git://git.onelab.eu/procprotect.git@procprotect-0.4-7
 # ipfw-sourceforge.git (obsolete) mirrored on git.onelab.eu from git://git.code.sf.net/p/dummynet/code
 # ipfw-google.git (current) is mirrored on git.onelab.eu from https://code.google.com/p/dummynet
@@ -44,8 +44,8 @@ oml-GITPATH                     := git://git.onelab.eu/oml.git@oml-2.6.1-1
 ###
 bootcd-GITPATH                  := git://git.onelab.eu/bootcd.git@bootcd-5.4-1
 sliceimage-GITPATH              := git://git.onelab.eu/sliceimage.git@sliceimage-5.1-11
-nodeimage-GITPATH               := git://git.onelab.eu/nodeimage.git@nodeimage-5.2-7
-myplc-GITPATH                   := git://git.onelab.eu/myplc.git@myplc-5.3-3
+nodeimage-GITPATH               := git://git.onelab.eu/nodeimage.git@master
+myplc-GITPATH                   := git://git.onelab.eu/myplc.git@master
 
 #
 sfa-GITPATH                     := git://git.onelab.eu/sfa.git@master
