@@ -27,7 +27,7 @@ tsctp-GITPATH                   := git://github.com/dreibh/tsctp.git@master
 # ##### NorNet ########################
 bootmanager-GITPATH             := git://github.com/dreibh/planetlab-bootmanager.git@master
 linux-GITPATH                   := git://github.com/dreibh/planetlab-kernel.git@master
-plcapi-GITPATH                  := git://github.com/dreibh/planetlab-lxc-plcapi.git@master
+plcapi-GITPATH                  := git://github.com/dreibh/planetlab-lxc-plcapi.git@remove-xmlrpc
 plewww-GITPATH                  := git://github.com/dreibh/planetlab-lxc-plewww@master
 bootcd-GITPATH                  := git://github.com/dreibh/planetlab-lxc-bootcd.git@master
 nodemanager-GITPATH             := git://github.com/dreibh/planetlab-lxc-nodemanager.git@master
