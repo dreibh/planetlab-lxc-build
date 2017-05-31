@@ -27,7 +27,7 @@ tsctp-GITPATH                   := git://github.com/dreibh/tsctp.git@master
 # ##### NorNet ########################
 bootmanager-GITPATH             := git://github.com/dreibh/planetlab-bootmanager.git@master
 linux-GITPATH                   := git://github.com/dreibh/planetlab-kernel.git@master
-plcapi-GITPATH                  := git://github.com/dreibh/planetlab-lxc-plcapi.git@remove-xmlrpc
+plcapi-GITPATH                  := git://github.com/dreibh/planetlab-lxc-plcapi.git@exp
 plewww-GITPATH                  := git://github.com/dreibh/planetlab-lxc-plewww@master
 bootcd-GITPATH                  := git://github.com/dreibh/planetlab-lxc-bootcd.git@master
 nodemanager-GITPATH             := git://github.com/dreibh/planetlab-lxc-nodemanager.git@master
@@ -45,7 +45,7 @@ planetlab-umts-tools-GITPATH    := git://git.onelab.eu/planetlab-umts-tools.git@
 nodeupdate-GITPATH              := git://git.onelab.eu/nodeupdate.git@nodeupdate-0.5-14
 PingOfDeath-GITPATH		:= git://git.onelab.eu/pingofdeath.git@PingOfDeath-2.2-1
 plnode-utils-GITPATH            := git://git.onelab.eu/plnode-utils.git@plnode-utils-0.2-2
-# !!! Using NorNet customisation! !!! nodemanager-GITPATH             := git://git.planet-lab.org/nodemanager.git@nodemanager-5.2-19
+# !!! Using NorNet customisation! !!! nodemanager-GITPATH             := git://git.onelab.eu/nodemanager.git@nodemanager-5.2-19
 
 #
 pl_sshd-GITPATH			:= git://git.onelab.eu/pl_sshd.git@pl_sshd-1.0-11
@@ -61,7 +61,7 @@ vsys-GITPATH			:= git://git.onelab.eu/vsys.git@vsys-0.99-3
 vsys-scripts-GITPATH            := git://git.onelab.eu/vsys-scripts.git@vsys-scripts-0.95-51
 bind_public-GITPATH             := git://git.onelab.eu/bind_public.git@bind_public-0.1-3
 sliver-openvswitch-GITPATH      := git://git.onelab.eu/sliver-openvswitch.git@sliver-openvswitch-2.2.90-1
-# !!! Using NorNet customisation! !!! plcapi-GITPATH                  := git://git.planet-lab.org/plcapi.git@master
+# !!! Using NorNet customisation! !!! plcapi-GITPATH                  := git://git.onelab.eu/plcapi.git@exp
 drupal-GITPATH                  := git://git.onelab.eu/drupal.git@drupal-4.7-16
 # !!! Using NorNet customisation! !!! plewww-GITPATH                  := git://git.onelab.eu/plewww.git@plewww-5.2-7
 www-register-wizard-GITPATH	:= git://git.onelab.eu/www-register-wizard.git@www-register-wizard-4.3-5
