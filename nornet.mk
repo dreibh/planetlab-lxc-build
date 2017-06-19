@@ -147,7 +147,7 @@ IN_NODEIMAGE += transforward
 # procprotect: root context module for protecting against weaknesses in /proc
 #
 ### remove procprotect from the nodes on f20 and above, needs more work starting with 3.19
-ifneq "$(DISTRONAME)" "$(filter $(DISTRONAME),f20 f21 f22 f23 f24 f25)"
+ifneq "$(DISTRONAME)" "$(filter $(DISTRONAME),f20 f21 f22 f23 f24 f25 f26)"
 procprotect-MODULES := procprotect
 procprotect-SPEC := procprotect.spec
 # ##### NorNet ########################
@@ -165,7 +165,7 @@ endif
 #
 ### starting August 2015, ipfw module won't build against fedora22
 # that comes with kernel 4.1.4
-ifneq "$(DISTRONAME)" "$(filter $(DISTRONAME),f21 f22 f23 f24 f25)"
+ifneq "$(DISTRONAME)" "$(filter $(DISTRONAME),f21 f22 f23 f24 f25 f26)"
 ipfwroot-MODULES := ipfw
 ipfwroot-SPEC := planetlab/ipfwroot.spec
 # ##### NorNet ########################
@@ -264,7 +264,7 @@ IN_NODEIMAGE += codemux
 # fprobe-ulog
 #
 # xxx temporarily turning this off on f20 and above
-ifneq "$(DISTRONAME)" "$(filter $(DISTRONAME),f20 f21 f22 f23 f24 f25)"
+ifneq "$(DISTRONAME)" "$(filter $(DISTRONAME),f20 f21 f22 f23 f24 f25 f26)"
 fprobe-ulog-MODULES := fprobe-ulog
 fprobe-ulog-SPEC := fprobe-ulog.spec
 ALL += fprobe-ulog
@@ -521,7 +521,7 @@ IN_NODEIMAGE += pyplnet
 IN_MYPLC += pyplnet
 IN_BOOTCD += pyplnet
 
-ifneq "$(DISTRONAME)" "$(filter $(DISTRONAME),f23 f24 f25)"
+ifneq "$(DISTRONAME)" "$(filter $(DISTRONAME),f23 f24 f25 f26)"
 #
 # OML measurement library
 #

@@ -41,7 +41,7 @@ known_fcdistros = [
     # oldies but we have references to that in the pkgs files
     'f8', 'f10', 'f12', 'f16',
     # these ones are still relevant
-    'f14', 'f18', 'f20', 'f21', 'f22', 'f23', 'f24', 'f25',
+    'f14', 'f18', 'f20', 'f21', 'f22', 'f23', 'f24', 'f25', 'f26',
     'sl6', 
     # debians
     'wheezy','jessie',
