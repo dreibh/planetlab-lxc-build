@@ -19,7 +19,7 @@ package: bridge-utils
 package: dnsmasq
 package: bash-completion
 package: kernel
-package: kernel-modules-extra
+package>=f23: kernel-modules kernel-modules-extra
 package: linux-firmware
 package: systemd
 package>=f24: systemd-container
