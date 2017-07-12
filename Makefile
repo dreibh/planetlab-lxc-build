@@ -351,7 +351,7 @@ header.spec:
 	echo "%global _source_filedigest_algorithm 1" >> $@
 	echo "%global _source_payload       w9.gzdio" >> $@
 	echo "%global _binary_payload       w9.gzdio" >> $@
-ifeq "$(DISTRONAME)""$(filter $(DISTRONAME),f23 f24 f25)"
+ifeq "$(DISTRONAME)""$(filter $(DISTRONAME),f23 f24 f25 f26)"
 	echo "%define debug_package %{nil}" >> $@
 endif
 
