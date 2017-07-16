@@ -34,7 +34,7 @@ sliver-openvswitch-GITPATH      := git://git.onelab.eu/sliver-openvswitch.git@sl
 # we take out its companion xmlrpc (the <nil/> extension is now supported mainstream)
 plcapi-GITPATH                  := git://git.onelab.eu/plcapi.git@plcapi-5.3-11 # DO NOT UPGRADE
 drupal-GITPATH                  := git://git.onelab.eu/drupal.git@drupal-4.7-16
-plewww-GITPATH                  := git://git.onelab.eu/plewww.git@plewww-5.2-7
+plewww-GITPATH                  := git://git.onelab.eu/plewww.git@plewww-5.2-8
 www-register-wizard-GITPATH	:= git://git.onelab.eu/www-register-wizard.git@www-register-wizard-4.3-5
 pcucontrol-GITPATH              := git://git.onelab.eu/pcucontrol.git@pcucontrol-1.0-13
 monitor-GITPATH                 := git://git.onelab.eu/monitor.git@monitor-3.1-6
