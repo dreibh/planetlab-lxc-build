@@ -34,7 +34,7 @@ sliver-openvswitch-GITPATH      := git://git.onelab.eu/sliver-openvswitch.git@sl
 # we take out its companion xmlrpc (the <nil/> extension is now supported mainstream)
 plcapi-GITPATH                  := git://git.onelab.eu/plcapi.git@plcapi-5.3-11 # DO NOT UPGRADE
 drupal-GITPATH                  := git://git.onelab.eu/drupal.git@drupal-4.7-16
-plewww-GITPATH                  := git://git.onelab.eu/plewww.git@plewww-5.2-7
+plewww-GITPATH                  := git://git.onelab.eu/plewww.git@plewww-5.2-8
 www-register-wizard-GITPATH	:= git://git.onelab.eu/www-register-wizard.git@www-register-wizard-4.3-5
 pcucontrol-GITPATH              := git://git.onelab.eu/pcucontrol.git@pcucontrol-1.0-13
 monitor-GITPATH                 := git://git.onelab.eu/monitor.git@monitor-3.1-6
@@ -52,8 +52,8 @@ oml-GITPATH                     := git://git.onelab.eu/oml.git@oml-2.6.1-1
 ###
 bootcd-GITPATH                  := git://git.onelab.eu/bootcd.git@bootcd-5.4-1
 sliceimage-GITPATH              := git://git.onelab.eu/sliceimage.git@sliceimage-5.1-11
-nodeimage-GITPATH               := git://git.onelab.eu/nodeimage.git@master
-myplc-GITPATH                   := git://git.onelab.eu/myplc.git@master
+nodeimage-GITPATH               := git://git.onelab.eu/nodeimage.git@nodeimage-5.2-8
+myplc-GITPATH                   := git://git.onelab.eu/myplc.git@myplc-5.3-4
 DistributedRateLimiting-GITPATH	:= git://git.onelab.eu/distributedratelimiting.git@DistributedRateLimiting-0.1-1
 
 #
