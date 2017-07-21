@@ -35,7 +35,7 @@ tests-GITPATH                   := git://github.com/dreibh/planetlab-lxc-tests.g
 # #####################################
 
 lxc-userspace-GITPATH           := git://git.onelab.eu/lxc-userspace.git@lxc-userspace-1.0-12
-transforward-GITPATH            := git://git.onelab.eu/transforward.git@master
+transforward-GITPATH            := git://git.onelab.eu/transforward.git@transforward-0.1-11
 procprotect-GITPATH             := git://git.onelab.eu/procprotect.git@procprotect-0.4-7
 # ipfw-sourceforge.git (obsolete) mirrored on git.onelab.eu from git://git.code.sf.net/p/dummynet/code
 # ipfw-google.git (current) is mirrored on git.onelab.eu from https://code.google.com/p/dummynet
@@ -61,9 +61,9 @@ vsys-GITPATH			:= git://git.onelab.eu/vsys.git@vsys-0.99-3
 vsys-scripts-GITPATH            := git://git.onelab.eu/vsys-scripts.git@vsys-scripts-0.95-51
 bind_public-GITPATH             := git://git.onelab.eu/bind_public.git@bind_public-0.1-3
 sliver-openvswitch-GITPATH      := git://git.onelab.eu/sliver-openvswitch.git@sliver-openvswitch-2.2.90-1
-# !!! Using NorNet customisation! !!! plcapi-GITPATH                  := git://git.onelab.eu/plcapi.git@exp
+# !!! Using NorNet customisation! !!! plcapi-GITPATH                  := git://git.onelab.eu/plcapi.git@plcapi-5.4-0
 drupal-GITPATH                  := git://git.onelab.eu/drupal.git@drupal-4.7-16
-# !!! Using NorNet customisation! !!! plewww-GITPATH                  := git://git.onelab.eu/plewww.git@plewww-5.2-7
+# !!! Using NorNet customisation! !!! plewww-GITPATH                  := git://git.onelab.eu/plewww.git@plewww-5.2-8
 www-register-wizard-GITPATH	:= git://git.onelab.eu/www-register-wizard.git@www-register-wizard-4.3-5
 monitor-GITPATH			:= git://git.onelab.eu/monitor@monitor-3.1-6
 PLCRT-GITPATH			:= git://git.onelab.eu/plcrt.git@PLCRT-1.0-11
@@ -81,10 +81,11 @@ oml-GITPATH                     := git://git.onelab.eu/oml.git@oml-2.6.1-1
 ###
 # !!! Using NorNet customisation! !!! bootcd-GITPATH                  := git://git.onelab.eu/bootcd.git@bootcd-5.4-1
 sliceimage-GITPATH              := git://git.onelab.eu/sliceimage.git@sliceimage-5.1-11
-nodeimage-GITPATH               := git://git.onelab.eu/nodeimage.git@master
-myplc-GITPATH                   := git://git.onelab.eu/myplc.git@master
+nodeimage-GITPATH               := git://git.onelab.eu/nodeimage.git@nodeimage-5.2-8
+myplc-GITPATH                   := git://git.onelab.eu/myplc.git@myplc-5.3-4
 
 #
 sfa-GITPATH                     := git://git.onelab.eu/sfa.git@master
 #
-# !!! Using NorNet customisation! !!! tests-GITPATH                   := git://git.onelab.eu/tests.git@master
+# !!! Using NorNet customisation! !!! tests-GITPATH                   := git://git.onelab.eu/tests.git@tests-6.0.4
+
