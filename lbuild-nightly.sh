@@ -29,7 +29,8 @@ RUN_LOG_EXTRAS=""
 
 # for publishing results, and the tests settings
 DEFAULT_WEBPATH="/build/@PLDISTRO@/"
-DEFAULT_TESTBUILDURL="https://benlomond.simula.nornet/testing/"
+# !!! Make sure benlomond.nntb.no (not only benlomond.simula.nornet) is accessible from the build systems !!!
+DEFAULT_TESTBUILDURL="https://benlomond.nntb.no/testing/"
 # this is where the buildurl is pointing towards
 DEFAULT_WEBROOT="/build/"
 DEFAULT_TESTMASTER="earnslaw.simula.nornet"
