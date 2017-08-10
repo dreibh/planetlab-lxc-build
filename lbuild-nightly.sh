@@ -136,16 +136,16 @@ EOF
 
 ### we might build on a box other than the actual web server
 # utilities for handling the pushed material (rpms, logfiles, ...)
-function webpublish_misses_dir () { ssh root@${WEBHOST}  "bash -c \"test \! -d $1\"" ; }
-function webpublish () { ssh root@${WEBHOST} "$@" ; }
-function webpublish_cp_local_to_remote () { scp $1 root@${WEBHOST}:$2 ; }
-function webpublish_cp_stdin_to_file () { ssh root@${WEBHOST} cat \> $1; }
-function webpublish_append_stdin_to_file () { ssh root@${WEBHOST} cat \>\> $1; }
+function webpublish_misses_dir () { ssh -4 root@${WEBHOST}  "bash -c \"test \! -d $1\"" ; }
+function webpublish () { ssh -4 root@${WEBHOST} "$@" ; }
+function webpublish_cp_local_to_remote () { scp -4 $1 root@${WEBHOST}:$2 ; }
+function webpublish_cp_stdin_to_file () { ssh -4 root@${WEBHOST} cat \> $1; }
+function webpublish_append_stdin_to_file () { ssh -4 root@${WEBHOST} cat \>\> $1; }
 # provide remote dir as first argument, so any number of local files can be passed next
-function webpublish_rsync_dir () { rsync --archive --delete $VERBOSE $2 root@${WEBHOST}:$1 ; }
+function webpublish_rsync_dir () { rsync -e "ssh -4" --archive --delete $VERBOSE $2 root@${WEBHOST}:$1 ; }
 function webpublish_rsync_files () {
     remote="$1"; shift
-    rsync --archive $VERBOSE "$@" root@${WEBHOST}:"$remote" ;
+    rsync -e "ssh -4" --verbose --archive $VERBOSE "$@" root@${WEBHOST}:"$remote" ;
 }
 
 function pretty_duration () {
