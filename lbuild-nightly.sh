@@ -137,7 +137,7 @@ EOF
 # utilities for handling the pushed material (rpms, logfiles, ...)
 function webpublish_misses_dir () { ssh root@${WEBHOST}  "bash -c \"test \! -d $1\"" ; }
 function webpublish () { ssh root@${WEBHOST} "$@" ; }
-function webpublish_cp_local_to_remote () { scp -4 $1 root@${WEBHOST}:$2 ; }
+function webpublish_cp_local_to_remote () { scp $1 root@${WEBHOST}:$2 ; }
 function webpublish_cp_stdin_to_file () { ssh root@${WEBHOST} cat \> $1; }
 function webpublish_append_stdin_to_file () { ssh root@${WEBHOST} cat \>\> $1; }
 # provide remote dir as first argument, so any number of local files can be passed next
