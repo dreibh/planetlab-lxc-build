@@ -86,7 +86,7 @@ nodeimage-GITPATH               := git://git.onelab.eu/nodeimage.git@nodeimage-5
 myplc-GITPATH                   := git://git.onelab.eu/myplc.git@myplc-5.3-4
 
 #
-sfa-GITPATH                     := git://git.onelab.eu/sfa.git@nornet-rel1.2.0
+sfa-GITPATH                     := git://git.onelab.eu/sfa.git@2880f8a4ec7acc3925cb865ce6b3076dd593274a
 #
 # !!! Using NorNet customisation! !!! tests-GITPATH                   := git://git.onelab.eu/tests.git@tests-6.0.4
 
