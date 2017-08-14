@@ -15,23 +15,23 @@
 # \=========================================================================/
 
 # ###### NorNet customisation ###############################################
-nornet-ca-GITPATH               := git://github.com/dreibh/nornet-ca.git@master
-nornet-nn-GITPATH               := git://github.com/dreibh/nornet-nn.git@master
+nornet-ca-GITPATH               := git://github.com/dreibh/nornet-ca.git@nornet-rel1.2.0
+nornet-nn-GITPATH               := git://github.com/dreibh/nornet-nn.git@nornet-rel1.2.0
 
-netperfmeter-GITPATH            := git://github.com/dreibh/netperfmeter.git@master
-rsplib-GITPATH                  := git://github.com/dreibh/rsplib.git@master
-subnetcalc-GITPATH              := git://github.com/dreibh/subnetcalc.git@master
-tsctp-GITPATH                   := git://github.com/dreibh/tsctp.git@master
+netperfmeter-GITPATH            := git://github.com/dreibh/netperfmeter.git@nornet-rel1.2.0
+rsplib-GITPATH                  := git://github.com/dreibh/rsplib.git@nornet-rel1.2.0
+subnetcalc-GITPATH              := git://github.com/dreibh/subnetcalc.git@nornet-rel1.2.0
+tsctp-GITPATH                   := git://github.com/dreibh/tsctp.git@nornet-rel1.2.0
 # ###########################################################################
 
 # ##### NorNet ########################
-bootmanager-GITPATH             := git://github.com/dreibh/planetlab-bootmanager.git@master
+bootmanager-GITPATH             := git://github.com/dreibh/planetlab-bootmanager.git@nornet-rel1.2.0
 linux-GITPATH                   := git://github.com/dreibh/planetlab-kernel.git@kernel-v4.4.80
 plcapi-GITPATH                  := git://github.com/dreibh/planetlab-lxc-plcapi.git@exp
-plewww-GITPATH                  := git://github.com/dreibh/planetlab-lxc-plewww@master
-bootcd-GITPATH                  := git://github.com/dreibh/planetlab-lxc-bootcd.git@master
-nodemanager-GITPATH             := git://github.com/dreibh/planetlab-lxc-nodemanager.git@master
-tests-GITPATH                   := git://github.com/dreibh/planetlab-lxc-tests.git@master
+plewww-GITPATH                  := git://github.com/dreibh/planetlab-lxc-plewww@nornet-rel1.2.0
+bootcd-GITPATH                  := git://github.com/dreibh/planetlab-lxc-bootcd.git@nornet-rel1.2.0
+nodemanager-GITPATH             := git://github.com/dreibh/planetlab-lxc-nodemanager.git@nornet-rel1.2.0
+tests-GITPATH                   := git://github.com/dreibh/planetlab-lxc-tests.git@nornet-rel1.2.0
 # #####################################
 
 lxc-userspace-GITPATH           := git://git.onelab.eu/lxc-userspace.git@lxc-userspace-1.0-12
@@ -85,7 +85,7 @@ nodeimage-GITPATH               := git://git.onelab.eu/nodeimage.git@nodeimage-5
 myplc-GITPATH                   := git://git.onelab.eu/myplc.git@myplc-5.3-4
 
 #
-sfa-GITPATH                     := git://git.onelab.eu/sfa.git@master
+sfa-GITPATH                     := git://git.onelab.eu/sfa.git@nornet-rel1.2.0
 #
 # !!! Using NorNet customisation! !!! tests-GITPATH                   := git://git.onelab.eu/tests.git@tests-6.0.4
 
