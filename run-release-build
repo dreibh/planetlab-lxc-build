@@ -23,11 +23,11 @@ cd "$BUILD_DIRECTORY"
 
 # ====== Run the builds =====================================================
 # LXC:
-#./lbuild-nightly.sh -m "$MAILTO" -b "$BASE" -d lxc -f f23 -p linux64 -e check-initscripts || true
+#./lbuild-nightly.sh -m "$MAILTO" -b "$BASE" -d lxc -f f25 -p linux64 -e check-initscripts || true
 
 # NorNet:
-./lbuild-nightly.sh -m "$MAILTO" -b "$BASE" -d nornet -f f24 -p linux64 -e check-initscripts || true
-#./lbuild-nightly.sh -m "$MAILTO" -b "$BASE" -d nornet -f f23 -p linux64 -e check-initscripts || true
+./lbuild-nightly.sh -m "$MAILTO" -b "$BASE" -d nornet -f f25 -p linux64 -e check-initscripts || true
+#./lbuild-nightly.sh -m "$MAILTO" -b "$BASE" -d nornet -f f26 -p linux64 -e check-initscripts || true
 
 
 echo -e "\x1b[1;34m`date +%FT%H:%M:%S`: Finished release builds!\x1b[0m"
