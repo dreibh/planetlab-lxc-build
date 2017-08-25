@@ -16,7 +16,7 @@
 
 # ###### NorNet customisation ###############################################
 nornet-ca-GITPATH               := git://github.com/dreibh/nornet-ca.git@nornet-rel1.2.0
-nornet-nn-GITPATH               := git://github.com/dreibh/nornet-nn.git@nornet-rel1.2.0
+nornet-nn-GITPATH               := git://github.com/dreibh/nornet-nn.git@nornet-rel1.2.2
 
 netperfmeter-GITPATH            := git://github.com/dreibh/netperfmeter.git@nornet-rel1.2.2
 rsplib-GITPATH                  := git://github.com/dreibh/rsplib.git@nornet-rel1.2.2
