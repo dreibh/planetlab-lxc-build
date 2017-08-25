@@ -3,7 +3,7 @@
 logFile=`ls -t /vservers/*log.txt | head -n1`
 if [ -e "$logFile" ] ; then
    echo "====== $logFile ======"
-   tail -f "$logFile"
+   tail -F "$logFile"
 else
    echo >&2 "No log file found."
 fi
