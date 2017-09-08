@@ -71,3 +71,65 @@ default via 192.168.124.1 dev eth0
 * 00:14:03 (client) -- Done
 * 02:14:04 -- ********** 1 FAILED step cross_check_tcp on plctest1_vplc01 (discarded from further steps)
 TRACE: 1 02-13-52->11s=0:00:11.477171s status=KO step=cross_check_tcp plc=plctest1_vplc01 force=False
+
+
+
+Bug #2: ssh_slice_again
+=======================
+
+Observation:
+- Container inri_sl1 seems to be running, but:
+"Domain inri_sl1 not found" when trying to SSH
+- "virsh -c lxc:/// list" shows status "running"
+-  Slice can be made working again with:
+ virsh -c lxc:/// destroy inri_sl1
+ virsh -c lxc:/// start inri_sl1
+  
+/var/log/nodemanager:
+Fri Sep  8 19:08:10 2017: (v) database: sync : fetching accounts
+Fri Sep  8 19:08:10 2017: (v) database: sync : looping on inri_sl1 (shell account class from pwd sliver_lxc.Sliver_LXC)
+Fri Sep  8 19:08:10 2017: (v) database: sync : ensure_create'ing 'instantiation' sliver inri_sl1
+Fri Sep  8 19:08:10 2017: (v) logger:.log_data_in_file Owerwrote /var/lib/nodemanager/inri_sl1.rec.txt
+Fri Sep  8 19:08:10 2017: (v) sliver_libvirt.is_running: Domain inri_sl1 id=1293 - OSType=exe state=running, reason=End-of-file from server [info: not available] => True
+Fri Sep  8 19:08:10 2017: (v) account.Worker.ensure_created: inri_sl1, running=True
+Fri Sep  8 19:08:10 2017: (v) sliver_libvirt.is_running: Domain inri_sl1 id=1293 - OSType=exe state=running, reason=End-of-file from server [info: not available] => True
+
+=> Note here for "inri_sl1": "info: not available"
+Statue is: state=running
+
+Fri Sep  8 19:08:10 2017: (v) Worker.needs_reimage (inri_sl1) - everything fine
+Fri Sep  8 19:08:10 2017: ========== sliver_lxc.configure inri_sl1
+Fri Sep  8 19:08:10 2017: Configure: postponing tag check on inri_sl1 as cgroups are not yet populated
+Fri Sep  8 19:08:10 2017: (v) account: configuring inri_sl1 with 1 keys
+Fri Sep  8 19:08:10 2017: WARNING: initscripts are not supported anymore in nodes that have machinectl
+Fri Sep  8 19:08:10 2017: (v) database: sync : looping on inri_sl2 (shell account class from pwd sliver_lxc.Sliver_LXC)
+Fri Sep  8 19:08:10 2017: (v) database: sync : ensure_create'ing 'instantiation' sliver inri_sl2
+Fri Sep  8 19:08:10 2017: (v) logger:.log_data_in_file Owerwrote /var/lib/nodemanager/inri_sl2.rec.txt
+Fri Sep  8 19:08:10 2017: (v) sliver_libvirt.is_running: Domain inri_sl2 id=6255 - OSType=exe state=running, reason=End-of-file from server [info: state=running, maxmem = 524288, mem = 36388, ncpu = 1, cputime = 1342262891] => True
+Fri Sep  8 19:08:10 2017: (v) account.Worker.ensure_created: inri_sl2, running=True
+Fri Sep  8 19:08:10 2017: (v) sliver_libvirt.is_running: Domain inri_sl2 id=6255 - OSType=exe state=running, reason=End-of-file from server [info: state=running, maxmem = 524288, mem = 36388, ncpu = 1, cputime = 1342262891] => True
+
+=> Note here for working sliver "inri_sl2": "info: state=running, maxmem = 524288, mem = 36388, ncpu = 1, cputime = 1342262891"
+
+Fri Sep  8 19:08:10 2017: (v) Worker.needs_reimage (inri_sl2) - everything fine
+Fri Sep  8 19:08:10 2017: ========== sliver_lxc.configure inri_sl2
+Fri Sep  8 19:08:10 2017: Configure: postponing tag check on inri_sl2 as cgroups are not yet populated
+Fri Sep  8 19:08:10 2017: (v) account: configuring inri_sl2 with 1 keys
+Fri Sep  8 19:08:10 2017: WARNING: initscripts are not supported anymore in nodes that have machinectl
+Fri Sep  8 19:08:10 2017: (v) database: sync : looping on inri_sl3 (shell account class from pwd sliver_lxc.Sliver_LXC)
+Fri Sep  8 19:08:10 2017: (v) database: sync : ensure_create'ing 'instantiation' sliver inri_sl3
+Fri Sep  8 19:08:10 2017: (v) logger:.log_data_in_file Owerwrote /var/lib/nodemanager/inri_sl3.rec.txt
+Fri Sep  8 19:08:10 2017: (v) sliver_libvirt.is_running: Domain inri_sl3 id=6466 - OSType=exe state=running, reason=End-of-file from server [info: state=running, maxmem = 524288, mem = 29460, ncpu = 1, cputime = 1367889973] => True
+Fri Sep  8 19:08:10 2017: (v) account.Worker.ensure_created: inri_sl3, running=True
+Fri Sep  8 19:08:10 2017: (v) sliver_libvirt.is_running: Domain inri_sl3 id=6466 - OSType=exe state=running, reason=End-of-file from server [info: state=running, maxmem = 524288, mem = 29460, ncpu = 1, cputime = 1367889973] => True
+Fri Sep  8 19:08:10 2017: (v) Worker.needs_reimage (inri_sl3) - everything fine
+Fri Sep  8 19:08:10 2017: ========== sliver_lxc.configure inri_sl3
+Fri Sep  8 19:08:10 2017: Configure: postponing tag check on inri_sl3 as cgroups are not yet populated
+Fri Sep  8 19:08:10 2017: (v) account: configuring inri_sl3 with 1 keys
+Fri Sep  8 19:08:10 2017: WARNING: initscripts are not supported anymore in nodes that have machinectl
+Fri Sep  8 19:08:10 2017: (v) database: sync : looping on auto_drl (shell account class from pwd sliver_lxc.Sliver_LXC)
+Fri Sep  8 19:08:10 2017: (v) database: sync : ensure_create'ing 'instantiation' sliver auto_drl
+Fri Sep  8 19:08:10 2017: (v) logger:.log_data_in_file Owerwrote /var/lib/nodemanager/auto_drl.rec.txt
+Fri Sep  8 19:08:10 2017: (v) sliver_libvirt.is_running: Domain auto_drl id=1992 - OSType=exe state=running, reason=End-of-file from server [info: state=running, maxmem = 524288, mem = 31688, ncpu = 1, cputime = 1381742915] => True
+Fri Sep  8 19:08:10 2017: (v) account.Worker.ensure_created: auto_drl, running=True
+Fri Sep  8 19:08:10 2017: (v) sliver_libvirt.is_running: Domain auto_drl id=1992 - OSType=exe state=running, reason=End-of-file from server [info: state=running, maxmem = 524288, mem = 31688, ncpu = 1, cputime = 1381742915] => True
