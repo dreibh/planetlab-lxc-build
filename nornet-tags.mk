@@ -32,7 +32,7 @@ plcapi-GITPATH                  := git://github.com/dreibh/planetlab-lxc-plcapi.
 plewww-GITPATH                  := git://github.com/dreibh/planetlab-lxc-plewww@nornet-rel1.2.0
 bootcd-GITPATH                  := git://github.com/dreibh/planetlab-lxc-bootcd.git@nornet-rel1.2.0
 nodemanager-GITPATH             := git://github.com/dreibh/planetlab-lxc-nodemanager.git@nornet-rel1.2.0
-tests-GITPATH                   := git://github.com/dreibh/planetlab-lxc-tests.git@nornet-rel1.2.0
+tests-GITPATH                   := git://github.com/dreibh/planetlab-lxc-tests.git@master
 # #####################################
 
 lxc-userspace-GITPATH           := git://git.onelab.eu/lxc-userspace.git@lxc-userspace-1.0-12
