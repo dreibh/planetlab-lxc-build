@@ -1,0 +1,73 @@
+Bug #1: cross_check_tcp
+=======================
+
+scp is used to copy tcptest.py to inri_sl1@vnodeXX multiple times. It is probably copied/invoked in parallel.
+
+* 02:13:52 -- ********** 1 RUNNING step cross_check_tcp on plc plctest1_vplc01
+* 02:13:52 -- Will check TCP between s=inri_sl1@vnode01.simula.nornet and c=inri_sl1@vnode01.simula.nornet
+* 02:13:52 -- Will check TCP between s=inri_sl1@vnode01.simula.nornet and c=inri_sl2@vnode01.simula.nornet
+* 02:13:52 -- Completer [2 tasks]: max timeout is 30.0 seconds, silent for 24.0 seconds (period is 5 s)
+-> 02:13:52 -- + scp -o BatchMode=yes -o StrictHostKeyChecking=no -o CheckHostIP=no -o ConnectTimeout=5 -i keys/key_user.rsa tcptest.py inri_sl1@vnode01.simula.nornet:./tcptest.py
+Warning: Permanently added 'vnode01.simula.nornet' (ECDSA) to the list of known hosts.
+-> 02:13:54 -- + ssh -n -o BatchMode=yes -o StrictHostKeyChecking=no -o CheckHostIP=no -o ConnectTimeout=5 -o UserKnownHostsFile=/dev/null -i keys/key_user.rsa inri_sl1@vnode01.simula.nornet ./tcptest.py ready -p 9999
+Warning: Permanently added 'vnode01.simula.nornet' (ECDSA) to the list of known hosts.
+* 00:13:54 (ready) -- ==================== tcptest.py ready
++ -> 02:13:55 -- + scp -o BatchMode=yes -o StrictHostKeyChecking=no -o CheckHostIP=no -o ConnectTimeout=5 -i keys/key_user.rsa tcptest.py inri_sl2@vnode01.simula.nornet:./tcptest.py
+-> 02:13:55 -- + ssh -n -o BatchMode=yes -o StrictHostKeyChecking=no -o CheckHostIP=no -o ConnectTimeout=5 -o UserKnownHostsFile=/dev/null -i keys/key_user.rsa inri_sl2@vnode01.simula.nornet ./tcptest.py ready -p 9999
+Warning: Permanently added 'vnode01.simula.nornet' (ECDSA) to the list of known hosts.
+* 00:13:55 (ready) -- ==================== tcptest.py ready
++ total completer (check for network readiness in slivers) 3s
+
+-> 02:13:56 -- + scp -o BatchMode=yes -o StrictHostKeyChecking=no -o CheckHostIP=no -o ConnectTimeout=5 -i keys/key_user.rsa tcptest.py inri_sl1@vnode01.simula.nornet:./tcptest.py
+
+-> 02:13:57 -- + ssh -n -o BatchMode=yes -o StrictHostKeyChecking=no -o CheckHostIP=no -o ConnectTimeout=5 -o UserKnownHostsFile=/dev/null -i keys/key_user.rsa inri_sl1@vnode01.simula.nornet ./tcptest.py server -p 10001 -t 20
+
+Trying to start server
+
+-> 02:13:57 -- + scp -o BatchMode=yes -o StrictHostKeyChecking=no -o CheckHostIP=no -o ConnectTimeout=5 -i keys/key_user.rsa tcptest.py inri_sl1@vnode01.simula.nornet:./tcptest.py
+Warning: Permanently added 'vnode01.simula.nornet' (ECDSA) to the list of known hosts.
+/bin/sh: ./tcptest.py: /usr/bin/env: bad interpreter: Text file busy
+
+Copy again. There is probably a race condition between running the server and storing the new file.
+
+-> 02:14:01 -- + ssh -n -o BatchMode=yes -o StrictHostKeyChecking=no -o CheckHostIP=no -o ConnectTimeout=5 -o UserKnownHostsFile=/dev/null -i keys/key_user.rsa inri_sl1@vnode01.simula.nornet ./tcptest.py client -a vnode01.simula.nornet -p 10001
+Warning: Permanently added 'vnode01.simula.nornet' (ECDSA) to the list of known hosts.
+* 00:14:01 (client) -- ==================== tcptest.py client
+Traceback (most recent call last):
+  File "./tcptest.py", line 162, in <module>
+    Client().main()
+  File "./tcptest.py", line 134, in main
+    s.connect((options.address, options.port))
+  File "/usr/lib64/python2.7/socket.py", line 228, in meth
+    return getattr(self._sock,name)(*args)
+socket.error: [Errno 111] Connection refused
+-> 02:14:02 -- + scp -o BatchMode=yes -o StrictHostKeyChecking=no -o CheckHostIP=no -o ConnectTimeout=5 -i keys/key_user.rsa tcptest.py inri_sl1@vnode01.simula.nornet:./tcptest.py
+-> 02:14:02 -- + ssh -n -o BatchMode=yes -o StrictHostKeyChecking=no -o CheckHostIP=no -o ConnectTimeout=5 -o UserKnownHostsFile=/dev/null -i keys/key_user.rsa inri_sl1@vnode01.simula.nornet ./tcptest.py server -p 10002 -t 20
+-> 02:14:02 -- + scp -o BatchMode=yes -o StrictHostKeyChecking=no -o CheckHostIP=no -o ConnectTimeout=5 -i keys/key_user.rsa tcptest.py inri_sl2@vnode01.simula.nornet:./tcptest.py
+Warning: Permanently added 'vnode01.simula.nornet' (ECDSA) to the list of known hosts.
+-> 02:14:03 -- + ssh -n -o BatchMode=yes -o StrictHostKeyChecking=no -o CheckHostIP=no -o ConnectTimeout=5 -o UserKnownHostsFile=/dev/null -i keys/key_user.rsa inri_sl2@vnode01.simula.nornet ./tcptest.py client -a vnode01.simula.nornet -p 10002
+Warning: Permanently added 'vnode01.simula.nornet' (ECDSA) to the list of known hosts.
+* 00:14:03 (server) -- ==================== tcptest.py server
+* 00:14:03 (server) -- ip address show
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+5: eth0@if6: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default qlen 1000
+    link/ether 52:54:00:9c:0d:67 brd ff:ff:ff:ff:ff:ff link-netnsid 0
+    inet 192.168.124.183/24 brd 192.168.124.255 scope global dynamic eth0
+       valid_lft 3614sec preferred_lft 3614sec
+    inet6 fe80::5054:ff:fe9c:d67/64 scope link 
+       valid_lft forever preferred_lft forever
+* 00:14:03 (server) -- ip route show
+default via 192.168.124.1 dev eth0 
+169.254.0.0/16 dev eth0 scope link metric 1005 
+192.168.124.0/24 dev eth0 proto kernel scope link src 192.168.124.183 
+* 00:14:03 (client) -- ==================== tcptest.py client
+* 00:14:03 (client) -- OK:ping
+* 00:14:03 (client) -- disconnecting
+* 00:14:03 (client) -- Done
+* 02:14:04 -- ********** 1 FAILED step cross_check_tcp on plctest1_vplc01 (discarded from further steps)
+TRACE: 1 02-13-52->11s=0:00:11.477171s status=KO step=cross_check_tcp plc=plctest1_vplc01 force=False
