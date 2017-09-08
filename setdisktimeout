@@ -1,0 +1,9 @@
+#!/bin/sh
+
+DISKS=sda sdb sdc sdd sde
+for disk in $DISKS ; do
+   if [ -e /sys/block/$disk/device/timeout ] ; then
+      echo "300" >/sys/block/$disk/device/timeout
+   fi
+done
+find /sys/class/scsi_generic/*/device/timeout -exec grep -H . '{}' \;

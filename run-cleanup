@@ -60,8 +60,12 @@ fi
 
 if [ "$1" = "-all" -o "$1" = "-a" ] ; then
    echo "Cleaning build system directories"
+   rm -rf /var/lib/mock/*
    rm -rf /var/cache/mock/*
-   rm -rf /var/cache/lxc/*   
+   rm -rf /var/cache/lxc/*
+   rm -rf /var/cache/yum/*
    dnf clean all
+   swapoff -a
+   swapon -a --discard
    fstrim -a -v
 fi
