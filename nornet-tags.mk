@@ -25,7 +25,7 @@ tsctp-GITPATH                   := git://github.com/dreibh/tsctp.git@nornet-rel1
 # ###########################################################################
 
 # ##### NorNet ########################
-bootmanager-GITPATH             := git://github.com/dreibh/planetlab-bootmanager.git@nornet-rel1.2.0
+bootmanager-GITPATH             := git://github.com/dreibh/planetlab-bootmanager.git@master
 linux-GITPATH                   := git://github.com/dreibh/planetlab-kernel.git@nornet-rel1.2.2
 # NOTE: !!! plcapi is currently using the upstream "exp" branch !!!
 plcapi-GITPATH                  := git://github.com/dreibh/planetlab-lxc-plcapi.git@nornet-rel1.2.0
