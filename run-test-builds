@@ -13,7 +13,7 @@ PROGRAM="$0"
 DISTRIBUTION=""
 FEDORA=""
 while [ $# -gt 0 ] ; do
-   if [ "$1" = "f18" -o "$1" = "f20" -o "$1" = "f21" -o "$1" = "f22" -o "$1" = "f23" -o "$1" = "f24" -o "$1" = "f25"  -o "$1" = "f26" ] ; then
+   if [ "$1" = "f18" -o "$1" = "f20" -o "$1" = "f21" -o "$1" = "f22" -o "$1" = "f23" -o "$1" = "f24" -o "$1" = "f25" -o "$1" = "f26" -o "$1" = "f27" ] ; then
       FEDORA="$FEDORA $1"
    elif [ "$1" = "lxc"  -o "$1" = "nornet" ] ; then
       DISTRIBUTION="$DISTRIBUTION $1"
