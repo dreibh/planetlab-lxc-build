@@ -50,6 +50,7 @@ package: beecrypt-devel
 package: tetex-latex
 package: gcc-c++ 
 package: binutils-devel
+package>=f27: elfutils-libelf-devel
 # required for perf
 package: xmlto asciidoc newt-devel
 package: perl-ExtUtils-Embed

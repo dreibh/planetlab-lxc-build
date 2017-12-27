@@ -16,8 +16,8 @@ root=/mirror/
 us_fedora_url=rsync://mirrors.kernel.org/fedora
 eu_fedora_url=rsync://mirror1.hs-esslingen.de/fedora/linux
 
-default_distroname="f25"
-all_distronames="f23 f24 f25 f26"
+default_distroname="f27"
+all_distronames="f25 f27"
 
 global_arch="x86_64"
 
@@ -69,7 +69,7 @@ function mirror_distro_arch () {
 
     echo "<<<<<<<<<<<<<<<<<<<< $distroname $arch"
 
-    return $RES 
+    return $RES
 }
 
 function usage () {
@@ -89,8 +89,8 @@ function usage () {
 
 function run () {
     RES=0
-    for distroname in $distronames ; do 
-	for arch in $archs; do 
+    for distroname in $distronames ; do
+	for arch in $archs; do
 	    mirror_distro_arch "$distroname" "$arch" || RES=1
 	done
     done
@@ -124,7 +124,7 @@ function main () {
 	run &> $LOG
     else
 	run
-    fi 
+    fi
     if [ "$?" == 0 ]; then
 	# report to fedora's infra
 	# can't get the config right...
