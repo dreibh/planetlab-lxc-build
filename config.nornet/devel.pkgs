@@ -50,6 +50,7 @@ package: beecrypt-devel
 package: tetex-latex
 package: gcc-c++ 
 package: binutils-devel
+package>=f27: elfutils-libelf-devel
 # required for perf
 package: xmlto asciidoc newt-devel
 package: perl-ExtUtils-Embed
@@ -112,7 +113,8 @@ package>=f8:inotify-tools-devel
 package=centos5: krb5-devel.@arch@ e2fsprogs-devel.@arch@ libidn-devel.@arch@
 ##########
 # for sfa : rebuilding wsdl index at build-time
-package: python-uuid pyOpenSSL m2crypto
+package<=f25: python-uuid
+package: pyOpenSSL m2crypto
 package: libxml2-python libxslt-python
 package: python-ZSI 
 package: python-psycopg2
