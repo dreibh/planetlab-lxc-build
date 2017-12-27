@@ -1,5 +1,5 @@
 #
-# Thierry Parmentelat - INRIA Sophia Antipolis
+# Thierry Parmentelat - INRIA Sophia Antipolis 
 #
 ####################
 # invocation:
@@ -15,33 +15,33 @@
 # (*) as of nov. 2007, myplc-devel is deprecated
 # (*) instead, we create a fresh vserver that holds required tools (see e.g. planetlab-devel.lst)
 # (*) the build uses the current fedora version as a target for the produced images
-# (*) so you simply need to create a fedora 8 build image for building fedora-8 images
-#
+# (*) so you simply need to create a fedora 8 build image for building fedora-8 images 
+#     
 #################### (planetlab) distributions
 #
 # (*) see README-pldistros.txt
-# (*) then you need to run
+# (*) then you need to run 
 #     make stage1=true PLDISTRO=onelab
 #
-####################
+#################### 
 # This build deals with 3 kinds of objects
-#
+# 
 # (*) packages are named upon the RPM name; they are mostly lowercase
 #     Add a package to ALL if you want it built as part of the default set.
 # (*) modules are named after the subversion or git tree; we would wish to keep
 #     these names lowercase as far as possible
 # (*) rpms are named in the spec files. A package typically defines several rpms;
 #     rpms are used for defining LOCAL-DEVEL-RPMS. See also package.rpmnames
-#
+# 
 # in simple cases, one package uses one module (in which case using the same name sounds right)
-# but others might need several modules (e.g. image-creation packages like bootstrapfs need
-# bootstrapfs and build); in this case the FIRST ONE is used for locating the specfile
+# but others might need several modules (e.g. image-creation packages like bootstrapfs need 
+# bootstrapfs and build); in this case the FIRST ONE is used for locating the specfile 
 #
 #################### packages
 # basics: how to build a package - you need to define the following variables
-#
+# 
 # (*) package-MODULES
-#     a package needs one or several modules to build; the first one is used for
+#     a package needs one or several modules to build; the first one is used for 
 #     some special purposes, like locating the specfile
 # (*) package-SPEC
 #     the package's specfile; this is relative to the FIRST module in package-MODULES
@@ -65,23 +65,23 @@
 #     rpms in this area will *not* be uninstalled after the target is made, because that would ruin the build vm for good
 # (*) package-DEPEND-FILES
 #     a set of files that the package depends on - and that make needs to know about
-#     if this contains RPMS/yumgroups.xml, then the toplevel RPMS's index
+#     if this contains RPMS/yumgroups.xml, then the toplevel RPMS's index 
 #     is refreshed with createrepo prior to running rpmbuild
 # (*) package-SPECVARS
-#     space-separated list of spec variable definitions, where you can reference make variables that
-#     belong to packages defined BEFORE the current one
+#     space-separated list of spec variable definitions, where you can reference make variables that 
+#     belong to packages defined BEFORE the current one 
 #     note: you should use = to define these (as opposed to :=)
-#     e.g. mydriver-SPECVARS = foo=$(kernel-rpm-release)
-#     would let you use the %release from the kernel's package when rpmbuild'ing mydriver
+#     e.g. mydriver-SPECVARS = foo=$(kernel-rpm-release) 
+#     would let you use the %release from the kernel's package when rpmbuild'ing mydriver 
 #     see automatic below
 # (*) package-RPMFLAGS: Miscellaneous RPM flags
 #     this is passed to rpmbuild, as well as to spec2make for "exporting" various rpm variable
 #     to make; beware that some features, like --with=debug or --define 'foo bar' are not
 #     well handled by spec2make as of this writing, which can cause issues.
 #     hopefully this will be fixed...
-# (*) package-BUILD-FROM-SRPM: set this to any non-empty value,
-#     if your package is able to produce a source rpm.
-#     In this case the build will first invoke 'make srpm', and then rebuild binaries from that
+# (*) package-BUILD-FROM-SRPM: set this to any non-empty value, 
+#     if your package is able to produce a source rpm. 
+#     In this case the build will first invoke 'make srpm', and then rebuild binaries from that 
 # (*) package-RPMDATE: set this to any non-empty value to get the rpm package's release field hold the current date
 #     this is useful for container packages, like e.g. bootstrapfs or vserver, that contains much more than the
 #     correspondng module
@@ -91,9 +91,9 @@
 #
 # (*) module-SVNPATH
 #     for svn modules
-#     the complete path where this module lies;
+#     the complete path where this module lies; 
 #     you can specify the trunk or a given tag with this variable
-#
+# 
 # (*) module-GITPATH
 #     for git modules
 #     which by analogy with svn revision scheme, is expected to be <url>@<tag>
@@ -115,7 +115,7 @@ PLANETLAB_RELEASE = 5.2
 #
 # Default values
 #
-# minimal compat with macos, just so this does not complain
+# minimal compat with macos, just so this does not complain 
 HOSTARCH := $(shell uname -i 2> /dev/null || uname -m 2> /dev/null)
 DISTRO := $(shell ./getdistro.sh)
 RELEASE := $(shell ./getrelease.sh)
@@ -154,7 +154,7 @@ endif
 include $(PLDISTROTAGS)
 
 # this used to be set in the -tags.mk files, but that turned out to require
-# error-prone duplicate changes
+# error-prone duplicate changes 
 # so now the nightly build script sets this to what it is currently using
 # in case we run this manually, i.e. if build-GITPATH is not set
 ifeq "$(build-GITPATH)" ""
@@ -205,10 +205,10 @@ $(eval $(call remote_pldistro,wextoolbox,wextoolbox-tags,git))
 $(eval $(call remote_pldistro,wexlxc,wexlxc-tags,git))
 
 ########## stage1 and stage1iter
-# extract specs and compute .mk files by running
+# extract specs and compute .mk files by running 
 # make stage1=true
 # entering stage1, we compute all the spec files
-# then we use stage1iter to compute the .mk iteratively,
+# then we use stage1iter to compute the .mk iteratively, 
 # ensuring that the n-1 first makefiles are loaded when creating the n-th one
 # when stage1iter is set, it is supposed to be an index (starting at 1) in $(ALL)
 
@@ -253,7 +253,7 @@ include $(ALLMKS)
 #all : modules
 #all : rpms
 #all : srpms
-# mention $(ALL) here rather than rpms
+# mention $(ALL) here rather than rpms 
 # this is because the inter-package dependencies are expressed like
 # util-vserver: util-python
 all: rpms
@@ -262,11 +262,11 @@ endif
 endif
 
 ### yumgroups.xml : compute from all known .pkgs files
-RPMS/yumgroups.xml:
+RPMS/yumgroups.xml: 
 	mkdir -p RPMS
 	./yumgroups.sh $(PLDISTRO) > $@
 
-createrepo = createrepo --quiet -g yumgroups.xml RPMS/
+createrepo = createrepo --quiet -g yumgroups.xml RPMS/ 
 
 repo: RPMS/yumgroups.xml
 	$(createrepo)
@@ -274,7 +274,7 @@ repo: RPMS/yumgroups.xml
 .PHONY: repo
 
 ####################
-# notes:
+# notes: 
 # * we always use the first module's location (SVNPATH/GITPATH) to extract the spec file
 # * no matter what SCM is used, SPEC should hold a relative path from the module's root
 #
@@ -310,13 +310,13 @@ endef
 $(foreach module,$(ALL.modules), $(eval $(call stage1_module_vars,$(module))))
 
 #
-# for each package, compute whether we need to set date
+# for each package, compute whether we need to set date 
 # the heuristic is that we mention the date as part of the rpm release flag if
 # (*) the package has requested it by setting package-RPMDATE (container packages should do that)
-# (*) or SVNPATH contains 'trunk' or 'branches'
-# (*) or GITPATH has no '@' (trunk)
+# (*) or SVNPATH contains 'trunk' or 'branches' 
+# (*) or GITPATH has no '@' (trunk) 
 # (*) or GITPATH contains a '@', and the gittag part has no '-' (this is to tell a tag from a branch..)
-#
+# 
 define package_hasdate
 $(1).has-date = $(if $($(1)-RPMDATE),yes, \
                   $(if $($($(1).module)-SVNPATH), \
@@ -395,7 +395,9 @@ endef
 #   $(1)/ gets cleaned up if job cannot be done
 define fetch_git_module
 	mkdir $(1) ; \
-	( git clone $($(1).gitrepo) $(1); cd $(1) ; git checkout $($(1).gittag) ; rm -rf .git ) || \
+	(git archive --remote=$($(1).gitrepo) $($(1).gittag) | tar -C $(1) -xf - ) || \
+	(echo "==================== git archive FAILED, trying git clone instead" ; \
+         git clone $($(1).gitrepo) $(1); cd $(1) ; git checkout $($(1).gittag) ; rm -rf .git ) || \
 	{ rm -rf $(1); false; }
 endef
 
@@ -444,7 +446,7 @@ endif
 ifeq "$(shell pwd)" "/build"
 	rm -f $(FAKEROOT) ; ln -s $(REALROOT) $(FAKEROOT)
 endif
-	rm -f $@
+	rm -f $@ 
 	echo "%_topdir $(HOME)" >> $@
 	echo "%_tmppath $(HOME)/tmp" >> $@
 	echo "%__spec_install_pre %{___build_pre}" >> $@
@@ -453,8 +455,8 @@ endif
 ### this utility allows to extract various info from a spec file
 ### and to define them in makefiles
 # use the C code where it works as it's the original one, use the python code otherwise
-spec2make: spec2make.py
-	ln -s spec2make.py $@
+spec2make: spec2make.c
+	$(CC) -g -Wall $< -o $@ -lrpm -lrpmbuild -lrpmio -lpopt || ln -s spec2make.py $@
 
 ### run spec2make on the spec file and include the result
 # usage: spec2make package
@@ -524,13 +526,13 @@ SOURCES/%.tgz: SOURCES/%
 ##
 URLS/%: url=$(subst @colon@,:,$(subst @slash@,/,$(notdir $@)))
 URLS/%: basename=$(notdir $(url))
-URLS/%:
+URLS/%: 
 	echo curl $(url) -o SOURCES/$(basename)
 	touch $@
 
-### the directory SOURCES/<package>-<version> is made
+### the directory SOURCES/<package>-<version> is made 
 # with a (set of) copy -rl from MODULES/<module>
-# the former is $(package.source)
+# the former is $(package.source) 
 ALLSOURCES:=$(foreach package, $(ALL), $($(package).source))
 # so that make does not use the rule below directly for creating the tarball files
 .SECONDARY: $(ALLSOURCES)
@@ -572,13 +574,13 @@ RPMYUM-INSTALL-STOCK := yum -y install
 RPMYUM-UNINSTALL-STOCK := rpm -e
 
 ### these macro handles the LOCAL-DEVEL-RPMS and LOCAL-DEVEL-RPMS-CRUCIAL tags for a given package
-# before building : rpm-install LOCAL-DEVEL-RPMS
-define rpmyum_install_local_rpms
-	$(if $($(1).all-local-devel-rpm-paths), echo "Installing for $(1)-LOCAL-DEVEL-RPMS" ; $(RPMYUM-INSTALL-LOCAL) $($(1).all-local-devel-rpm-paths))
+# before building : rpm-install LOCAL-DEVEL-RPMS 
+define rpmyum_install_local_rpms 
+	$(if $($(1).all-local-devel-rpm-paths), echo "Installing for $(1)-LOCAL-DEVEL-RPMS" ; $(RPMYUM-INSTALL-LOCAL) $($(1).all-local-devel-rpm-paths)) 
 endef
 
 # install stock rpms if defined
-define rpmyum_install_stock_rpms
+define rpmyum_install_stock_rpms 
 	$(if $($(1)-STOCK-DEVEL-RPMS), echo "Installing for $(1)-STOCK-DEVEL-RPMS" ; $(RPMYUM-INSTALL-STOCK) $($(1)-STOCK-DEVEL-RPMS) || true)
 endef
 
@@ -592,11 +594,11 @@ DPKGAPT-INSTALL-LOCAL := gdebi
 DPKGAPT-INSTALL-STOCK := apt-get -y install
 DPKGAPT-UNINSTALL-STOCK := echo WARNING uninstalling stock debs not implemented
 
-define dpkgapt_install_local_debs
+define dpkgapt_install_local_debs 
 	$(if $($(1)-LOCAL-DEVEL-DEBS), echo "Installing for $(1)-LOCAL-DEVEL-DEBS" ; $(foreach debname,$($(1)-LOCAL-DEVEL-DEBS),$(DPKGAPT-INSTALL-LOCAL) $(wildcard DEBIAN/$(debname)_*.deb);))
 endef
 
-define dpkgapt_install_stock_debs
+define dpkgapt_install_stock_debs 
 	$(if $($(1)-STOCK-DEVEL-DEBS), echo "Installing for $(1)-STOCK-DEVEL-DEBS" ; $(DPKGAPT-INSTALL-STOCK) $($(1)-STOCK-DEVEL-DEBS) || true)
 endef
 
@@ -607,9 +609,9 @@ endef
 
 ####################
 # usage: target_source_rpm package
-define target_source_rpm
+define target_source_rpm 
 ifeq "$($(1)-BUILD-FROM-SRPM)" ""
-$($(1).srpm): $($(1).specpath) .rpmmacros $($(1).tarballs)
+$($(1).srpm): $($(1).specpath) .rpmmacros $($(1).tarballs) 
 	mkdir -p BUILD SRPMS tmp
 	@(echo -n "XXXXXXXXXXXXXXX -- BEG SRPM $(1) (using SOURCES) " ; date)
 	$(call rpmyum_install_stock_rpms,$(1))
@@ -625,7 +627,7 @@ $($(1).srpm): $($(1).specpath) .rpmmacros $($(1).source)
 	$(call rpmyum_install_local_rpms,$(1))
 	make -C $($(1).source) srpm SPECFILE=$(HOME)/$($(1).specpath) EXPECTED_SRPM=$(notdir $($(1).srpm)) && \
            rm -f SRPMS/$(notdir $($(1).srpm)) && \
-           ln $($(1).source)/$(notdir $($(1).srpm)) SRPMS/$(notdir $($(1).srpm))
+           ln $($(1).source)/$(notdir $($(1).srpm)) SRPMS/$(notdir $($(1).srpm)) 
 	$(call rpmyum_uninstall_stock_rpms,$(1))
 	@(echo -n "XXXXXXXXXXXXXXX -- END SRPM $(1) " ; date)
 endif
@@ -640,14 +642,14 @@ rpms: $(ALLRPMS)
 	@echo $(words $(ALLRPMS)) binary rpms OK
 .PHONY: rpms
 
-# use tmp dirs when building binary rpm so make remains idempotent
+# use tmp dirs when building binary rpm so make remains idempotent 
 # otherwise SOURCES/ or SPEC gets touched again - which leads to rebuilding
 RPM-USE-TMP-DIRS = --define "_sourcedir $(HOME)/tmp" --define "_specdir $(HOME)/tmp"
 RPM-USE-COMPILE-DIRS = --define "_sourcedir $(HOME)/COMPILE" --define "_specdir $(HOME)/COMPILE"
 
 # usage: build_binary_rpm package
 # xxx hacky - invoke createrepo if DEPEND-FILES mentions RPMS/yumgroups.xml
-define target_binary_rpm
+define target_binary_rpm 
 $($(1).rpms): $($(1).srpm)
 	mkdir -p RPMS tmp
 	@(echo -n "XXXXXXXXXXXXXXX -- BEG RPM $(1) " ; date)
@@ -674,7 +676,7 @@ $(foreach package,$(ALL),$(eval $(call target_binary_rpm,$(package))))
 ### shorthand target
 # e.g. make proper -> does propers rpms
 # usage shorthand_target package
-define target_shorthand
+define target_shorthand 
 $(1): $($(1).rpms)
 .PHONY: $(1)
 $(1)-spec: $($(1)-SPEC)
@@ -727,7 +729,7 @@ debian: $(ALL-DEBIAN)
 # very rough for now (one module per package), targets only sfa for now
 # the general idea here is, changing the specfile (for version number and all) is enough, and this
 # gets passed to "make debian" in the module
-# PREFIX: at one point we had passed PREFIX=/usr to this 'make debian'
+# PREFIX: at one point we had passed PREFIX=/usr to this 'make debian' 
 # however it turned out we could manage this some other way (see manifold)
 # so I'm reverting to simplicity
 define target_debian
@@ -774,7 +776,7 @@ $(1)-clean-debian:
 CLEANS += $(1)-clean-srpm
 $(1)-codeclean: $(1)-clean-source $(1)-clean-tarball $(1)-clean-build $(1)-clean-rpms $(1)-clean-srpm $(1)-clean-debian
 $(1)-clean: $(1)-clean-modules $(1)-codeclean
-.PHONY: $(1)-codeclean $(1)-clean
+.PHONY: $(1)-codeclean $(1)-clean 
 $(1)-clean-spec:
 	rm -rf $($(1).specpath)
 .PHONY: $(1)-clean-spec
@@ -835,10 +837,10 @@ version-build:
 	@echo    "Build target-arch: $(HOSTARCH)"
 	@echo    "Build target-distro: $(DISTRO)"
 	@echo    "Build target-distroname: $(DISTRONAME)"
-	@echo    "Build target-release: $(RELEASE)"
-	@echo    "Build target-personality: $(PERSONALITY)"
+	@echo    "Build target-release: $(RELEASE)"	
+	@echo    "Build target-personality: $(PERSONALITY)"	
 
-####################
+#################### 
 # for a given module
 VFORMAT="%30s := %s\n"
 define print_tag_target
@@ -867,12 +869,12 @@ versions: myplc-release version-build version-tags version-rpms
 #################### package info
 PKGKEYS := tarballs source srpm rpms rpmnames rpm-release rpm-name rpm-version rpm-subversion
 %-pkginfo: package=$(subst -pkginfo,,$@)
-%-pkginfo:
+%-pkginfo: 
 	@$(foreach key,$(PKGKEYS),echo "$(package).$(key)=$($(package).$(key))";)
 ## rpm info
 RPMKEYS := rpm-path package
 %-rpminfo: rpm=$(subst -rpminfo,,$@)
-%-rpminfo:
+%-rpminfo: 
 	@$(foreach key,$(RPMKEYS),echo "$(rpm).$(key)=$($(rpm).$(key))";)
 
 #################### various lists - designed to run with stage1=true
@@ -897,7 +899,7 @@ module-tools:
 	     echo $(module):$($(module)-BRANCH); , \
 	     echo $(module); )))
 
-info: info-packages info-modules info-branches
+info: info-packages info-modules info-branches 
 
 .PHONY: info info-packages info-modules info-branches module-tools
 
