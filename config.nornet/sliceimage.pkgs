@@ -62,6 +62,7 @@ package: python3
 # ###### NorNet customisation ###############################################
 package: autoconf
 package: automake
+package: cmake
 package: libtool
 package: bind-utils
 package: colordiff
