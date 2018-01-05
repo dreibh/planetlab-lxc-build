@@ -161,4 +161,6 @@ package: elfutils-libelf-devel
 package: audit-libs-devel
 package: pesign
 package: openssl
+package: perl-devel
+package: perl-generators
 # ###########################################################################
