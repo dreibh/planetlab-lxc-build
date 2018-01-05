@@ -15,18 +15,18 @@
 # \=========================================================================/
 
 # ###### NorNet customisation ###############################################
-nornet-ca-GITPATH               := git://github.com/dreibh/nornet-ca.git@nornet-rel1.2.0
-nornet-nn-GITPATH               := git://github.com/dreibh/nornet-nn.git@nornet-rel1.2.2
+nornet-ca-GITPATH               := git://github.com/dreibh/nornet-ca.git@master
+nornet-nn-GITPATH               := git://github.com/dreibh/nornet-nn.git@master
 
-netperfmeter-GITPATH            := git://github.com/dreibh/netperfmeter.git@nornet-rel1.2.2
-rsplib-GITPATH                  := git://github.com/dreibh/rsplib.git@nornet-rel1.2.2
-subnetcalc-GITPATH              := git://github.com/dreibh/subnetcalc.git@nornet-rel1.2.0
-tsctp-GITPATH                   := git://github.com/dreibh/tsctp.git@nornet-rel1.2.0
+netperfmeter-GITPATH            := git://github.com/dreibh/netperfmeter.git@master
+rsplib-GITPATH                  := git://github.com/dreibh/rsplib.git@master
+subnetcalc-GITPATH              := git://github.com/dreibh/subnetcalc.git@master
+tsctp-GITPATH                   := git://github.com/dreibh/tsctp.git@master
 # ###########################################################################
 
 # ##### NorNet ########################
 bootmanager-GITPATH             := git://github.com/dreibh/planetlab-bootmanager.git@master
-linux-GITPATH                   := git://github.com/dreibh/planetlab-kernel.git@nornet-rel1.2.2
+linux-GITPATH                   := git://github.com/dreibh/planetlab-kernel.git@kernel-v4.9
 # NOTE: !!! plcapi is currently using the upstream "exp" branch !!!
 plcapi-GITPATH                  := git://github.com/dreibh/planetlab-lxc-plcapi.git@nornet-rel1.2.0
 plewww-GITPATH                  := git://github.com/dreibh/planetlab-lxc-plewww@nornet-rel1.2.0
