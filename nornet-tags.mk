@@ -28,10 +28,10 @@ tsctp-GITPATH                   := git://github.com/dreibh/tsctp.git@master
 bootmanager-GITPATH             := git://github.com/dreibh/planetlab-bootmanager.git@master
 linux-GITPATH                   := git://github.com/dreibh/planetlab-kernel.git@kernel-v4.9
 # NOTE: !!! plcapi is currently using the upstream "exp" branch !!!
-plcapi-GITPATH                  := git://github.com/dreibh/planetlab-lxc-plcapi.git@nornet-rel1.2.0
-plewww-GITPATH                  := git://github.com/dreibh/planetlab-lxc-plewww@nornet-rel1.2.0
-bootcd-GITPATH                  := git://github.com/dreibh/planetlab-lxc-bootcd.git@nornet-rel1.2.0
-nodemanager-GITPATH             := git://github.com/dreibh/planetlab-lxc-nodemanager.git@nornet-rel1.2.0
+plcapi-GITPATH                  := git://github.com/dreibh/planetlab-lxc-plcapi.git@master
+plewww-GITPATH                  := git://github.com/dreibh/planetlab-lxc-plewww@master
+bootcd-GITPATH                  := git://github.com/dreibh/planetlab-lxc-bootcd.git@master
+nodemanager-GITPATH             := git://github.com/dreibh/planetlab-lxc-nodemanager.git@master
 tests-GITPATH                   := git://github.com/dreibh/planetlab-lxc-tests.git@master
 # #####################################
 
