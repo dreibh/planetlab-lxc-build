@@ -43,11 +43,7 @@ endif
 #
 ### starting August 2015, ipfw module won't build against fedora22
 # that comes with kernel 4.1.4
-<<<<<<< HEAD
-ifneq "$(DISTRONAME)" "$(filter $(DISTRONAME),f21 f22 f23 f24 f25 f26)"
-=======
 ifneq "$(DISTRONAME)" "$(filter $(DISTRONAME),f21 f22 f23 f24 f25 f27)"
->>>>>>> upstream/master
 ipfwroot-MODULES := ipfw
 ipfwroot-SPEC := planetlab/ipfwroot.spec
 ALL += ipfwroot
@@ -134,11 +130,7 @@ IN_NODEIMAGE += codemux
 # fprobe-ulog
 #
 # xxx temporarily turning this off on f20 and above
-<<<<<<< HEAD
-ifneq "$(DISTRONAME)" "$(filter $(DISTRONAME),f20 f21 f22 f23 f24 f25 f26)"
-=======
 ifneq "$(DISTRONAME)" "$(filter $(DISTRONAME),f20 f21 f22 f23 f24 f25 f27)"
->>>>>>> upstream/master
 fprobe-ulog-MODULES := fprobe-ulog
 fprobe-ulog-SPEC := fprobe-ulog.spec
 ALL += fprobe-ulog
@@ -401,11 +393,7 @@ IN_NODEIMAGE += pyplnet
 IN_MYPLC += pyplnet
 IN_BOOTCD += pyplnet
 
-<<<<<<< HEAD
-ifneq "$(DISTRONAME)" "$(filter $(DISTRONAME),f23 f24 f25 f26)"
-=======
 ifneq "$(DISTRONAME)" "$(filter $(DISTRONAME),f23 f24 f25 f27)"
->>>>>>> upstream/master
 #
 # OML measurement library
 #
