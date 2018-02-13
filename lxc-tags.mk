@@ -37,7 +37,7 @@ bootmanager-GITPATH             := git://git.onelab.eu/bootmanager.git@bootmanag
 pypcilib-GITPATH                := git://git.onelab.eu/pypcilib.git@pypcilib-0.2-11
 pyplnet-GITPATH                 := git://git.onelab.eu/pyplnet.git@pyplnet-4.3-19
 DistributedRateLimiting-GITPATH	:= git://git.onelab.eu/distributedratelimiting.git@DistributedRateLimiting-0.1-1
-pcucontrol-GITPATH              := git://git.onelab.eu/pcucontrol.git@pcucontrol-1.0-13
+pcucontrol-GITPATH              := git://git.onelab.eu/pcucontrol.git@master
 ###
 # omf-resctl now comes from yum and gem, no need for rvm-ruby anymore
 oml-GITPATH                     := git://git.onelab.eu/oml.git@oml-2.6.1-1
