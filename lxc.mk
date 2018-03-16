@@ -312,17 +312,11 @@ IN_MYPLC += www-register-wizard
 #
 # pcucontrol
 #
-### remove pcucontrol from the nodes on f27 and above
-# f27 comes with openssl-11.0g and in this version
-# X509_EXTENSION {aka struct X509_extension_st} has become opaque
-# this is mentioned here
-# https://github.com/openssl/openssl/issues/2239
-# anyway, needs more work
-ifneq "$(DISTRONAME)" "$(filter $(DISTRONAME),f27)"
+# WARNING: as of f27 I have to remove support for SSL in pcucontrol
+# see pcucontrol.spec for details
 pcucontrol-MODULES := pcucontrol
 pcucontrol-SPEC := pcucontrol.spec
 ALL += pcucontrol
-endif
 
 #
 # monitor

@@ -1,0 +1,11 @@
+#!/bin/bash
+
+COUNT=5
+VARIANT=lxc
+FEDORA=f25
+
+
+i=0
+while [ $i -lt $COUNT ] ; do
+   ./run-test-builds "$VARIANT" "$FEDORA"
+done
