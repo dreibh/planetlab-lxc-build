@@ -35,7 +35,7 @@ tests-GITPATH                   := git://github.com/dreibh/planetlab-lxc-tests.g
 # #####################################
 
 lxc-userspace-GITPATH           := git://git.onelab.eu/lxc-userspace.git@lxc-userspace-1.0-12
-transforward-GITPATH            := git://git.onelab.eu/transforward.git@transforward-0.1-11
+transforward-GITPATH            := git://git.onelab.eu/transforward.git@master
 procprotect-GITPATH             := git://git.onelab.eu/procprotect.git@procprotect-0.4-7
 # ipfw-sourceforge.git (obsolete) mirrored on git.onelab.eu from git://git.code.sf.net/p/dummynet/code
 # ipfw-google.git (current) is mirrored on git.onelab.eu from https://code.google.com/p/dummynet
@@ -74,18 +74,19 @@ nodeconfig-GITPATH              := git://git.onelab.eu/nodeconfig.git@nodeconfig
 pypcilib-GITPATH                := git://git.onelab.eu/pypcilib.git@pypcilib-0.2-11
 pyplnet-GITPATH                 := git://git.onelab.eu/pyplnet.git@pyplnet-4.3-19
 DistributedRateLimiting-GITPATH	:= git://git.onelab.eu/distributedratelimiting.git@DistributedRateLimiting-0.1-1
-pcucontrol-GITPATH              := git://git.onelab.eu/pcucontrol.git@pcucontrol-1.0-13
+pcucontrol-GITPATH              := git://git.onelab.eu/pcucontrol.git@master
 ###
 # omf-resctl now comes from yum and gem, no need for rvm-ruby anymore
 oml-GITPATH                     := git://git.onelab.eu/oml.git@oml-2.6.1-1
 ###
 # !!! Using NorNet customisation! !!! bootcd-GITPATH                  := git://git.onelab.eu/bootcd.git@bootcd-5.4-1
-sliceimage-GITPATH              := git://git.onelab.eu/sliceimage.git@sliceimage-5.1-11
-nodeimage-GITPATH               := git://git.onelab.eu/nodeimage.git@nodeimage-5.2-8
-myplc-GITPATH                   := git://git.onelab.eu/myplc.git@myplc-5.3-4
+sliceimage-GITPATH              := git://git.onelab.eu/sliceimage.git@master
+nodeimage-GITPATH               := git://git.onelab.eu/nodeimage.git@master
+myplc-GITPATH                   := git://git.onelab.eu/myplc.git@master
 
 #
-sfa-GITPATH                     := git://git.onelab.eu/sfa.git@2880f8a4ec7acc3925cb865ce6b3076dd593274a
+sfa-GITPATH                     := git://git.onelab.eu/sfa.git@master
+
 #
 # !!! Using NorNet customisation! !!! tests-GITPATH                   := git://git.onelab.eu/tests.git@tests-6.0.4
 
