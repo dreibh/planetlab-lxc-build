@@ -7,5 +7,5 @@ FEDORA=f25
 i=0
 while [ $i -lt $COUNT ] ; do
    let i=$i+1
-   ../run-test-builds "$VARIANT" "$FEDORA"   
+   ./run-test-builds "$VARIANT" "$FEDORA"   
 done
