@@ -1,7 +1,7 @@
 #!/usr/bin/python
 #
-# This is a replacement for the formerly bash-written function pl_parsePkgs () 
-# 
+# This is a replacement for the formerly bash-written function pl_parsePkgs ()
+#
 # Usage: $0  [-a arch] default_arch keyword fcdistro pldistro pkgs-file[..s]
 # default_arch is $pl_DISTRO_ARCH, but can be overridden
 #
@@ -35,14 +35,14 @@ import re
 
 default_arch='x86_64'
 known_arch = ['i386', 'i686', 'x86_64']
-default_fcdistro = 'f27'
+default_fcdistro = 'f29'
 known_fcdistros = [
     'centos5', 'centos6',
     # oldies but we have references to that in the pkgs files
     'f8', 'f10', 'f12', 'f16',
     # these ones are still relevant
-    'f14', 'f18', 'f20', 'f21', 'f22', 'f23', 'f24', 'f25', 'f27',
-    'sl6', 
+    'f14', 'f18', 'f20', 'f21', 'f22', 'f23', 'f24', 'f25', 'f27', 'f29',
+    'sl6',
     # debians
     'wheezy','jessie',
     # ubuntus
@@ -56,8 +56,8 @@ known_fcdistros = [
 default_pldistro='onelab'
 
 known_keywords = [
-    'group', 'groupname', 'groupdesc', 
-     'package', 'pip', 'gem', 
+    'group', 'groupname', 'groupdesc',
+     'package', 'pip', 'gem',
     'nodeyumexclude', 'plcyumexclude', 'yumexclude',
     'precious', 'junk', 'mirror',
 ]
@@ -121,7 +121,7 @@ class PkgsParser:
 
     re_old = '[a-z]+[+-][a-z]+[0-9]+'
     m_old = re.compile('\A{re_old}\Z'.format(**locals()))
-    
+
     # returns a tuple (included, excluded)
     def parse(self, filename):
         ok = True
@@ -159,7 +159,7 @@ class PkgsParser:
                                 # skip if another distro family
                                 if distro != self.distro: continue
                                 # skip if the qualifier does not fit
-                                if not self.match (qual, version): 
+                                if not self.match (qual, version):
                                     if self.options.verbose:
                                         print('{filename}:{lineno}:qualifer {left} does not apply'
                                               .format(**locals()), file=stderr)
@@ -180,7 +180,7 @@ class PkgsParser:
                                                 format(**locals()))
                             else:
                                 raise Exception('error in left expression {left}'.format(**locals()))
-                                
+
                 except Exception as e:
                     ok = False
                     print("{filename}:{lineno}:syntax error: {e}".format(**locals()), file=stderr)
@@ -200,7 +200,7 @@ class PkgsParser:
             ok = ok and o
         # avoid set operations that would not preserve order
         results = [ x for x in included if x not in excluded ]
-        
+
         results = [ x.replace('@arch@', self.arch).\
                         replace('@fcdistro@', self.fcdistro).\
                         replace('@pldistro@', self.pldistro) for x in results]
@@ -231,7 +231,7 @@ def main ():
     parser.add_option ('-u', '--no-sort', dest='sort_results', default=True, action='store_false',
                        help='keep results in the same order as in the inputs')
     (options, args) = parser.parse_args()
-    
+
     if len(args) <= 1 :
         parser.print_help(file=stderr)
         sys.exit(1)

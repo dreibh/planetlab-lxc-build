@@ -6,12 +6,12 @@ COMMAND=$(basename $0)
 # close stdin, as with ubuntu and debian VMs this script tends to hang and wait for input ..
 0<&-
 
-# old guests have e.g. mount in /bin but this is no longer part of 
+# old guests have e.g. mount in /bin but this is no longer part of
 # the standard PATH in recent hosts after usrmove, so let's keep it simple
 export PATH=$PATH:/bin:/sbin
 
 # default values, tunable with command-line options
-DEFAULT_FCDISTRO=f27
+DEFAULT_FCDISTRO=f29
 DEFAULT_PLDISTRO=lxc
 DEFAULT_PERSONALITY=linux64
 DEFAULT_MAILDEST="build at onelab.eu"
@@ -71,7 +71,7 @@ function guest_ipv4() {
 # use with care, a *lot* of other things can go bad as well
 function summary () {
     from=$1; shift
-    echo "******************** BEG SUMMARY" 
+    echo "******************** BEG SUMMARY"
     python - $from <<EOF
 #!/usr/bin/env python
 # read a full log and tries to extract the interesting stuff
@@ -115,7 +115,7 @@ def summary (filename):
                 echo=False
             # any 'installing' line
             elif m_installing_any.match(line):
-                if echo: 
+                if echo:
                     installing=m_installing_any.match(line).group(1)
                     print '>>>',installing
                 echo=False
@@ -129,7 +129,7 @@ def summary (filename):
 for arg in sys.argv[1:]:
     summary(arg)
 EOF
-    echo "******************** END SUMMARY" 
+    echo "******************** END SUMMARY"
 }
 
 ### we might build on a box other than the actual web server
@@ -153,11 +153,11 @@ function pretty_duration () {
     total_minutes=$(($total_seconds/60))
     minutes=$(($total_minutes%60))
     hours=$(($total_minutes/60))
-    
+
     printf "%02d:%02d:%02d" $hours $minutes $seconds
 }
 
-# Notify recipient of failure or success, manage various stamps 
+# Notify recipient of failure or success, manage various stamps
 function failure() {
     set -x
     # early stage ? - let's not create /build/@PLDISTRO@
@@ -242,7 +242,7 @@ function success () {
 ##############################
 # manage root / container contexts
 function in_root_context () {
-    rpm -q libvirt > /dev/null 
+    rpm -q libvirt > /dev/null
 }
 
 # convenient for simple commands
@@ -261,9 +261,9 @@ function build () {
 
     cd /build
     show_env
-    
+
     echo "Running make IN $(pwd)"
-    
+
     # stuff our own variable settings
     MAKEVARS=("build-GITPATH=${BUILD_SCM_URL}" "${MAKEVARS[@]}")
     MAKEVARS=("PLDISTRO=${PLDISTRO}" "${MAKEVARS[@]}")
@@ -280,7 +280,7 @@ function build () {
     /build/latex-first-run.sh || :
 
     # stage1
-    make -C /build $DRY_RUN "${MAKEVARS[@]}" stage1=true 
+    make -C /build $DRY_RUN "${MAKEVARS[@]}" stage1=true
     # versions
     make -C /build $DRY_RUN "${MAKEVARS[@]}" versions
     # actual stuff
@@ -326,7 +326,7 @@ function run_log () {
 
     # check it out in the build
     run_in_build_guest $BASE make -C /build tests-module ${MAKEVARS[@]}
-    
+
     # push it onto the testmaster - just the 'system' subdir is enough
     rsync --verbose --archive $(rootdir $BASE)/build/MODULES/tests/system/ ${testmaster_ssh}:${BASE}
     # toss the build in the bargain, so the tests don't need to mess with extracting it
@@ -347,7 +347,7 @@ function run_log () {
     case $retcod in
 	0) success=true; IGNORED="" ;;
 	2) success=true; IGNORED=true ;;
-	*) success="";   IGNORED="" ;; 
+	*) success="";   IGNORED="" ;;
     esac
 
     # gather logs in the build vm
@@ -363,7 +363,7 @@ function run_log () {
 	echo "Tests have failed - bailing out"
 	failure
     fi
-    
+
 }
 
 # this part won't work if WEBHOST does not match the local host
@@ -372,7 +372,7 @@ function run_log () {
 function sign_node_packages () {
 
     echo "Signing node packages"
-    
+
     need_createrepo=""
 
     repository=$WEBPATH/$BASE/RPMS/
@@ -395,7 +395,7 @@ function sign_node_packages () {
     if [ -n "$new_rpms" ] ; then
         # Create a stamp once the package gets signed
         mkdir $repository/signed-stamps 2> /dev/null
-	
+
         # Sign RPMS. setsid detaches rpm from the terminal,
         # allowing the (hopefully blank) GPG password to be
         # entered from stdin instead of /dev/tty.
@@ -406,7 +406,7 @@ function sign_node_packages () {
             --resign $new_rpms && touch $new_stamps
     fi
 
-     # Update repository index / yum metadata. 
+     # Update repository index / yum metadata.
     if [ -n "$need_createrepo" ] ; then
 	echo "Indexing node packages after signing"
         if [ -f $repository/yumgroups.xml ] ; then
@@ -448,7 +448,7 @@ function show_env () {
 function setupssh () {
     base=$1; shift
     sshkey=$1; shift
-    
+
     if [ -f ${sshkey} ] ; then
 	SSHDIR=$(rootdir ${base})/root/.ssh
 	mkdir -p ${SSHDIR}
@@ -458,7 +458,7 @@ function setupssh () {
 	    echo "  StrictHostKeyChecking no" ) > ${SSHDIR}/config
 	chmod 700 ${SSHDIR}
 	chmod 400 ${SSHDIR}/*
-    else 
+    else
 	echo "WARNING : could not find provided ssh key $sshkey - ignored"
     fi
 }
@@ -489,7 +489,7 @@ function usage () {
     echo " -r webroot - defaults to $DEFAULT_WEBROOT - the fs point where testbuildurl actually sits"
     echo " -M testmaster - defaults to $DEFAULT_TESTMASTER"
     echo " -Y - sign yum repo in webpath"
-    echo " -g gpg_path - to the gpg secring used to sign rpms.  Defaults to $DEFAULT_GPGPATH" 
+    echo " -g gpg_path - to the gpg secring used to sign rpms.  Defaults to $DEFAULT_GPGPATH"
     echo " -u gpg_uid - email used in secring. Defaults to $DEFAULT_GPGUID"
     echo " -K sshkey - specify ssh key to use when reaching git over ssh"
     echo " -S - do not publish source rpms"
@@ -572,7 +572,7 @@ function main () {
     # preserve options for passing them again later, together with expanded base
     options=$OPTS_ORIG
 
-    # allow var=value stuff; 
+    # allow var=value stuff;
     for target in "$@" ; do
 	# check if contains '='
 	target1=$(echo $target | sed -e s,=,,)
@@ -582,7 +582,7 @@ function main () {
 	    MAKEVARS=(${MAKEVARS[@]} "$target")
 	fi
     done
-    
+
     # set defaults
     [ -z "$FCDISTRO" ] && FCDISTRO=$DEFAULT_FCDISTRO
     [ -z "$PLDISTRO" ] && PLDISTRO=$DEFAULT_PLDISTRO
@@ -605,8 +605,8 @@ function main () {
     for config in ${TESTCONFIG} ; do
 	RUN_LOG_EXTRAS="$RUN_LOG_EXTRAS --config $config"
     done
-    
-	
+
+
     if [ -n "$OVERBASE" ] ; then
 	sedargs="-e s,@DATE@,${DATE},g"
 	BASE=$(echo ${OVERBASE} | sed $sedargs)
@@ -631,7 +631,7 @@ function main () {
     short_hostname=$(hostname | cut -d. -f1)
     MAIL_SUBJECT="on ${short_hostname} - ${MAIL_SUBJECT}"
 
-    ### compute WEBHOST from TESTBUILDURL 
+    ### compute WEBHOST from TESTBUILDURL
     # this is to avoid having to change the builds configs everywhere
     # simplistic way to extract hostname from a URL
     WEBHOST=$(echo "$TESTBUILDURL" | cut -d/ -f 3)
@@ -644,11 +644,11 @@ function main () {
 
     else
 	trap failure ERR INT
-        # we run in the root context : 
+        # we run in the root context :
         # (*) create or check for the vm to use
         # (*) copy this command in the vm
         # (*) invoke it
-	
+
 	if [ -n "$OVERBASE" ] ; then
             ### Re-use a vm (finish an unfinished build..)
 	    if [ ! -d $(rootdir ${BASE}) ] ; then
@@ -701,7 +701,7 @@ function main () {
 	    # manage LOG - beware it might be a symlink so nuke it first
 	    LOG=$(logfile ${BASE})
 	    rm -f $LOG
-	    exec > $LOG 2>&1 
+	    exec > $LOG 2>&1
 	    set -x
 	    echo "XXXXXXXXXX $COMMAND: creating vm $BASE" $(date)
 	    show_env
@@ -711,14 +711,14 @@ function main () {
 	    GIT_REPO=$(echo $BUILD_SCM_URL | cut -d@ -f1)
 	    GIT_TAG=$(echo $BUILD_SCM_URL | cut -s -d@ -f2)
 	    GIT_TAG=${GIT_TAG:-master}
-	    mkdir -p $tmpdir 
+	    mkdir -p $tmpdir
             ( git archive --remote=$GIT_REPO $GIT_TAG | tar -C $tmpdir -xf -) || \
 		( echo "==================== git archive FAILED, trying git clone instead" ; \
 		  git clone $GIT_REPO $tmpdir && cd $tmpdir && git checkout $GIT_TAG && rm -rf .git)
 
             # Create lxc vm
 	    cd $tmpdir
-	    ./lbuild-initvm.sh $VERBOSE -f ${FCDISTRO} -d ${PLDISTRO} -p ${PERSONALITY} ${PREINSTALLED} ${BASE} 
+	    ./lbuild-initvm.sh $VERBOSE -f ${FCDISTRO} -d ${PLDISTRO} -p ${PERSONALITY} ${PREINSTALLED} ${BASE}
 	    # cleanup
 	    cd -
 	    rm -rf $tmpdir
@@ -738,7 +738,7 @@ function main () {
 	rm $LOG; ln -s $LOG2 $LOG
 	LOG=$LOG2
 	# redirect log again
-	exec >> $LOG 2>&1 
+	exec >> $LOG 2>&1
 
 	sedargs="-e s,@DATE@,${DATE},g -e s,@FCDISTRO@,${FCDISTRO},g -e s,@PLDISTRO@,${PLDISTRO},g -e s,@PERSONALITY@,${PERSONALITY},g"
 	WEBPATH=$(echo ${WEBPATH} | sed $sedargs)
@@ -749,8 +749,8 @@ function main () {
 	WEBLOG=${WEBPATH}/${BASE}/log.txt
         # compute the log URL - inserted in the mail messages for convenience
 	WEBBASE_URL=$(echo $WEBBASE | sed -e "s,//,/,g" -e "s,${WEBROOT},${TESTBUILDURL},")
-    
-	if [ -n "$DO_BUILD" ] ; then 
+
+	if [ -n "$DO_BUILD" ] ; then
 
 	    # invoke this command into the build directory of the vm
 	    cp $COMMANDPATH $(rootdir ${BASE})/build/
@@ -763,7 +763,7 @@ function main () {
 	# publish to the web so run_log can find them
 	set +e
 	trap - ERR INT
-	webpublish rm -rf $WEBPATH/$BASE 
+	webpublish rm -rf $WEBPATH/$BASE
 	# guess if we've been doing any debian-related build
 	if [ ! -f $(rootdir $BASE)/etc/debian_version  ] ; then
 	    webpublish mkdir -p $WEBPATH/$BASE/{RPMS,SRPMS}
@@ -774,7 +774,7 @@ function main () {
 	    # (not needed on fedora b/c this is done by the regular build already)
 	    run_in_build_guest $BASE "(cd /build ; dpkg-scanpackages DEBIAN/ | gzip -9c > Packages.gz)"
 	    webpublish mkdir -p $WEBPATH/$BASE/DEBIAN
-	    webpublish_rsync_files $WEBPATH/$BASE/DEBIAN/ $(rootdir $BASE)/build/DEBIAN/*.deb 
+	    webpublish_rsync_files $WEBPATH/$BASE/DEBIAN/ $(rootdir $BASE)/build/DEBIAN/*.deb
 	    webpublish_rsync_files $WEBPATH/$BASE/ $(rootdir $BASE)/build/Packages.gz
 	fi
 	# publish myplc-release if this exists
@@ -796,16 +796,16 @@ function main () {
 	    fi
 	fi
 
-	if [ -n "$DO_TEST" ] ; then 
+	if [ -n "$DO_TEST" ] ; then
 	    run_log
 	fi
 
-	success 
+	success
 
-        echo "==================== MAIN END $(date)"	
+        echo "==================== MAIN END $(date)"
     fi
 
 }
 
 ##########
-main "$@" 
+main "$@"

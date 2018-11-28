@@ -13,7 +13,7 @@ BUILD_DIR=$(pwd)
 # pkgs parsing utilities + lbuild-bridge.sh
 export PATH=$(dirname $0):$PATH
 
-# old guests have e.g. mount in /bin but this is no longer part of 
+# old guests have e.g. mount in /bin but this is no longer part of
 # the standard PATH in recent hosts after usrmove, so let's keep it simple
 export PATH=$PATH:/bin:/sbin
 
@@ -30,7 +30,7 @@ function lxcroot () {
 
 # XXX fixme : when creating a 32bits VM we need to call linux32 as appropriate...s
 
-DEFAULT_FCDISTRO=f27
+DEFAULT_FCDISTRO=f29
 DEFAULT_PLDISTRO=lxc
 DEFAULT_PERSONALITY=linux64
 DEFAULT_MEMORY=3072
@@ -60,7 +60,7 @@ function masklen_to_netmask () {
     python <<EOF
 import sys
 masklen=$masklen
-if not (masklen>=1 and masklen<=32): 
+if not (masklen>=1 and masklen<=32):
   print "Wrong masklen",masklen
   exit(1)
 result=[]
@@ -72,7 +72,7 @@ for i in range(4):
        result.append(masklen)
        masklen=0
 print ".".join([ str(256-2**(8-i)) for i in result ])
-  
+
 EOF
 }
 
@@ -87,7 +87,7 @@ function package_method () {
 	    echo debootstrap ;;
 	*)
 	    echo Unknown distro $fcdistro ;;
-    esac 
+    esac
 }
 
 # return arch from debian distro and personality
@@ -105,12 +105,12 @@ function canonical_arch () {
 }
 
 # the new test framework creates /timestamp in /vservers/<name> *before* populating it
-function almost_empty () { 
-    dir="$1"; shift ; 
+function almost_empty () {
+    dir="$1"; shift ;
     # non existing is fine
-    [ ! -d $dir ] && return 0; 
+    [ ! -d $dir ] && return 0;
     # need to have at most one file
-    count=$(cd $dir; ls | wc -l); [ $count -le 1 ]; 
+    count=$(cd $dir; ls | wc -l); [ $count -le 1 ];
 }
 
 ##############################
@@ -123,7 +123,7 @@ function fedora_install() {
 
     cache=/var/cache/lxc/fedora/$arch/${fedora_release}
     mkdir -p $cache
-    
+
     (
         flock --exclusive --timeout 60 200 || { echo "Cache repository is busy." ; return 1 ; }
 
@@ -141,7 +141,7 @@ function fedora_install() {
 
         echo "Filling $lxc_root from $cache/rootfs ... "
 	rsync -a $cache/rootfs/ $lxc_root/
-	
+
         return 0
 
         ) 200> $cache/lock
@@ -163,7 +163,7 @@ function fedora_download() {
 
     mkdir -p $INSTALL_ROOT || { echo "Failed to create '$INSTALL_ROOT' directory" ; return 1; }
 
-    mkdir -p $INSTALL_ROOT/etc/yum.repos.d   
+    mkdir -p $INSTALL_ROOT/etc/yum.repos.d
     mkdir -p $INSTALL_ROOT/dev
     mknod -m 0444 $INSTALL_ROOT/dev/random c 1 8
     mknod -m 0444 $INSTALL_ROOT/dev/urandom c 1 9
@@ -175,7 +175,7 @@ function fedora_download() {
     # append fedora repo files with desired ${fedora_release} and $basearch
     for f in $INSTALL_ROOT/etc/yum.repos.d/* ; do
       sed -i "s/\$basearch/$arch/g; s/\$releasever/${fedora_release}/g;" $f
-    done 
+    done
 
     MIRROR_URL=$FEDORA_MIRROR_BASE/releases/${fedora_release}/Everything/$arch/os
     RELEASE_URL1="$MIRROR_URL/Packages/fedora-release-${fedora_release}-1.noarch.rpm"
@@ -183,7 +183,7 @@ function fedora_download() {
     # first try the second version of fedora-release first
     RELEASE_URL2="$MIRROR_URL/Packages/f/fedora-release-${fedora_release}-2.noarch.rpm"
     RELEASE_URL3="$MIRROR_URL/Packages/f/fedora-release-${fedora_release}-1.noarch.rpm"
-   
+
     RELEASE_TARGET=$INSTALL_ROOT/fedora-release-${fedora_release}.noarch.rpm
     found=""
     for attempt in $RELEASE_URL1 $RELEASE_URL2 $RELEASE_URL3; do
@@ -196,7 +196,7 @@ function fedora_download() {
 	fi
     done
     [ -n "$found" ] || { echo "Could not retrieve fedora-release rpm - exiting" ; exit 1; }
-    
+
     mkdir -p $INSTALL_ROOT/var/lib/rpm
     rpm --root $INSTALL_ROOT  --initdb
     # when installing f12 this apparently is already present, so ignore result
@@ -204,9 +204,9 @@ function fedora_download() {
     # however f12 root images won't get created on a f18 host
     # (the issue here is the same as the one we ran into when dealing with a vs-box)
     # in a nutshell, in f12 the glibc-common and filesystem rpms have an apparent conflict
-    # >>> file /usr/lib/locale from install of glibc-common-2.11.2-3.x86_64 conflicts 
+    # >>> file /usr/lib/locale from install of glibc-common-2.11.2-3.x86_64 conflicts
     #          with file from package filesystem-2.4.30-2.fc12.x86_64
-    # in fact this was - of course - allowed by f12's rpm but later on a fix was made 
+    # in fact this was - of course - allowed by f12's rpm but later on a fix was made
     #   http://rpm.org/gitweb?p=rpm.git;a=commitdiff;h=cf1095648194104a81a58abead05974a5bfa3b9a
     # So ideally if we want to be able to build f12 images from f18 we need an rpm that has
     # this patch undone, like we have in place on our f14 boxes (our f14 boxes need a f18-like rpm)
@@ -235,7 +235,7 @@ function fedora_configure() {
     echo 0 > $lxc_root/selinux/enforce
 
     # set the hostname
-    case "$fcdistro" in 
+    case "$fcdistro" in
 	f18|f2?)
             cat <<EOF > ${lxc_root}/etc/sysconfig/network
 NETWORKING=yes
@@ -312,7 +312,7 @@ function fedora_configure_systemd() {
     lxc=$1; shift
     lxc_root=$(lxcroot $lxc)
 
-    # so ignore if we can't find /etc/systemd at all 
+    # so ignore if we can't find /etc/systemd at all
     [ -d ${lxc_root}/etc/systemd ] || return 0
     # otherwise let's proceed
     ln -sf /lib/systemd/system/multi-user.target ${lxc_root}/etc/systemd/system/default.target
@@ -329,8 +329,8 @@ function fedora_configure_systemd() {
 
 # overwrite container yum config
 function fedora_configure_yum () {
-    set -x 
-    set -e 
+    set -x
+    set -e
     trap failure ERR INT
 
     lxc=$1; shift
@@ -372,10 +372,10 @@ EOF
 	if [ ! -d $lxc_root/etc/yum.repos.d ] ; then
 	    echo "WARNING : cannot create myplc repo"
 	else
-            # exclude kernel from fedora repos 
+            # exclude kernel from fedora repos
 	    yumexclude=$(pl_plcyumexclude $fcdistro $pldistro $DIRNAME)
 	    for repo in $lxc_root/etc/yum.repos.d/* ; do
-		[ -f $repo ] && yumconf_exclude $repo "exclude=$yumexclude" 
+		[ -f $repo ] && yumconf_exclude $repo "exclude=$yumexclude"
 	    done
 	    # the build repo is not signed at this stage
 	    cat > $lxc_root/etc/yum.repos.d/myplc.repo <<EOF
@@ -387,7 +387,7 @@ gpgcheck=0
 EOF
 	fi
     fi
-}    
+}
 
 ##############################
 # apparently ubuntu exposes a mirrors list by country at
@@ -396,9 +396,9 @@ EOF
 function debian_mirror () {
     fcdistro=$1; shift
     case $fcdistro in
-	wheezy|jessie) 
+	wheezy|jessie)
 	    echo http://ftp2.fr.debian.org/debian/ ;;
-	precise|trusty|utopic|vivid|wily|xenial) 
+	precise|trusty|utopic|vivid|wily|xenial)
 #	    echo http://mir1.ovh.net/ubuntu/ubuntu/ ;;
 	    echo http://www-ftp.lip6.fr/pub/linux/distributions/Ubuntu/archive/ ;;
 	*) echo unknown distro $fcdistro; exit 1;;
@@ -424,7 +424,7 @@ function debian_install () {
     cat <<EOF > ${lxc_root}/etc/hostname
 $GUEST_HOSTNAME
 EOF
-    
+
 }
 
 function debian_configure () {
@@ -462,8 +462,8 @@ function setup_lxc() {
 
     lxc_root=$(lxcroot $lxc)
 
-    # create lxc container 
-    
+    # create lxc container
+
     pkg_method=$(package_method $fcdistro)
     case $pkg_method in
 	yum)
@@ -491,14 +491,14 @@ function setup_lxc() {
 
     # Enable cgroup -- xxx -- is this really useful ?
     [ -d $lxc_root/cgroup ] || mkdir $lxc_root/cgroup
-    
+
     ### set up resolv.conf from host
     # ubuntu precise and on, /etc/resolv.conf is a symlink to ../run/resolvconf/resolv.conf
     [ -h $lxc_root/etc/resolv.conf ] && rm -f $lxc_root/etc/resolv.conf
     cp /etc/resolv.conf $lxc_root/etc/resolv.conf
     ### and /etc/hosts for at least localhost
     [ -f $lxc_root/etc/hosts ] || echo "127.0.0.1 localhost localhost.localdomain" > $lxc_root/etc/hosts
-    
+
     # grant ssh access from host to guest
     mkdir -p $lxc_root/root/.ssh
     cat /root/.ssh/id_rsa.pub >> $lxc_root/root/.ssh/authorized_keys
@@ -508,7 +508,7 @@ function setup_lxc() {
     # don't keep the input xml, this can be retrieved at all times with virsh dumpxml
     config_xml=/tmp/$lxc.xml
     ( [ -n "$NAT_MODE" ] && write_lxc_xml_natip $lxc || write_lxc_xml_publicip $lxc ) > $config_xml
-    
+
     # define lxc container for libvirt
     virsh -c lxc:/// define $config_xml
 
@@ -560,7 +560,7 @@ EOF
 }
 
 # grant build guests the ability to do mknods
-function write_lxc_xml_natip () { 
+function write_lxc_xml_natip () {
     lxc=$1; shift
     lxc_root=$(lxcroot $lxc)
     cat <<EOF
@@ -627,8 +627,8 @@ EOF
 
 function devel_or_test_tools () {
 
-    set -x 
-    set -e 
+    set -x
+    set -e
     trap failure ERR INT
 
     lxc=$1; shift
@@ -644,7 +644,7 @@ function devel_or_test_tools () {
 
     ### install individual packages, then groups
     # get target arch - use uname -i here (we want either x86_64 or i386)
-   
+
     lxc_arch=$(chroot ${lxc_root} $personality uname -i)
     # on debian systems we get arch through the 'arch' command
     [ "$lxc_arch" = "unknown" ] && lxc_arch=$(chroot ${lxc_root} $personality arch)
@@ -702,7 +702,7 @@ function devel_or_test_tools () {
 }
 
 function post_install () {
-    lxc=$1; shift 
+    lxc=$1; shift
     personality=$1; shift
     lxc_root=$(lxcroot $lxc)
     # setup localtime from the host
@@ -724,7 +724,7 @@ function post_install () {
 
 # just in case, let's stay on the safe side
 function sshd_disable_password_auth () {
-    lxc=$1; shift 
+    lxc=$1; shift
     lxc_root=$(lxcroot $lxc)
     sed --in-place=.password -e 's,^#\?PasswordAuthentication.*,PasswordAuthentication no,' \
 	$lxc_root/etc/ssh/sshd_config
@@ -732,8 +732,8 @@ function sshd_disable_password_auth () {
 
 function post_install_natip () {
 
-    set -x 
-    set -e 
+    set -x
+    set -e
     trap failure ERR INT
 
     lxc=$1; shift
@@ -743,19 +743,19 @@ function post_install_natip () {
 ### From myplc-devel-native.spec
 # be careful to backslash $ in this, otherwise it's the root context that's going to do the evaluation
     cat << EOF | chroot ${lxc_root} $personality bash -x
-    
+
     # customize root's prompt
     /bin/cat << PROFILE > /root/.profile
 export PS1="[$lxc] \\w # "
 PROFILE
 
 EOF
-	
+
 }
 
 function post_install_myplc  () {
-    set -x 
-    set -e 
+    set -x
+    set -e
     trap failure ERR INT
 
     lxc=$1; shift
@@ -802,16 +802,16 @@ function wait_for_ssh () {
     # if run in public_ip mode, we know the IP of the guest and it is specified here
     [ -n "$1" ] && { guest_ip=$1; shift; }
 
-    #wait max 2 min for sshd to start 
+    #wait max 2 min for sshd to start
     success=""
     current_time=$(date +%s)
     stop_time=$(($current_time + 120))
-    
+
     counter=1
     while [ "$current_time" -lt "$stop_time" ] ; do
          echo "$counter-th attempt to reach sshd in container $lxc ..."
 	 [ -z "$guest_ip" ] && guest_ip=$(guest_ipv4 $lxc)
-	 [ -n "$guest_ip" ] && ssh -o "StrictHostKeyChecking no" $guest_ip 'uname -i' && { 
+	 [ -n "$guest_ip" ] && ssh -o "StrictHostKeyChecking no" $guest_ip 'uname -i' && {
 		 success=true; echo "SSHD in container $lxc is UP on IP $guest_ip"; break ; } || :
          counter=$(($counter+1))
          sleep 10
@@ -819,7 +819,7 @@ function wait_for_ssh () {
     done
 
     # Thierry: this is fatal, let's just exit with a failure here
-    [ -z $success ] && { echo "SSHD in container $lxc could not be reached (guest_ip=$guest_ip)" ; exit 1 ; } 
+    [ -z $success ] && { echo "SSHD in container $lxc could not be reached (guest_ip=$guest_ip)" ; exit 1 ; }
     return 0
 }
 
@@ -830,7 +830,7 @@ function failure () {
 }
 
 function usage () {
-    set +x 
+    set +x
     echo "Usage: $COMMAND [options] lxc-name             (aka build mode)"
     echo "Usage: $COMMAND -n hostname [options] lxc-name (aka test mode)"
     echo "Description:"
@@ -853,7 +853,7 @@ function usage () {
     exit 1
 }
 
-### parse args and 
+### parse args and
 function main () {
 
     #set -e
@@ -880,7 +880,7 @@ function main () {
 	    *) usage ;;
 	esac
     done
-	
+
     shift $(($OPTIND - 1))
 
     # parse fixed arguments
@@ -913,10 +913,10 @@ function main () {
     [ -z "$pldistro" ] && pldistro=$DEFAULT_PLDISTRO
     [ -z "$personality" ] && personality=$DEFAULT_PERSONALITY
     [ -z "$MEMORY" ] && MEMORY=$DEFAULT_MEMORY
-    
+
     # set memory in KB
     MEMORY=$(($MEMORY * 1024))
-    
+
     # the set of preinstalled packages - depends on mode
     if [ -z "$PREINSTALLED" ] ; then
 	if [ -n "$NAT_MODE" ] ; then
@@ -936,7 +936,7 @@ function main () {
 	if [ "$REPO_URL" == "none" ] ; then
 	    REPO_URL=""
 	elif [ -z "$REPO_URL" ] ; then
-	    echo "WARNING -- setting up a yum repo is recommended" 
+	    echo "WARNING -- setting up a yum repo is recommended"
 	fi
     fi
 
@@ -968,7 +968,7 @@ function main () {
         VIF_HOST="vif$(echo $GUEST_HOSTNAME | cut -d. -f1)"
     fi
 
-    setup_lxc $lxc $fcdistro $pldistro $personality 
+    setup_lxc $lxc $fcdistro $pldistro $personality
 
     # historically this command is for setting up a build or a test VM
     # kind of patchy right now though
@@ -976,7 +976,7 @@ function main () {
 
     # container gets started here
     post_install $lxc $personality
-    
+
     echo $COMMAND Done
 
     exit 0
