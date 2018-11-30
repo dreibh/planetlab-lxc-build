@@ -60,7 +60,7 @@ function mirror_distro_arch () {
         paths="$paths updates/$distroindex/$arch/"
         localpath=fedora
     else
-        paths="$paths updates/$distroindex/Everything/$arch updates/$distroindex/Modular/$arch"
+        paths="$paths updates/$distroindex/Everything/$arch/ updates/$distroindex/Modular/$arch/"
     fi
 
     for repopath in $paths; do
