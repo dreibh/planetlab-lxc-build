@@ -61,6 +61,7 @@ function mirror_distro_arch () {
         localpath=fedora
     else
         paths="$paths updates/$distroindex/Everything/$arch/ updates/$distroindex/Modular/$arch/"
+        localpath=fedora
     fi
 
     for repopath in $paths; do
@@ -68,7 +69,7 @@ function mirror_distro_arch () {
         [ -z "$dry_run" ] && mkdir -p ${root}/${localpath}/${repopath}
         command="rsync $options ${rsyncurl}/${repopath} ${root}/${localpath}/${repopath}"
         echo $command
-       $command
+        $command
     done
 
     echo "<<<<<<<<<<<<<<<<<<<< $distroname $arch"
