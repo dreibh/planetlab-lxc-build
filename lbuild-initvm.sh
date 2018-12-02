@@ -45,7 +45,7 @@ VIF_GUEST=eth0
 ##########
 FEDORA_MIRROR_BASE="http://mirror.onelab.eu/fedora/"
 FEDORA_MIRROR_KEYS="http://mirror.onelab.eu/keys/"
-FEDORA_PREINSTALLED="yum initscripts passwd rsyslog vim-minimal dhclient chkconfig rootfiles policycoreutils openssh-server openssh-clients"
+FEDORA_PREINSTALLED="dnf dnf-yum passwd rsyslog vim-minimal dhclient chkconfig rootfiles policycoreutils openssh-server openssh-clients"
 DEBIAN_PREINSTALLED="openssh-server openssh-client"
 
 ########## networking utilities
@@ -77,12 +77,12 @@ EOF
 }
 
 ##############################
-# return yum or debootstrap
+# return dnf or debootstrap
 function package_method () {
     fcdistro=$1; shift
     case $fcdistro in
 	f[0-9]*|centos[0-9]*|sl[0-9]*)
-	    echo yum ;;
+	    echo dnf ;;
 	wheezy|jessie|precise|trusty|utopic|vivid|wily|xenial)
 	    echo debootstrap ;;
 	*)
@@ -95,7 +95,7 @@ function canonical_arch () {
     personality=$1; shift
     fcdistro=$1; shift
     case $(package_method $fcdistro) in
-	yum)
+	dnf)
 	    case $personality in *32) echo i386 ;; *64) echo x86_64 ;; *) echo Unknown-arch-1 ;; esac ;;
 	debootstrap)
 	    case $personality in *32) echo i386 ;; *64) echo amd64 ;; *) echo Unknown-arch-2 ;; esac ;;
@@ -132,7 +132,7 @@ function fedora_install() {
             fedora_download $cache || { echo "Failed to download 'fedora base'"; return 1; }
         else
             echo "Updating cache $cache/rootfs ..."
-	    if ! yum --installroot $cache/rootfs --releasever ${fedora_release} -y --nogpgcheck update ; then
+	    if ! dnf --installroot $cache/rootfs --releasever ${fedora_release} -y --nogpgcheck update ; then
                 echo "Failed to update 'fedora base', continuing with last known good cache"
             else
                 echo "Update finished"
@@ -178,21 +178,22 @@ function fedora_download() {
     done
 
     MIRROR_URL=$FEDORA_MIRROR_BASE/releases/${fedora_release}/Everything/$arch/os
-    RELEASE_URL1="$MIRROR_URL/Packages/fedora-release-${fedora_release}-1.noarch.rpm"
-    # with fedora18 the rpms are scattered by first name
+    # since fedora18 the rpms are scattered by first name
     # first try the second version of fedora-release first
-    RELEASE_URL2="$MIRROR_URL/Packages/f/fedora-release-${fedora_release}-2.noarch.rpm"
-    RELEASE_URL3="$MIRROR_URL/Packages/f/fedora-release-${fedora_release}-1.noarch.rpm"
+    RELEASE_URLS=""
+    for subindex in 3 2 1; do
+        RELEASE_URLS="$RELEASE_URLS $MIRROR_URL/Packages/f/fedora-release-${fedora_release}-1.noarch.rpm"
+    done
 
     RELEASE_TARGET=$INSTALL_ROOT/fedora-release-${fedora_release}.noarch.rpm
     found=""
-    for attempt in $RELEASE_URL1 $RELEASE_URL2 $RELEASE_URL3; do
-	if curl -f $attempt -o $RELEASE_TARGET ; then
-	    echo "Retrieved $attempt"
+    for attempt in $RELEASE_URLS; do
+	if curl --silent --fail $attempt -o $RELEASE_TARGET; then
+	    echo "Successfully Retrieved $attempt"
 	    found=true
 	    break
 	else
-	    echo "Failed attempt $attempt"
+	    echo "Failed (not to worry about) with attempt $attempt"
 	fi
     done
     [ -n "$found" ] || { echo "Could not retrieve fedora-release rpm - exiting" ; exit 1; }
@@ -211,9 +212,9 @@ function fedora_download() {
     # So ideally if we want to be able to build f12 images from f18 we need an rpm that has
     # this patch undone, like we have in place on our f14 boxes (our f14 boxes need a f18-like rpm)
 
-    YUM="yum --installroot=$INSTALL_ROOT --releasever=${fedora_release} --nogpgcheck -y"
-    echo "$YUM install $FEDORA_PREINSTALLED"
-    $YUM install $FEDORA_PREINSTALLED || { echo "Failed to download rootfs, aborting." ; return 1; }
+    DNF="dnf --installroot=$INSTALL_ROOT --releasever=${fedora_release} --nogpgcheck -y"
+    echo "$DNF install $FEDORA_PREINSTALLED"
+    $DNF install $FEDORA_PREINSTALLED || { echo "Failed to download rootfs, aborting." ; return 1; }
 
     mv "$INSTALL_ROOT" "$cache/rootfs"
     echo "Download complete."
@@ -466,11 +467,11 @@ function setup_lxc() {
 
     pkg_method=$(package_method $fcdistro)
     case $pkg_method in
-	yum)
+	dnf)
             if [ -z "$IMAGE" ]; then
                 fedora_install $lxc ||  { echo "failed to install fedora root image"; exit 1 ; }
 		# this appears to be safer; observed in Jan. 2016 on a f23 host and a f14 cached image
-		# we were getting this message when attempting the first chroot yum install
+		# we were getting this message when attempting the first chroot dnf install
 		# rpmdb: Program version 4.8 doesn't match environment version 5.3
 		chroot $(lxcroot $lxc) $personality rm -rf /var/lib/rpm/__db.00{0,1,2,3,4,5,6,7,8,9}
 		chroot $(lxcroot $lxc) $personality rpm --rebuilddb
@@ -653,7 +654,7 @@ function devel_or_test_tools () {
     groups=$(pl_getGroups -a $lxc_arch $fcdistro $pldistro $pkgsfile)
 
     case "$pkg_method" in
-	yum)
+	dnf)
 	    # --allowerasing required starting with fedora24
 	    #
 	    has_dnf=""
@@ -663,9 +664,9 @@ function devel_or_test_tools () {
 		pkg_installer="dnf -y install --allowerasing"
 		grp_installer="dnf -y groupinstall --allowerasing"
 	    else
-		echo "container has only yum"
-		pkg_installer="yum -y install"
-		grp_installer="yum -y groupinstall"
+		echo "container has only dnf"
+		pkg_installer="dnf -y install"
+		grp_installer="dnf -y groupinstall"
 	    fi
 	    [ -n "$packages" ] && chroot ${lxc_root} $personality $pkg_installer $packages
 	    for group_plus in $groups; do
