@@ -133,3 +133,5 @@ package: libgcrypt-devel
 package: libtasn1-devel
 package: nmap-ncat
 package: pkgconfig
+# f29
+package>=f29: network-scripts
