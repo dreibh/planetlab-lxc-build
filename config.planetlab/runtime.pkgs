@@ -8,3 +8,5 @@ package: file
 
 # while runing the tests, try to work around a glitch with yum by running yum=complete-transaction
 package: yum-utils
+package: psmisc
+package>=f29: network-scripts
