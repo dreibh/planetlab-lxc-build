@@ -65,7 +65,7 @@ package: yum createrepo
 package: sharutils
 # bootcd
 package: nasm
-package: mkisofs
+package<=f27: mkisofs
 package: dosfstools
 package: mtools
 package: syslinux
@@ -115,7 +115,7 @@ package=centos5: krb5-devel.@arch@ e2fsprogs-devel.@arch@ libidn-devel.@arch@
 package<=f25: python-uuid
 package: pyOpenSSL m2crypto
 package: libxml2-python libxslt-python
-package: python-ZSI
+package<=f27: python-ZSI
 package: python-psycopg2
 package: python-setuptools
 package: python-dateutil
