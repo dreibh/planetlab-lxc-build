@@ -29,7 +29,7 @@ EOF
 
 function discover_interface () {
     for ifname in $(gather_interfaces); do
-	ip link show $ifname | grep -qi 'state UP' && { echo $ifname; return; }
+        ip link show $ifname | grep -qi 'state UP' && { echo $ifname; return; }
     done
     # still not found ? that's bad
     echo unknown
@@ -57,8 +57,8 @@ function create_bridge_if_needed() {
 
     # already created ? - we're done
     ip addr show $public_bridge >& /dev/null && {
-	echo "Bridge already set up - skipping create_bridge_if_needed"
-	return 0
+        echo "Bridge already set up - skipping create_bridge_if_needed"
+        return 0
     }
 
     # find out the physical interface to bridge onto
@@ -137,9 +137,9 @@ function create_bridge_if_needed() {
 
 function main () {
     if [[ -n "$@" ]] ; then 
-	public_bridge="$1"; shift
+        public_bridge="$1"; shift
     else
-	public_bridge="$DEFAULT_PUBLIC_BRIDGE"
+        public_bridge="$DEFAULT_PUBLIC_BRIDGE"
     fi
     create_bridge_if_needed $public_bridge
 }

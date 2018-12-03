@@ -81,12 +81,12 @@ EOF
 function package_method () {
     fcdistro=$1; shift
     case $fcdistro in
-	f[0-9]*|centos[0-9]*|sl[0-9]*)
-	    echo dnf ;;
-	wheezy|jessie|precise|trusty|utopic|vivid|wily|xenial)
-	    echo debootstrap ;;
-	*)
-	    echo Unknown distro $fcdistro ;;
+        f[0-9]*|centos[0-9]*|sl[0-9]*)
+            echo dnf ;;
+        wheezy|jessie|precise|trusty|utopic|vivid|wily|xenial)
+            echo debootstrap ;;
+        *)
+            echo Unknown distro $fcdistro ;;
     esac
 }
 
@@ -95,12 +95,12 @@ function canonical_arch () {
     personality=$1; shift
     fcdistro=$1; shift
     case $(package_method $fcdistro) in
-	dnf)
-	    case $personality in *32) echo i386 ;; *64) echo x86_64 ;; *) echo Unknown-arch-1 ;; esac ;;
-	debootstrap)
-	    case $personality in *32) echo i386 ;; *64) echo amd64 ;; *) echo Unknown-arch-2 ;; esac ;;
-	*)
-	    echo Unknown-arch-3 ;;
+        dnf)
+            case $personality in *32) echo i386 ;; *64) echo x86_64 ;; *) echo Unknown-arch-1 ;; esac ;;
+        debootstrap)
+            case $personality in *32) echo i386 ;; *64) echo amd64 ;; *) echo Unknown-arch-2 ;; esac ;;
+        *)
+            echo Unknown-arch-3 ;;
     esac
 }
 
@@ -132,7 +132,7 @@ function fedora_install() {
             fedora_download $cache || { echo "Failed to download 'fedora base'"; return 1; }
         else
             echo "Updating cache $cache/rootfs ..."
-	    if ! dnf --installroot $cache/rootfs --releasever ${fedora_release} -y --nogpgcheck update ; then
+            if ! dnf --installroot $cache/rootfs --releasever ${fedora_release} -y --nogpgcheck update ; then
                 echo "Failed to update 'fedora base', continuing with last known good cache"
             else
                 echo "Update finished"
@@ -140,7 +140,7 @@ function fedora_install() {
         fi
 
         echo "Filling $lxc_root from $cache/rootfs ... "
-	rsync -a $cache/rootfs/ $lxc_root/
+        rsync -a $cache/rootfs/ $lxc_root/
 
         return 0
 
@@ -188,13 +188,13 @@ function fedora_download() {
     RELEASE_TARGET=$INSTALL_ROOT/fedora-release-${fedora_release}.noarch.rpm
     found=""
     for attempt in $RELEASE_URLS; do
-	if curl --silent --fail $attempt -o $RELEASE_TARGET; then
-	    echo "Successfully Retrieved $attempt"
-	    found=true
-	    break
-	else
-	    echo "Failed (not to worry about) with attempt $attempt"
-	fi
+        if curl --silent --fail $attempt -o $RELEASE_TARGET; then
+            echo "Successfully Retrieved $attempt"
+            found=true
+            break
+        else
+            echo "Failed (not to worry about) with attempt $attempt"
+        fi
     done
     [ -n "$found" ] || { echo "Could not retrieve fedora-release rpm - exiting" ; exit 1; }
 
@@ -237,24 +237,24 @@ function fedora_configure() {
 
     # set the hostname
     case "$fcdistro" in
-	f18|f2?)
+        f18|f2?)
             cat <<EOF > ${lxc_root}/etc/sysconfig/network
 NETWORKING=yes
 EOF
-	    cat <<EOF > ${lxc_root}/etc/hostname
+            cat <<EOF > ${lxc_root}/etc/hostname
 $GUEST_HOSTNAME
 EOF
-	    echo ;;
-	*)
+            echo ;;
+        *)
             cat <<EOF > ${lxc_root}/etc/sysconfig/network
 NETWORKING=yes
 HOSTNAME=$GUEST_HOSTNAME
 EOF
             # set minimal hosts
-	    cat <<EOF > $lxc_root/etc/hosts
+            cat <<EOF > $lxc_root/etc/hosts
 127.0.0.1 localhost $GUEST_HOSTNAME
 EOF
-	    echo ;;
+            echo ;;
     esac
 
     dev_path="${lxc_root}/dev"
@@ -278,9 +278,9 @@ EOF
     mknod -m 666 ${dev_path}/ptmx c 5 2
 
     if [ "$(echo $fcdistro | cut -d"f" -f2)" -le "14" ]; then
-	fedora_configure_init $lxc
+        fedora_configure_init $lxc
     else
-	fedora_configure_systemd $lxc
+        fedora_configure_systemd $lxc
     fi
 
     guest_ifcfg=${lxc_root}/etc/sysconfig/network-scripts/ifcfg-$VIF_GUEST
@@ -370,23 +370,23 @@ EOF
     # for using this script as a general-purpose lxc creation wrapper
     # just mention 'none' as the repo url
     if [ -n "$REPO_URL" ] ; then
-	if [ ! -d $lxc_root/etc/yum.repos.d ] ; then
-	    echo "WARNING : cannot create myplc repo"
-	else
+        if [ ! -d $lxc_root/etc/yum.repos.d ] ; then
+            echo "WARNING : cannot create myplc repo"
+        else
             # exclude kernel from fedora repos
-	    yumexclude=$(pl_plcyumexclude $fcdistro $pldistro $DIRNAME)
-	    for repo in $lxc_root/etc/yum.repos.d/* ; do
-		[ -f $repo ] && yumconf_exclude $repo "exclude=$yumexclude"
-	    done
-	    # the build repo is not signed at this stage
-	    cat > $lxc_root/etc/yum.repos.d/myplc.repo <<EOF
+            yumexclude=$(pl_plcyumexclude $fcdistro $pldistro $DIRNAME)
+            for repo in $lxc_root/etc/yum.repos.d/* ; do
+                [ -f $repo ] && yumconf_exclude $repo "exclude=$yumexclude"
+            done
+            # the build repo is not signed at this stage
+            cat > $lxc_root/etc/yum.repos.d/myplc.repo <<EOF
 [myplc]
 name= MyPLC
 baseurl=$REPO_URL
 enabled=1
 gpgcheck=0
 EOF
-	fi
+        fi
     fi
 }
 
@@ -397,12 +397,12 @@ EOF
 function debian_mirror () {
     fcdistro=$1; shift
     case $fcdistro in
-	wheezy|jessie)
-	    echo http://ftp2.fr.debian.org/debian/ ;;
-	precise|trusty|utopic|vivid|wily|xenial)
-#	    echo http://mir1.ovh.net/ubuntu/ubuntu/ ;;
-	    echo http://www-ftp.lip6.fr/pub/linux/distributions/Ubuntu/archive/ ;;
-	*) echo unknown distro $fcdistro; exit 1;;
+        wheezy|jessie)
+            echo http://ftp2.fr.debian.org/debian/ ;;
+        precise|trusty|utopic|vivid|wily|xenial)
+#           echo http://mir1.ovh.net/ubuntu/ubuntu/ ;;
+            echo http://www-ftp.lip6.fr/pub/linux/distributions/Ubuntu/archive/ ;;
+        *) echo unknown distro $fcdistro; exit 1;;
     esac
 }
 
@@ -467,27 +467,27 @@ function setup_lxc() {
 
     pkg_method=$(package_method $fcdistro)
     case $pkg_method in
-	dnf)
+        dnf)
             if [ -z "$IMAGE" ]; then
                 fedora_install $lxc ||  { echo "failed to install fedora root image"; exit 1 ; }
-		# this appears to be safer; observed in Jan. 2016 on a f23 host and a f14 cached image
-		# we were getting this message when attempting the first chroot dnf install
-		# rpmdb: Program version 4.8 doesn't match environment version 5.3
-		chroot $(lxcroot $lxc) $personality rm -rf /var/lib/rpm/__db.00{0,1,2,3,4,5,6,7,8,9}
-		chroot $(lxcroot $lxc) $personality rpm --rebuilddb
+                # this appears to be safer; observed in Jan. 2016 on a f23 host and a f14 cached image
+                # we were getting this message when attempting the first chroot dnf install
+                # rpmdb: Program version 4.8 doesn't match environment version 5.3
+                chroot $(lxcroot $lxc) $personality rm -rf /var/lib/rpm/__db.00{0,1,2,3,4,5,6,7,8,9}
+                chroot $(lxcroot $lxc) $personality rpm --rebuilddb
             fi
-	    fedora_configure $lxc || { echo "failed to configure fedora for a container"; exit 1 ; }
-	    ;;
-	debootstrap)
+            fedora_configure $lxc || { echo "failed to configure fedora for a container"; exit 1 ; }
+            ;;
+        debootstrap)
             if [ -z "$IMAGE" ]; then
-	        debian_install $lxc || { echo "failed to install debian/ubuntu root image"; exit 1 ; }
+                debian_install $lxc || { echo "failed to install debian/ubuntu root image"; exit 1 ; }
             fi
-	    debian_configure || { echo "failed to configure debian/ubuntu for a container"; exit 1 ; }
-	    ;;
-	*)
-	    echo "$COMMAND:: unknown package_method - exiting"
-	    exit 1
-	    ;;
+            debian_configure || { echo "failed to configure debian/ubuntu for a container"; exit 1 ; }
+            ;;
+        *)
+            echo "$COMMAND:: unknown package_method - exiting"
+            exit 1
+            ;;
     esac
 
     # Enable cgroup -- xxx -- is this really useful ?
@@ -654,49 +654,49 @@ function devel_or_test_tools () {
     groups=$(pl_getGroups -a $lxc_arch $fcdistro $pldistro $pkgsfile)
 
     case "$pkg_method" in
-	dnf)
-	    # --allowerasing required starting with fedora24
-	    #
-	    has_dnf=""
-	    chroot ${lxc_root} $personality dnf --version && has_dnf=true
-	    if [ -n "$has_dnf" ]; then
-		echo "container has dnf - invoking with --allowerasing"
-		pkg_installer="dnf -y install --allowerasing"
-		grp_installer="dnf -y groupinstall --allowerasing"
-	    else
-		echo "container has only dnf"
-		pkg_installer="dnf -y install"
-		grp_installer="dnf -y groupinstall"
-	    fi
-	    [ -n "$packages" ] && chroot ${lxc_root} $personality $pkg_installer $packages
-	    for group_plus in $groups; do
-		group=$(echo $group_plus | sed -e "s,+++, ,g")
-		chroot ${lxc_root} $personality $grp_installer "$group"
-	    done
-	    # store current rpm list in /init-lxc.rpms in case we need to check the contents
-	    chroot ${lxc_root} $personality rpm -aq > $lxc_root/init-lxc.rpms
-	    ;;
-	debootstrap)
-	    # for ubuntu
-	    if grep -iq ubuntu /vservers/$lxc/etc/lsb-release 2> /dev/null; then
-		# on ubuntu, at this point we end up with a single feed in /etc/apt/sources.list
- 	        # we need at least to add the 'universe' feed for python-rpm
-		( cd /vservers/$lxc/etc/apt ; head -1 sources.list | sed -e s,main,universe, > sources.list.d/universe.list )
-	        # also adding a link to updates sounds about right
-		( cd /vservers/$lxc/etc/apt ; head -1 sources.list | sed -e 's, main,-updates main,' > sources.list.d/updates.list )
-		# tell apt about the changes
-		chroot /vservers/$lxc apt-get update
-	    fi
-	    for package in $packages ; do
-		# container not started yet
-	        #virsh -c lxc:/// lxc-enter-namespace $lxc /usr/bin/$personality /bin/bash -c "apt-get install -y $package" || :
-		chroot ${lxc_root} $personality apt-get install -y $package || :
-	    done
-	    ### xxx todo install groups with apt..
-	    ;;
-	*)
-	    echo "unknown pkg_method $pkg_method"
-	    ;;
+        dnf)
+            # --allowerasing required starting with fedora24
+            #
+            has_dnf=""
+            chroot ${lxc_root} $personality dnf --version && has_dnf=true
+            if [ -n "$has_dnf" ]; then
+                echo "container has dnf - invoking with --allowerasing"
+                pkg_installer="dnf -y install --allowerasing"
+                grp_installer="dnf -y groupinstall --allowerasing"
+            else
+                echo "container has only dnf"
+                pkg_installer="dnf -y install"
+                grp_installer="dnf -y groupinstall"
+            fi
+            [ -n "$packages" ] && chroot ${lxc_root} $personality $pkg_installer $packages
+            for group_plus in $groups; do
+                group=$(echo $group_plus | sed -e "s,+++, ,g")
+                chroot ${lxc_root} $personality $grp_installer "$group"
+            done
+            # store current rpm list in /init-lxc.rpms in case we need to check the contents
+            chroot ${lxc_root} $personality rpm -aq > $lxc_root/init-lxc.rpms
+            ;;
+        debootstrap)
+            # for ubuntu
+            if grep -iq ubuntu /vservers/$lxc/etc/lsb-release 2> /dev/null; then
+                # on ubuntu, at this point we end up with a single feed in /etc/apt/sources.list
+                # we need at least to add the 'universe' feed for python-rpm
+                ( cd /vservers/$lxc/etc/apt ; head -1 sources.list | sed -e s,main,universe, > sources.list.d/universe.list )
+                # also adding a link to updates sounds about right
+                ( cd /vservers/$lxc/etc/apt ; head -1 sources.list | sed -e 's, main,-updates main,' > sources.list.d/updates.list )
+                # tell apt about the changes
+                chroot /vservers/$lxc apt-get update
+            fi
+            for package in $packages ; do
+                # container not started yet
+                #virsh -c lxc:/// lxc-enter-namespace $lxc /usr/bin/$personality /bin/bash -c "apt-get install -y $package" || :
+                chroot ${lxc_root} $personality apt-get install -y $package || :
+            done
+            ### xxx todo install groups with apt..
+            ;;
+        *)
+            echo "unknown pkg_method $pkg_method"
+            ;;
     esac
 
     return 0
@@ -713,13 +713,13 @@ function post_install () {
     [ -n "$NAT_MODE" ] && post_install_natip $lxc $personality || post_install_myplc $lxc $personality
     # start the VM unless specified otherwise
     if [ -n "$START_VM" ] ; then
-	echo Starting guest $lxc
-	virsh -c lxc:/// start $lxc
-	if [ -n "$NAT_MODE" ] ; then
-	    wait_for_ssh $lxc
-	else
-	    wait_for_ssh $lxc $GUEST_IP
-	fi
+        echo Starting guest $lxc
+        virsh -c lxc:/// start $lxc
+        if [ -n "$NAT_MODE" ] ; then
+            wait_for_ssh $lxc
+        else
+            wait_for_ssh $lxc $GUEST_IP
+        fi
     fi
 }
 
@@ -728,7 +728,7 @@ function sshd_disable_password_auth () {
     lxc=$1; shift
     lxc_root=$(lxcroot $lxc)
     sed --in-place=.password -e 's,^#\?PasswordAuthentication.*,PasswordAuthentication no,' \
-	$lxc_root/etc/ssh/sshd_config
+        $lxc_root/etc/ssh/sshd_config
 }
 
 function post_install_natip () {
@@ -811,12 +811,12 @@ function wait_for_ssh () {
     counter=1
     while [ "$current_time" -lt "$stop_time" ] ; do
          echo "$counter-th attempt to reach sshd in container $lxc ..."
-	 [ -z "$guest_ip" ] && guest_ip=$(guest_ipv4 $lxc)
-	 [ -n "$guest_ip" ] && ssh -o "StrictHostKeyChecking no" $guest_ip 'uname -i' && {
-		 success=true; echo "SSHD in container $lxc is UP on IP $guest_ip"; break ; } || :
+         [ -z "$guest_ip" ] && guest_ip=$(guest_ipv4 $lxc)
+         [ -n "$guest_ip" ] && ssh -o "StrictHostKeyChecking no" $guest_ip 'uname -i' && {
+                 success=true; echo "SSHD in container $lxc is UP on IP $guest_ip"; break ; } || :
          counter=$(($counter+1))
          sleep 10
-	 current_time=$(date +%s)
+         current_time=$(date +%s)
     done
 
     # Thierry: this is fatal, let's just exit with a failure here
@@ -867,19 +867,19 @@ function main () {
 
     START_VM=true
     while getopts "n:f:d:p:r:P:i:m:sv" opt ; do
-	case $opt in
-	    n) GUEST_HOSTNAME=$OPTARG;;
-	    f) fcdistro=$OPTARG;;
-	    d) pldistro=$OPTARG;;
-	    p) personality=$OPTARG;;
-	    r) REPO_URL=$OPTARG;;
-	    P) PREINSTALLED=$OPTARG;;
+        case $opt in
+            n) GUEST_HOSTNAME=$OPTARG;;
+            f) fcdistro=$OPTARG;;
+            d) pldistro=$OPTARG;;
+            p) personality=$OPTARG;;
+            r) REPO_URL=$OPTARG;;
+            P) PREINSTALLED=$OPTARG;;
             i) IMAGE=$OPTARG;;
             m) MEMORY=$OPTARG;;
-	    s) START_VM= ;;
-	    v) VERBOSE=true; set -x;;
-	    *) usage ;;
-	esac
+            s) START_VM= ;;
+            v) VERBOSE=true; set -x;;
+            *) usage ;;
+        esac
     done
 
     shift $(($OPTIND - 1))
@@ -891,9 +891,9 @@ function main () {
 
     # rainchecks
     almost_empty $lxc_root || \
-	{ echo "container $lxc already exists in $lxc_root - exiting" ; exit 1 ; }
+        { echo "container $lxc already exists in $lxc_root - exiting" ; exit 1 ; }
     virsh -c lxc:/// domuuid $lxc >& /dev/null && \
-	{ echo "container $lxc already exists in libvirt - exiting" ; exit 1 ; }
+        { echo "container $lxc already exists in libvirt - exiting" ; exit 1 ; }
     mkdir -p $lxc_root
 
     # if IMAGE, copy the provided rootfs to lxc_root
@@ -920,25 +920,25 @@ function main () {
 
     # the set of preinstalled packages - depends on mode
     if [ -z "$PREINSTALLED" ] ; then
-	if [ -n "$NAT_MODE" ] ; then
-	    PREINSTALLED=devel.pkgs
-	else
-	    PREINSTALLED=runtime.pkgs
-	fi
+        if [ -n "$NAT_MODE" ] ; then
+            PREINSTALLED=devel.pkgs
+        else
+            PREINSTALLED=runtime.pkgs
+        fi
     fi
 
     if [ -n "$NAT_MODE" ] ; then
-	# we can now set GUEST_HOSTNAME safely
+        # we can now set GUEST_HOSTNAME safely
         [ -z "$GUEST_HOSTNAME" ] && GUEST_HOSTNAME=$(echo $lxc | sed -e 's,\.,-,g')
     else
-	# as this command can be used in other contexts, not specifying
-	# a repo is considered a warning
-	# use -r none to get rid of this warning
-	if [ "$REPO_URL" == "none" ] ; then
-	    REPO_URL=""
-	elif [ -z "$REPO_URL" ] ; then
-	    echo "WARNING -- setting up a yum repo is recommended"
-	fi
+        # as this command can be used in other contexts, not specifying
+        # a repo is considered a warning
+        # use -r none to get rid of this warning
+        if [ "$REPO_URL" == "none" ] ; then
+            REPO_URL=""
+        elif [ -z "$REPO_URL" ] ; then
+            echo "WARNING -- setting up a yum repo is recommended"
+        fi
     fi
 
     ##########
@@ -958,12 +958,12 @@ function main () {
     # (build mode relies entirely on dhcp on the private subnet)
     if [ -z "$NAT_MODE" ] ; then
 
-	#create_bridge_if_needed $PUBLIC_BRIDGE
-	lbuild-bridge.sh $PUBLIC_BRIDGE
+        #create_bridge_if_needed $PUBLIC_BRIDGE
+        lbuild-bridge.sh $PUBLIC_BRIDGE
 
-	GUEST_IP=$(gethostbyname $GUEST_HOSTNAME)
-	# use same NETMASK as bridge interface br0
-	masklen=$(ip addr show $PUBLIC_BRIDGE | grep -v inet6 | grep inet | awk '{print $2;}' | cut -d/ -f2)
+        GUEST_IP=$(gethostbyname $GUEST_HOSTNAME)
+        # use same NETMASK as bridge interface br0
+        masklen=$(ip addr show $PUBLIC_BRIDGE | grep -v inet6 | grep inet | awk '{print $2;}' | cut -d/ -f2)
         NETMASK=$(masklen_to_netmask $masklen)
         GATEWAY=$(ip route show | grep default | awk '{print $3}' | head -1)
         VIF_HOST="vif$(echo $GUEST_HOSTNAME | cut -d. -f1)"
