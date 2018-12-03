@@ -24,7 +24,7 @@ export PATH=$PATH:/bin:/sbin
 # it works, but this really is poor practice
 # we should have an lxc_root function instead
 function lxcroot () {
-    lxc=$1; shift
+    local lxc=$1; shift
     echo /vservers/$lxc
 }
 
@@ -50,13 +50,13 @@ DEBIAN_PREINSTALLED="openssh-server openssh-client"
 
 ########## networking utilities
 function gethostbyname () {
-    hostname=$1
+    local hostname=$1
     python -c "import socket; print socket.gethostbyname('"$hostname"')" 2> /dev/null
 }
 
 # e.g. 21 -> 255.255.248.0
 function masklen_to_netmask () {
-    masklen=$1; shift
+    local masklen=$1; shift
     python <<EOF
 import sys
 masklen=$masklen
@@ -79,7 +79,7 @@ EOF
 ##############################
 # return dnf or debootstrap
 function package_method () {
-    fcdistro=$1; shift
+    local fcdistro=$1; shift
     case $fcdistro in
         f[0-9]*|centos[0-9]*|sl[0-9]*)
             echo dnf ;;
@@ -92,8 +92,8 @@ function package_method () {
 
 # return arch from debian distro and personality
 function canonical_arch () {
-    personality=$1; shift
-    fcdistro=$1; shift
+    local personality=$1; shift
+    local fcdistro=$1; shift
     case $(package_method $fcdistro) in
         dnf)
             case $personality in
@@ -114,11 +114,12 @@ function canonical_arch () {
 
 # the new test framework creates /timestamp in /vservers/<name> *before* populating it
 function almost_empty () {
-    dir="$1"; shift ;
+    local dir="$1"; shift ;
     # non existing is fine
     [ ! -d $dir ] && return 0;
     # need to have at most one file
-    count=$(cd $dir; ls | wc -l); [ $count -le 1 ];
+    local count=$(cd $dir; ls | wc -l)
+    [ $count -le 1 ]
 }
 
 ##############################
@@ -126,10 +127,10 @@ function fedora_install() {
     set -x
     set -e
 
-    lxc=$1; shift
-    lxc_root=$(lxcroot $lxc)
+    local lxc=$1; shift
+    local lxc_root=$(lxcroot $lxc)
 
-    cache=/var/cache/lxc/fedora/$arch/${fedora_release}
+    local cache=/var/cache/lxc/fedora/$arch/${fedora_release}
     mkdir -p $cache
 
     (
@@ -160,7 +161,7 @@ function fedora_install() {
 function fedora_download() {
     set -x
 
-    cache=$1; shift
+    local cache=$1; shift
 
     # check the mini fedora was not already downloaded
     INSTALL_ROOT=$cache/partial
@@ -189,12 +190,14 @@ function fedora_download() {
     # since fedora18 the rpms are scattered by first name
     # first try the second version of fedora-release first
     RELEASE_URLS=""
+    local subindex
     for subindex in 3 2 1; do
         RELEASE_URLS="$RELEASE_URLS $MIRROR_URL/Packages/f/fedora-release-${fedora_release}-1.noarch.rpm"
     done
 
     RELEASE_TARGET=$INSTALL_ROOT/fedora-release-${fedora_release}.noarch.rpm
-    found=""
+    local found=""
+    local attempt
     for attempt in $RELEASE_URLS; do
         if curl --silent --fail $attempt -o $RELEASE_TARGET; then
             echo "Successfully Retrieved $attempt"
@@ -236,8 +239,9 @@ function fedora_configure() {
     set -x
     set -e
 
-    lxc=$1; shift
-    lxc_root=$(lxcroot $lxc)
+    local lxc=$1; shift
+    local fcdistro=$1; shift
+    local lxc_root=$(lxcroot $lxc)
 
     # disable selinux in fedora
     mkdir -p $lxc_root/selinux
@@ -251,7 +255,7 @@ EOF
 $GUEST_HOSTNAME
 EOF
 
-    dev_path="${lxc_root}/dev"
+    local dev_path="${lxc_root}/dev"
     rm -rf $dev_path
     mkdir -p $dev_path
     mknod -m 666 ${dev_path}/null c 1 3
@@ -273,8 +277,19 @@ EOF
 
     fedora_configure_systemd $lxc
 
-    guest_ifcfg=${lxc_root}/etc/sysconfig/network-scripts/ifcfg-$VIF_GUEST
-    ( [ -n "$NAT_MODE" ] && write_guest_ifcfg_natip || write_guest_ifcfg_publicip ) > $guest_ifcfg
+    local guest_ifcfg=${lxc_root}/etc/sysconfig/network-scripts/ifcfg-$VIF_GUEST
+    mkdir -p $(dirname ${guest_ifcfg})
+    # starting with f29, we go for NetworkManager as older network-scripts
+    # is about to be deprecated
+    local nm_controlled=false
+    [[ $fcdistro == f29 ]] && nm_controlled=true
+    [[ $fcdistro == f3[0-9] ]] && nm_controlled=true
+
+    if [ -n "$NAT_MODE" ]; then
+        write_guest_ifcfg_natip $nm_controlled
+    else
+        write_guest_ifcfg_publicip $nm_controlled
+    fi > $guest_ifcfg
 
     [ -z "$IMAGE" ] && fedora_configure_yum $lxc $fcdistro $pldistro
 
@@ -285,8 +300,8 @@ EOF
 function fedora_configure_systemd() {
     set -e
     set -x
-    lxc=$1; shift
-    lxc_root=$(lxcroot $lxc)
+    local lxc=$1; shift
+    local lxc_root=$(lxcroot $lxc)
 
     # so ignore if we can't find /etc/systemd at all
     [ -d ${lxc_root}/etc/systemd ] || return 0
@@ -309,11 +324,11 @@ function fedora_configure_yum () {
     set -e
     trap failure ERR INT
 
-    lxc=$1; shift
-    fcdistro=$1; shift
-    pldistro=$1; shift
+    local lxc=$1; shift
+    local fcdistro=$1; shift
+    local pldistro=$1; shift
 
-    lxc_root=$(lxcroot $lxc)
+    local lxc_root=$(lxcroot $lxc)
     # rpm --rebuilddb
     chroot ${lxc_root} $personality rpm --rebuilddb
 
@@ -370,7 +385,7 @@ EOF
 # http://mirrors.ubuntu.com/mirrors.txt
 # need to specify the right mirror for debian variants like ubuntu and the like
 function debian_mirror () {
-    fcdistro=$1; shift
+    local fcdistro=$1; shift
     case $fcdistro in
         wheezy|jessie)
             echo http://ftp2.fr.debian.org/debian/ ;;
@@ -383,11 +398,11 @@ function debian_mirror () {
 function debian_install () {
     set -e
     set -x
-    lxc=$1; shift
-    lxc_root=$(lxcroot $lxc)
+    local lxc=$1; shift
+    local lxc_root=$(lxcroot $lxc)
     mkdir -p $lxc_root
-    arch=$(canonical_arch $personality $fcdistro)
-    mirror=$(debian_mirror $fcdistro)
+    local arch=$(canonical_arch $personality $fcdistro)
+    local mirror=$(debian_mirror $fcdistro)
     debootstrap --no-check-gpg --arch $arch $fcdistro $lxc_root $mirror
     # just like with fedora we ensure a few packages get installed as well
     # not started yet
@@ -403,7 +418,7 @@ EOF
 }
 
 function debian_configure () {
-    guest_interfaces=${lxc_root}/etc/network/interfaces
+    local guest_interfaces=${lxc_root}/etc/network/interfaces
     ( [ -n "$NAT_MODE" ] && write_guest_interfaces_natip || write_guest_interfaces_publicip ) > $guest_interfaces
 }
 
@@ -430,12 +445,12 @@ function setup_lxc() {
     set -e
     #trap failure ERR INT
 
-    lxc=$1; shift
-    fcdistro=$1; shift
-    pldistro=$1; shift
-    personality=$1; shift
+    local lxc=$1; shift
+    local fcdistro=$1; shift
+    local pldistro=$1; shift
+    local personality=$1; shift
 
-    lxc_root=$(lxcroot $lxc)
+    local lxc_root=$(lxcroot $lxc)
 
     # create lxc container
 
@@ -450,7 +465,7 @@ function setup_lxc() {
                 chroot $(lxcroot $lxc) $personality rm -rf /var/lib/rpm/__db.00{0,1,2,3,4,5,6,7,8,9}
                 chroot $(lxcroot $lxc) $personality rpm --rebuilddb
             fi
-            fedora_configure $lxc || { echo "failed to configure fedora for a container"; exit 1 ; }
+            fedora_configure $lxc $fcdistro || { echo "failed to configure fedora for a container"; exit 1 ; }
             ;;
         debootstrap)
             if [ -z "$IMAGE" ]; then
@@ -481,7 +496,7 @@ function setup_lxc() {
     chmod 600 $lxc_root/root/.ssh/authorized_keys
 
     # don't keep the input xml, this can be retrieved at all times with virsh dumpxml
-    config_xml=/tmp/$lxc.xml
+    local config_xml=/tmp/$lxc.xml
     ( [ -n "$NAT_MODE" ] && write_lxc_xml_natip $lxc || write_lxc_xml_publicip $lxc ) > $config_xml
 
     # define lxc container for libvirt
@@ -500,8 +515,8 @@ function setup_lxc() {
 #
 
 function write_lxc_xml_publicip () {
-    lxc=$1; shift
-    lxc_root=$(lxcroot $lxc)
+    local lxc=$1; shift
+    local lxc_root=$(lxcroot $lxc)
     cat <<EOF
 <domain type='lxc'>
   <name>$lxc</name>
@@ -536,8 +551,8 @@ EOF
 
 # grant build guests the ability to do mknods
 function write_lxc_xml_natip () {
-    lxc=$1; shift
-    lxc_root=$(lxcroot $lxc)
+    local lxc=$1; shift
+    local lxc_root=$(lxcroot $lxc)
     cat <<EOF
 <domain type='lxc'>
   <name>$lxc</name>
@@ -574,18 +589,20 @@ EOF
 
 # this one is dhcp-based
 function write_guest_ifcfg_natip () {
+    local nm_controlled=$1; shift
     cat <<EOF
 DEVICE=$VIF_GUEST
 BOOTPROTO=dhcp
 ONBOOT=yes
-NM_CONTROLLED=no
 TYPE=Ethernet
 MTU=1500
 EOF
+    [ "$nm_controlled" == true ] || echo NM_CONTROLLED=no
 }
 
 # use fixed GUEST_IP as specified by GUEST_HOSTNAME
 function write_guest_ifcfg_publicip () {
+    local nm_controlled=$1; shift
     cat <<EOF
 DEVICE=$VIF_GUEST
 BOOTPROTO=static
@@ -594,10 +611,10 @@ HOSTNAME=$GUEST_HOSTNAME
 IPADDR=$GUEST_IP
 NETMASK=$NETMASK
 GATEWAY=$GATEWAY
-NM_CONTROLLED=no
 TYPE=Ethernet
 MTU=1500
 EOF
+    [ "$nm_controlled" == true ] || echo NM_CONTROLLED=no
 }
 
 function devel_or_test_tools () {
@@ -606,45 +623,45 @@ function devel_or_test_tools () {
     set -e
     trap failure ERR INT
 
-    lxc=$1; shift
-    fcdistro=$1; shift
-    pldistro=$1; shift
-    personality=$1; shift
+    local lxc=$1; shift
+    local fcdistro=$1; shift
+    local pldistro=$1; shift
+    local personality=$1; shift
 
-    lxc_root=$(lxcroot $lxc)
+    local lxc_root=$(lxcroot $lxc)
 
-    pkg_method=$(package_method $fcdistro)
+    local pkg_method=$(package_method $fcdistro)
 
-    pkgsfile=$(pl_locateDistroFile $DIRNAME $pldistro $PREINSTALLED)
+    local pkgsfile=$(pl_locateDistroFile $DIRNAME $pldistro $PREINSTALLED)
 
     ### install individual packages, then groups
     # get target arch - use uname -i here (we want either x86_64 or i386)
 
-    lxc_arch=$(chroot ${lxc_root} $personality uname -i)
+    local lxc_arch=$(chroot ${lxc_root} $personality uname -i)
     # on debian systems we get arch through the 'arch' command
     [ "$lxc_arch" = "unknown" ] && lxc_arch=$(chroot ${lxc_root} $personality arch)
 
-    packages=$(pl_getPackages -a $lxc_arch $fcdistro $pldistro $pkgsfile)
-    groups=$(pl_getGroups -a $lxc_arch $fcdistro $pldistro $pkgsfile)
+    local packages=$(pl_getPackages -a $lxc_arch $fcdistro $pldistro $pkgsfile)
+    local groups=$(pl_getGroups -a $lxc_arch $fcdistro $pldistro $pkgsfile)
 
     case "$pkg_method" in
         dnf)
             # --allowerasing required starting with fedora24
             #
-            has_dnf=""
+            local has_dnf=""
             chroot ${lxc_root} $personality dnf --version && has_dnf=true
             if [ -n "$has_dnf" ]; then
                 echo "container has dnf - invoking with --allowerasing"
-                pkg_installer="dnf -y install --allowerasing"
-                grp_installer="dnf -y groupinstall --allowerasing"
+                local pkg_installer="dnf -y install --allowerasing"
+                local grp_installer="dnf -y groupinstall --allowerasing"
             else
                 echo "container has only dnf"
-                pkg_installer="dnf -y install"
-                grp_installer="dnf -y groupinstall"
+                local pkg_installer="dnf -y install"
+                local grp_installer="dnf -y groupinstall"
             fi
             [ -n "$packages" ] && chroot ${lxc_root} $personality $pkg_installer $packages
             for group_plus in $groups; do
-                group=$(echo $group_plus | sed -e "s,+++, ,g")
+                local group=$(echo $group_plus | sed -e "s,+++, ,g")
                 chroot ${lxc_root} $personality $grp_installer "$group"
             done
             # store current rpm list in /init-lxc.rpms in case we need to check the contents
@@ -677,9 +694,9 @@ function devel_or_test_tools () {
 }
 
 function post_install () {
-    lxc=$1; shift
-    personality=$1; shift
-    lxc_root=$(lxcroot $lxc)
+    local lxc=$1; shift
+    local personality=$1; shift
+    local lxc_root=$(lxcroot $lxc)
     # setup localtime from the host
     cp /etc/localtime $lxc_root/etc/localtime
     sshd_disable_password_auth $lxc
@@ -699,8 +716,8 @@ function post_install () {
 
 # just in case, let's stay on the safe side
 function sshd_disable_password_auth () {
-    lxc=$1; shift
-    lxc_root=$(lxcroot $lxc)
+    local lxc=$1; shift
+    local lxc_root=$(lxcroot $lxc)
     sed --in-place=.password -e 's,^#\?PasswordAuthentication.*,PasswordAuthentication no,' \
         $lxc_root/etc/ssh/sshd_config
 }
@@ -711,9 +728,9 @@ function post_install_natip () {
     set -e
     trap failure ERR INT
 
-    lxc=$1; shift
-    personality=$1; shift
-    lxc_root=$(lxcroot $lxc)
+    local lxc=$1; shift
+    local personality=$1; shift
+    local lxc_root=$(lxcroot $lxc)
 
 ### From myplc-devel-native.spec
 # be careful to backslash $ in this, otherwise it's the root context that's going to do the evaluation
@@ -733,9 +750,9 @@ function post_install_myplc  () {
     set -e
     trap failure ERR INT
 
-    lxc=$1; shift
-    personality=$1; shift
-    lxc_root=$(lxcroot $lxc)
+    local lxc=$1; shift
+    local personality=$1; shift
+    local lxc_root=$(lxcroot $lxc)
 
 # be careful to backslash $ in this, otherwise it's the root context that's going to do the evaluation
     cat << EOF | chroot ${lxc_root} $personality bash -x
@@ -760,9 +777,9 @@ EOF
 # however this was too fragile, would not work for fedora14 containers
 # WARNING: this code is duplicated in lbuild-nightly.sh
 function guest_ipv4() {
-    lxc=$1; shift
+    local lxc=$1; shift
 
-    mac=$(virsh -c lxc:/// domiflist $lxc | egrep 'network|bridge' | awk '{print $5;}')
+    local mac=$(virsh -c lxc:/// domiflist $lxc | egrep 'network|bridge' | awk '{print $5;}')
     # sanity check
     [ -z "$mac" ] && return 0
     arp -en | grep "$mac" | awk '{print $1;}'
@@ -772,17 +789,17 @@ function wait_for_ssh () {
     set -x
     set -e
 
-    lxc=$1; shift
+    local lxc=$1; shift
 
     # if run in public_ip mode, we know the IP of the guest and it is specified here
     [ -n "$1" ] && { guest_ip=$1; shift; }
 
     #wait max 2 min for sshd to start
-    success=""
-    current_time=$(date +%s)
-    stop_time=$(($current_time + 120))
+    local success=""
+    local current_time=$(date +%s)
+    local stop_time=$(($current_time + 120))
 
-    counter=1
+    local counter=1
     while [ "$current_time" -lt "$stop_time" ] ; do
          echo "$counter-th attempt to reach sshd in container $lxc ..."
          [ -z "$guest_ip" ] && guest_ip=$(guest_ipv4 $lxc)
@@ -860,8 +877,8 @@ function main () {
 
     # parse fixed arguments
     [[ -z "$@" ]] && usage
-    lxc=$1 ; shift
-    lxc_root=$(lxcroot $lxc)
+    local lxc=$1 ; shift
+    local lxc_root=$(lxcroot $lxc)
 
     # rainchecks
     almost_empty $lxc_root || \
