@@ -96,9 +96,17 @@ function canonical_arch () {
     fcdistro=$1; shift
     case $(package_method $fcdistro) in
         dnf)
-            case $personality in *32) echo i386 ;; *64) echo x86_64 ;; *) echo Unknown-arch-1 ;; esac ;;
+            case $personality in
+                *32) echo i386 ;;
+                *64) echo x86_64 ;;
+                *) echo Unknown-arch-1 ;;
+            esac ;;
         debootstrap)
-            case $personality in *32) echo i386 ;; *64) echo amd64 ;; *) echo Unknown-arch-2 ;; esac ;;
+            case $personality in
+                *32) echo i386 ;;
+                *64) echo amd64 ;;
+                *) echo Unknown-arch-2 ;;
+            esac ;;
         *)
             echo Unknown-arch-3 ;;
     esac
@@ -235,27 +243,13 @@ function fedora_configure() {
     mkdir -p $lxc_root/selinux
     echo 0 > $lxc_root/selinux/enforce
 
-    # set the hostname
-    case "$fcdistro" in
-        f18|f2?)
-            cat <<EOF > ${lxc_root}/etc/sysconfig/network
+    # enable networking and set hostname
+    cat <<EOF > ${lxc_root}/etc/sysconfig/network
 NETWORKING=yes
 EOF
-            cat <<EOF > ${lxc_root}/etc/hostname
+    cat <<EOF > ${lxc_root}/etc/hostname
 $GUEST_HOSTNAME
 EOF
-            echo ;;
-        *)
-            cat <<EOF > ${lxc_root}/etc/sysconfig/network
-NETWORKING=yes
-HOSTNAME=$GUEST_HOSTNAME
-EOF
-            # set minimal hosts
-            cat <<EOF > $lxc_root/etc/hosts
-127.0.0.1 localhost $GUEST_HOSTNAME
-EOF
-            echo ;;
-    esac
 
     dev_path="${lxc_root}/dev"
     rm -rf $dev_path
@@ -277,11 +271,7 @@ EOF
     mknod -m 600 ${dev_path}/initctl p
     mknod -m 666 ${dev_path}/ptmx c 5 2
 
-    if [ "$(echo $fcdistro | cut -d"f" -f2)" -le "14" ]; then
-        fedora_configure_init $lxc
-    else
-        fedora_configure_systemd $lxc
-    fi
+    fedora_configure_systemd $lxc
 
     guest_ifcfg=${lxc_root}/etc/sysconfig/network-scripts/ifcfg-$VIF_GUEST
     ( [ -n "$NAT_MODE" ] && write_guest_ifcfg_natip || write_guest_ifcfg_publicip ) > $guest_ifcfg
@@ -289,21 +279,6 @@ EOF
     [ -z "$IMAGE" ] && fedora_configure_yum $lxc $fcdistro $pldistro
 
     return 0
-}
-
-function fedora_configure_init() {
-    set -e
-    set -x
-    lxc=$1; shift
-    lxc_root=$(lxcroot $lxc)
-
-    sed -i 's|.sbin.start_udev||' ${lxc_root}/etc/rc.sysinit
-    sed -i 's|.sbin.start_udev||' ${lxc_root}/etc/rc.d/rc.sysinit
-    # don't mount devpts, for pete's sake
-    sed -i 's/^.*dev.pts.*$/#\0/' ${lxc_root}/etc/rc.sysinit
-    sed -i 's/^.*dev.pts.*$/#\0/' ${lxc_root}/etc/rc.d/rc.sysinit
-    chroot ${lxc_root} $personality chkconfig udev-post off
-    chroot ${lxc_root} $personality chkconfig network on
 }
 
 # this code of course is for guests that do run on systemd
@@ -400,7 +375,6 @@ function debian_mirror () {
         wheezy|jessie)
             echo http://ftp2.fr.debian.org/debian/ ;;
         precise|trusty|utopic|vivid|wily|xenial)
-#           echo http://mir1.ovh.net/ubuntu/ubuntu/ ;;
             echo http://www-ftp.lip6.fr/pub/linux/distributions/Ubuntu/archive/ ;;
         *) echo unknown distro $fcdistro; exit 1;;
     esac
