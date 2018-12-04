@@ -65,7 +65,8 @@ package: yum createrepo
 package: sharutils
 # bootcd
 package: nasm
-package<=f27: mkisofs
+package<=f25: mkisofs
+package>=f27: genisoimage
 package: dosfstools
 package: mtools
 package: syslinux
