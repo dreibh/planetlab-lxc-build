@@ -10,3 +10,4 @@ package: file
 package: yum-utils
 package: psmisc
 package>=f29: NetworkManager
+package>=f29: hostname
