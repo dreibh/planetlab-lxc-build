@@ -268,6 +268,9 @@ bind_public-SPEC := bind_public.spec
 IN_SLICEIMAGE += bind_public
 ALL += bind_public
 
+# in fedora 29, this triggers nasty-looking compile messages
+# not trying too hard, we're mostly after the server-side of f29
+ifneq "$(DISTRONAME)" "$(filter $(DISTRONAME),f23 f24 f25 f27 f29)"
 #
 # sliver-openvswitch
 #
@@ -275,6 +278,7 @@ sliver-openvswitch-MODULES := sliver-openvswitch
 sliver-openvswitch-SPEC := sliver-openvswitch.spec
 IN_SLICEIMAGE += sliver-openvswitch
 ALL += sliver-openvswitch
+endif
 
 #
 # plcapi
