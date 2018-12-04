@@ -179,7 +179,7 @@ function fedora_download() {
 
     # copy yum config and repo files
     cp /etc/yum.conf $INSTALL_ROOT/etc/
-    cp /etc/yum.repos.d/fedora* $INSTALL_ROOT/etc/yum.repos.d/
+    cp /etc/yum.repos.d/fedora*.repo $INSTALL_ROOT/etc/yum.repos.d/
 
     # append fedora repo files with desired ${fedora_release} and $basearch
     for f in $INSTALL_ROOT/etc/yum.repos.d/* ; do
@@ -192,7 +192,7 @@ function fedora_download() {
     RELEASE_URLS=""
     local subindex
     for subindex in 3 2 1; do
-        RELEASE_URLS="$RELEASE_URLS $MIRROR_URL/Packages/f/fedora-release-${fedora_release}-1.noarch.rpm"
+        RELEASE_URLS="$RELEASE_URLS $MIRROR_URL/Packages/f/fedora-release-${fedora_release}-${subindex}.noarch.rpm"
     done
 
     RELEASE_TARGET=$INSTALL_ROOT/fedora-release-${fedora_release}.noarch.rpm
