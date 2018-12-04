@@ -43,7 +43,7 @@ PUBLIC_BRIDGE=br0
 VIF_GUEST=eth0
 
 ##########
-FEDORA_MIRROR_BASE="http://mirror.onelab.eu/fedora/"
+FEDORA_MIRROR="http://mirror.onelab.eu/"
 FEDORA_MIRROR_KEYS="http://mirror.onelab.eu/keys/"
 FEDORA_PREINSTALLED="dnf dnf-yum passwd rsyslog vim-minimal dhclient chkconfig rootfiles policycoreutils openssh-server openssh-clients"
 DEBIAN_PREINSTALLED="openssh-server openssh-client"
@@ -186,7 +186,7 @@ function fedora_download() {
       sed -i "s/\$basearch/$arch/g; s/\$releasever/${fedora_release}/g;" $f
     done
 
-    MIRROR_URL=$FEDORA_MIRROR_BASE/releases/${fedora_release}/Everything/$arch/os
+    MIRROR_URL=$FEDORA_MIRROR/fedora/releases/${fedora_release}/Everything/$arch/os
     # since fedora18 the rpms are scattered by first name
     # first try the second version of fedora-release first
     RELEASE_URLS=""
@@ -338,8 +338,7 @@ function fedora_configure_yum () {
     # use mirroring/ stuff instead of a hard-wired config
     local repofile=$lxc_root/etc/yum.repos.d/building.repo
     yumconf_mirrors $repofile ${DIRNAME} $fcdistro \
-        "no-exclusion-in-this-context" \
-        $FEDORA_MIRROR_BASE
+        "" $FEDORA_MIRROR
     # the keys stuff requires adjustment though
     sed -i $repofile -e s,'gpgkey=.*',"gpgkey=${FEDORA_MIRROR_KEYS}/RPM-GPG-KEY-fedora-${fedora_release}-primary,"
 
