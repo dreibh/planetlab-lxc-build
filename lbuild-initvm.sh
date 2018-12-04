@@ -335,23 +335,13 @@ function fedora_configure_yum () {
     echo "Initializing yum.repos.d in $lxc"
     rm -f $lxc_root/etc/yum.repos.d/*
 
-    cat > $lxc_root/etc/yum.repos.d/building.repo <<EOF
-[fedora]
-name=Fedora \$releasever - \$basearch
-baseurl=$FEDORA_MIRROR_BASE/releases/\$releasever/Everything/\$basearch/os/
-enabled=1
-metadata_expire=7d
-gpgcheck=1
-gpgkey=$FEDORA_MIRROR_KEYS/RPM-GPG-KEY-fedora-${fedora_release}-primary
-
-[updates]
-name=Fedora \$releasever - \$basearch - Updates
-baseurl=$FEDORA_MIRROR_BASE/updates/\$releasever/\$basearch/
-enabled=1
-metadata_expire=7d
-gpgcheck=1
-gpgkey=$FEDORA_MIRROR_KEYS/RPM-GPG-KEY-fedora-${fedora_release}-primary
-EOF
+    # use mirroring/ stuff instead of a hard-wired config
+    local repofile=$lxc_root/etc/yum.repos.d/building.repo
+    yumconf_mirrors $repofile ${DIRNAME} $fcdistro \
+        "no-exclusion-in-this-context" \
+        $FEDORA_MIRROR_BASE
+    # the keys stuff requires adjustment though
+    sed -i $repofile -e s,'gpgkey=.*',"gpgkey=${FEDORA_MIRROR_KEYS}/RPM-GPG-KEY-fedora-${fedora_release}-primary,"
 
     # import fedora key so that gpgckeck does not whine or require stdin
     # required since fedora24
