@@ -16,18 +16,18 @@ export PATH=.:$PATH
 # returns 'Fedora' or 'CentOS' for now
 function pl_getDistro() {
     if [ -f "/etc/redhat-release" ] ; then
-	distro=$(awk ' { print $1 } ' /etc/redhat-release)
-	case $distro in Scientific*) distro="SL" ; esac
+        distro=$(awk ' { print $1 } ' /etc/redhat-release)
+        case $distro in Scientific*) distro="SL" ; esac
     elif [ -f /etc/lsb-release ] ; then
-	. /etc/lsb-release
-	distro=$DISTRIB_CODENAME 
+        . /etc/lsb-release
+        distro=$DISTRIB_CODENAME 
     elif [ -f /etc/debian_version ] ; then
-	case $(cat /etc/debian_version) in
-	    7.*) distro=wheezy  ;;
-	    # might be that I'm getting 'jessie'sid' just because it's still testing..
-	    8.*|jessie*) distro=jessie  ;;
-	    *)	 distro=unknown.debian.in.build.common ;;
-	esac
+        case $(cat /etc/debian_version) in
+            7.*) distro=wheezy  ;;
+            # might be that I'm getting 'jessie'sid' just because it's still testing..
+            8.*|jessie*) distro=jessie  ;;
+            *)   distro=unknown.debian.in.build.common ;;
+        esac
     fi
     [ -z "$distro" ] && { echo "build.common.pl_getDistro-unknown"; exit 1; }
     echo "$distro"
@@ -37,10 +37,10 @@ function pl_getDistro() {
 # returns something like 8, 10, or 5.3
 function pl_getRelease() {
     if [ -f "/etc/redhat-release" ] ; then
-	release=$(awk ' { if ($1=="Fedora" && $2=="Core") print $4 ; if (($1=="Fedora" && $2!="Core")||$1=="CentOS") print $3 ; if ($1=="Scientific") print $4 } ' /etc/redhat-release)
+        release=$(awk ' { if ($1=="Fedora" && $2=="Core") print $4 ; if (($1=="Fedora" && $2!="Core")||$1=="CentOS") print $3 ; if ($1=="Scientific") print $4 } ' /etc/redhat-release)
     else
-	echo "build.common.pl_getRelease-unknown"
-	exit 1
+        echo "build.common.pl_getRelease-unknown"
+        exit 1
     fi
     # keep only the major number
     echo "$release" | cut -d. -f1
@@ -52,27 +52,27 @@ function pl_getReleaseName () {
     distro=$1; shift
     release=$1; shift
     case $distro in
-	[Ff]edora*)
-	    releasename=f$release
-	    ;;
-	[Cc]entOS*)
-	    old_IFS="$IFS"
-	    IFS="."
-	    set -- $release
-	    IFS="$old_IFS"
-	    releasename=centos$1
-	    ;;
-	[Ss]L*)
-	    releasename=sl$release
-	    ;;
-	wheezy|jessie|precise|trusty|utopic|vivid|wily|xenial)
-	    releasename=$distro
-	    ;;
-	*)
-	    releasename="unknown-name-for-${pl_DISTRO}-please-edit-build.common"
-	    echo 1>&2 "build.common: WARNING - releasename not set for distro=$distro" 
-	    return 1
-	    ;;
+        [Ff]edora*)
+            releasename=f$release
+            ;;
+        [Cc]entOS*)
+            old_IFS="$IFS"
+            IFS="."
+            set -- $release
+            IFS="$old_IFS"
+            releasename=centos$1
+            ;;
+        [Ss]L*)
+            releasename=sl$release
+            ;;
+        wheezy|jessie|precise|trusty|utopic|vivid|wily|xenial)
+            releasename=$distro
+            ;;
+        *)
+            releasename="unknown-name-for-${pl_DISTRO}-please-edit-build.common"
+            echo 1>&2 "build.common: WARNING - releasename not set for distro=$distro" 
+            return 1
+            ;;
     esac
     echo "$releasename"
     return 0
@@ -93,7 +93,7 @@ function pl_yumexclude () {
 
     # parse it
     pkgs.py -a $pl_DISTRO_ARCH -f $fcdistro -d $pldistro $keyword $yumexclude_file || \
-	{ echo pl_yumexclude failed with fcdistro=$fcdistro and pldistro=$pldistro; return 1 ; }
+        { echo pl_yumexclude failed with fcdistro=$fcdistro and pldistro=$pldistro; return 1 ; }
 }
 
 # <> fcdistro pldistro builddir
@@ -125,29 +125,29 @@ function pl_process_fedora_options () {
     # Get options
     shiftcount=0
     while getopts "l:r:a:h" opt ; do
-	case $opt in
-	    l)
-		pl_DISTRO_URL=$OPTARG
-		let shiftcount=$shiftcount+2
-		;;
-	    r)
-		pl_DISTRO_RELEASE=$OPTARG
-		let shiftcount=$shiftcount+2
-		;;
-	    a)
-		pl_DISTRO_ARCH=$OPTARG
-		let shiftcount=$shiftcount+2
-		;;
-	    h|*)
-		echo "Usage: $0 [OPTION]..."
-		echo "	-l url		distro mirror location (default: $pl_DISTRO_URL)"
-		echo "	-r release	distro release number (default: $pl_DISTRO_RELEASE)"
-		echo "	-a arch		distro architecture (default: $pl_DISTRO_ARCH)"
-		echo "where distro can be either fedora, centos, or redhat"
-		echo "	-h		This message"
-		exit 1
-		;;
-	esac
+        case $opt in
+            l)
+                pl_DISTRO_URL=$OPTARG
+                let shiftcount=$shiftcount+2
+                ;;
+            r)
+                pl_DISTRO_RELEASE=$OPTARG
+                let shiftcount=$shiftcount+2
+                ;;
+            a)
+                pl_DISTRO_ARCH=$OPTARG
+                let shiftcount=$shiftcount+2
+                ;;
+            h|*)
+                echo "Usage: $0 [OPTION]..."
+                echo "  -l url          distro mirror location (default: $pl_DISTRO_URL)"
+                echo "  -r release      distro release number (default: $pl_DISTRO_RELEASE)"
+                echo "  -a arch         distro architecture (default: $pl_DISTRO_ARCH)"
+                echo "where distro can be either fedora, centos, or redhat"
+                echo "  -h              This message"
+                exit 1
+                ;;
+        esac
     done
     return $shiftcount
 }
@@ -194,19 +194,19 @@ function pl_root_makedevs() {
     # For mkinitrd (in case a kernel is being installed)
     # As well as for loop back mounting within a vm. 
     for i in $(seq 0 255) ; do
-	mknod -m 640 $vroot/dev/loop$i b 7 $i
+        mknod -m 640 $vroot/dev/loop$i b 7 $i
     done
 }
 
 function pl_root_mkfedora_usage() {
     echo "Usage: pl_root_mkfedora [OPTION]... basedir pldistro pkgsfile(s)"
-#    echo "	-l url		Fedora mirror location."
+#    echo "     -l url          Fedora mirror location."
 #    echo "                      Defaults are searched in <pldistro>.mirrors"
-    echo "	-v		Be verbose"
-    echo "	-h		This message"
+    echo "      -v              Be verbose"
+    echo "      -h              This message"
 #    echo " target selection (defaults based on current build VM context)"
-#    echo "	-r release	Fedora release number (default: $releasever)"
-#    echo "	-a arch		Fedora architecture (default: $basearch)"
+#    echo "     -r release      Fedora release number (default: $releasever)"
+#    echo "     -a arch         Fedora architecture (default: $basearch)"
     exit 1
 }
 
@@ -215,8 +215,8 @@ function pl_root_mkfedora () {
     echo "* Entering pl_root_mkfedora" "$@"
 
     if [ $UID -ne 0 ] ; then
-	echo "Error: You must run this script as root."
-	exit 1
+        echo "Error: You must run this script as root."
+        exit 1
     fi
 
 # Verbosity
@@ -228,10 +228,10 @@ function pl_root_mkfedora () {
 
 # Get options
     while getopts "vh" opt ; do
-	case $opt in
-	    v) verbose=1; set -x ;;
-	    h|*) pl_root_mkfedora_usage ;;
-	esac
+        case $opt in
+            v) verbose=1; set -x ;;
+            h|*) pl_root_mkfedora_usage ;;
+        esac
     done
 
     shift $(($OPTIND - 1))
@@ -259,9 +259,9 @@ function pl_root_mkfedora () {
     pkgs_yumexclude=$(pkgs.py -a $pl_DISTRO_ARCH -f $fcdistro -d $pldistro yumexclude $pkgsfile | sed -e s,@NODEYUMEXCLUDE@,"$SUBST_NODEYUMEXCLUDE",)
     # get mirrors if not specified with -l
     if [ -z "$mirrors" ] ; then
-	mirrorsfile=$(pl_locateDistroFile ../build/ $pldistro "$pldistro.mirrors")
-	# do not sort mirrors, keep order from input
-	mirrors=$(pkgs.py -u -a $pl_DISTRO_ARCH -f $fcdistro -d $pldistro mirror $mirrorsfile)
+        mirrorsfile=$(pl_locateDistroFile ../build/ $pldistro "$pldistro.mirrors")
+        # do not sort mirrors, keep order from input
+        mirrors=$(pkgs.py -u -a $pl_DISTRO_ARCH -f $fcdistro -d $pldistro mirror $mirrorsfile)
     fi
 
     yumexclude_line=""
@@ -269,13 +269,13 @@ function pl_root_mkfedora () {
 
     echo "$0: candidate mirrors"
     for mirror in $mirrors ; do
-	echo "* candidate mirror $mirror"
+        echo "* candidate mirror $mirror"
     done
 
     # the repo part of the final yum.conf
     yum_conf_repos=$vroot/xxxmkfedora-repos.confxxx
     if ! yumconf_mirrors $yum_conf_repos ../build/ $fcdistro "$yumexclude_line" $mirrors ; then
-	echo xxx -- error ; return 1
+        echo xxx -- error ; return 1
     fi
     
     # Do not tolerate errors
@@ -299,9 +299,9 @@ function pl_root_mkfedora () {
     pl_root_rpm_macros > $vroot/tmp/.rpmmacros
 
     function mkfedora_cleanup () {
-	umount -l $vroot/proc
-	umount -l $vroot/dev/shm
-	umount -l $vroot/dev/pts
+        umount -l $vroot/proc
+        umount -l $vroot/dev/shm
+        umount -l $vroot/dev/pts
     }
 
     # Clean up before exiting if anything goes wrong
@@ -322,7 +322,7 @@ function pl_root_mkfedora () {
     mkdir -p $vroot/etc
     cat >$vroot/etc/fstab <<EOF
 # This fake fstab exists only to please df and linuxconf.
-/dev/hdv1	/	ext2	defaults	1 1
+/dev/hdv1       /       ext2    defaults        1 1
 EOF
     cp $vroot/etc/fstab $vroot/etc/mtab
 
@@ -364,13 +364,13 @@ EOF
     # bootstrap problem by including any just built packages in the yum
     # configuration. This cooperates with the PlanetLab build system.
     if [ -n "$RPM_BUILD_DIR" ] ; then
-	RPM_RPMS_DIR=$(cd $(dirname $RPM_BUILD_DIR)/RPMS && pwd -P)
+        RPM_RPMS_DIR=$(cd $(dirname $RPM_BUILD_DIR)/RPMS && pwd -P)
         # If run under sudo, allow user to delete the headers/ and
         # repodata/ directories.
-	if [ -n "$SUDO_USER" ] ; then
-	    chown -R $SUDO_USER $RPM_RPMS_DIR
-	fi
-	cat >> $yum_conf <<EOF
+        if [ -n "$SUDO_USER" ] ; then
+            chown -R $SUDO_USER $RPM_RPMS_DIR
+        fi
+        cat >> $yum_conf <<EOF
 
 [building]
 name=Building - $basearch - $RPM_RPMS_DIR/
@@ -397,37 +397,37 @@ fi
 
     # Go, baby, go
     if [ -n "$pkgs_packages" ] ; then
-	echo "* Installing optional packages" $pkgs_packages
+        echo "* Installing optional packages" $pkgs_packages
         # ignore yum's return code that is basically undefined
         echo "* Install options" $vroot $yum_options 
-	yum $yum_options install $pkgs_packages || :
-	if ! rpm --root $vroot -q $pkgs_packages >/dev/null ; then
-	    echo "* Warning: Missing packages"
-	    rpm --root $vroot -q $pkgs_packages | grep "not installed"
-	fi
+        yum $yum_options install $pkgs_packages || :
+        if ! rpm --root $vroot -q $pkgs_packages >/dev/null ; then
+            echo "* Warning: Missing packages"
+            rpm --root $vroot -q $pkgs_packages | grep "not installed"
+        fi
     fi
 
     if [ -n "$pkgs_groups" ] ; then
        ## call yum sequentially to get finer-grained info on dependencies
-	for group_plus in $pkgs_groups ; do
-	    group=$(echo $group_plus | sed -e "s,+++, ,g")
-	    echo "* Installing optional group $group" 
+        for group_plus in $pkgs_groups ; do
+            group=$(echo $group_plus | sed -e "s,+++, ,g")
+            echo "* Installing optional group $group" 
             # ignore yum's return code that is basically undefined
-	    yum $yum_options groupinstall "$group" || :
-	done
+            yum $yum_options groupinstall "$group" || :
+        done
     fi
 
     # formerly in bootcd/prep.sh : to optimize footprint
     if [ -n "$pkgs_junk" ] ; then
-	echo "* Removing unnecessary junk"
-	pushd $vroot
+        echo "* Removing unnecessary junk"
+        pushd $vroot
         # Save precious files
-	[ -n "$pkgs_precious" ] && tar --ignore-failed-read -cpf precious.tar $pkgs_precious
+        [ -n "$pkgs_precious" ] && tar --ignore-failed-read -cpf precious.tar $pkgs_precious
         # Remove unnecessary junk
-	[ -n "$pkgs_junk" ] && rm -rf $pkgs_junk
+        [ -n "$pkgs_junk" ] && rm -rf $pkgs_junk
         # Restore precious files
-	[ -n "$pkgs_precious" ] && tar -xpf precious.tar && rm -f precious.tar
-	popd
+        [ -n "$pkgs_precious" ] && tar -xpf precious.tar && rm -f precious.tar
+        popd
     fi
 
     # Clean yum cache
@@ -438,15 +438,15 @@ fi
     # we link to our version of kernel/initrd and clean up
     # kernel-debug manually
     if rpm --root $vroot --quiet -q kernel-debug ; then
-	echo "* Cleaning up kernel-debug - (workaround for f12)"
-	pushd $vroot/boot/
+        echo "* Cleaning up kernel-debug - (workaround for f12)"
+        pushd $vroot/boot/
         rm -rf kernel-boot kernel-bootsmp initrd-boot initrd-bootsmp
         ln -s vmlinuz-*${pldistro}* kernel-boot
         ln -s vmlinuz-*${pldistro}* kernel-bootsmp
         ln -s initrd-*${pldistro}* initrd-boot
         ln -s initrd-*${pldistro}* initrd-bootsmp
         rpm --root $vroot --nodeps -e kernel-debug || :
-	popd
+        popd
     fi
 
     # ignore yum's return code that is basically undefined
@@ -457,8 +457,8 @@ fi
 
     # Set time zone to UTC
     if [ -f $vroot/usr/share/zoneinfo/UTC -a -f $vroot/etc/localtime ] ; then
-	rm -f $vroot/etc/localtime
-	ln -s /usr/share/zoneinfo/UTC $vroot/etc/localtime
+        rm -f $vroot/etc/localtime
+        ln -s /usr/share/zoneinfo/UTC $vroot/etc/localtime
     fi
 
     echo "Dumping current list of rpms in /etc/mkfedora-rpms.txt"
@@ -500,13 +500,13 @@ function pl_move_dirs() {
 
     mkdir -p $root/data
     for datadir in "$@" ; do
-	mkdir -p ${data}${datadir}
-	if [ -d ${root}/${datadir} -a ! -h ${root}/${datadir} ] ; then
-	    (cd ${root} && find ./${datadir} | cpio -p -d -u ../${data}/)
-	fi
-	rm -rf ${root}/${datadir}
-	mkdir -p $(dirname ${root}/${datadir})
-	ln -nsf ${store}/${datadir} ${root}/${datadir}
+        mkdir -p ${data}${datadir}
+        if [ -d ${root}/${datadir} -a ! -h ${root}/${datadir} ] ; then
+            (cd ${root} && find ./${datadir} | cpio -p -d -u ../${data}/)
+        fi
+        rm -rf ${root}/${datadir}
+        mkdir -p $(dirname ${root}/${datadir})
+        ln -nsf ${store}/${datadir} ${root}/${datadir}
     done
 }
 
@@ -548,10 +548,10 @@ function pl_fixdirs() {
     root=$1
     datadirs=$2
     for datadir in datadirs ; do
-	if [ -h ${root}/${datadir} ] ; then
-	    rm -f ${root}/${datadir}
-	    mkdir -p ${root}/${datadir}
-	fi
+        if [ -h ${root}/${datadir} ] ; then
+            rm -f ${root}/${datadir}
+            mkdir -p ${root}/${datadir}
+        fi
     done
 }
 
@@ -589,32 +589,32 @@ function pl_locateDistroFile () {
     # if config dir is missing but a .svnpath or a .gitpath exists, use it to extract the config dir
     configdir="$builddir/config.${pldistro}"
     if [ ! -d $configdir ] ; then
-	if [ -f "${configdir}.svnpath" -o -f "${configdir}.gitpath" ] ; then
-	    echo 1>&2 "Invoking make to extract remote config.${pldistro}"
-	    # we set PLDISTROTAGS here to /dev/null because when dealing with remote distros
-	    # at a very early stage (like searching for devel.pkgs even before the build VM is created)
-	    # then make screams because it cannot find a mandatory include file
-	    # OTOH this mechanism here is not intended to depend on tags specifically
-	    make 1>&2 --no-print-directory -C $builddir stage1=true config.${pldistro} PLDISTROTAGS=/dev/null
-	fi
+        if [ -f "${configdir}.svnpath" -o -f "${configdir}.gitpath" ] ; then
+            echo 1>&2 "Invoking make to extract remote config.${pldistro}"
+            # we set PLDISTROTAGS here to /dev/null because when dealing with remote distros
+            # at a very early stage (like searching for devel.pkgs even before the build VM is created)
+            # then make screams because it cannot find a mandatory include file
+            # OTOH this mechanism here is not intended to depend on tags specifically
+            make 1>&2 --no-print-directory -C $builddir stage1=true config.${pldistro} PLDISTROTAGS=/dev/null
+        fi
     fi
     # locate it
     paths="$builddir/config.$pldistro/$pkgsfile $builddir/config.planetlab/$pkgsfile"
     for path in $paths; do
-	if [ -f $path ] ; then
-	    pkgspath=$path
-	    break
-	fi
+        if [ -f $path ] ; then
+            pkgspath=$path
+            break
+        fi
     done
     if [ -z "$pkgspath" ] ; then
-	echo 1>&2 "pl_locateDistroFile - in $(pwd) : cannot locate $pkgsfile in $builddir"
-	echo 1>&2 "candidates were $paths"
-	echo "not-found-by-pl_locateDistroFile"
-	return 1
+        echo 1>&2 "pl_locateDistroFile - in $(pwd) : cannot locate $pkgsfile in $builddir"
+        echo 1>&2 "candidates were $paths"
+        echo "not-found-by-pl_locateDistroFile"
+        return 1
     else
-	echo 1>&2 "pl_locateDistroFile: using $pkgspath"
-	echo $pkgspath
-	return 0
+        echo 1>&2 "pl_locateDistroFile: using $pkgspath"
+        echo $pkgspath
+        return 0
     fi
 }
 
@@ -633,18 +633,18 @@ function yumgroups_from_pkgs () {
 __header
 
     for pkgsname in $pkgsnames; do
-	pkgsfile=$(pl_locateDistroFile $builddir $pldistro $pkgsname)
-	packages=$(pl_getPackages $fcdistro $pldistro $pkgsfile)
+        pkgsfile=$(pl_locateDistroFile $builddir $pldistro $pkgsname)
+        packages=$(pl_getPackages $fcdistro $pldistro $pkgsfile)
 
-	groupname=$(pkgs.py groupname $pkgsfile | sed $sedargs)
-	groupdesc=$(pkgs.py groupdesc $pkgsfile | sed $sedargs)
+        groupname=$(pkgs.py groupname $pkgsfile | sed $sedargs)
+        groupdesc=$(pkgs.py groupdesc $pkgsfile | sed $sedargs)
 
-	if [ -z "$groupname" -o -z "$groupdesc" ] ; then
-	    echo "Cannot find groupname: and groupdesc: in $pkgsfile -- skipped" 1>&2
-	    continue
-	fi
-	
-	cat << __group_header
+        if [ -z "$groupname" -o -z "$groupdesc" ] ; then
+            echo "Cannot find groupname: and groupdesc: in $pkgsfile -- skipped" 1>&2
+            continue
+        fi
+        
+        cat << __group_header
   <group>
     <id>$(echo $groupname|tr A-Z a-z)</id>
     <name>$groupname</name>
@@ -653,9 +653,9 @@ __header
     <packagelist>
 __group_header
         for package in $packages; do 
-	    echo "<packagereq type=\"mandatory\">$package</packagereq>"
-	done
-	cat << __group_footer
+            echo "<packagereq type=\"mandatory\">$package</packagereq>"
+        done
+        cat << __group_footer
     </packagelist>
   </group>
 __group_footer
@@ -683,15 +683,15 @@ function yumconf_mirrors () {
     template=$builddir/mirroring/$fcdistro/yum.repos.d/building.repo.in
     
     if [ ! -f $template ] ; then
-	echo "yumconf_mirrors: cannot locate template $template"
-	rm -f $dest_yumconf
-	return 1
+        echo "yumconf_mirrors: cannot locate template $template"
+        rm -f $dest_yumconf
+        return 1
     fi
 
     for mirror in $mirrors; do
-	if yumconf_mirror $dest_yumconf $template "$yumexclude_line" $mirror; then
-	    return 0
-	fi
+        if yumconf_mirror $dest_yumconf $template "$yumexclude_line" $mirror; then
+            return 0
+        fi
     done
     echo 'yumconf_mirrors in build.common : ran out of mirrors -- BAILING OUT'
     rm -f $dest_yumconf
@@ -707,26 +707,26 @@ function yumconf_mirror () {
     mirror=$1; shift
 
     sed -e "s,@MIRRORURL@,$mirror,g" \
-	-e "/baseurl=/i\\
+        -e "/baseurl=/i\\
 $yumexclude_line" $template > $dest_yumconf
     
     # capture all lines defining baseurl
     baseurl_defs=$(grep '^baseurl=' $dest_yumconf)
     if [ -z "$baseurl_defs" ] ; then
-	return 1
+        return 1
     fi
 
     for baseurl_def in $baseurl_defs; do
-	baseurl=$(echo $baseurl_def | sed \
-	    -e s,baseurl=,, \
-	    -e 's,$basearch,'"$pl_DISTRO_ARCH",g)
-	repomd=$baseurl/repodata/repomd.xml
+        baseurl=$(echo $baseurl_def | sed \
+            -e s,baseurl=,, \
+            -e 's,$basearch,'"$pl_DISTRO_ARCH",g)
+        repomd=$baseurl/repodata/repomd.xml
 
-	echo "* Trying to fetch $repomd"
-	if ! build_fetch $repomd ; then
-	    echo "* Failed to fetch $repomd"
-	    return 1
-	fi
+        echo "* Trying to fetch $repomd"
+        if ! build_fetch $repomd ; then
+            echo "* Failed to fetch $repomd"
+            return 1
+        fi
     done
     echo "* Selected mirror $mirror"
     return 0
