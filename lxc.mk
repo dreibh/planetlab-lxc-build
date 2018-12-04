@@ -19,13 +19,18 @@ ALL += lxc-userspace
 IN_NODEIMAGE += lxc-userspace
 
 #
-#
 # transforward: root context module for transparent port forwarding
+#
+# with 4.19, the jprobe api has gone entirely
+# https://github.com/torvalds/linux/commit/4de58696de076d9bd2745d1cbe0930635c3f5ac9
+#
+ifneq "$(DISTRONAME)" "$(filter $(DISTRONAME), f29)"
 #
 transforward-MODULES := transforward
 transforward-SPEC := transforward.spec
 ALL += transforward
 IN_NODEIMAGE += transforward
+endif
 
 #
 # procprotect: root context module for protecting against weaknesses in /proc
