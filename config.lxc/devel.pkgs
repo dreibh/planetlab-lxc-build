@@ -134,6 +134,6 @@ package: libgcrypt-devel
 package: libtasn1-devel
 package: nmap-ncat
 package: pkgconfig
-# f29
-package>=f29: NetworkManager
+# f29; and needed on f27 so the spawned container actually starts its networking
+package>=f27: NetworkManager
 package>=f29: hostname
