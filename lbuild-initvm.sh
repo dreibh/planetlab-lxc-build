@@ -179,7 +179,7 @@ function fedora_download() {
 
     # copy yum config and repo files
     cp /etc/yum.conf $INSTALL_ROOT/etc/
-    cp /etc/yum.repos.d/fedora*.repo $INSTALL_ROOT/etc/yum.repos.d/
+    cp /etc/yum.repos.d/fedora{,-updates}.repo $INSTALL_ROOT/etc/yum.repos.d/
 
     # append fedora repo files with desired ${fedora_release} and $basearch
     for f in $INSTALL_ROOT/etc/yum.repos.d/* ; do
