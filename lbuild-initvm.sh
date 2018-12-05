@@ -141,7 +141,7 @@ function fedora_install() {
             fedora_download $cache || { echo "Failed to download 'fedora base'"; return 1; }
         else
             echo "Updating cache $cache/rootfs ..."
-            if ! dnf --installroot $cache/rootfs --releasever ${fedora_release} -y --nogpgcheck update ; then
+            if ! dnf --installroot $cache/rootfs --releasever=${fedora_release} -y --nogpgcheck update ; then
                 echo "Failed to update 'fedora base', continuing with last known good cache"
             else
                 echo "Update finished"
@@ -181,38 +181,40 @@ function fedora_download() {
     cp /etc/yum.conf $INSTALL_ROOT/etc/
     cp /etc/yum.repos.d/fedora{,-updates}.repo $INSTALL_ROOT/etc/yum.repos.d/
 
-    # append fedora repo files with desired ${fedora_release} and $basearch
+    # append fedora repo files with hardwired releasever and basearch
     for f in $INSTALL_ROOT/etc/yum.repos.d/* ; do
       sed -i "s/\$basearch/$arch/g; s/\$releasever/${fedora_release}/g;" $f
     done
 
-    MIRROR_URL=$FEDORA_MIRROR/fedora/releases/${fedora_release}/Everything/$arch/os
-    # since fedora18 the rpms are scattered by first name
-    # first try the second version of fedora-release first
-    RELEASE_URLS=""
-    local subindex
-    for subindex in 3 2 1; do
-        RELEASE_URLS="$RELEASE_URLS $MIRROR_URL/Packages/f/fedora-release-${fedora_release}-${subindex}.noarch.rpm"
-    done
-
-    RELEASE_TARGET=$INSTALL_ROOT/fedora-release-${fedora_release}.noarch.rpm
-    local found=""
-    local attempt
-    for attempt in $RELEASE_URLS; do
-        if curl --silent --fail $attempt -o $RELEASE_TARGET; then
-            echo "Successfully Retrieved $attempt"
-            found=true
-            break
-        else
-            echo "Failed (not to worry about) with attempt $attempt"
-        fi
-    done
-    [ -n "$found" ] || { echo "Could not retrieve fedora-release rpm - exiting" ; exit 1; }
+# looks like all this business about fetching fedora-release is not needed
+# it does
+#    MIRROR_URL=$FEDORA_MIRROR/fedora/releases/${fedora_release}/Everything/$arch/os
+#    # since fedora18 the rpms are scattered by first name
+#    # first try the second version of fedora-release first
+#    RELEASE_URLS=""
+#    local subindex
+#    for subindex in 3 2 1; do
+#        RELEASE_URLS="$RELEASE_URLS $MIRROR_URL/Packages/f/fedora-release-${fedora_release}-${subindex}.noarch.rpm"
+#    done
+#
+#    RELEASE_TARGET=$INSTALL_ROOT/fedora-release-${fedora_release}.noarch.rpm
+#    local found=""
+#    local attempt
+#    for attempt in $RELEASE_URLS; do
+#        if curl --silent --fail $attempt -o $RELEASE_TARGET; then
+#            echo "Successfully Retrieved $attempt"
+#            found=true
+#            break
+#        else
+#            echo "Failed (not to worry about) with attempt $attempt"
+#        fi
+#    done
+#    [ -n "$found" ] || { echo "Could not retrieve fedora-release rpm - exiting" ; exit 1; }
 
     mkdir -p $INSTALL_ROOT/var/lib/rpm
     rpm --root $INSTALL_ROOT  --initdb
     # when installing f12 this apparently is already present, so ignore result
-    rpm --root $INSTALL_ROOT -ivh $INSTALL_ROOT/fedora-release-${fedora_release}.noarch.rpm || :
+#    rpm --root $INSTALL_ROOT -ivh $INSTALL_ROOT/fedora-release-${fedora_release}.noarch.rpm || :
     # however f12 root images won't get created on a f18 host
     # (the issue here is the same as the one we ran into when dealing with a vs-box)
     # in a nutshell, in f12 the glibc-common and filesystem rpms have an apparent conflict
@@ -223,7 +225,7 @@ function fedora_download() {
     # So ideally if we want to be able to build f12 images from f18 we need an rpm that has
     # this patch undone, like we have in place on our f14 boxes (our f14 boxes need a f18-like rpm)
 
-    DNF="dnf --installroot=$INSTALL_ROOT --releasever=${fedora_release} --nogpgcheck -y"
+    DNF="dnf --installroot=$INSTALL_ROOT --nogpgcheck -y"
     echo "$DNF install $FEDORA_PREINSTALLED"
     $DNF install $FEDORA_PREINSTALLED || { echo "Failed to download rootfs, aborting." ; return 1; }
 
