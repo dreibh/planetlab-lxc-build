@@ -279,16 +279,12 @@ EOF
 
     local guest_ifcfg=${lxc_root}/etc/sysconfig/network-scripts/ifcfg-$VIF_GUEST
     mkdir -p $(dirname ${guest_ifcfg})
-    # starting with f29, we go for NetworkManager as older network-scripts
-    # is about to be deprecated
-    local nm_controlled=false
-    [[ $fcdistro == f29 ]] && nm_controlled=true
-    [[ $fcdistro == f3[0-9] ]] && nm_controlled=true
-
+    # starting with f27, we go for NetworkManager
+    # no more NM_CONTROLLED nonsense
     if [ -n "$NAT_MODE" ]; then
-        write_guest_ifcfg_natip $nm_controlled
+        write_guest_ifcfg_natip
     else
-        write_guest_ifcfg_publicip $nm_controlled
+        write_guest_ifcfg_publicip
     fi > $guest_ifcfg
 
     [ -z "$IMAGE" ] && fedora_configure_yum $lxc $fcdistro $pldistro
@@ -578,7 +574,6 @@ EOF
 
 # this one is dhcp-based
 function write_guest_ifcfg_natip () {
-    local nm_controlled=$1; shift
     cat <<EOF
 DEVICE=$VIF_GUEST
 BOOTPROTO=dhcp
@@ -586,12 +581,10 @@ ONBOOT=yes
 TYPE=Ethernet
 MTU=1500
 EOF
-    [ "$nm_controlled" == true ] || echo NM_CONTROLLED=no
 }
 
 # use fixed GUEST_IP as specified by GUEST_HOSTNAME
 function write_guest_ifcfg_publicip () {
-    local nm_controlled=$1; shift
     cat <<EOF
 DEVICE=$VIF_GUEST
 BOOTPROTO=static
@@ -603,7 +596,6 @@ GATEWAY=$GATEWAY
 TYPE=Ethernet
 MTU=1500
 EOF
-    [ "$nm_controlled" == true ] || echo NM_CONTROLLED=no
 }
 
 function devel_or_test_tools () {
