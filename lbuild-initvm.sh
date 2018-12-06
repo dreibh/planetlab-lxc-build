@@ -51,7 +51,7 @@ DEBIAN_PREINSTALLED="openssh-server openssh-client"
 ########## networking utilities
 function gethostbyname () {
     local hostname=$1
-    python -c "import socket; print socket.gethostbyname('"$hostname"')" 2> /dev/null
+    python3 -c "import socket; print(socket.gethostbyname('"$hostname"'))" 2> /dev/null
 }
 
 # e.g. 21 -> 255.255.248.0
