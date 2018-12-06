@@ -57,22 +57,21 @@ function gethostbyname () {
 # e.g. 21 -> 255.255.248.0
 function masklen_to_netmask () {
     local masklen=$1; shift
-    python <<EOF
+    python3 <<EOF
 import sys
-masklen=$masklen
-if not (masklen>=1 and masklen<=32):
-  print "Wrong masklen",masklen
+masklen = $masklen
+if not (1 <= masklen <= 32):
+  print("Wrong masklen", masklen)
   exit(1)
-result=[]
+result = []
 for i in range(4):
-    if masklen>=8:
+    if masklen >= 8:
        result.append(8)
-       masklen-=8
+       masklen -= 8
     else:
        result.append(masklen)
-       masklen=0
-print ".".join([ str(256-2**(8-i)) for i in result ])
-
+       masklen = 0
+print(".".join([ str(256-2**(8-i)) for i in result ]))
 EOF
 }
 

@@ -72,27 +72,28 @@ function guest_ipv4() {
 function summary () {
     from=$1; shift
     echo "******************** BEG SUMMARY"
-    python - $from <<EOF
-#!/usr/bin/env python
+    python3 - $from <<EOF
+#!/usr/bin/env python3
 # read a full log and tries to extract the interesting stuff
 
-import sys,re
-m_show_line=re.compile(".* (BEG|END) (RPM|LXC).*|.*'boot'.*|\* .*| \* .*|.*is not installed.*|.*PROPFIND.*|.* (BEG|END).*:run_log.*|.* Within LXC (BEG|END) .*|.* MAIN (BEG|END).*")
-m_installing_any=re.compile('\r  (Installing:[^\]]*]) ')
-m_installing_err=re.compile('\r  (Installing:[^\]]*])(..+)')
-m_installing_end=re.compile('Installed:.*')
-m_installing_doc1=re.compile("(.*)install-info: No such file or directory for /usr/share/info/\S+(.*)")
-m_installing_doc2=re.compile("(.*)grep: /usr/share/info/dir: No such file or directory(.*)")
+import sys, re
+m_show_line = re.compile(
+".* (BEG|END) (RPM|LXC).*|.*'boot'.*|\* .*| \* .*|.*is not installed.*|.*PROPFIND.*|.* (BEG|END).*:run_log.*|.* Within LXC (BEG|END) .*|.* MAIN (BEG|END).*")
+m_installing_any = re.compile('\r  (Installing:[^\]]*]) ')
+m_installing_err = re.compile('\r  (Installing:[^\]]*])(..+)')
+m_installing_end = re.compile('Installed:.*')
+m_installing_doc1 = re.compile("(.*)install-info: No such file or directory for /usr/share/info/\S+(.*)")
+m_installing_doc2 = re.compile("(.*)grep: /usr/share/info/dir: No such file or directory(.*)")
 
 def summary (filename):
 
     try:
-        if filename=="-":
-            filename="stdin"
-            f=sys.stdin
+        if filename == "-":
+            filename = "stdin"
+            f = sys.stdin
         else:
-            f=open(filename)
-        echo=False
+            f = open(filename)
+        echo = False
         for line in f.xreadlines():
             # first off : discard warnings related to doc
             if m_installing_doc1.match(line):
@@ -103,12 +104,12 @@ def summary (filename):
                 line=begin+end
             # unconditionnally show these lines
             if m_show_line.match(line):
-                print '>>>',line,
+                print('>>>', line, end="")
             # an 'installing' line with messages afterwards : needs to be echoed
             elif m_installing_err.match(line):
                 (installing,error)=m_installing_err.match(line).groups()
-                print '>>>',installing
-                print '>>>',error
+                print('>>>',installing)
+                print('>>>',error)
                 echo=True
             # closing an 'installing' section
             elif m_installing_end.match(line):
@@ -117,14 +118,14 @@ def summary (filename):
             elif m_installing_any.match(line):
                 if echo:
                     installing=m_installing_any.match(line).group(1)
-                    print '>>>',installing
+                    print('>>>',installing)
                 echo=False
             # print lines when echo is true
             else:
-                if echo: print '>>>',line,
+                if echo: print('>>>',line, end="")
         f.close()
     except:
-        print 'Failed to analyze',filename
+        print('Failed to analyze',filename)
 
 for arg in sys.argv[1:]:
     summary(arg)

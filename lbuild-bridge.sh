@@ -1,29 +1,30 @@
 #!/bin/bash
 
-# taking this bridge-initialization code out of lbuild-initvm.sh 
-# so we can use it on our libvirt/lxc local infra 
-# there's something very similar in 
+# taking this bridge-initialization code out of lbuild-initvm.sh
+# so we can use it on our libvirt/lxc local infra
+# there's something very similar in
 # tests/system/template-qemu/qemu-bridge-init
-# that the current code was actually based on, but 
-# nobody was ever bold enough to reconcile these two 
+# that the current code was actually based on, but
+# nobody was ever bold enough to reconcile these two
 
-# hard-wired 
+# hard-wired
 DEFAULT_PUBLIC_BRIDGE=br0
 
 ##############################
 # use /proc/net/dev instead of a hard-wired list
 function gather_interfaces () {
-    python <<EOF
-for line in file("/proc/net/dev"):
+    python3 <<EOF
+with open("/proc/net/dev") as feed:
+  for line in feed:
     if ':' not in line: continue
-    ifname=line.replace(" ","").split(":")[0]
-    if ifname.find("lo")==0: continue
-    if ifname.find("br")==0: continue
-    if ifname.find("virbr")==0: continue
-    if ifname.find("veth")==0: continue
-    if ifname.find("tap")==0: continue
-    if ifname.find("vif")==0: continue
-    print ifname
+    ifname = line.replace(" ","").split(":")[0]
+    if ifname.startswith("lo"): continue
+    if ifname.startswith("br"): continue
+    if ifname.startswith("virbr"): continue
+    if ifname.startswith("veth"): continue
+    if ifname.startswith("tap"): continue
+    if ifname.startswith("vif"): continue
+    print(ifname)
 EOF
 }
 
@@ -87,7 +88,7 @@ function create_bridge_if_needed() {
     sysctl net.bridge.bridge-nf-call-ip6tables=0
     sysctl net.bridge.bridge-nf-call-arptables=0
 
-    
+
     #Getting host IP/masklen
     address=$(ip addr show $if_lan | grep -v inet6 | grep inet | head --lines=1 | awk '{print $2;}')
     [ -z "$address" ] && { echo "ERROR: Could not determine IP address for $if_lan" ; exit 1 ; }
@@ -106,7 +107,7 @@ function create_bridge_if_needed() {
     echo "Activating promiscuous mode if_lan=$if_lan"
     ip link set $if_lan up promisc on
     sleep 2
-    # rely on dhcp to re assign IP.. 
+    # rely on dhcp to re assign IP..
     echo "Starting dhclient on $public_bridge"
     dhclient $public_bridge
     sleep 1
@@ -136,7 +137,7 @@ function create_bridge_if_needed() {
 }
 
 function main () {
-    if [[ -n "$@" ]] ; then 
+    if [[ -n "$@" ]] ; then
         public_bridge="$1"; shift
     else
         public_bridge="$DEFAULT_PUBLIC_BRIDGE"
