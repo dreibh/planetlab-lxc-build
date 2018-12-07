@@ -2,11 +2,6 @@
 #
 # This is a replacement for the formerly bash-written function pl_parsePkgs ()
 #
-<<<<<<< HEAD
-# This is a replacement for the formerly bash-written function pl_parsePkgs ()
-#
-=======
->>>>>>> upstream/master
 # Usage: $0  [-a arch] default_arch keyword fcdistro pldistro pkgs-file[..s]
 # default_arch is $pl_DISTRO_ARCH, but can be overridden
 #
