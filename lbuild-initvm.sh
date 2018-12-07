@@ -868,6 +868,8 @@ function main () {
     local lxc_root=$(lxcroot $lxc)
 
     # rainchecks
+    # when using with the -i option, checking that $lxc_root is void
+    # is a little too much stress..
     almost_empty $lxc_root || \
         { echo "container $lxc already exists in $lxc_root - exiting" ; exit 1 ; }
     virsh -c lxc:/// domuuid $lxc >& /dev/null && \
@@ -876,9 +878,13 @@ function main () {
 
     # if IMAGE, copy the provided rootfs to lxc_root
     if [ -n "$IMAGE" ] ; then
-        [ ! -d "$IMAGE" ] && \
-        { echo "$IMAGE rootfs folder does not exist - exiting" ; exit 1 ; }
-        rsync -a $IMAGE/ $lxc_root/
+        if [ ! -d "$IMAGE" ]; then
+            echo "$IMAGE rootfs folder does not exist - exiting"
+            exit 1
+        else
+            echo "Copying $IMAGE into $lxc_root with rsync --archive --delete"
+            rsync --archive --delete $IMAGE/ $lxc_root/
+        fi
     fi
 
     # check we've exhausted the arguments
