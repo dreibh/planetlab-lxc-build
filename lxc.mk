@@ -5,7 +5,7 @@
 # Copyright (C) 2003-2006 The Trustees of Princeton University
 # rewritten by Thierry Parmentelat - INRIA Sophia Antipolis
 #
-# see doc in Makefile  
+# see doc in Makefile
 #
 
 ### the madwifi drivers ship with fedora16's kernel rpm
@@ -19,19 +19,24 @@ ALL += lxc-userspace
 IN_NODEIMAGE += lxc-userspace
 
 #
-#
 # transforward: root context module for transparent port forwarding
+#
+# with 4.19, the jprobe api has gone entirely
+# https://github.com/torvalds/linux/commit/4de58696de076d9bd2745d1cbe0930635c3f5ac9
+#
+ifneq "$(DISTRONAME)" "$(filter $(DISTRONAME), f29)"
 #
 transforward-MODULES := transforward
 transforward-SPEC := transforward.spec
 ALL += transforward
 IN_NODEIMAGE += transforward
+endif
 
 #
 # procprotect: root context module for protecting against weaknesses in /proc
 #
 ### remove procprotect from the nodes on f20 and above, needs more work starting with 3.19
-ifneq "$(DISTRONAME)" "$(filter $(DISTRONAME),f20 f21 f22 f23 f24 f25 f27)"
+ifneq "$(DISTRONAME)" "$(filter $(DISTRONAME),f20 f21 f22 f23 f24 f25 f27 f29)"
 procprotect-MODULES := procprotect
 procprotect-SPEC := procprotect.spec
 ALL += procprotect
@@ -43,7 +48,7 @@ endif
 #
 ### starting August 2015, ipfw module won't build against fedora22
 # that comes with kernel 4.1.4
-ifneq "$(DISTRONAME)" "$(filter $(DISTRONAME),f21 f22 f23 f24 f25 f27)"
+ifneq "$(DISTRONAME)" "$(filter $(DISTRONAME),f21 f22 f23 f24 f25 f27 f29)"
 ipfwroot-MODULES := ipfw
 ipfwroot-SPEC := planetlab/ipfwroot.spec
 ALL += ipfwroot
@@ -56,7 +61,7 @@ ALL += ipfwslice
 
 #
 # comgt - a companion to umts tools
-# 
+#
 comgt-MODULES := comgt
 comgt-SPEC := comgt.spec
 IN_NODEIMAGE += comgt
@@ -96,7 +101,7 @@ IN_NODEIMAGE += ipod
 
 #
 # plnode-utils
-# 
+#
 plnode-utils-MODULES := plnode-utils
 plnode-utils-SPEC := plnode-utils-lxc.spec
 ALL += plnode-utils
@@ -130,7 +135,7 @@ IN_NODEIMAGE += codemux
 # fprobe-ulog
 #
 # xxx temporarily turning this off on f20 and above
-ifneq "$(DISTRONAME)" "$(filter $(DISTRONAME),f20 f21 f22 f23 f24 f25 f27)"
+ifneq "$(DISTRONAME)" "$(filter $(DISTRONAME),f20 f21 f22 f23 f24 f25 f27 f29)"
 fprobe-ulog-MODULES := fprobe-ulog
 fprobe-ulog-SPEC := fprobe-ulog.spec
 ALL += fprobe-ulog
@@ -154,13 +159,13 @@ libvirt-SPEC    := libvirt.spec
 libvirt-BUILD-FROM-SRPM := yes
 # The --without options are breaking spec2make : hard-wired in the specfile instead
 libvirt-STOCK-DEVEL-RPMS += xhtml1-dtds
-libvirt-STOCK-DEVEL-RPMS += libattr-devel augeas libpciaccess-devel yajl-devel 
-libvirt-STOCK-DEVEL-RPMS += libpcap-devel radvd ebtables device-mapper-devel 
-libvirt-STOCK-DEVEL-RPMS += ceph-devel numactl-devel libcap-ng-devel scrub 
+libvirt-STOCK-DEVEL-RPMS += libattr-devel augeas libpciaccess-devel yajl-devel
+libvirt-STOCK-DEVEL-RPMS += libpcap-devel radvd ebtables device-mapper-devel
+libvirt-STOCK-DEVEL-RPMS += ceph-devel numactl-devel libcap-ng-devel scrub
 # for 1.2.1 - first seen on f20, not sure for the other ones
 libvirt-STOCK-DEVEL-RPMS += libblkid-devel glusterfs-api-devel glusterfs-devel
 # strictly speaking fuse-devel is not required anymore but we might wish to turn fuse back on again in the future
-libvirt-STOCK-DEVEL-RPMS += fuse-devel libssh2-devel dbus-devel numad 
+libvirt-STOCK-DEVEL-RPMS += fuse-devel libssh2-devel dbus-devel numad
 libvirt-STOCK-DEVEL-RPMS += systemd-devel libnl3-devel iptables-services netcf-devel
 # 1.2.11
 libvirt-STOCK-DEVEL-RPMS += wireshark-devel
@@ -268,6 +273,9 @@ bind_public-SPEC := bind_public.spec
 IN_SLICEIMAGE += bind_public
 ALL += bind_public
 
+# in fedora 29, this triggers nasty-looking compile messages
+# not trying too hard, we're mostly after the server-side of f29
+ifneq "$(DISTRONAME)" "$(filter $(DISTRONAME),f23 f24 f25 f27 f29)"
 #
 # sliver-openvswitch
 #
@@ -275,6 +283,7 @@ sliver-openvswitch-MODULES := sliver-openvswitch
 sliver-openvswitch-SPEC := sliver-openvswitch.spec
 IN_SLICEIMAGE += sliver-openvswitch
 ALL += sliver-openvswitch
+endif
 
 #
 # plcapi
@@ -286,7 +295,7 @@ IN_MYPLC += plcapi
 
 #
 # drupal
-# 
+#
 drupal-MODULES := drupal
 drupal-SPEC := drupal.spec
 drupal-BUILD-FROM-SRPM := yes
@@ -371,7 +380,7 @@ IN_MYPLC += bootmanager
 
 #
 # pypcilib : used in bootcd
-# 
+#
 pypcilib-MODULES := pypcilib
 pypcilib-SPEC := pypcilib.spec
 ALL += pypcilib
@@ -387,12 +396,12 @@ IN_NODEIMAGE += pyplnet
 IN_MYPLC += pyplnet
 IN_BOOTCD += pyplnet
 
-ifneq "$(DISTRONAME)" "$(filter $(DISTRONAME),f23 f24 f25 f27)"
+ifneq "$(DISTRONAME)" "$(filter $(DISTRONAME),f23 f24 f25 f27 f29)"
 #
 # OML measurement library
 #
 oml-MODULES := oml
-oml-STOCK-DEVEL-RPMS += sqlite-devel 
+oml-STOCK-DEVEL-RPMS += sqlite-devel
 oml-SPEC := liboml.spec
 ALL += oml
 endif
@@ -421,7 +430,7 @@ IN_NODEIMAGE += sliceimage
 
 #
 # lxc-specific sliceimage initialization
-# 
+#
 lxc-sliceimage-MODULES	:= sliceimage
 lxc-sliceimage-SPEC	:= lxc-sliceimage.spec
 lxc-sliceimage-RPMDATE	:= yes
@@ -487,7 +496,7 @@ myplc-DEPEND-FILES := myplc-release RPMS/yumgroups.xml
 ALL += myplc
 
 # myplc-docs only contains docs for PLCAPI and NMAPI, but
-# we still need to pull MyPLC, as it is where the specfile lies, 
+# we still need to pull MyPLC, as it is where the specfile lies,
 # together with the utility script docbook2drupal.sh
 myplc-docs-MODULES := myplc plcapi nodemanager monitor
 myplc-docs-SPEC := myplc-docs.spec

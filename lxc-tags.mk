@@ -20,7 +20,7 @@ pf2slice-GITPATH		:= git://git.onelab.eu/pf2slice.git@pf2slice-1.0-2
 mom-GITPATH                     := git://git.onelab.eu/mom.git@mom-2.3-5
 inotify-tools-GITPATH		:= git://git.onelab.eu/inotify-tools.git@inotify-tools-3.13-2
 openvswitch-GITPATH		:= git://git.onelab.eu/openvswitch.git@openvswitch-1.2-1
-vsys-GITPATH			:= git://git.onelab.eu/vsys.git@vsys-0.99-3
+vsys-GITPATH                    := git://git.onelab.eu/vsys.git@master
 vsys-scripts-GITPATH            := git://git.onelab.eu/vsys-scripts.git@vsys-scripts-0.95-51
 bind_public-GITPATH             := git://git.onelab.eu/bind_public.git@bind_public-0.1-3
 sliver-openvswitch-GITPATH      := git://git.onelab.eu/sliver-openvswitch.git@sliver-openvswitch-2.2.90-1
@@ -42,7 +42,7 @@ pcucontrol-GITPATH              := git://git.onelab.eu/pcucontrol.git@master
 # omf-resctl now comes from yum and gem, no need for rvm-ruby anymore
 oml-GITPATH                     := git://git.onelab.eu/oml.git@oml-2.6.1-1
 ###
-bootcd-GITPATH                  := git://git.onelab.eu/bootcd.git@bootcd-5.4-1
+bootcd-GITPATH                  := git://git.onelab.eu/bootcd.git@master
 sliceimage-GITPATH              := git://git.onelab.eu/sliceimage.git@master
 nodeimage-GITPATH               := git://git.onelab.eu/nodeimage.git@master
 myplc-GITPATH                   := git://git.onelab.eu/myplc.git@master

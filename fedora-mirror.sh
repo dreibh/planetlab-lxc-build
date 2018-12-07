@@ -16,8 +16,8 @@ root=/mirror/
 us_fedora_url=rsync://mirrors.kernel.org/fedora
 eu_fedora_url=rsync://mirror1.hs-esslingen.de/fedora/linux
 
-default_distroname="f27"
-all_distronames="f25 f27"
+default_distroname="f29"
+all_distronames="f27 f29"
 
 global_arch="x86_64"
 
@@ -30,15 +30,15 @@ function mirror_distro_arch () {
 
     distroname=$(echo $distroname | tr '[A-Z]' '[a-z]')
     case $distroname in
-	f*)
-	    distroindex=$(echo $distroname | sed -e "s,f,,g")
-	    distro="Fedora"
-	    rsyncurl=$fedora_url
-	    ;;
-	*)
-	    echo "WARNING -- Unknown distribution $distroname -- skipped"
-	    return 1
-	    ;;
+    f*)
+        distroindex=$(echo $distroname | sed -e "s,f,,g")
+        distro="Fedora"
+        rsyncurl=$fedora_url
+        ;;
+    *)
+        echo "WARNING -- Unknown distribution $distroname -- skipped"
+        return 1
+        ;;
     esac
 
     excludelist="debug/ iso/ ppc/ source/"
@@ -48,7 +48,7 @@ function mirror_distro_arch () {
     options="$options -aH --numeric-ids"
     options="$options --delete --delete-excluded --delete-after --delay-updates"
     for e in $excludelist; do
-	options="$options --exclude $e"
+        options="$options --exclude $e"
     done
 
     echo ">>>>>>>>>>>>>>>>>>>> distroname=$distroname arch=$arch rsyncurl=$rsyncurl"
@@ -56,15 +56,20 @@ function mirror_distro_arch () {
 
     paths=""
     [ -z "$skip_core" ] && paths="releases/$distroindex/Everything/$arch/os/"
-    paths="$paths updates/$distroindex/$arch/"
-    localpath=fedora
+    if [ "$distroindex" -le 27 ]; then
+        paths="$paths updates/$distroindex/$arch/"
+        localpath=fedora
+    else
+        paths="$paths updates/$distroindex/Everything/$arch/ updates/$distroindex/Modular/$arch/"
+        localpath=fedora
+    fi
 
     for repopath in $paths; do
-	echo "===== $distro -> $distroindex $repopath"
-	[ -z "$dry_run" ] && mkdir -p ${root}/${localpath}/${repopath}
-	command="rsync $options ${rsyncurl}/${repopath} ${root}/${localpath}/${repopath}"
-	echo $command
-	$command
+        echo "===== $distro -> $distroindex $repopath"
+        [ -z "$dry_run" ] && mkdir -p ${root}/${localpath}/${repopath}
+        command="rsync $options ${rsyncurl}/${repopath} ${root}/${localpath}/${repopath}"
+        echo $command
+        $command
     done
 
     echo "<<<<<<<<<<<<<<<<<<<< $distroname $arch"
@@ -90,9 +95,9 @@ function usage () {
 function run () {
     RES=0
     for distroname in $distronames ; do
-	for arch in $archs; do
-	    mirror_distro_arch "$distroname" "$arch" || RES=1
-	done
+        for arch in $archs; do
+            mirror_distro_arch "$distroname" "$arch" || RES=1
+        done
     done
     return $RES
 }
@@ -101,18 +106,18 @@ function main () {
     distronames=""
     archs="$global_arch"
     while getopts "nvlcu:sef:Fh" opt ; do
-	case $opt in
-	    n) dry_run=--dry-run ;;
-	    v) verbose= ;;
-	    l) log=true ;;
-	    c) skip_core= ;;
-	    u) fedora_url=$OPTARG ;;
-	    s) fedora_url=$us_fedora_url ;;
-	    e) fedora_url=$eu_fedora_url ;;
-	    f) distronames="$distronames $OPTARG" ;;
-	    F) distronames="$distronames $all_distronames" ;;
-	    h|*) usage ;;
-	esac
+    case $opt in
+        n) dry_run=--dry-run ;;
+        v) verbose= ;;
+        l) log=true ;;
+        c) skip_core= ;;
+        u) fedora_url=$OPTARG ;;
+        s) fedora_url=$us_fedora_url ;;
+        e) fedora_url=$eu_fedora_url ;;
+        f) distronames="$distronames $OPTARG" ;;
+        F) distronames="$distronames $all_distronames" ;;
+        h|*) usage ;;
+    esac
     done
     shift $(($OPTIND-1))
     [[ -n "$@" ]] && usage
@@ -120,18 +125,18 @@ function main () {
 
     # auto log : if specified
     if [ -n "$log" ] ; then
-	mkdir -p $LOGDIR
-	run &> $LOG
+        mkdir -p $LOGDIR
+        run &> $LOG
     else
-	run
+        run
     fi
     if [ "$?" == 0 ]; then
-	# report to fedora's infra
-	# can't get the config right...
-	#/usr/bin/report_mirror
-	exit 0
+        # report to fedora's infra
+        # can't get the config right...
+        #/usr/bin/report_mirror
+        exit 0
     else
-	exit 1
+        exit 1
     fi
 }
 
