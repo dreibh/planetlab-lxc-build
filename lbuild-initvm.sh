@@ -783,13 +783,18 @@ function wait_for_ssh () {
 
     local counter=1
     while [ "$current_time" -lt "$stop_time" ] ; do
-         echo "$counter-th attempt to reach sshd in container $lxc ..."
-         [ -z "$guest_ip" ] && guest_ip=$(guest_ipv4 $lxc)
-         [ -n "$guest_ip" ] && ssh -o "StrictHostKeyChecking no" $guest_ip 'uname -i' && {
-                 success=true; echo "SSHD in container $lxc is UP on IP $guest_ip"; break ; } || :
-         counter=$(($counter+1))
-         sleep 10
-         current_time=$(date +%s)
+        echo "$counter-th attempt to reach sshd in container $lxc ..."
+        [ -z "$guest_ip" ] && guest_ip=$(guest_ipv4 $lxc)
+        [ -n "$guest_ip" ] && ssh -o "StrictHostKeyChecking no" $guest_ip 'uname -i' && {
+            success=true; echo "SSHD in container $lxc is UP on IP $guest_ip"; break ; } || :
+        # when migrating, sometimes we don't have the same uid/gid mapping
+        # for the ssh_keys group on both host boxes...
+        # also this is not wuite right, as *_key gets expanded in the host context
+        # but using "" or \ makes it litteral...
+        virsh -c lxc:/// lxc-enter-namespace $lxc /usr/bin/env chown root:ssh_keys /etc/ssh/*_key
+        counter=$(($counter+1))
+        sleep 10
+        current_time=$(date +%s)
     done
 
     # Thierry: this is fatal, let's just exit with a failure here
