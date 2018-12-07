@@ -787,11 +787,10 @@ function wait_for_ssh () {
         [ -z "$guest_ip" ] && guest_ip=$(guest_ipv4 $lxc)
         [ -n "$guest_ip" ] && ssh -o "StrictHostKeyChecking no" $guest_ip 'uname -i' && {
             success=true; echo "SSHD in container $lxc is UP on IP $guest_ip"; break ; } || :
-        # when migrating, sometimes we don't have the same uid/gid mapping
-        # for the ssh_keys group on both host boxes...
-        # also this is not wuite right, as *_key gets expanded in the host context
-        # but using "" or \ makes it litteral...
-        virsh -c lxc:/// lxc-enter-namespace $lxc /usr/bin/env chown root:ssh_keys /etc/ssh/*_key
+        # some of our boxes have gone through a long upgrade historically, and
+        # so they don't end up with the same gid mapping for the ssh_keys
+        # group as the ones in the guest that result from a fresh install
+        virsh -c lxc:/// lxc-enter-namespace $lxc /bin/bash -c "chown root:ssh_keys /etc/ssh/*_key" || :
         counter=$(($counter+1))
         sleep 10
         current_time=$(date +%s)
