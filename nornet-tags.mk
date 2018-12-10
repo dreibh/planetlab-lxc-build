@@ -84,7 +84,6 @@ nodeimage-GITPATH               := git://git.onelab.eu/nodeimage.git@nodeimage-5
 myplc-GITPATH                   := git://git.onelab.eu/myplc.git@myplc-5.3-3
 
 #
-sfa-BRANCH			:= geni-v3
 sfa-GITPATH                     := git://git.onelab.eu/sfa.git@sfa-3.1-13
 #
 tests-GITPATH                   := git://git.onelab.eu/tests.git@tests-6.0-4
