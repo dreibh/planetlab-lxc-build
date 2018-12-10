@@ -49,7 +49,7 @@ package: vsyssh
 package: vsys-wrapper
 
 # onelab additions
-package: sliver-openvswitch
+package<=f27: sliver-openvswitch
 package: ipfwslice
 
 # convenience
