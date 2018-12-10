@@ -9,5 +9,5 @@ package: file
 # while runing the tests, try to work around a glitch with yum by running yum=complete-transaction
 package<=f27: yum-utils
 package: psmisc
-package>=f29: NetworkManager
+package>=f27: NetworkManager
 package>=f29: hostname
