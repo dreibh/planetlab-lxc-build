@@ -119,11 +119,7 @@ class PkgsParser:
     m_qualified = re.compile(r'\A{}\Z'.format(re_qualified))
 
     re_old = '[a-z]+[+-][a-z]+[0-9]+'
-<<<<<<< HEAD
-    m_old = re.compile('\A{re_old}\Z'.format(**locals()))
-=======
     m_old = re.compile(r'\A{}\Z'.format(re_old))
->>>>>>> upstream/master
 
     # returns a tuple (included, excluded)
     def parse(self, filename):
@@ -131,53 +127,6 @@ class PkgsParser:
         included = []
         excluded = []
         try:
-<<<<<<< HEAD
-            for line in file(filename).readlines():
-                lineno += 1
-                line = line.strip()
-                if self.m_comment.match(line) or self.m_blank.match(line):
-                    continue
-                try:
-                    lefts, rights = line.split(':', 1)
-                    for left in lefts.split():
-                        ########## single ident
-                        if self.m_ident.match(left):
-                            if left not in known_keywords:
-                                raise Exception("Unknown keyword {left}".format(**locals()))
-                            elif left == self.keyword:
-                                included += rights.split()
-                        else:
-                            m = self.m_qualified.match(left)
-                            if m:
-                                (plus_minus, kw, qual, fcdistro) = m.groups()
-                                if kw not in known_keywords:
-                                    raise Exception("Unknown keyword in {left}".format(**locals()))
-                                if fcdistro not in known_fcdistros:
-                                    raise Exception('Unknown fcdistro {fcdistro}'.format(**locals()))
-                                # skip if another keyword
-                                if kw != self.keyword: continue
-                                # does this fcdistro match ?
-                                (distro, version) = m_fcdistro_cutter.match(fcdistro).groups()
-                                version = int (version)
-                                # skip if another distro family
-                                if distro != self.distro: continue
-                                # skip if the qualifier does not fit
-                                if not self.match (qual, version):
-                                    if self.options.verbose:
-                                        print('{filename}:{lineno}:qualifer {left} does not apply'
-                                              .format(**locals()), file=stderr)
-                                    continue
-                                # we're in, let's add (default) or remove (if plus_minus is minus)
-                                if plus_minus == '-':
-                                    if self.options.verbose:
-                                        print('{filename}:{lineno}: from {left}, excluding {rights}'
-                                              .format(**locals()), file=stderr)
-                                    excluded += rights.split()
-                                else:
-                                    if self.options.verbose:
-                                        print('{filename}:{lineno}: from {left}, including {rights}'\
-                                              .format(**locals()), file=stderr)
-=======
             with open(filename) as feed:
                 for lineno, line in enumerate(feed, 1):
                     line = line.strip()
@@ -191,17 +140,8 @@ class PkgsParser:
                                 if left not in known_keywords:
                                     raise Exception("Unknown keyword {left}".format(**locals()))
                                 elif left == self.keyword:
->>>>>>> upstream/master
                                     included += rights.split()
                             else:
-<<<<<<< HEAD
-                                raise Exception('error in left expression {left}'.format(**locals()))
-
-                except Exception as e:
-                    ok = False
-                    print("{filename}:{lineno}:syntax error: {e}".format(**locals()), file=stderr)
-        except Exception as e:
-=======
                                 m = self.m_qualified.match(left)
                                 if m:
                                     (plus_minus, kw, qual, fcdistro) = m.groups()
@@ -243,7 +183,6 @@ class PkgsParser:
                         ok = False
                         print("{filename}:{lineno}:syntax error: {e}".format(**locals()), file=stderr)
         except Exception as exc:
->>>>>>> upstream/master
             ok = False
             print('Could not parse file', filename, exc, file=stderr)
         return (ok, included, excluded)
@@ -258,19 +197,11 @@ class PkgsParser:
             excluded += e
             ok = ok and o
         # avoid set operations that would not preserve order
-<<<<<<< HEAD
-        results = [ x for x in included if x not in excluded ]
-
-        results = [ x.replace('@arch@', self.arch).\
-                        replace('@fcdistro@', self.fcdistro).\
-                        replace('@pldistro@', self.pldistro) for x in results]
-=======
         results = [x for x in included if x not in excluded]
 
         results = [x.replace('@arch@', self.arch)
                    .replace('@fcdistro@', self.fcdistro)
                    .replace('@pldistro@', self.pldistro) for x in results]
->>>>>>> upstream/master
         if self.options.sort_results:
             results.sort()
         # default is space-separated
@@ -305,11 +236,7 @@ def main ():
         help='keep results in the same order as in the inputs')
     (options, args) = parser.parse_args()
 
-<<<<<<< HEAD
-    if len(args) <= 1 :
-=======
     if len(args) <= 1:
->>>>>>> upstream/master
         parser.print_help(file=stderr)
         sys.exit(1)
     keyword = args[0]
