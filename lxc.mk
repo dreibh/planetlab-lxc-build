@@ -354,15 +354,6 @@ pyopenssl-BUILD-FROM-SRPM := yes
 ALL += pyopenssl
 endif
 
-#
-# pyaspects
-#
-pyaspects-MODULES := pyaspects
-pyaspects-SPEC := pyaspects.spec
-pyaspects-BUILD-FROM-SRPM := yes
-ALL += pyaspects
-
-#
 # nodeconfig
 #
 nodeconfig-MODULES := nodeconfig
