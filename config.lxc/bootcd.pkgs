@@ -53,7 +53,7 @@ package: pypcilib
 package: openvpn
 #package: vim-enhanced
 package: e2fsprogs
-package: rsyslog 
+package: rsyslog
 package: strace lsof
 package: net-tools
 

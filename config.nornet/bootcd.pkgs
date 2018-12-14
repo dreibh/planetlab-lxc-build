@@ -53,7 +53,7 @@ package: pypcilib
 package: openvpn
 #package: vim-enhanced
 package: e2fsprogs
-package: rsyslog 
+package: rsyslog
 package: strace lsof
 package: net-tools
 
@@ -62,6 +62,9 @@ package: python3
 
 # 06/2015: this does not ship anymore by default in f21
 package>=f21: biosdevname
+
+# 12/2018
+package>=f29: NetworkManager
 
 # Thierry : january 2015
 # the bootcd image has grown out of control in terms of size
