@@ -24,7 +24,7 @@ vsys-GITPATH                    := git://git.onelab.eu/vsys.git@master
 vsys-scripts-GITPATH            := git://git.onelab.eu/vsys-scripts.git@vsys-scripts-0.95-51
 bind_public-GITPATH             := git://git.onelab.eu/bind_public.git@bind_public-0.1-3
 sliver-openvswitch-GITPATH      := git://git.onelab.eu/sliver-openvswitch.git@sliver-openvswitch-2.2.90-1
-plcapi-GITPATH                  := git://git.onelab.eu/plcapi.git@master
+plcapi-GITPATH                  := git://git.onelab.eu/plcapi.git@python3
 drupal-GITPATH                  := git://git.onelab.eu/drupal.git@drupal-4.7-16
 plewww-GITPATH                  := git://git.onelab.eu/plewww.git@master
 www-register-wizard-GITPATH	:= git://git.onelab.eu/www-register-wizard.git@www-register-wizard-4.3-5
@@ -44,9 +44,10 @@ oml-GITPATH                     := git://git.onelab.eu/oml.git@oml-2.6.1-1
 bootcd-GITPATH                  := git://git.onelab.eu/bootcd.git@master
 sliceimage-GITPATH              := git://git.onelab.eu/sliceimage.git@master
 nodeimage-GITPATH               := git://git.onelab.eu/nodeimage.git@master
-myplc-GITPATH                   := git://git.onelab.eu/myplc.git@master
+myplc-GITPATH                   := git://git.onelab.eu/myplc.git@python3
 
 #
 sfa-GITPATH                     := git://git.onelab.eu/sfa.git@master
 #
-tests-GITPATH                   := git://git.onelab.eu/tests.git@master
+tests-GITPATH                   := git://git.onelab.eu/tests.git@python3
+
