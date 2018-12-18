@@ -139,3 +139,6 @@ package>=f21: policycoreutils
 
 # 03/2015: let's move on
 package: python3
+
+# from f29 we rely on NetworkManager
+package>=f29: NetworkManager
