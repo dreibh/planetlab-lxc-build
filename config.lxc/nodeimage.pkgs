@@ -7,7 +7,7 @@ groupdesc: PlanetLab Node Root
 # turned off on >=f21 - hopefully on a temporary basis
 package<=f20: ipfwroot
 package: lxc-userspace
-package: transforward
+package<=f27: transforward
 # temporarily turned off as it won't build on recent kernels
 package<=f18: procprotect
 # packages to exclude from stock repositories
