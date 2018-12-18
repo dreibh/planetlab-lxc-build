@@ -64,7 +64,7 @@ package: python3
 package>=f21: biosdevname
 
 # 12/2018
-package>=f29: NetworkManager
+package>=f27: NetworkManager
 
 # Thierry : january 2015
 # the bootcd image has grown out of control in terms of size
