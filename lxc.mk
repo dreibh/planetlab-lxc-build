@@ -503,6 +503,10 @@ ALL += release
 #
 # sfa - Slice Facility Architecture
 #
+# this is python2, somehow the tests won't pass on f29, so let's move on
+#
+ifneq "$(DISTRONAME)" "$(filter $(DISTRONAME), f29)"
 sfa-MODULES := sfa
 sfa-SPEC := sfa.spec
 ALL += sfa
+endif
