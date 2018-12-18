@@ -503,9 +503,12 @@ ALL += release
 #
 # sfa - Slice Facility Architecture
 #
-# this is python2, somehow the tests won't pass on f29, so let's move on
+# this is python2, somehow the tests won't pass against a py3 plcapi
+# oddly enough, when the py2 sfa code issues xmlrpc calls over ssl 
+# to the underlying myplc, we get SSL handshake issues
+# so, let's keep this out of the way for now
 #
-ifneq "$(DISTRONAME)" "$(filter $(DISTRONAME), f29)"
+ifneq "$(DISTRONAME)" "$(filter $(DISTRONAME), f27 f29)"
 sfa-MODULES := sfa
 sfa-SPEC := sfa.spec
 ALL += sfa
