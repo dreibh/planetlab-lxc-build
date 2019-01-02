@@ -1,4 +1,4 @@
-lxc-userspace-GITPATH           := git://git.onelab.eu/lxc-userspace.git@lxc-userspace-1.0-12
+lxc-userspace-GITPATH           := git://git.onelab.eu/lxc-userspace.git@python3
 transforward-GITPATH            := git://git.onelab.eu/transforward.git@master
 procprotect-GITPATH             := git://git.onelab.eu/procprotect.git@procprotect-0.4-7
 # ipfw-sourceforge.git (obsolete) mirrored on git.onelab.eu from git://git.code.sf.net/p/dummynet/code
