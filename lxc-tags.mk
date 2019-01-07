@@ -43,7 +43,7 @@ oml-GITPATH                     := git://git.onelab.eu/oml.git@oml-2.6.1-1
 ###
 bootcd-GITPATH                  := git://git.onelab.eu/bootcd.git@bootcd-6.0-0
 sliceimage-GITPATH              := git://git.onelab.eu/sliceimage.git@sliceimage-5.1-12
-nodeimage-GITPATH               := git://git.onelab.eu/nodeimage.git@master
+nodeimage-GITPATH               := git://git.onelab.eu/nodeimage.git@nodeimage-5.2-9
 myplc-GITPATH                   := git://git.onelab.eu/myplc.git@python3
 
 #
