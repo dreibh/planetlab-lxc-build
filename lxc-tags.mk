@@ -34,7 +34,7 @@ pyopenssl-GITPATH               := git://git.onelab.eu/pyopenssl.git@pyopenssl-0
 nodeconfig-GITPATH              := git://git.onelab.eu/nodeconfig.git@nodeconfig-5.2-5
 bootmanager-GITPATH             := git://git.onelab.eu/bootmanager.git@bootmanager-6.0-0
 pypcilib-GITPATH                := git://git.onelab.eu/pypcilib.git@pypcilib-0.2-11
-pyplnet-GITPATH                 := git://git.onelab.eu/pyplnet.git@python3
+pyplnet-GITPATH                 := git://git.onelab.eu/pyplnet.git@pyplnet-7.0-0
 DistributedRateLimiting-GITPATH	:= git://git.onelab.eu/distributedratelimiting.git@DistributedRateLimiting-0.1-1
 pcucontrol-GITPATH              := git://git.onelab.eu/pcucontrol.git@pcucontrol-1.0-14
 ###
