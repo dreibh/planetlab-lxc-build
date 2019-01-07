@@ -1,9 +1,5 @@
 lxc-userspace-GITPATH           := git://git.onelab.eu/lxc-userspace.git@lxc-userspace-2.0-0
 transforward-GITPATH            := git://git.onelab.eu/transforward.git@transforward-0.1-12
-procprotect-GITPATH             := git://git.onelab.eu/procprotect.git@procprotect-0.4-7
-# ipfw-sourceforge.git (obsolete) mirrored on git.onelab.eu from git://git.code.sf.net/p/dummynet/code
-# ipfw-google.git (current) is mirrored on git.onelab.eu from https://code.google.com/p/dummynet
-ipfw-GITPATH                    := git://git.onelab.eu/ipfw-google.git@e717cdd4bef764a4aa7babedc54220b35b04c777
 comgt-GITPATH			:= git://git.onelab.eu/comgt.git@0.3
 planetlab-umts-tools-GITPATH    := git://git.onelab.eu/planetlab-umts-tools.git@planetlab-umts-tools-0.7-1
 nodeupdate-GITPATH              := git://git.onelab.eu/nodeupdate.git@nodeupdate-1.0-0
@@ -13,13 +9,10 @@ nodemanager-GITPATH             := git://git.onelab.eu/nodemanager.git@nodemanag
 #
 pl_sshd-GITPATH			:= git://git.onelab.eu/pl_sshd.git@pl_sshd-1.0-11
 codemux-GITPATH			:= git://git.onelab.eu/codemux.git@codemux-0.1-15
-fprobe-ulog-GITPATH             := git://git.onelab.eu/fprobe-ulog.git@fprobe-ulog-1.1.4-3
 libvirt-GITPATH                 := git://git.onelab.eu/libvirt.git@libvirt-1.2.11-2
 libvirt-python-GITPATH          := git://git.onelab.eu/libvirt-python.git@libvirt-1.2.11-2
 pf2slice-GITPATH		:= git://git.onelab.eu/pf2slice.git@pf2slice-1.0-2
-mom-GITPATH                     := git://git.onelab.eu/mom.git@mom-2.3-5
 inotify-tools-GITPATH		:= git://git.onelab.eu/inotify-tools.git@inotify-tools-3.13-2
-openvswitch-GITPATH		:= git://git.onelab.eu/openvswitch.git@openvswitch-1.2-1
 vsys-GITPATH                    := git://git.onelab.eu/vsys.git@vsys-0.99-4
 vsys-scripts-GITPATH            := git://git.onelab.eu/vsys-scripts.git@vsys-scripts-0.95-51
 bind_public-GITPATH             := git://git.onelab.eu/bind_public.git@bind_public-0.1-3
@@ -30,24 +23,16 @@ plewww-GITPATH                  := git://git.onelab.eu/plewww.git@plewww-5.2-9
 www-register-wizard-GITPATH	:= git://git.onelab.eu/www-register-wizard.git@www-register-wizard-4.3-5
 monitor-GITPATH			:= git://git.onelab.eu/monitor@monitor-3.1-6
 PLCRT-GITPATH			:= git://git.onelab.eu/plcrt.git@PLCRT-1.0-11
-pyopenssl-GITPATH               := git://git.onelab.eu/pyopenssl.git@pyopenssl-0.9-2
 nodeconfig-GITPATH              := git://git.onelab.eu/nodeconfig.git@nodeconfig-5.2-5
 bootmanager-GITPATH             := git://git.onelab.eu/bootmanager.git@bootmanager-6.0-0
 pypcilib-GITPATH                := git://git.onelab.eu/pypcilib.git@pypcilib-0.2-11
 pyplnet-GITPATH                 := git://git.onelab.eu/pyplnet.git@pyplnet-7.0-0
-DistributedRateLimiting-GITPATH	:= git://git.onelab.eu/distributedratelimiting.git@DistributedRateLimiting-0.1-1
 pcucontrol-GITPATH              := git://git.onelab.eu/pcucontrol.git@pcucontrol-1.0-14
-###
-# omf-resctl now comes from yum and gem, no need for rvm-ruby anymore
-oml-GITPATH                     := git://git.onelab.eu/oml.git@oml-2.6.1-1
-###
 bootcd-GITPATH                  := git://git.onelab.eu/bootcd.git@bootcd-6.0-0
 sliceimage-GITPATH              := git://git.onelab.eu/sliceimage.git@sliceimage-5.1-12
 nodeimage-GITPATH               := git://git.onelab.eu/nodeimage.git@nodeimage-5.2-9
 myplc-GITPATH                   := git://git.onelab.eu/myplc.git@myplc-7.0-0
-
 #
 sfa-GITPATH                     := git://git.onelab.eu/sfa.git@sfa-4.0-2
 #
 tests-GITPATH                   := git://git.onelab.eu/tests.git@tests-7.0-0
-
