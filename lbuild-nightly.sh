@@ -141,11 +141,10 @@ function webpublish_cp_local_to_remote () { scp $1 root@${WEBHOST}:$2 ; }
 function webpublish_cp_stdin_to_file () { ssh root@${WEBHOST} cat \> $1; }
 function webpublish_append_stdin_to_file () { ssh root@${WEBHOST} cat \>\> $1; }
 # provide remote dir as first argument, so any number of local files can be passed next
-function webpublish_rsync_dir () { rsync --archive --delete $VERBOSE $2 root@${WEBHOST}:$1 ; }
-function webpublish_rsync_files () {
-    remote="$1"; shift
-    rsync --archive $VERBOSE "$@" root@${WEBHOST}:"$remote" ;
-}
+function webpublish_rsync () {
+    local remote="$1"; shift
+    rsync --archive --delete $VERBOSE "$@" root@${WEBHOST}:"$remote"
+ }
 
 function pretty_duration () {
     total_seconds=$1; shift
@@ -356,7 +355,7 @@ function run_log () {
     rsync --verbose --archive ${testmaster_ssh}:$BASE/logs/ $(rootdir $BASE)/build/testlogs
     # push them to the build web
     chmod -R a+r $(rootdir $BASE)/build/testlogs/
-    webpublish_rsync_dir $WEBPATH/$BASE/testlogs/ $(rootdir $BASE)/build/testlogs/
+    webpublish_rsync $WEBPATH/$BASE/testlogs/ $(rootdir $BASE)/build/testlogs/
 
     echo  "============================== END $COMMAND:run_log on $(date)"
 
@@ -764,23 +763,23 @@ function main () {
         # publish to the web so run_log can find them
         set +e
         trap - ERR INT
-        webpublish rm -rf $WEBPATH/$BASE
+#        webpublish rm -rf $WEBPATH/$BASE
         # guess if we've been doing any debian-related build
         if [ ! -f $(rootdir $BASE)/etc/debian_version  ] ; then
             webpublish mkdir -p $WEBPATH/$BASE/{RPMS,SRPMS}
-            webpublish_rsync_dir $WEBPATH/$BASE/RPMS/ $(rootdir $BASE)/build/RPMS/
-            [[ -n "$PUBLISH_SRPMS" ]] && webpublish_rsync_dir $WEBPATH/$BASE/SRPMS/ $(rootdir $BASE)/build/SRPMS/
+            webpublish_rsync $WEBPATH/$BASE/RPMS/ $(rootdir $BASE)/build/RPMS/
+            [[ -n "$PUBLISH_SRPMS" ]] && webpublish_rsync $WEBPATH/$BASE/SRPMS/ $(rootdir $BASE)/build/SRPMS/
         else
             # run scanpackages so we can use apt-get on this
             # (not needed on fedora b/c this is done by the regular build already)
             run_in_build_guest $BASE "(cd /build ; dpkg-scanpackages DEBIAN/ | gzip -9c > Packages.gz)"
             webpublish mkdir -p $WEBPATH/$BASE/DEBIAN
-            webpublish_rsync_files $WEBPATH/$BASE/DEBIAN/ $(rootdir $BASE)/build/DEBIAN/*.deb
-            webpublish_rsync_files $WEBPATH/$BASE/ $(rootdir $BASE)/build/Packages.gz
+            webpublish_rsync $WEBPATH/$BASE/DEBIAN/ $(rootdir $BASE)/build/DEBIAN/*.deb
+            webpublish_rsync $WEBPATH/$BASE/ $(rootdir $BASE)/build/Packages.gz
         fi
         # publish myplc-release if this exists
         release=$(rootdir $BASE)/build/myplc-release
-        [ -f $release ] && webpublish_rsync_files $WEBPATH/$BASE $release
+        [ -f $release ] && webpublish_rsync $WEBPATH/$BASE $release
         set -e
         trap failure ERR INT
 
