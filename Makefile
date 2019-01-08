@@ -201,9 +201,6 @@ DISTCLEANS += $(1).mk $(2).mk config.$(1)
 $(eval $(call remote_pldistro_fetch_$(3),$(1)))
 endef
 
-$(eval $(call remote_pldistro,wextoolbox,wextoolbox-tags,git))
-$(eval $(call remote_pldistro,wexlxc,wexlxc-tags,git))
-
 ########## stage1 and stage1iter
 # extract specs and compute .mk files by running
 # make stage1=true
