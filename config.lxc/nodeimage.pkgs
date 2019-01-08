@@ -117,7 +117,7 @@ package: sliceimage-@pldistro@-@fcdistro@-@arch@
 package: sliceimage-system-@pldistro@-@fcdistro@-@arch@
 package: lxc-sliceimage
 #package: pl_mom
-package: fprobe-ulog
+package<=f18: fprobe-ulog
 package: vsys
 package: vsys-scripts
 # ??? package: monitor-client

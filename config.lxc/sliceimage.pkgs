@@ -50,7 +50,7 @@ package: vsys-wrapper
 
 # onelab additions
 package<=f27: sliver-openvswitch
-package: ipfwslice
+package<=f25: ipfwslice
 
 # convenience
 package: less emacs-nox
