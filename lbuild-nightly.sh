@@ -249,7 +249,7 @@ function in_root_context () {
 # convenient for simple commands
 function run_in_build_guest () {
     buildname=$1; shift
-    ssh -o "StrictHostKeyChecking no" root@$(guest_ipv4 $buildname) "$@"
+    ssh -o StrictHostKeyChecking=no root@$(guest_ipv4 $buildname) "$@"
 }
 
 # run in the vm - do not manage success/failure, will be done from the root ctx
