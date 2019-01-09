@@ -12,7 +12,7 @@ LOGS=$HOME/machines
 DOMAIN=pl.sophia.inria.fr
 
 DEFAULT_DISTRO=f29
-DEFAULT_MEMORY=4096
+DEFAULT_MEMORY=16384
 
 CONFIRM=
 function usage () {
