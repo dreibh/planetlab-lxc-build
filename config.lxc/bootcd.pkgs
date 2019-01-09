@@ -27,7 +27,8 @@ package: wget
 package: yum
 package: curl
 package: gzip
-package: python
+package<=f27: python
+package>=f29: python2 python-unversioned-command
 package: tar
 package: pciutils
 package: kbd
@@ -39,7 +40,8 @@ package>=f8 package>=centos5: gnupg
 package>=sl6: gnupg2
 package: nano
 package: parted
-package: pyparted
+package<=f27: pyparted
+package>=f29: python2-pyparted
 package: openssh-server
 package: openssh-clients
 package: ncftp
@@ -53,7 +55,7 @@ package: pypcilib
 package: openvpn
 #package: vim-enhanced
 package: e2fsprogs
-package: rsyslog 
+package: rsyslog
 package: strace lsof
 package: net-tools
 

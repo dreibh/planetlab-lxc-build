@@ -28,11 +28,12 @@ package: filesystem
 package: lvm2
 package: bash
 package: coreutils
-package: python
+package<=f27: python
+package>=f29: python2 python-unversioned-command
 package: cpio
 package: e2fsprogs
 package: ed
-package: file     
+package: file
 package: glibc
 package: hdparm
 package: initscripts
@@ -89,7 +90,6 @@ package: iptables
 package: dracut
 package: ntp
 package: perl
-package: python
 package: tar
 package: expect
 package: nfs-utils

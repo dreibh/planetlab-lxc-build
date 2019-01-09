@@ -14,7 +14,8 @@ package: crontabs logrotate passwd sudo
 package: gzip bzip2 tar rsync
 package: wget curl
 package: perl
-package: python python-devel
+package<=f27: python python-devel
+package>=f29: python2 python-unversioned-command python2-devel
 package: yum
 package: iputils
 package: tcpdump traceroute telnet

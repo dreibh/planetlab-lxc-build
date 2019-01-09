@@ -28,7 +28,8 @@ package: bison flex
 package: libtool
 package<=f21: metadata
 package: mysql mysql-devel mysql-server
-package: python python-devel
+package<=f27: python python-devel
+package>=f29: python2 python-unversioned-command python2-devel
 package: python3 python3-devel
 package: doxygen
 package: cronie
