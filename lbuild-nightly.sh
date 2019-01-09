@@ -767,6 +767,9 @@ function main () {
         # guess if we've been doing any debian-related build
         if [ ! -f $(rootdir $BASE)/etc/debian_version  ] ; then
             webpublish mkdir -p $WEBPATH/$BASE/{RPMS,SRPMS}
+            # after moving to f29, we see this dir created as 700
+            # as remote umask is 077
+            webpublish chmod 755 $WEBPATH/$BASE
             webpublish_rsync $WEBPATH/$BASE/RPMS/ $(rootdir $BASE)/build/RPMS/
             [[ -n "$PUBLISH_SRPMS" ]] && webpublish_rsync $WEBPATH/$BASE/SRPMS/ $(rootdir $BASE)/build/SRPMS/
         else
