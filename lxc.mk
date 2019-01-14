@@ -34,30 +34,13 @@ endif
 
 #
 # procprotect: root context module for protecting against weaknesses in /proc
+# has gone since f20
 #
-### remove procprotect from the nodes on f20 and above, needs more work starting with 3.19
-ifneq "$(DISTRONAME)" "$(filter $(DISTRONAME),f20 f21 f22 f23 f24 f25 f27 f29)"
-procprotect-MODULES := procprotect
-procprotect-SPEC := procprotect.spec
-ALL += procprotect
-IN_NODEIMAGE += procprotect
-endif
 
 #
 # ipfw: root context module, and slice companion
+# has gone since f21
 #
-### starting August 2015, ipfw module won't build against fedora22
-# that comes with kernel 4.1.4
-ifneq "$(DISTRONAME)" "$(filter $(DISTRONAME),f21 f22 f23 f24 f25 f27 f29)"
-ipfwroot-MODULES := ipfw
-ipfwroot-SPEC := planetlab/ipfwroot.spec
-ALL += ipfwroot
-IN_NODEIMAGE += ipfwroot
-endif
-
-ipfwslice-MODULES := ipfw
-ipfwslice-SPEC := planetlab/ipfwslice.spec
-ALL += ipfwslice
 
 #
 # comgt - a companion to umts tools
@@ -133,79 +116,13 @@ IN_NODEIMAGE += codemux
 
 #
 # fprobe-ulog
+# has gone since f20
 #
-# xxx temporarily turning this off on f20 and above
-ifneq "$(DISTRONAME)" "$(filter $(DISTRONAME),f20 f21 f22 f23 f24 f25 f27 f29)"
-fprobe-ulog-MODULES := fprobe-ulog
-fprobe-ulog-SPEC := fprobe-ulog.spec
-ALL += fprobe-ulog
-IN_NODEIMAGE += fprobe-ulog
-endif
-
-#################### libvirt version selection
-
-# use fedora's libvirt starting with f22
-ifeq "$(DISTRONAME)" "$(filter $(DISTRONAME),f18 f20 f21)"
-local_libvirt=true
-endif
 
 #
-# libvirt
+# our own brew of libvirt
+# is no longer needed since f22
 #
-ifeq "$(local_libvirt)" "true"
-
-libvirt-MODULES := libvirt
-libvirt-SPEC    := libvirt.spec
-libvirt-BUILD-FROM-SRPM := yes
-# The --without options are breaking spec2make : hard-wired in the specfile instead
-libvirt-STOCK-DEVEL-RPMS += xhtml1-dtds
-libvirt-STOCK-DEVEL-RPMS += libattr-devel augeas libpciaccess-devel yajl-devel
-libvirt-STOCK-DEVEL-RPMS += libpcap-devel radvd ebtables device-mapper-devel
-libvirt-STOCK-DEVEL-RPMS += ceph-devel numactl-devel libcap-ng-devel scrub
-# for 1.2.1 - first seen on f20, not sure for the other ones
-libvirt-STOCK-DEVEL-RPMS += libblkid-devel glusterfs-api-devel glusterfs-devel
-# strictly speaking fuse-devel is not required anymore but we might wish to turn fuse back on again in the future
-libvirt-STOCK-DEVEL-RPMS += fuse-devel libssh2-devel dbus-devel numad
-libvirt-STOCK-DEVEL-RPMS += systemd-devel libnl3-devel iptables-services netcf-devel
-# 1.2.11
-libvirt-STOCK-DEVEL-RPMS += wireshark-devel
-libvirt-STOCK-DEVEL-RPMS += ceph-devel-compat
-ALL += libvirt
-IN_NODEREPO += libvirt
-IN_NODEIMAGE += libvirt
-
-#
-## libvirt-python
-#
-libvirt-python-MODULES := libvirt-python
-libvirt-python-SPEC    := libvirt-python.spec
-libvirt-python-BUILD-FROM-SRPM := yes
-libvirt-python-STOCK-DEVEL-RPMS += pm-utils
-# for 1.2.11
-libvirt-python-STOCK-DEVEL-RPMS += python-nose
-# it would make sense to do something like this if we wanted to
-# build against python3 as well, but for now I turned this feature off
-# in libvirt-python
-#ifeq "$(distro)" "Fedora"
-#xxx if $(distrorelease) > 18
-#libvirt-python-STOCK-DEVEL-RPMS += python3-devel python3-nose python3-lxml
-#endif
-#endif
-libvirt-python-LOCAL-DEVEL-RPMS += libvirt-devel libvirt-docs libvirt-client
-libvirt-python-RPMFLAGS :=     --define 'packager PlanetLab'
-ALL += libvirt-python
-IN_NODEREPO += libvirt-python
-IN_NODEIMAGE += libvirt-python
-
-endif # local_libvirt
-
-#
-# DistributedRateLimiting
-#
-#DistributedRateLimiting-MODULES := DistributedRateLimiting
-#DistributedRateLimiting-SPEC := DistributedRateLimiting.spec
-#ALL += DistributedRateLimiting
-#IN_NODEREPO += DistributedRateLimiting
 
 #
 # pf2slice
@@ -213,26 +130,6 @@ endif # local_libvirt
 pf2slice-MODULES := pf2slice
 pf2slice-SPEC := pf2slice.spec
 ALL += pf2slice
-
-##
-## PlanetLab Mom: Cleans up your mess
-##
-#mom-MODULES := mom
-#mom-SPEC := pl_mom.spec
-#ALL += mom
-#IN_NODEIMAGE += mom
-
-#
-# openvswitch
-#
-# openvswitch-MODULES := openvswitch
-# openvswitch-SPEC := openvswitch.spec
-# openvswitch-STOCK-DEVEL-RPMS += kernel-devel
-# IN_NODEIMAGE += openvswitch
-# # build only on f14 as f16 has this natively
-# ifeq "$(DISTRONAME)" "$(filter $(DISTRONAME),f14)"
-# ALL += openvswitch
-# endif
 
 #
 # vsys
@@ -343,17 +240,6 @@ plcrt-MODULES := PLCRT
 plcrt-SPEC := plcrt.spec
 ALL += plcrt
 
-# f12 has 0.9-1 already
-ifeq "$(DISTRONAME)" "$(filter $(DISTRONAME),f8 centos5)"
-#
-# pyopenssl
-#
-pyopenssl-MODULES := pyopenssl
-pyopenssl-SPEC := pyOpenSSL.spec
-pyopenssl-BUILD-FROM-SRPM := yes
-ALL += pyopenssl
-endif
-
 # nodeconfig
 #
 nodeconfig-MODULES := nodeconfig
@@ -386,16 +272,6 @@ ALL += pyplnet
 IN_NODEIMAGE += pyplnet
 IN_MYPLC += pyplnet
 IN_BOOTCD += pyplnet
-
-ifneq "$(DISTRONAME)" "$(filter $(DISTRONAME),f23 f24 f25 f27 f29)"
-#
-# OML measurement library
-#
-oml-MODULES := oml
-oml-STOCK-DEVEL-RPMS += sqlite-devel
-oml-SPEC := liboml.spec
-ALL += oml
-endif
 
 #
 # bootcd
@@ -503,6 +379,13 @@ ALL += release
 #
 # sfa - Slice Facility Architecture
 #
+# this is python2, somehow the tests won't pass against a py3 plcapi
+# oddly enough, when the py2 sfa code issues xmlrpc calls over ssl
+# to the underlying myplc, we get SSL handshake issues
+# so, let's keep this out of the way for now
+#
+ifneq "$(DISTRONAME)" "$(filter $(DISTRONAME), f27 f29)"
 sfa-MODULES := sfa
 sfa-SPEC := sfa.spec
 ALL += sfa
+endif

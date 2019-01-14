@@ -14,9 +14,9 @@ rm -rf ${vdir}/etc/yum.conf ${vdir}/etc/yum.repos.d
 # turn ON openvswitch as it is required for the privatebridge nm plugin
 chroot ${vdir} systemctl enable openvswitch.service || :
 # enabling network as it ends up turned off on systems that come with NetworkManager, starting with fedora9
-chroot ${vdir} systemctl enable network.service || :
+chroot ${vdir} systemctl disable network.service || :
 # and turn off NetworkManager if present, as it quite obviously messes with network
-chroot ${vdir} systemctl disable NetworkManager.service || :
+chroot ${vdir} systemctl enable NetworkManager.service || :
 # turn on ntpd
 chroot ${vdir} systemctl enable ntpd.service || :
 # tentatively turn on getty on tty1
