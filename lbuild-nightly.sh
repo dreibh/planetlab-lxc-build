@@ -135,12 +135,20 @@ EOF
 
 ### we might build on a box other than the actual web server
 # utilities for handling the pushed material (rpms, logfiles, ...)
-function webpublish_misses_dir () { ssh root@${WEBHOST}  "bash -c \"test \! -d $1\"" ; }
-function webpublish () { ssh root@${WEBHOST} "$@" ; }
-function webpublish_cp_local_to_remote () { scp $1 root@${WEBHOST}:$2 ; }
-function webpublish_cp_stdin_to_file () { ssh root@${WEBHOST} cat \> $1; }
-function webpublish_append_stdin_to_file () { ssh root@${WEBHOST} cat \>\> $1; }
-# provide remote dir as first argument, so any number of local files can be passed next
+function webpublish_misses_dir () {
+    ssh root@${WEBHOST}  "bash -c \"test \! -d $1\""
+}
+function webpublish () {
+    ssh root@${WEBHOST} "$@"
+}
+function webpublish_cp_stdin_to_file () {
+    ssh root@${WEBHOST} cat \> $1 \; chmod g+r,o+r $1
+}
+function webpublish_append_stdin_to_file () {
+    ssh root@${WEBHOST} cat \>\> $1 \; chmod g+r,o+r $1
+}
+# provide remote dir as first argument,
+# so any number of local files can be passed next
 function webpublish_rsync () {
     local remote="$1"; shift
     rsync --archive --delete $VERBOSE "$@" root@${WEBHOST}:"$remote"
@@ -168,7 +176,7 @@ function failure() {
         WEBLOG=/tmp/lbuild-early-$(date +%Y-%m-%d).log.txt
     fi
     webpublish mkdir -p $WEBBASE ||:
-    webpublish_cp_local_to_remote $LOG $WEBLOG ||:
+    webpublish_rsync $WEBLOG $LOG  ||:
     summary $LOG | webpublish_append_stdin_to_file $WEBLOG ||:
     (echo -n "============================== $COMMAND: failure at " ; date ; \
         webpublish tail --lines=1000 $WEBLOG) | \
@@ -196,7 +204,7 @@ function success () {
         WEBLOG=/tmp/lbuild-early-$(date +%Y-%m-%d).log.txt
     fi
     webpublish mkdir -p $WEBBASE
-    webpublish_cp_local_to_remote $LOG $WEBLOG
+    webpublish_rsync $WEBLOG $LOG
     summary $LOG | webpublish_append_stdin_to_file $WEBLOG
     if [ -n "$DO_TEST" ] ; then
         short_message="PASS"
