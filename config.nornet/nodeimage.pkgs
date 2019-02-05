@@ -90,7 +90,6 @@ package: iptables
 package: dracut
 package: ntp
 package: perl
-package: python
 package: tar
 package: expect
 package: nfs-utils
