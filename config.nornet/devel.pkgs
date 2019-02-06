@@ -164,7 +164,7 @@ package: bc
 package: hmaccalc
 package: elfutils-devel
 package: elfutils-libelf-devel
-package: gcc-plugin-devel
+package>=f27: gcc-plugin-devel
 package: net-tools
 package: openssl
 package: perl-devel
