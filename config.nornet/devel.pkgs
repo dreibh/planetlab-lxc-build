@@ -143,30 +143,31 @@ package>=f29: hostname
 
 
 # ###### NorNet customisation ###############################################
-package: lksctp-tools-devel
-package: valgrind-devel
 package: bzip2-devel
-package: glib2-devel
 package: GeoIP-devel
-package: qt-devel
+package: glib2-devel
+package: iptables-services
+package: libdnet-devel
+package: libpcap-devel
+package: lksctp-tools-devel
+package: lua-devel
+package: nmap-ncat
 package: qt5-qtbase-devel
 package: qtchooser
-package: libpcap-devel
-package: libdnet-devel
-package: lua-devel
-package: iptables-services
-package: nmap-ncat
+package: qt-devel
+package: valgrind-devel
 package: xorg-x11-xauth
 
 # The following packages are needed to build the custom kernel:
-package: hmaccalc
-package: net-tools
+package: audit-libs-devel
 package: bc
+package: hmaccalc
 package: elfutils-devel
 package: elfutils-libelf-devel
-package: audit-libs-devel
-package: pesign
+package: gcc-plugin-devel
+package: net-tools
 package: openssl
 package: perl-devel
 package: perl-generators
+package: pesign
 # ###########################################################################
