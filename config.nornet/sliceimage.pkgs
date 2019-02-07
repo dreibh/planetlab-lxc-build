@@ -96,9 +96,9 @@ package: yum-utils
 package: nornet-ca
 package: nornet-nn
 package: netperfmeter
-package: rsplib
+package: rsplib-services
+package: rsplib-tools
 package: subnetcalc
-# package: tracebox
 package: tsctp
 package: psmisc
 package: lsof

@@ -175,9 +175,8 @@ package: smartmontools
 package: nornet-ca
 package: nornet-nn
 package: netperfmeter
-package: rsplib
+package: rsplib-tools
 package: subnetcalc
-# package: tracebox
 package: tsctp
 package: psmisc
 package: lsof
