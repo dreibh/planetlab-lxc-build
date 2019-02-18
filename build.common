@@ -453,16 +453,23 @@ fi
     yum $yum_options clean all || :
 
     # Clean RPM state
+echo "X-1"    
     rm -f $vroot/var/lib/rpm/__db*
 
     # Set time zone to UTC
+echo "X-2"
     if [ -f $vroot/usr/share/zoneinfo/UTC -a -f $vroot/etc/localtime ] ; then
         rm -f $vroot/etc/localtime
         ln -s /usr/share/zoneinfo/UTC $vroot/etc/localtime
     fi
 
+echo "X-3"
     echo "Dumping current list of rpms in /etc/mkfedora-rpms.txt"
+    echo "vroot=$vroot"
+    ls -l $vroot
+    echo "vroot=$vroot"
     chroot $vroot rpm -aq | sort > $vroot/etc/mkfedora-rpms.txt
+echo "X-4"
 
     # remove trap handler, as we are about to call it directly.
     trap - ERR INT
@@ -477,7 +484,12 @@ function pl_root_tune_image () {
     root=$1; shift
 
     # Disable all services in reference image
+echo "Y-1"
+echo "root=$root"
+ls -l $root
+echo "root=$root"
     chroot $root sh -c "/sbin/chkconfig --list | awk '{ print \$1 }' | xargs -i /sbin/chkconfig {} off"
+echo "Y-2"
 
     # FC2 minilogd starts up during shutdown and makes unmounting
     # impossible. Just get rid of it.
