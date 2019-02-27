@@ -69,7 +69,7 @@ IN_NODEIMAGE += nornet-nn
 rsplib-MODULES := rsplib
 rsplib-SPEC := rpm/rsplib.spec
 ALL += rsplib
-IN_NODEIMAGE += rsplib
+IN_NODEIMAGE += rsplib-all
 
 #
 # subnetcalc
