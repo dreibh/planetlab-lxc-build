@@ -65,7 +65,7 @@ function pl_getReleaseName () {
         [Ss]L*)
             releasename=sl$release
             ;;
-        wheezy|jessie|precise|trusty|utopic|vivid|wily|xenial)
+        wheezy|jessie|trusty|xenial|bionic)
             releasename=$distro
             ;;
         *)
