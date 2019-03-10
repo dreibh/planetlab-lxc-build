@@ -88,7 +88,7 @@ function package_method () {
     case $fcdistro in
         f[0-9]*|centos[0-9]*|sl[0-9]*)
             echo dnf ;;
-        wheezy|jessie|precise|trusty|utopic|vivid|wily|xenial)
+        wheezy|jessie|trusty|xenial|bionic)
             echo debootstrap ;;
         *)
             echo Unknown distro $fcdistro ;;
@@ -381,7 +381,7 @@ function debian_mirror () {
     case $fcdistro in
         wheezy|jessie)
             echo http://ftp2.fr.debian.org/debian/ ;;
-        precise|trusty|utopic|vivid|wily|xenial)
+        trusty|xenial|bionic)
             echo http://www-ftp.lip6.fr/pub/linux/distributions/Ubuntu/archive/ ;;
         *) echo unknown distro $fcdistro; exit 1;;
     esac

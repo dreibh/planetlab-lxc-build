@@ -50,6 +50,7 @@ known_fcdistros = [
     # ubuntus
     'trusty',  # 14.04 LTS
     'xenial',  # 16.04 LTS
+    'bionic',  # 18.04 LTS
 ]
 default_pldistro = 'onelab'
 
