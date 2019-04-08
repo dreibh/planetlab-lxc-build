@@ -33,7 +33,7 @@ sliceimage-GITPATH          := git://git.onelab.eu/sliceimage.git@sliceimage-5.1
 nodeimage-GITPATH           := git://git.onelab.eu/nodeimage.git@nodeimage-5.2-9
 myplc-GITPATH               := git://git.onelab.eu/myplc.git@myplc-7.0-0
 #
-sfa-GITPATH                 := git://git.onelab.eu/sfa.git@sfa-4.0-2
+sfa-GITPATH                     := git://git.onelab.eu/sfa.git@master
 #
 
 # !!! tests-GITPATH               := git://git.onelab.eu/tests.git@tests-7.0-0

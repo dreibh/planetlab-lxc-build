@@ -383,9 +383,10 @@ ALL += release
 # oddly enough, when the py2 sfa code issues xmlrpc calls over ssl
 # to the underlying myplc, we get SSL handshake issues
 # so, let's keep this out of the way for now
+# 2019 mar 27: reinstating for hopefully connecting fed4fire
 #
-ifneq "$(DISTRONAME)" "$(filter $(DISTRONAME), f27 f29)"
+#ifneq "$(DISTRONAME)" "$(filter $(DISTRONAME), f27 f29)"
 sfa-MODULES := sfa
 sfa-SPEC := sfa.spec
 ALL += sfa
-endif
+#endif
