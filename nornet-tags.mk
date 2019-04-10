@@ -67,8 +67,8 @@ pcucontrol-GITPATH          := git://git.onelab.eu/pcucontrol.git@pcucontrol-1.0
 # !!! Using NorNet customisation! !!! bootcd-GITPATH                  := git://git.onelab.eu/bootcd.git@bootcd-master
 sliceimage-GITPATH          := git://git.onelab.eu/sliceimage.git@sliceimage-5.1-12
 nodeimage-GITPATH           := git://git.onelab.eu/nodeimage.git@nodeimage-5.2-9
-myplc-GITPATH               := git://git.onelab.eu/myplc.git@myplc-7.0-0
+myplc-GITPATH                   := git://git.onelab.eu/myplc.git@master
 #
-sfa-GITPATH                 := git://git.onelab.eu/sfa.git@sfa-4.0-2
+sfa-GITPATH                     := git://git.onelab.eu/sfa.git@master
 
 # !!! Using NorNet customisation! !!! tests-GITPATH                   := git://git.onelab.eu/tests.git@tests-master
