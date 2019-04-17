@@ -89,7 +89,7 @@ package: tcpdump
 package: tftp
 package: virt-what
 package: whois
-package: wireshark
+package: wireshark-cli
 package: xorg-x11-xauth
 package: yum-utils
 
