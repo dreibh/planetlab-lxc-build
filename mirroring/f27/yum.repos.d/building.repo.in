@@ -1,16 +1,15 @@
 [fedora]
 name=Fedora 27 - $basearch
-baseurl=@MIRRORURL@/fedora/releases/27/Everything/$basearch/os/
+baseurl=@MIRRORURL@/fedora/linux/releases/27/Everything/$basearch/os/
 enabled=1
 metadata_expire=7d
 gpgcheck=1
-gpgkey=http://mirror.onelab.eu/keys/RPM-GPG-KEY-fedora-27-primary
+gpgkey=https://getfedora.org/static/F5282EE4.txt
 
 [updates]
 name=Fedora 27 - $basearch - Updates
-baseurl=@MIRRORURL@/fedora/updates/27/$basearch/
+baseurl=@MIRRORURL@/fedora/linux/updates/27/$basearch/
 enabled=1
 metadata_expire=7d
 gpgcheck=1
-gpgkey=http://mirror.onelab.eu/keys/RPM-GPG-KEY-fedora-27-primary
-
+gpgkey=https://getfedora.org/static/F5282EE4.txt
