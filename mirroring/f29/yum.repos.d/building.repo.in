@@ -1,23 +1,23 @@
 [fedora]
 name=Fedora 29 - $basearch
-baseurl=@MIRRORURL@/fedora/releases/29/Everything/$basearch/os/
+baseurl=@MIRRORURL@/fedora/linux/releases/29/Everything/$basearch/os/
 enabled=1
 metadata_expire=7d
 gpgcheck=1
-gpgkey=http://mirror.onelab.eu/keys/RPM-GPG-KEY-fedora-29-primary
+gpgkey=https://getfedora.org/static/429476B4.txt
 
 [updates]
 name=Fedora 29 - $basearch - Updates
-baseurl=@MIRRORURL@/fedora/updates/29/Everything/$basearch/
+baseurl=@MIRRORURL@/fedora/linux/updates/29/Everything/$basearch/
 enabled=1
 metadata_expire=7d
 gpgcheck=1
-gpgkey=http://mirror.onelab.eu/keys/RPM-GPG-KEY-fedora-29-primary
+gpgkey=https://getfedora.org/static/429476B4.txt
 
 [modular]
 name=Fedora 29 - $basearch - Updates
-baseurl=@MIRRORURL@/fedora/updates/29/Modular/$basearch/
+baseurl=@MIRRORURL@/fedora/linux/updates/29/Modular/$basearch/
 enabled=1
 metadata_expire=7d
 gpgcheck=1
-gpgkey=http://mirror.onelab.eu/keys/RPM-GPG-KEY-fedora-29-primary
+gpgkey=https://getfedora.org/static/429476B4.txt

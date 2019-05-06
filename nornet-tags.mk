@@ -69,6 +69,6 @@ sliceimage-GITPATH          := git://git.onelab.eu/sliceimage.git@sliceimage-5.1
 nodeimage-GITPATH           := git://git.onelab.eu/nodeimage.git@nodeimage-5.2-9
 myplc-GITPATH                   := git://git.onelab.eu/myplc.git@master
 #
-sfa-GITPATH                     := git://git.onelab.eu/sfa.git@master
+sfa-GITPATH                     := git://git.onelab.eu/sfa.git@python2
 
 # !!! Using NorNet customisation! !!! tests-GITPATH                   := git://git.onelab.eu/tests.git@tests-master
