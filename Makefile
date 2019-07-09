@@ -514,6 +514,9 @@ tarballs: $(ALLTARBALLS)
 	@echo $(words $(ALLTARBALLS)) source tarballs OK
 .PHONY: tarballs
 
+SOURCES/%.tar.xz: SOURCES/%
+	tar chpJf $@ -C SOURCES $*
+
 SOURCES/%.tar.bz2: SOURCES/%
 	tar chpjf $@ -C SOURCES $*
 
