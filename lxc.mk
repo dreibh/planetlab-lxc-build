@@ -24,7 +24,7 @@ IN_NODEIMAGE += lxc-userspace
 # with 4.19, the jprobe api has gone entirely
 # https://github.com/torvalds/linux/commit/4de58696de076d9bd2745d1cbe0930635c3f5ac9
 #
-ifneq "$(DISTRONAME)" "$(filter $(DISTRONAME), f29)"
+ifneq "$(DISTRONAME)" "$(filter $(DISTRONAME), f29 f31)"
 #
 transforward-MODULES := transforward
 transforward-SPEC := transforward.spec
@@ -171,8 +171,8 @@ IN_SLICEIMAGE += bind_public
 ALL += bind_public
 
 # in fedora 29, this triggers nasty-looking compile messages
-# not trying too hard, we're mostly after the server-side of f29
-ifneq "$(DISTRONAME)" "$(filter $(DISTRONAME), f29)"
+# not trying too hard, we're mostly after the server-side of f29 and above
+ifneq "$(DISTRONAME)" "$(filter $(DISTRONAME), f29 f31)"
 #
 # sliver-openvswitch
 #
@@ -385,7 +385,7 @@ ALL += release
 # so, let's keep this out of the way for now
 # 2019 mar 27: reinstating for hopefully connecting fed4fire
 #
-#ifneq "$(DISTRONAME)" "$(filter $(DISTRONAME), f27 f29)"
+#ifneq "$(DISTRONAME)" "$(filter $(DISTRONAME), f27 f29 f31)"
 sfa-MODULES := sfa
 sfa-SPEC := sfa.spec
 ALL += sfa

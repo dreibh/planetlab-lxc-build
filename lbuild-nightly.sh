@@ -11,7 +11,7 @@ COMMAND=$(basename $0)
 export PATH=$PATH:/bin:/sbin
 
 # default values, tunable with command-line options
-DEFAULT_FCDISTRO=f29
+DEFAULT_FCDISTRO=f31
 DEFAULT_PLDISTRO=lxc
 DEFAULT_PERSONALITY=linux64
 DEFAULT_MAILDEST="build at onelab.eu"

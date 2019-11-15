@@ -35,14 +35,14 @@ from optparse import OptionParser
 import re
 
 default_arch = 'x86_64'
-known_arch = ['i386', 'i686', 'x86_64']
-default_fcdistro = 'f29'
+known_archs = ['i386', 'i686', 'x86_64']
+default_fcdistro = 'f31'
 known_fcdistros = [
     'centos5', 'centos6',
     # oldies but we have references to that in the pkgs files
     'f8', 'f10', 'f12', 'f14', 'f16', 'f18', 'f20', 'f21', 'f22', 'f23', 'f24',
     # these ones are still relevant
-    'f25', 'f27', 'f29',
+    'f25', 'f27', 'f29', 'f31'
     # scientific linux
     'sl6',
     # debians
@@ -242,7 +242,7 @@ def main ():
         sys.exit(1)
     keyword = args[0]
     inputs = args[1:]
-    if not options.arch in known_arch:
+    if not options.arch in known_archs:
         print('Unsupported arch', options.arch, file=stderr)
         parser.print_help(file=stderr)
         sys.exit(1)
