@@ -117,7 +117,7 @@ class PkgsParser:
     re_qualified += r'\s*'
     re_qualified += r'(?P<fcdistro>{re_ident}[0-9]+)'.format(re_ident=re_ident)
     re_qualified += r'\s*'
-    m_qualified = re.compile(r'\A{}\Z'.format(re_qualified))
+    m_qualified = re.compile(r'\A{re_qualified}\Z'.format(re_qualified=re_qualified))
 
     re_old = '[a-z]+[+-][a-z]+[0-9]+'
     m_old = re.compile(r'\A{}\Z'.format(re_old))
@@ -242,13 +242,13 @@ def main ():
         sys.exit(1)
     keyword = args[0]
     inputs = args[1:]
-    if not options.arch in known_archs:
+    if options.arch not in known_archs:
         print('Unsupported arch', options.arch, file=stderr)
         parser.print_help(file=stderr)
         sys.exit(1)
     if options.arch == 'i686':
         options.arch = 'i386'
-    if not options.fcdistro in known_fcdistros:
+    if options.fcdistro not in known_fcdistros:
         print('Unsupported fcdistro', options.fcdistro, file=stderr)
         parser.print_help(file=stderr)
         sys.exit(1)
