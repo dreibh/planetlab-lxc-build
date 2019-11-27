@@ -3,7 +3,7 @@ transforward-GITPATH        := git://git.onelab.eu/transforward.git@transforward
 comgt-GITPATH               := git://git.onelab.eu/comgt.git@0.3
 planetlab-umts-tools-GITPATH:= git://git.onelab.eu/planetlab-umts-tools.git@planetlab-umts-tools-0.7-1
 nodeupdate-GITPATH          := git://git.onelab.eu/nodeupdate.git@nodeupdate-1.0-0
-PingOfDeath-GITPATH         := git://git.onelab.eu/pingofdeath.git@PingOfDeath-2.2-1
+PingOfDeath-GITPATH         := git://git.onelab.eu/pingofdeath.git@master
 plnode-utils-GITPATH        := git://git.onelab.eu/plnode-utils.git@plnode-utils-1.0-0
 nodemanager-GITPATH         := git://git.onelab.eu/nodemanager.git@nodemanager-7.0-0
 #
