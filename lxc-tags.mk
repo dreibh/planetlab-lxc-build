@@ -35,4 +35,4 @@ myplc-GITPATH                   := git://git.onelab.eu/myplc.git@master
 #
 sfa-GITPATH                     := git://git.onelab.eu/sfa.git@python2
 #
-tests-GITPATH               := git://git.onelab.eu/tests.git@tests-7.0-0
+tests-GITPATH                   := git://git.onelab.eu/tests.git@master
