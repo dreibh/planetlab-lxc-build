@@ -476,6 +476,15 @@ fi
 function pl_root_tune_image () {
     root=$1; shift
 
+    # This tells the Boot Manager that it is okay to update
+    # /etc/resolv.conf and /etc/hosts whenever the network configuration
+    # changes. Users are free to delete this file.
+    touch $root/etc/AUTO_UPDATE_NET_FILES
+
+    # all this sounds terribly old and out of scope
+    # turning off for fedora31 where it just fails
+    return 0
+
     # Disable all services in reference image
     chroot $root sh -c "/sbin/chkconfig --list | awk '{ print \$1 }' | xargs -i /sbin/chkconfig {} off"
 
@@ -484,10 +493,6 @@ function pl_root_tune_image () {
     rm -f $root/sbin/minilogd
     ln -nsf /bin/true $root/sbin/minilogd
 
-    # This tells the Boot Manager that it is okay to update
-    # /etc/resolv.conf and /etc/hosts whenever the network configuration
-    # changes. Users are free to delete this file.
-    touch $root/etc/AUTO_UPDATE_NET_FILES
 }
 
 # Move specified directories out of a src tree into a dst tree, and
