@@ -12,6 +12,7 @@ package: coreutils
 package: iputils
 package: kernel
 package>=f23: kernel-modules kernel-modules-extra
+package>=f31: kernel-core
 package>=f24: systemd-udev
 package: bzip2
 package: diffutils
