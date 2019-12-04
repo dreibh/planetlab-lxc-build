@@ -420,8 +420,10 @@ fi
     function investigate() {
         echo "* DBG BEG contents of /boot"
         ls -lR $vroot/boot || :
-        echo "* DBG MID"
-        rpm --root $vroot -ql kernel-core && rpm --root $vroot -q --verify kernel-core || :
+        echo "* DBG MID1"
+        rpm --root $vroot -ql kernel-core | grep /boot || :
+        echo "* DBG MID2"
+        rpm --root $vroot -q --verify kernel-core || :
         echo "* DBG END contents of /boot"
     }
 
