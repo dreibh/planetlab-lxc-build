@@ -417,6 +417,16 @@ fi
         done
     fi
 
+    function investigate() {
+        echo "* DBG BEG contents of /boot"
+        ls -lR $vroot/boot || :
+        echo "* DBG MID"
+        rpm --root $vroot -ql kernel-core && rpm --root $vroot -q --verify kernel-core || :
+        echo "* DBG END contents of /boot"
+    }
+
+    investigate
+
     # formerly in bootcd/prep.sh : to optimize footprint
     if [ -n "$pkgs_junk" ] ; then
         echo "* Removing unnecessary junk"
@@ -430,8 +440,12 @@ fi
         popd
     fi
 
+    investigate
+
     # Clean yum cache
     echo "* Cleaning up"
+
+    investigate
 
 #    # NOTE: this hack is for Fedora >= 12.
 #    # if kernel-debug is installed, clean it up
@@ -463,6 +477,8 @@ fi
 
     echo "Dumping current list of rpms in /etc/mkfedora-rpms.txt"
     chroot $vroot rpm -aq | sort > $vroot/etc/mkfedora-rpms.txt
+
+    investigate
 
     # remove trap handler, as we are about to call it directly.
     trap - ERR INT
