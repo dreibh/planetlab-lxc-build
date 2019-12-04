@@ -30,7 +30,7 @@ function lxcroot () {
 
 # XXX fixme : when creating a 32bits VM we need to call linux32 as appropriate...s
 
-DEFAULT_FCDISTRO=f29
+DEFAULT_FCDISTRO=f31
 DEFAULT_PLDISTRO=lxc
 DEFAULT_PERSONALITY=linux64
 DEFAULT_MEMORY=3072
@@ -318,7 +318,8 @@ function fedora_configure_systemd() {
     ln -sf /dev/null ${lxc_root}/etc/systemd/system/"getty@.service"
     rm -f ${lxc_root}/etc/systemd/system/getty.target.wants/*service || :
 # can't seem to handle this one with systemctl
-    chroot ${lxc_root} $personality chkconfig network on
+# second part should trigger starting with fedora31, where the network target is not manually manageable
+    chroot ${lxc_root} $personality chkconfig network on ||     chroot ${lxc_root} $personality systemctl enable NetworkManager
 }
 
 # overwrite container yum config

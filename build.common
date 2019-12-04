@@ -157,7 +157,7 @@ function pl_root_rpm_macros () {
     cat <<EOF
 %_install_langs C:en_US:en
 %_netsharedpath /proc:/dev/pts:/usr/share/info
-%_excludedocs 0
+%_excludedocs 1
 %__file_context_path /dev/null
 EOF
 }
@@ -417,6 +417,16 @@ fi
         done
     fi
 
+    function investigate() {
+        echo "* DBG BEG contents of /boot"
+        ls -lR $vroot/boot || :
+        echo "* DBG MID"
+        rpm --root $vroot -ql kernel-core && rpm --root $vroot -q --verify kernel-core || :
+        echo "* DBG END contents of /boot"
+    }
+
+    investigate
+
     # formerly in bootcd/prep.sh : to optimize footprint
     if [ -n "$pkgs_junk" ] ; then
         echo "* Removing unnecessary junk"
@@ -430,46 +440,45 @@ fi
         popd
     fi
 
+    investigate
+
     # Clean yum cache
     echo "* Cleaning up"
 
-    # NOTE: this hack is for Fedora >= 12.
-    # if kernel-debug is installed, clean it up
-    # we link to our version of kernel/initrd and clean up
-    # kernel-debug manually
-    if rpm --root $vroot --quiet -q kernel-debug ; then
-        echo "* Cleaning up kernel-debug - (workaround for f12)"
-        pushd $vroot/boot/
-        rm -rf kernel-boot kernel-bootsmp initrd-boot initrd-bootsmp
-        ln -s vmlinuz-*${pldistro}* kernel-boot
-        ln -s vmlinuz-*${pldistro}* kernel-bootsmp
-        ln -s initrd-*${pldistro}* initrd-boot
-        ln -s initrd-*${pldistro}* initrd-bootsmp
-        rpm --root $vroot --nodeps -e kernel-debug || :
-        popd
-    fi
+    investigate
+
+#    # NOTE: this hack is for Fedora >= 12.
+#    # if kernel-debug is installed, clean it up
+#    # kernel-debug manually
+#    # we link to our version of kernel/initrd and clean up
+#    if rpm --root $vroot --quiet -q kernel-debug ; then
+#        echo "* Cleaning up kernel-debug - (workaround for f12)"
+#        pushd $vroot/boot/
+#        rm -rf kernel-boot kernel-bootsmp initrd-boot initrd-bootsmp
+#        ln -s vmlinuz-*${pldistro}* kernel-boot
+#        ln -s vmlinuz-*${pldistro}* kernel-bootsmp
+#        ln -s initrd-*${pldistro}* initrd-boot
+#        ln -s initrd-*${pldistro}* initrd-bootsmp
+#        rpm --root $vroot --nodeps -e kernel-debug || :
+#        popd
+#    fi
 
     # ignore yum's return code that is basically undefined
     yum $yum_options clean all || :
 
     # Clean RPM state
-echo "X-1"    
     rm -f $vroot/var/lib/rpm/__db*
 
     # Set time zone to UTC
-echo "X-2"
     if [ -f $vroot/usr/share/zoneinfo/UTC -a -f $vroot/etc/localtime ] ; then
         rm -f $vroot/etc/localtime
         ln -s /usr/share/zoneinfo/UTC $vroot/etc/localtime
     fi
 
-echo "X-3"
     echo "Dumping current list of rpms in /etc/mkfedora-rpms.txt"
-    echo "vroot=$vroot"
-    ls -l $vroot
-    echo "vroot=$vroot"
     chroot $vroot rpm -aq | sort > $vroot/etc/mkfedora-rpms.txt
-echo "X-4"
+
+    investigate
 
     # remove trap handler, as we are about to call it directly.
     trap - ERR INT
@@ -483,23 +492,23 @@ echo "X-4"
 function pl_root_tune_image () {
     root=$1; shift
 
+    # This tells the Boot Manager that it is okay to update
+    # /etc/resolv.conf and /etc/hosts whenever the network configuration
+    # changes. Users are free to delete this file.
+    touch $root/etc/AUTO_UPDATE_NET_FILES
+
+    # all this sounds terribly old and out of scope
+    # turning off for fedora31 where it just fails
+    return 0
+
     # Disable all services in reference image
-echo "Y-1"
-echo "root=$root"
-ls -l $root
-echo "root=$root"
     chroot $root sh -c "/sbin/chkconfig --list | awk '{ print \$1 }' | xargs -i /sbin/chkconfig {} off"
-echo "Y-2"
 
     # FC2 minilogd starts up during shutdown and makes unmounting
     # impossible. Just get rid of it.
     rm -f $root/sbin/minilogd
     ln -nsf /bin/true $root/sbin/minilogd
 
-    # This tells the Boot Manager that it is okay to update
-    # /etc/resolv.conf and /etc/hosts whenever the network configuration
-    # changes. Users are free to delete this file.
-    touch $root/etc/AUTO_UPDATE_NET_FILES
 }
 
 # Move specified directories out of a src tree into a dst tree, and
