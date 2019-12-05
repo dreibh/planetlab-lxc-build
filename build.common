@@ -302,16 +302,23 @@ function pl_root_mkfedora () {
         umount -l $vroot/proc
         umount -l $vroot/dev/shm
         umount -l $vroot/dev/pts
+        umount -l $vroot/dev
+        umount -l $vroot/run
+        umount -l $vroot/sys
     }
 
     # Clean up before exiting if anything goes wrong
     trap "mkfedora_cleanup" ERR INT
 
     # Mount in reference image
+    mount -t sysfs none $vroot/sys
+    mount -t tmpfs none $vroot/run
+    mount -t devtmpfs none $vroot/dev
     mount -t devpts none $vroot/dev/pts
     mount -t tmpfs none $vroot/dev/shm
     mkdir -p $vroot/proc
     mount -t proc none $vroot/proc
+
     
     # Create a /var/lib dirs for yum & rpm
     mkdir -p $vroot/var/lib/yum
