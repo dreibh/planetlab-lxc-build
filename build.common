@@ -299,12 +299,13 @@ function pl_root_mkfedora () {
     pl_root_rpm_macros > $vroot/tmp/.rpmmacros
 
     function mkfedora_cleanup () {
-        umount -l $vroot/proc
+        umount -l $vroot/dev/log
         umount -l $vroot/dev/shm
         umount -l $vroot/dev/pts
         umount -l $vroot/dev
         umount -l $vroot/run
         umount -l $vroot/sys
+        umount -l $vroot/proc
     }
 
     # Clean up before exiting if anything goes wrong
@@ -312,12 +313,13 @@ function pl_root_mkfedora () {
 
     # Mount in reference image
     mkdir -p $vroot/{proc,sys,run} $vroot/dev/{pts,shm}
+    mount -t proc none $vroot/proc
     mount -t sysfs none $vroot/sys
     mount -t tmpfs none $vroot/run
     mount -t devtmpfs none $vroot/dev
     mount -t devpts none $vroot/dev/pts
     mount -t tmpfs none $vroot/dev/shm
-    mount -t proc none $vroot/proc
+    mount --bind $(readlink /dev/log) $vroot/dev/log
 
     
     # Create a /var/lib dirs for yum & rpm
