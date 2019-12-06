@@ -311,12 +311,12 @@ function pl_root_mkfedora () {
     trap "mkfedora_cleanup" ERR INT
 
     # Mount in reference image
+    mkdir -p $vroot/{proc,sys,run} $vroot/dev/{pts,shm}
     mount -t sysfs none $vroot/sys
     mount -t tmpfs none $vroot/run
     mount -t devtmpfs none $vroot/dev
     mount -t devpts none $vroot/dev/pts
     mount -t tmpfs none $vroot/dev/shm
-    mkdir -p $vroot/proc
     mount -t proc none $vroot/proc
 
     
