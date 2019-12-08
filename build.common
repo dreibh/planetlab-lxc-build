@@ -313,6 +313,7 @@ function pl_root_mkfedora () {
 
     # Mount in reference image
     mkdir -p $vroot/{proc,sys,run} $vroot/dev/{pts,shm}
+    touch $vroot/dev/log
     mount -t proc none $vroot/proc
     mount -t sysfs none $vroot/sys
     mount -t tmpfs none $vroot/run
