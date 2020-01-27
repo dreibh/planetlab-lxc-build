@@ -299,7 +299,7 @@ function pl_root_mkfedora () {
     pl_root_rpm_macros > $vroot/tmp/.rpmmacros
 
     function mkfedora_cleanup () {
-        umount -l $vroot/dev/log
+        umount -l $vroot/dev/log || true
         umount -l $vroot/dev/shm
         umount -l $vroot/dev/pts
         umount -l $vroot/dev
