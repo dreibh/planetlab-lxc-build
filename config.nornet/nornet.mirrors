@@ -9,6 +9,6 @@ mirror: http://archives.fedoraproject.org/pub/archive
 # mirror: http://mirror.onelab.eu/
 
 # There mirrors are without Fedora 29!
-# mirror: http://fedora.uib.no/fedora/linux/
-# mirror: http://ftp.acc.umu.se/mirror/
-# mirror: http://ftp.lysator.liu.se/pub/fedora/linux
+# mirror: http://fedora.uib.no
+# mirror: http://ftp.acc.umu.se/mirror
+# mirror: http://ftp.lysator.liu.se/pub
