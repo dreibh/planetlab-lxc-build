@@ -123,6 +123,8 @@ package: python-psycopg2
 package: python-setuptools
 package: python-dateutil
 package: python-lxml
+# hopefully temporary, for sfa@python2
+package>=f29: python2-dateutil python2-lxml
 # DistributedRateLimiting
 package: libxml2-devel
 # myplc-docs
