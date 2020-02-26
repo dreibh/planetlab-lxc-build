@@ -12,6 +12,12 @@ package: coreutils
 package: iputils
 package: kernel
 package>=f23: kernel-modules kernel-modules-extra
+# f31: building root images with a kernel with kernel-core
+# apparently this requires grubby-deprecated;
+# it might even be safer to install that one 
+# earlier so that we can be sure that grubby-deprecated is there
+# when the kernel-core install scriptlet triggers
+package>=f31: grubby-deprecated kernel-core 
 package>=f24: systemd-udev
 package: bzip2
 package: diffutils
