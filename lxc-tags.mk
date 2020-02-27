@@ -5,7 +5,7 @@ planetlab-umts-tools-GITPATH:= git://git.onelab.eu/planetlab-umts-tools.git@plan
 nodeupdate-GITPATH          := git://git.onelab.eu/nodeupdate.git@nodeupdate-1.0-0
 PingOfDeath-GITPATH         := git://git.onelab.eu/pingofdeath.git@master
 plnode-utils-GITPATH        := git://git.onelab.eu/plnode-utils.git@plnode-utils-1.0-0
-nodemanager-GITPATH         := git://git.onelab.eu/nodemanager.git@nodemanager-7.0-0
+nodemanager-GITPATH             := git://git.onelab.eu/nodemanager.git@master
 #
 pl_sshd-GITPATH             := git://git.onelab.eu/pl_sshd.git@pl_sshd-1.0-11
 codemux-GITPATH             := git://git.onelab.eu/codemux.git@codemux-0.1-15
@@ -30,7 +30,7 @@ pyplnet-GITPATH             := git://git.onelab.eu/pyplnet.git@pyplnet-7.0-0
 pcucontrol-GITPATH              := git://git.onelab.eu/pcucontrol.git@master
 bootcd-GITPATH                  := git://git.onelab.eu/bootcd.git@master
 sliceimage-GITPATH          := git://git.onelab.eu/sliceimage.git@sliceimage-5.1-12
-nodeimage-GITPATH           := git://git.onelab.eu/nodeimage.git@nodeimage-5.2-9
+nodeimage-GITPATH               := git://git.onelab.eu/nodeimage.git@master
 myplc-GITPATH                   := git://git.onelab.eu/myplc.git@master
 #
 sfa-GITPATH                     := git://git.onelab.eu/sfa.git@python2
