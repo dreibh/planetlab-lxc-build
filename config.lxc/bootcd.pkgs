@@ -42,7 +42,9 @@ package: authconfig
 package: hdparm
 package: lvm2
 package: kexec-tools
-package>=f8 package>=centos5: gnupg
+# see myplc/plc.d/gpg
+package<=f29: gnupg
+package>=f31: gnupg1
 package>=sl6: gnupg2
 package: nano
 package: parted

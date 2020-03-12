@@ -42,7 +42,9 @@ package: dnsmasq
 # for spec2make / rpmlib
 package=f8: popt-devel
 # kernel
-package: gnupg
+# see myplc/plc.d/gpg
+package<=f29: gnupg
+package>=f31: gnupg1
 package: diffutils
 package: patchutils
 package: vconfig
