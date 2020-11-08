@@ -3,6 +3,23 @@
 COMMAND=$(basename $0)
 DIRNAME=$(dirname $0)
 
+# NOTE - April 2020
+# this whole lot won't work well with ubuntu containers any longer
+# tried with webprivacy on bionic, and
+# (*) the initial populating phase somehow spawned a question screen
+#     something about asking questions during upgrades..
+#     so I had to turn off the redirection into ~/machines/<container>.log
+# (*) more badly, the resulting container does not start its network upon boot
+#     everything is in place and it could be started manually 
+#     like for the record e.g.
+#         ip link set dev eth0 up
+#         ip address add 138.96.119.13/21 dev eth0
+#         ip route add default dev eth0 via 138.96.112.250
+#         ping -c 1 8.8.8.8
+# trying to solve that last issue by apt-get install'ing network-manager
+# (which was missing indeed) was not enough 
+# a bit more work seems to be needed if that became needed 
+
 BUILD="${HOME}/git-build"
 
 LOGS=$HOME/machines
@@ -11,7 +28,7 @@ LOGS=$HOME/machines
 
 DOMAIN=pl.sophia.inria.fr
 
-DEFAULT_DISTRO=f31
+DEFAULT_DISTRO=f33
 DEFAULT_MEMORY=16384
 
 CONFIRM=

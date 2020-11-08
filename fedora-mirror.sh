@@ -16,8 +16,8 @@ root=/mirror/
 us_fedora_url=rsync://mirrors.kernel.org/fedora
 eu_fedora_url=rsync://mirror1.hs-esslingen.de/fedora/linux
 
-default_distroname="f31"
-all_distronames="f29 f31"
+default_distroname="f33"
+all_distronames="f31 f33"
 
 global_arch="x86_64"
 
