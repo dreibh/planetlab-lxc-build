@@ -89,6 +89,8 @@ fqdn=$VM_HOSTNAME.$DOMAIN
 initvm="$BUILD/lbuild-initvm.sh"
 [ -z "$IMAGE" ] && initvm="$initvm -f $DISTRO" || initvm="$initvm -i $IMAGE"
 initvm="$initvm -n $fqdn"
+# always use fedora repos
+initvm="$initvm -u"
 [ -n "$DO_NOT_START_VM" ] && initvm="$initvm -s"
 [ -n "$MEMORY" ] && initvm="$initvm -m $MEMORY"
 initvm="$initvm $container"
