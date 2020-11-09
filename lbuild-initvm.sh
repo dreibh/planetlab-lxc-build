@@ -335,8 +335,7 @@ function fedora_configure_yum () {
 
     # use mirroring/ stuff instead of a hard-wired config
     local repofile=$lxc_root/etc/yum.repos.d/building.repo
-    yumconf_mirrors $repofile ${DIRNAME} $fcdistro \
-        "" $FEDORA_MIRROR
+    yumconf_mirrors $repofile ${DIRNAME} $fcdistro "" $FEDORA_MIRROR
     # the keys stuff requires adjustment though
     sed -i $repofile -e s,'gpgkey=.*',"gpgkey=${FEDORA_MIRROR_KEYS}/RPM-GPG-KEY-fedora-${fedora_release}-primary,"
 
