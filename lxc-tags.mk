@@ -29,7 +29,7 @@ pypcilib-GITPATH                := git://git.onelab.eu/pypcilib.git@master
 pyplnet-GITPATH             := git://git.onelab.eu/pyplnet.git@pyplnet-7.0-0
 pcucontrol-GITPATH              := git://git.onelab.eu/pcucontrol.git@master
 bootcd-GITPATH                  := git://git.onelab.eu/bootcd.git@master
-sliceimage-GITPATH          := git://git.onelab.eu/sliceimage.git@sliceimage-5.1-12
+sliceimage-GITPATH              := git://git.onelab.eu/sliceimage.git@master
 nodeimage-GITPATH               := git://git.onelab.eu/nodeimage.git@master
 myplc-GITPATH                   := git://git.onelab.eu/myplc.git@master
 #
