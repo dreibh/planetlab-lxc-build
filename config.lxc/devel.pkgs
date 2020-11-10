@@ -38,7 +38,7 @@ package: expat-devel
 package: ncurses-devel
 package: readline-devel
 package: dnsmasq
-package <= f31: db4-devel
+package<=f31: db4-devel
 # for spec2make / rpmlib
 package=f8: popt-devel
 # kernel
@@ -81,7 +81,8 @@ package: ghostscript
 package: ed
 package: docbook-utils-pdf
 # plcapi
-package: postgresql postgresql-devel postgresql-python postgresql-server
+package: postgresql postgresql-devel postgresql-server
+package<=f31: postgresql-python
 # if we don't specify @arch@ for php-devel, we end up with the 2 variants (i386 and x86_64)
 # in an undetermined order, and php-config --extension-dir might return the wrong place
 package: php php-devel.@arch@ php-gd php-pgsql
