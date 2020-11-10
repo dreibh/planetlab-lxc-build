@@ -134,12 +134,21 @@ ALL += pf2slice
 #
 # vsys
 #
+# dropped in f33:
+#ocamlopt  -c -o inotify.cmx inotify.ml
+#File "inotify.ml", line 95, characters 27-30:
+#95 |    let toread = Unix.read fd buf 0 toread in
+#                                ^^^
+#Error: This expression has type string but an expression was expected of type bytes
+# 
+ifneq "$(DISTRONAME)" "$(filter $(DISTRONAME), f33)"
 vsys-MODULES := vsys
 vsys-SPEC := vsys.spec
 # ocaml-docs is not needed anymore but keep it on a tmp basis as some tags may still have it
 vsys-STOCK-DEVEL-RPMS += ocaml-ocamldoc ocaml-docs
 IN_NODEIMAGE += vsys
 ALL += vsys
+endif
 
 #
 # vsyssh : installed in slivers
