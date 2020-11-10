@@ -229,9 +229,16 @@ IN_MYPLC += www-register-wizard
 #
 # WARNING: as of f27 I have to remove support for SSL in pcucontrol
 # see pcucontrol.spec for details
+# no longer builds in f33
+# stdsoap2.cpp: In function ‘char* soap_string_in(soap*, int, long int, long int)’:
+# stdsoap2.cpp:8259:18: error: narrowing conversion of ‘2147483708’ from ‘unsigned int’ to ‘int’ [-Wnarrowing]
+#  8259 |       case '<' | 0x80000000:
+#       |                  ^~~~~~~~~~
+ifneq "$(DISTRONAME)" "$(filter $(DISTRONAME), f33)"
 pcucontrol-MODULES := pcucontrol
 pcucontrol-SPEC := pcucontrol.spec
 ALL += pcucontrol
+endif
 
 #
 # monitor
