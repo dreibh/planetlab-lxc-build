@@ -8,6 +8,14 @@
 # see doc in Makefile
 #
 
+
+
+### starting with f31 : server-side-only
+ifneq "$(DISTRONAME)" "$(filter $(DISTRONAME), f31 f33)"
+###
+
+
+
 ### the madwifi drivers ship with fedora16's kernel rpm
 
 #
@@ -140,7 +148,7 @@ ALL += pf2slice
 #95 |    let toread = Unix.read fd buf 0 toread in
 #                                ^^^
 #Error: This expression has type string but an expression was expected of type bytes
-# 
+#
 ifneq "$(DISTRONAME)" "$(filter $(DISTRONAME), f33)"
 vsys-MODULES := vsys
 vsys-SPEC := vsys.spec
@@ -190,6 +198,15 @@ sliver-openvswitch-SPEC := sliver-openvswitch.spec
 IN_SLICEIMAGE += sliver-openvswitch
 ALL += sliver-openvswitch
 endif
+
+
+
+### server-side-only
+endif
+### server-side-only
+
+
+
 
 #
 # plcapi
@@ -248,6 +265,12 @@ endif
 #monitor-STOCK-DEVEL-RPMS += net-snmp net-snmp-devel
 #ALL += monitor
 #IN_NODEIMAGE += monitor
+
+
+### server-side-only
+ifneq "$(DISTRONAME)" "$(filter $(DISTRONAME), f31 f33)"
+### server-side-only
+
 
 #
 # PLC RT
@@ -369,6 +392,12 @@ slicerepo-DEPEND-FILES := RPMS/yumgroups.xml
 slicerepo-SPECVARS = slice_rpms_plus=$(SLICEREPO_RPMS_3PLUS)
 slicerepo-RPMDATE := yes
 ALL += slicerepo
+
+
+### server-side-only
+endif
+### server-side-only
+
 
 #
 # MyPLC : lightweight packaging, dependencies are yum-installed in a vserver
