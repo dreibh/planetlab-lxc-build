@@ -299,30 +299,17 @@ function pl_root_mkfedora () {
     pl_root_rpm_macros > $vroot/tmp/.rpmmacros
 
     function mkfedora_cleanup () {
-        umount -l $vroot/dev/log || true
+        umount -l $vroot/proc
         umount -l $vroot/dev/shm
         umount -l $vroot/dev/pts
-        umount -l $vroot/dev
-        umount -l $vroot/run
-        umount -l $vroot/sys
-        umount -l $vroot/proc
     }
 
     # Clean up before exiting if anything goes wrong
     trap "mkfedora_cleanup" ERR INT
 
     # Mount in reference image
-    mkdir -p $vroot/{proc,sys,run} $vroot/dev/{pts,shm}
-    touch $vroot/dev/log
-    mount -t proc none $vroot/proc
-    mount -t sysfs none $vroot/sys
-    mount -t tmpfs none $vroot/run
-    mount -t devtmpfs none $vroot/dev
     mount -t devpts none $vroot/dev/pts
     mount -t tmpfs none $vroot/dev/shm
-    #mount --bind $(readlink /dev/log) $vroot/dev/log
-
-
     mkdir -p $vroot/proc
     mount -t proc none $vroot/proc
 
@@ -408,23 +395,6 @@ fi
     # ignore yum's return code that is basically undefined
     yum $yum_options install glibc || :
 
-    echo "* Installing kernel-core"
-    # ignore yum's return code that is basically undefined
-    yum $yum_options install kernel-core || :
-
-    function investigate() {
-        echo "* DBG BEG contents of /boot"
-        ls -lRa $vroot/boot || :
-        find $vroot -name 'vmlinuz*'
-        echo "* DBG MID1"
-        rpm --root $vroot -ql kernel-core | grep /boot || :
-        echo "* DBG MID2"
-        rpm --root $vroot -qV -v kernel-core | grep /boot || :
-        echo "* DBG END contents of /boot"
-    }
-
-    investigate
-
     # Go, baby, go
     if [ -n "$pkgs_packages" ] ; then
         echo "* Installing optional packages" $pkgs_packages
@@ -437,10 +407,8 @@ fi
         fi
     fi
 
-    investigate
-
     if [ -n "$pkgs_groups" ] ; then
-        ## call yum sequentially to get finer-grained info on dependencies
+       ## call yum sequentially to get finer-grained info on dependencies
         for group_plus in $pkgs_groups ; do
             group=$(echo $group_plus | sed -e "s,+++, ,g")
             echo "* Installing optional group $group"
@@ -448,8 +416,6 @@ fi
             yum $yum_options groupinstall "$group" || :
         done
     fi
-
-    investigate
 
     # formerly in bootcd/prep.sh : to optimize footprint
     if [ -n "$pkgs_junk" ] ; then
@@ -464,12 +430,8 @@ fi
         popd
     fi
 
-    investigate
-
     # Clean yum cache
     echo "* Cleaning up"
-
-    investigate
 
 #    # NOTE: this hack is for Fedora >= 12.
 #    # if kernel-debug is installed, clean it up
@@ -501,8 +463,6 @@ fi
 
     echo "Dumping current list of rpms in /etc/mkfedora-rpms.txt"
     chroot $vroot rpm -aq | sort > $vroot/etc/mkfedora-rpms.txt
-
-    investigate
 
     # remove trap handler, as we are about to call it directly.
     trap - ERR INT
