@@ -47,7 +47,7 @@ VIF_GUEST=eth0
 # ##### NorNet ########################
 # FEDORA_MIRROR="http://mirror.onelab.eu/"
 # FEDORA_MIRROR_KEYS="http://mirror.onelab.eu/keys/"
-FEDORA_MIRROR="http://ftp-stud.hs-esslingen.de/pub/Mirrors/archive.fedoraproject.org http://archives.fedoraproject.org/pub"
+FEDORA_MIRROR="https://fedora.uib.no/ https://archives.fedoraproject.org/pub/"
 FEDORA_MIRROR_KEYS="http://mirror.simula.nornet/keys/"
 # ##### NorNet ########################
 
