@@ -11,7 +11,7 @@ COMMAND=$(basename $0)
 export PATH=$PATH:/bin:/sbin
 
 # default values, tunable with command-line options
-DEFAULT_FCDISTRO=f31
+DEFAULT_FCDISTRO=f33
 DEFAULT_PLDISTRO=lxc
 DEFAULT_PERSONALITY=linux64
 DEFAULT_MAILDEST="build at onelab.eu"
@@ -334,7 +334,8 @@ function run_log () {
     ssh -n ${testmaster_ssh} rm -rf ${testdir} ${testdir}.git
 
     # check it out in the build
-    run_in_build_guest $BASE make -C /build tests-module ${MAKEVARS[@]}
+    # as well as build that might not be here esp. in a short build
+    run_in_build_guest $BASE make -C /build tests-module build-module ${MAKEVARS[@]}
 
     # push it onto the testmaster - just the 'system' subdir is enough
     rsync --verbose --archive $(rootdir $BASE)/build/MODULES/tests/system/ ${testmaster_ssh}:${BASE}

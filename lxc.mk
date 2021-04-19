@@ -8,6 +8,14 @@
 # see doc in Makefile
 #
 
+
+
+### starting with f31 : server-side-only
+ifneq "$(DISTRONAME)" "$(filter $(DISTRONAME), f31 f33)"
+###
+
+
+
 ### the madwifi drivers ship with fedora16's kernel rpm
 
 #
@@ -24,7 +32,7 @@ IN_NODEIMAGE += lxc-userspace
 # with 4.19, the jprobe api has gone entirely
 # https://github.com/torvalds/linux/commit/4de58696de076d9bd2745d1cbe0930635c3f5ac9
 #
-ifneq "$(DISTRONAME)" "$(filter $(DISTRONAME), f29 f31)"
+ifneq "$(DISTRONAME)" "$(filter $(DISTRONAME), f29 f31 f33)"
 #
 transforward-MODULES := transforward
 transforward-SPEC := transforward.spec
@@ -134,12 +142,21 @@ ALL += pf2slice
 #
 # vsys
 #
+# dropped in f33:
+#ocamlopt  -c -o inotify.cmx inotify.ml
+#File "inotify.ml", line 95, characters 27-30:
+#95 |    let toread = Unix.read fd buf 0 toread in
+#                                ^^^
+#Error: This expression has type string but an expression was expected of type bytes
+#
+ifneq "$(DISTRONAME)" "$(filter $(DISTRONAME), f33)"
 vsys-MODULES := vsys
 vsys-SPEC := vsys.spec
 # ocaml-docs is not needed anymore but keep it on a tmp basis as some tags may still have it
 vsys-STOCK-DEVEL-RPMS += ocaml-ocamldoc ocaml-docs
 IN_NODEIMAGE += vsys
 ALL += vsys
+endif
 
 #
 # vsyssh : installed in slivers
@@ -172,7 +189,7 @@ ALL += bind_public
 
 # in fedora 29, this triggers nasty-looking compile messages
 # not trying too hard, we're mostly after the server-side of f29 and above
-ifneq "$(DISTRONAME)" "$(filter $(DISTRONAME), f29 f31)"
+ifneq "$(DISTRONAME)" "$(filter $(DISTRONAME), f29 f31 f33)"
 #
 # sliver-openvswitch
 #
@@ -181,6 +198,15 @@ sliver-openvswitch-SPEC := sliver-openvswitch.spec
 IN_SLICEIMAGE += sliver-openvswitch
 ALL += sliver-openvswitch
 endif
+
+
+
+### server-side-only
+endif
+### server-side-only
+
+
+
 
 #
 # plcapi
@@ -220,9 +246,16 @@ IN_MYPLC += www-register-wizard
 #
 # WARNING: as of f27 I have to remove support for SSL in pcucontrol
 # see pcucontrol.spec for details
+# no longer builds in f33
+# stdsoap2.cpp: In function ‘char* soap_string_in(soap*, int, long int, long int)’:
+# stdsoap2.cpp:8259:18: error: narrowing conversion of ‘2147483708’ from ‘unsigned int’ to ‘int’ [-Wnarrowing]
+#  8259 |       case '<' | 0x80000000:
+#       |                  ^~~~~~~~~~
+ifneq "$(DISTRONAME)" "$(filter $(DISTRONAME), f33)"
 pcucontrol-MODULES := pcucontrol
 pcucontrol-SPEC := pcucontrol.spec
 ALL += pcucontrol
+endif
 
 #
 # monitor
@@ -232,6 +265,12 @@ ALL += pcucontrol
 #monitor-STOCK-DEVEL-RPMS += net-snmp net-snmp-devel
 #ALL += monitor
 #IN_NODEIMAGE += monitor
+
+
+### server-side-only
+ifneq "$(DISTRONAME)" "$(filter $(DISTRONAME), f31 f33)"
+### server-side-only
+
 
 #
 # PLC RT
@@ -353,6 +392,12 @@ slicerepo-DEPEND-FILES := RPMS/yumgroups.xml
 slicerepo-SPECVARS = slice_rpms_plus=$(SLICEREPO_RPMS_3PLUS)
 slicerepo-RPMDATE := yes
 ALL += slicerepo
+
+
+### server-side-only
+endif
+### server-side-only
+
 
 #
 # MyPLC : lightweight packaging, dependencies are yum-installed in a vserver

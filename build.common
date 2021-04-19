@@ -20,7 +20,7 @@ function pl_getDistro() {
         case $distro in Scientific*) distro="SL" ; esac
     elif [ -f /etc/lsb-release ] ; then
         . /etc/lsb-release
-        distro=$DISTRIB_CODENAME 
+        distro=$DISTRIB_CODENAME
     elif [ -f /etc/debian_version ] ; then
         case $(cat /etc/debian_version) in
             7.*) distro=wheezy  ;;
@@ -70,7 +70,7 @@ function pl_getReleaseName () {
             ;;
         *)
             releasename="unknown-name-for-${pl_DISTRO}-please-edit-build.common"
-            echo 1>&2 "build.common: WARNING - releasename not set for distro=$distro" 
+            echo 1>&2 "build.common: WARNING - releasename not set for distro=$distro"
             return 1
             ;;
     esac
@@ -117,7 +117,7 @@ pl_DISTRO_RELEASE=$(pl_getRelease)
 pl_DISTRO_NAME=$(pl_getReleaseName $pl_DISTRO $pl_DISTRO_RELEASE)
 
 # get path to appropriate yumgroups.xml file
-# Thierry: quick & dirty improvement 
+# Thierry: quick & dirty improvement
 # this file is updated by the toplevel build, from the .pkgs files
 pl_DISTRO_YUMGROUPS="../../../RPMS/yumgroups.xml"
 
@@ -166,7 +166,7 @@ function pl_root_makedevs() {
     vroot=$1
     # Clean ${vroot}/dev, but only when ${vroot}!=""
     [ -n $vroot ] && rm -rf $vroot/dev
-    
+
     mkdir -p $vroot/dev
     mknod -m 666 $vroot/dev/null c 1 3
     mknod -m 666 $vroot/dev/zero c 1 5
@@ -192,7 +192,7 @@ function pl_root_makedevs() {
     mknod -m 600 $vroot/dev/net/tun c 10 200
 
     # For mkinitrd (in case a kernel is being installed)
-    # As well as for loop back mounting within a vm. 
+    # As well as for loop back mounting within a vm.
     for i in $(seq 0 255) ; do
         mknod -m 640 $vroot/dev/loop$i b 7 $i
     done
@@ -245,13 +245,13 @@ function pl_root_mkfedora () {
 
     # parse pkgsfile and add to local vars
     fcdistro=${pl_DISTRO_NAME}
-    pkgs_packages=$(pkgs.py -a $pl_DISTRO_ARCH -f $fcdistro -d $pldistro package $pkgsfile) 
+    pkgs_packages=$(pkgs.py -a $pl_DISTRO_ARCH -f $fcdistro -d $pldistro package $pkgsfile)
     pkgs_groups=$(pkgs.py -a $pl_DISTRO_ARCH -f $fcdistro -d $pldistro group $pkgsfile)
     # what can get trashed to save space
     pkgs_junk=$(pkgs.py -a $pl_DISTRO_ARCH -f $fcdistro -d $pldistro junk $pkgsfile)
     # but not this
     pkgs_precious=$(pkgs.py -a $pl_DISTRO_ARCH -f $fcdistro -d $pldistro precious $pkgsfile)
-    # formerly related to mkfedora -k : packages to take from our own build 
+    # formerly related to mkfedora -k : packages to take from our own build
     # and thus need be excluded frem the stock repos
     # locate builddir by looking for pkgs.py
     builddir=$(dirname $(type -p pkgs.py))
@@ -277,7 +277,7 @@ function pl_root_mkfedora () {
     if ! yumconf_mirrors $yum_conf_repos ../build/ $fcdistro "$yumexclude_line" $mirrors ; then
         echo xxx -- error ; return 1
     fi
-    
+
     # Do not tolerate errors
     set -e
 
@@ -288,7 +288,7 @@ function pl_root_mkfedora () {
     # you have to use at least one language beside 'C'
     # Prevent all locales from being installed in reference image
     mkdir -p $vroot/etc/rpm
-    pl_root_rpm_macros > $vroot/etc/rpm/macros 
+    pl_root_rpm_macros > $vroot/etc/rpm/macros
 
     # Trick rpm and yum, who read the real root /etc/rpm/macros file
     # rather than the one installed in the reference image, despite what
@@ -322,7 +322,10 @@ function pl_root_mkfedora () {
     mount -t tmpfs none $vroot/dev/shm
     #mount --bind $(readlink /dev/log) $vroot/dev/log
 
-    
+
+    mkdir -p $vroot/proc
+    mount -t proc none $vroot/proc
+
     # Create a /var/lib dirs for yum & rpm
     mkdir -p $vroot/var/lib/yum
     mkdir -p $vroot/var/lib/rpm
@@ -367,7 +370,7 @@ gpgcheck=0
 # (e.g., from /etc/yum.repos.d/)
 reposdir=/dev/null
 EOF
-    
+
     cat $yum_conf_repos >> $yum_conf
 
     # If we are being built as part of an automated RPM build, solve the
@@ -426,7 +429,7 @@ fi
     if [ -n "$pkgs_packages" ] ; then
         echo "* Installing optional packages" $pkgs_packages
         # ignore yum's return code that is basically undefined
-        echo "* Install options" $vroot $yum_options 
+        echo "* Install options" $vroot $yum_options
         yum $yum_options install $pkgs_packages || :
         if ! rpm --root $vroot -q $pkgs_packages >/dev/null ; then
             echo "* Warning: Missing packages"
@@ -440,7 +443,7 @@ fi
         ## call yum sequentially to get finer-grained info on dependencies
         for group_plus in $pkgs_groups ; do
             group=$(echo $group_plus | sed -e "s,+++, ,g")
-            echo "* Installing optional group $group" 
+            echo "* Installing optional group $group"
             # ignore yum's return code that is basically undefined
             yum $yum_options groupinstall "$group" || :
         done
@@ -610,7 +613,7 @@ function pl_parsePkgs () {
     pldistro=$1; shift
 
     echo 1>&2 "pl_parsePkgs: using -a $target_arch -f $fcdistro -d $pldistro $keyword $@"
-    pkgs.py -a $target_arch -f $fcdistro -d $pldistro $keyword "$@" 
+    pkgs.py -a $target_arch -f $fcdistro -d $pldistro $keyword "$@"
 }
 # usage: pl_getPackages [-a arch] fcdistro pldistro pkg-file[..s]
 function pl_getPackages() { pl_parsePkgs package "$@" ; }
@@ -685,7 +688,7 @@ __header
             echo "Cannot find groupname: and groupdesc: in $pkgsfile -- skipped" 1>&2
             continue
         fi
-        
+
         cat << __group_header
   <group>
     <id>$(echo $groupname|tr A-Z a-z)</id>
@@ -694,7 +697,7 @@ __header
     <uservisible>true</uservisible>
     <packagelist>
 __group_header
-        for package in $packages; do 
+        for package in $packages; do
             echo "<packagereq type=\"mandatory\">$package</packagereq>"
         done
         cat << __group_footer
@@ -709,7 +712,7 @@ __footer
 
 
 function build_fetch () {
-    curl --fail --silent --max-time 60 --output /dev/null "$1" 
+    curl --fail --silent --max-time 60 --output /dev/null "$1"
 }
 
 # tries to compute a valid yum.conf for that pldistro from the template in mirroring/
@@ -723,7 +726,7 @@ function yumconf_mirrors () {
     mirrors="$@"
 
     template=$builddir/mirroring/$fcdistro/yum.repos.d/building.repo.in
-    
+
     if [ ! -f $template ] ; then
         echo "yumconf_mirrors: cannot locate template $template"
         rm -f $dest_yumconf
@@ -751,7 +754,7 @@ function yumconf_mirror () {
     sed -e "s,@MIRRORURL@,$mirror,g" \
         -e "/baseurl=/i\\
 $yumexclude_line" $template > $dest_yumconf
-    
+
     # capture all lines defining baseurl
     baseurl_defs=$(grep '^baseurl=' $dest_yumconf)
     if [ -z "$baseurl_defs" ] ; then
@@ -788,7 +791,7 @@ function yumconf_gpgkey () {
 function yumconf_exclude () {
     repo=$1; shift
     yumexclude_line="$1" ; shift
-    
+
     sed -i -e "/#baseurl=.*$/i\\
 $yumexclude_line" $repo
 }

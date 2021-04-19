@@ -30,7 +30,7 @@ function lxcroot () {
 
 # XXX fixme : when creating a 32bits VM we need to call linux32 as appropriate...s
 
-DEFAULT_FCDISTRO=f31
+DEFAULT_FCDISTRO=f33
 DEFAULT_PLDISTRO=lxc
 DEFAULT_PERSONALITY=linux64
 DEFAULT_MEMORY=3072
@@ -187,9 +187,11 @@ function fedora_download() {
     cp /etc/yum.repos.d/fedora{,-updates}.repo $INSTALL_ROOT/etc/yum.repos.d/
 
     # append fedora repo files with hardwired releasever and basearch
-    for f in $INSTALL_ROOT/etc/yum.repos.d/* ; do
-      sed -i "s/\$basearch/$arch/g; s/\$releasever/${fedora_release}/g;" $f
-    done
+    if [ -z "$USE_UPSTREAM_REPOS" ]; then
+        for f in $INSTALL_ROOT/etc/yum.repos.d/* ; do
+            sed -i "s/\$basearch/$arch/g; s/\$releasever/${fedora_release}/g;" $f
+        done
+    fi
 
 # looks like all this business about fetching fedora-release is not needed
 # it does
@@ -230,7 +232,7 @@ function fedora_download() {
     # So ideally if we want to be able to build f12 images from f18 we need an rpm that has
     # this patch undone, like we have in place on our f14 boxes (our f14 boxes need a f18-like rpm)
 
-    DNF="dnf --installroot=$INSTALL_ROOT --nogpgcheck -y"
+    DNF="dnf --installroot=$INSTALL_ROOT --nogpgcheck -y --releasever=${fedora_release}"
     echo "$DNF install $FEDORA_PREINSTALLED"
     $DNF install $FEDORA_PREINSTALLED || { echo "Failed to download rootfs, aborting." ; return 1; }
 
@@ -336,23 +338,23 @@ function fedora_configure_yum () {
     # rpm --rebuilddb
     chroot ${lxc_root} $personality rpm --rebuilddb
 
-    echo "Initializing yum.repos.d in $lxc"
-    rm -f $lxc_root/etc/yum.repos.d/*
+    if [ -z "$USE_UPSTREAM_REPOS" ]; then
+        echo "Initializing yum.repos.d in $lxc"
+        rm -f $lxc_root/etc/yum.repos.d/*
 
-    # use mirroring/ stuff instead of a hard-wired config
-    local repofile=$lxc_root/etc/yum.repos.d/building.repo
-    yumconf_mirrors $repofile ${DIRNAME} $fcdistro \
-        "" $FEDORA_MIRROR
-    # the keys stuff requires adjustment though
-    sed -i $repofile -e s,'gpgkey=.*',"gpgkey=${FEDORA_MIRROR_KEYS}/RPM-GPG-KEY-fedora-${fedora_release}-primary,"
-
+        # use mirroring/ stuff instead of a hard-wired config
+        local repofile=$lxc_root/etc/yum.repos.d/building.repo
+        yumconf_mirrors $repofile ${DIRNAME} $fcdistro "" $FEDORA_MIRROR
+        # the keys stuff requires adjustment though
+        sed -i $repofile -e s,'gpgkey=.*',"gpgkey=${FEDORA_MIRROR_KEYS}/RPM-GPG-KEY-fedora-${fedora_release}-primary,"
+    fi
     # import fedora key so that gpgckeck does not whine or require stdin
     # required since fedora24
     rpm --root $lxc_root --import $FEDORA_MIRROR_KEYS/RPM-GPG-KEY-fedora-${fedora_release}-primary
 
     # for using this script as a general-purpose lxc creation wrapper
     # just mention 'none' as the repo url
-    if [ -n "$REPO_URL" ] ; then
+    if [ -n "$MYPLC_REPO_URL" ] ; then
         if [ ! -d $lxc_root/etc/yum.repos.d ] ; then
             echo "WARNING : cannot create myplc repo"
         else
@@ -365,7 +367,7 @@ function fedora_configure_yum () {
             cat > $lxc_root/etc/yum.repos.d/myplc.repo <<EOF
 [myplc]
 name= MyPLC
-baseurl=$REPO_URL
+baseurl=$MYPLC_REPO_URL
 enabled=1
 gpgcheck=0
 EOF
@@ -850,13 +852,14 @@ function main () {
     fi
 
     START_VM=true
-    while getopts "n:f:d:p:r:P:i:m:sv" opt ; do
+    while getopts "n:f:d:p:r:uP:i:m:sv" opt ; do
         case $opt in
             n) GUEST_HOSTNAME=$OPTARG;;
             f) fcdistro=$OPTARG;;
             d) pldistro=$OPTARG;;
             p) personality=$OPTARG;;
-            r) REPO_URL=$OPTARG;;
+            r) MYPLC_REPO_URL=$OPTARG;;
+            u) USE_UPSTREAM_REPOS=true;;
             P) PREINSTALLED=$OPTARG;;
             i) IMAGE=$OPTARG;;
             m) MEMORY=$OPTARG;;
@@ -924,9 +927,9 @@ function main () {
         # as this command can be used in other contexts, not specifying
         # a repo is considered a warning
         # use -r none to get rid of this warning
-        if [ "$REPO_URL" == "none" ] ; then
-            REPO_URL=""
-        elif [ -z "$REPO_URL" ] ; then
+        if [ "$MYPLC_REPO_URL" == "none" ] ; then
+            MYPLC_REPO_URL=""
+        elif [ -z "$MYPLC_REPO_URL" ] ; then
             echo "WARNING -- setting up a yum repo is recommended"
         fi
     fi

@@ -13,4 +13,4 @@ package>=f27: NetworkManager
 package>=f29: hostname
 
 # PLCAPI historical flavour was on python2
-package>=f29: python2-pip
+# package>=f29: python2-pip
