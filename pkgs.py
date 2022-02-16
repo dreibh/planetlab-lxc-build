@@ -54,6 +54,7 @@ known_fcdistros = [
     'trusty',  # 14.04 LTS
     'xenial',  # 16.04 LTS
     'bionic',  # 18.04 LTS
+    'focal',   # 20.04 LTS
 ]
 default_pldistro = 'onelab'
 

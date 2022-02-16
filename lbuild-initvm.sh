@@ -82,10 +82,28 @@ function package_method () {
     case $fcdistro in
         f[0-9]*|centos[0-9]*|sl[0-9]*)
             echo dnf ;;
-        wheezy|jessie|trusty|xenial|bionic)
+        wheezy|jessie|trusty|xenial|bionic|focal)
             echo debootstrap ;;
         *)
-            echo Unknown distro $fcdistro ;;
+            echo "Unknown package_method for distro $fcdistro" ;;
+    esac
+}
+
+### return
+# ifcfg      for redhat's
+# interfaces for older debian/uuntu
+# systemd    for more recent debian/ubuntu
+function network_method () {
+    local fcdistro=$1; shift
+    case $fcdistro in
+        f[0-9]*|centos[0-9]*|sl[0-9]*)
+            echo ifcfg ;;
+        wheezy|jessie|trusty|xenial|bionic)
+            echo interfaces ;;
+        focal)
+            echo systemd ;;
+        *)
+            echo "Unknown network_method for distro $fcdistro" ;;
     esac
 }
 
@@ -378,7 +396,7 @@ function debian_mirror () {
     case $fcdistro in
         wheezy|jessie)
             echo http://ftp2.fr.debian.org/debian/ ;;
-        trusty|xenial|bionic)
+        trusty|xenial|bionic|focal)
             echo http://www-ftp.lip6.fr/pub/linux/distributions/Ubuntu/archive/ ;;
         *) echo unknown distro $fcdistro; exit 1;;
     esac
@@ -407,8 +425,23 @@ EOF
 }
 
 function debian_configure () {
-    local guest_interfaces=${lxc_root}/etc/network/interfaces
-    ( [ -n "$NAT_MODE" ] && write_guest_interfaces_natip || write_guest_interfaces_publicip ) > $guest_interfaces
+    local lxc=$1; shift
+    local fcdistro=$1; shift
+    case $(network_method $fcdistro) in
+        interfaces)
+            local guest_interfaces=${lxc_root}/etc/network/interfaces
+            ( [ -n "$NAT_MODE" ] \
+                && write_guest_interfaces_natip \
+                || write_guest_interfaces_publicip ) > $guest_interfaces
+            ;;
+        systemd)
+            local systemd_config="${lxc_root}/etc/systemd/network/wired.network"
+            ( [ -n "$NAT_MODE" ] \
+                && write_guest_systemd_natip \
+                || write_guest_systemd_publicip ) > $systemd_config
+            chroot "${lxc_root}" systemctl enable systemd-networkd
+            ;;
+    esac
 }
 
 function write_guest_interfaces_natip () {
@@ -427,6 +460,31 @@ netmask $NETMASK
 gateway $GATEWAY
 EOF
 }
+
+# systemd-networkd
+#   https://wiki.archlinux.org/title/systemd-networkd
+#   https://www.linuxtricks.fr/wiki/systemd-le-reseau-avec-systemd-networkd
+function write_guest_systemd_natip () {
+    cat << EOF
+[Match]
+Name=eth0
+
+[Network]
+DHCP=ipv4
+EOF
+}
+
+function write_guest_systemd_publicip () {
+    cat << EOF
+[Match]
+Name=eth0
+
+[Network]
+Address=${GUEST_IP}/${MASKLEN}
+Gateway=$GATEWAY
+EOF
+}
+
 ##############################
 function setup_lxc() {
 
@@ -460,7 +518,7 @@ function setup_lxc() {
             if [ -z "$IMAGE" ]; then
                 debian_install $lxc || { echo "failed to install debian/ubuntu root image"; exit 1 ; }
             fi
-            debian_configure || { echo "failed to configure debian/ubuntu for a container"; exit 1 ; }
+            debian_configure $lxc $fcdistro || { echo "failed to configure debian/ubuntu for a container"; exit 1 ; }
             ;;
         *)
             echo "$COMMAND:: unknown package_method - exiting"
@@ -950,7 +1008,7 @@ function main () {
 
         GUEST_IP=$(gethostbyname $GUEST_HOSTNAME)
         # use same NETMASK as bridge interface br0
-        masklen=$(ip addr show $PUBLIC_BRIDGE | grep -v inet6 | grep inet | awk '{print $2;}' | cut -d/ -f2)
+        MASKLEN=$(ip addr show $PUBLIC_BRIDGE | grep -v inet6 | grep inet | awk '{print $2;}' | cut -d/ -f2)
         NETMASK=$(masklen_to_netmask $masklen)
         GATEWAY=$(ip route show | grep default | awk '{print $3}' | head -1)
         VIF_HOST="vif$(echo $GUEST_HOSTNAME | cut -d. -f1)"
