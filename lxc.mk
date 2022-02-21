@@ -11,7 +11,7 @@
 
 
 ### starting with f31 : server-side-only
-ifneq "$(DISTRONAME)" "$(filter $(DISTRONAME), f31 f33)"
+ifneq "$(DISTRONAME)" "$(filter $(DISTRONAME), f31 f33 f35)"
 ###
 
 
@@ -32,7 +32,7 @@ IN_NODEIMAGE += lxc-userspace
 # with 4.19, the jprobe api has gone entirely
 # https://github.com/torvalds/linux/commit/4de58696de076d9bd2745d1cbe0930635c3f5ac9
 #
-ifneq "$(DISTRONAME)" "$(filter $(DISTRONAME), f29 f31 f33)"
+ifneq "$(DISTRONAME)" "$(filter $(DISTRONAME), f29 f31 f33 f35)"
 #
 transforward-MODULES := transforward
 transforward-SPEC := transforward.spec
@@ -149,7 +149,7 @@ ALL += pf2slice
 #                                ^^^
 #Error: This expression has type string but an expression was expected of type bytes
 #
-ifneq "$(DISTRONAME)" "$(filter $(DISTRONAME), f33)"
+ifneq "$(DISTRONAME)" "$(filter $(DISTRONAME), f33 f35)"
 vsys-MODULES := vsys
 vsys-SPEC := vsys.spec
 # ocaml-docs is not needed anymore but keep it on a tmp basis as some tags may still have it
@@ -189,7 +189,7 @@ ALL += bind_public
 
 # in fedora 29, this triggers nasty-looking compile messages
 # not trying too hard, we're mostly after the server-side of f29 and above
-ifneq "$(DISTRONAME)" "$(filter $(DISTRONAME), f29 f31 f33)"
+ifneq "$(DISTRONAME)" "$(filter $(DISTRONAME), f29 f31 f33 f35)"
 #
 # sliver-openvswitch
 #
@@ -251,7 +251,7 @@ IN_MYPLC += www-register-wizard
 # stdsoap2.cpp:8259:18: error: narrowing conversion of ‘2147483708’ from ‘unsigned int’ to ‘int’ [-Wnarrowing]
 #  8259 |       case '<' | 0x80000000:
 #       |                  ^~~~~~~~~~
-ifneq "$(DISTRONAME)" "$(filter $(DISTRONAME), f33)"
+ifneq "$(DISTRONAME)" "$(filter $(DISTRONAME), f33 f35)"
 pcucontrol-MODULES := pcucontrol
 pcucontrol-SPEC := pcucontrol.spec
 ALL += pcucontrol
@@ -268,7 +268,7 @@ endif
 
 
 ### server-side-only
-ifneq "$(DISTRONAME)" "$(filter $(DISTRONAME), f31 f33)"
+ifneq "$(DISTRONAME)" "$(filter $(DISTRONAME), f31 f33 f35)"
 ### server-side-only
 
 
