@@ -36,7 +36,7 @@ import re
 
 default_arch = 'x86_64'
 known_archs = ['i386', 'i686', 'x86_64']
-default_fcdistro = 'f33'
+default_fcdistro = 'f35'
 known_fcdistros = [
     'centos5', 'centos6',
     # oldies but we have references to that in the pkgs files
@@ -45,7 +45,7 @@ known_fcdistros = [
     # these ones are still relevant;
     # f32 is mentioned to be able to use create-vms with that distro
     # as we're running into issues to build a minimal f33 from a f29 host
-    'f29', 'f31', 'f32', 'f33',
+    'f29', 'f31', 'f32', 'f33', 'f35',
     # scientific linux
     'sl6',
     # debians
@@ -54,6 +54,7 @@ known_fcdistros = [
     'trusty',  # 14.04 LTS
     'xenial',  # 16.04 LTS
     'bionic',  # 18.04 LTS
+    'focal',   # 20.04 LTS
 ]
 default_pldistro = 'onelab'
 
