@@ -47,6 +47,7 @@ function mirror_distro_arch () {
     options="$options $dry_run $verbose"
     options="$options -aH --numeric-ids"
     options="$options --delete --delete-excluded"
+    options="$options --partial"
     for e in $excludelist; do
         options="$options --exclude $e"
     done
