@@ -255,7 +255,6 @@ function fedora_download() {
 }
 
 ##############################
-# xxx f35 not working yet
 function fedora_configure() {
 
     set -x
