@@ -7,7 +7,7 @@ DATE=$(date '+%Y-%m-%d-%H-%M')
 LOG=${LOGDIR}/${DATE}.log
 
 dry_run=
-verbose=-a
+verbose=-i
 log=
 skip_core=true
 root=/mirror/
