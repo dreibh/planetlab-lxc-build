@@ -429,9 +429,15 @@ ALL += release
 # to the underlying myplc, we get SSL handshake issues
 # so, let's keep this out of the way for now
 # 2019 mar 27: reinstating for hopefully connecting fed4fire
+# 2022 apr 28:
+# we currently run on r2labapi.inria.fr a hybrid f33/f34/f35
+# that has python2 (recipe from f33) + php-7.4 (from f34) and httpd-2.4.53 (from f35)
+# and we'll hold to that until end of june 2022
+# however the python2 ecosystem is too far-fetched now
+# so we're dropping for good support for sfa, last version is f33
 #
-#ifneq "$(DISTRONAME)" "$(filter $(DISTRONAME), f27 f29 f31)"
+ifeq "$(DISTRONAME)" "$(filter $(DISTRONAME), f33)"
 sfa-MODULES := sfa
 sfa-SPEC := sfa.spec
 ALL += sfa
-#endif
+endif
