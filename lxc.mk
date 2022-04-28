@@ -10,7 +10,7 @@
 
 
 
-### starting with f31 : server-side-only
+### starting with f31 : serverside-only
 ifneq "$(DISTRONAME)" "$(filter $(DISTRONAME), f31 f33 f35)"
 ###
 
@@ -32,7 +32,7 @@ IN_NODEIMAGE += lxc-userspace
 # with 4.19, the jprobe api has gone entirely
 # https://github.com/torvalds/linux/commit/4de58696de076d9bd2745d1cbe0930635c3f5ac9
 #
-ifneq "$(DISTRONAME)" "$(filter $(DISTRONAME), f29 f31 f33 f35)"
+ifneq "$(DISTRONAME)" "$(filter $(DISTRONAME), f31 f33 f35)"
 #
 transforward-MODULES := transforward
 transforward-SPEC := transforward.spec
@@ -188,8 +188,8 @@ IN_SLICEIMAGE += bind_public
 ALL += bind_public
 
 # in fedora 29, this triggers nasty-looking compile messages
-# not trying too hard, we're mostly after the server-side of f29 and above
-ifneq "$(DISTRONAME)" "$(filter $(DISTRONAME), f29 f31 f33 f35)"
+# not trying too hard, we're mostly after the serverside of f29 and above
+ifneq "$(DISTRONAME)" "$(filter $(DISTRONAME), f31 f33 f35)"
 #
 # sliver-openvswitch
 #
@@ -201,9 +201,9 @@ endif
 
 
 
-### server-side-only
+### serverside-only
 endif
-### server-side-only
+### serverside-only
 
 
 
@@ -267,9 +267,9 @@ endif
 #IN_NODEIMAGE += monitor
 
 
-### server-side-only
+### serverside-only
 ifneq "$(DISTRONAME)" "$(filter $(DISTRONAME), f31 f33 f35)"
-### server-side-only
+### serverside-only
 
 
 #
@@ -394,9 +394,9 @@ slicerepo-RPMDATE := yes
 ALL += slicerepo
 
 
-### server-side-only
+### serverside-only
 endif
-### server-side-only
+### serverside-only
 
 
 #
