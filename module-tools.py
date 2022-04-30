@@ -109,7 +109,7 @@ class Command:
             raise Exception("Command {} failed".format(self.command))
 
     # returns stdout, like bash's $(mycommand)
-    def output_of(self, with_stderr=False):
+    def output_of(self, with_stderr=False, binary=False):
         if self.options.dry_run:
             print('dry_run', self.command)
             return 'dry_run output'
@@ -124,7 +124,8 @@ class Command:
             command += " > "
         command += tmp
         os.system(command)
-        with open(tmp) as f:
+        mode = "r" if not binary else "rb"
+        with open(tmp, mode) as f:
             result=f.read()
         os.unlink(tmp)
         if self.options.debug:
@@ -223,11 +224,17 @@ class GitRepository:
 
     def diff(self, f=""):
         c = Command("git diff {}".format(f), self.options)
-        return self.__run_in_repo(c.output_of, with_stderr=True)
+        try:
+            return self.__run_in_repo(c.output_of, with_stderr=True)
+        except:
+            return self.__run_in_repo(c.output_of, with_stderr=True, binary=True)
 
     def diff_with_tag(self, tagname):
         c = Command("git diff {}".format(tagname), self.options)
-        return self.__run_in_repo(c.output_of, with_stderr=True)
+        try:
+            return self.__run_in_repo(c.output_of, with_stderr=True)
+        except:
+            return self.__run_in_repo(c.output_of, with_stderr=True, binary=True)
 
     def commit(self, logfile, branch="master"):
         self.__run_command_in_repo("git add .", ignore_errors=True)
@@ -237,7 +244,7 @@ class GitRepository:
             self.__run_command_in_repo("git push")
         else:
             self.__run_command_in_repo("git push origin {}:{}".format(branch, branch))
-        self.__run_command_in_repo("git push --tags")
+        self.__run_command_in_repo("git push --tags", ignore_errors=True)
 
     def revert(self, f=""):
         if f:
