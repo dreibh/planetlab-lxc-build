@@ -199,7 +199,7 @@ class GitRepository:
             self.__run_command_in_repo("git checkout {}".format(branch))
         else:
             self.to_branch(branch, remote=True)
-        self.__run_command_in_repo("git fetch origin --tags")
+        self.__run_command_in_repo("git fetch origin --tags", ignore_errors=True)
         self.__run_command_in_repo("git fetch origin")
         if not self.__is_commit_id(branch):
             # we don't need to merge anything for commit ids.
