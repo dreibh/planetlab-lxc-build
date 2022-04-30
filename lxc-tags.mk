@@ -31,7 +31,7 @@ pcucontrol-GITPATH              := git://git.onelab.eu/pcucontrol.git@master
 bootcd-GITPATH                  := git://git.onelab.eu/bootcd.git@master
 sliceimage-GITPATH              := git://git.onelab.eu/sliceimage.git@master
 nodeimage-GITPATH               := git://git.onelab.eu/nodeimage.git@master
-myplc-GITPATH                   := git://git.onelab.eu/myplc.git@master
+myplc-GITPATH                   := git://git.onelab.eu/myplc.git@myplc-7.1-0
 #
 sfa-GITPATH                     := git://git.onelab.eu/sfa.git@python2
 #
