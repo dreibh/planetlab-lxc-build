@@ -7,7 +7,7 @@ import tempfile
 from glob import glob
 from optparse import OptionParser
 
-# e.g. other_choices = [ ('d','iff') , ('g','uess') ] - lowercase 
+# e.g. other_choices = [ ('d','iff') , ('g','uess') ] - lowercase
 def prompt(question, default=True, other_choices=[], allow_outside=False):
     if not isinstance(other_choices, list):
         other_choices = [ other_choices ]
@@ -130,7 +130,7 @@ class Command:
         if self.options.debug:
             print('Done', end=' ')
         return result
-    
+
 class GitRepository:
     type = "git"
 
@@ -256,11 +256,11 @@ class GitRepository:
 
     def is_valid(self):
         return os.path.exists(os.path.join(self.path, ".git"))
-    
+
 
 class Repository:
-    """ 
-    Generic repository 
+    """
+    Generic repository
     From old times when we had svn and git
     """
     supported_repo_types = [ GitRepository ]
@@ -290,7 +290,7 @@ class Module:
 
     edit_magic_line = "--This line, and those below, will be ignored--"
     setting_tag_format = "Setting tag {}"
-    
+
     redirectors = [
         # ('module_name_varname', 'name'),
         ('module_version_varname', 'version'),
@@ -299,7 +299,7 @@ class Module:
 
     # where to store user's config
     config_storage = "CONFIG"
-    # 
+    #
     config = {}
 
     import subprocess
@@ -323,7 +323,7 @@ class Module:
                 cls.prompt_config_option(key, message, default)
 
     # for parsing module spec name:branch
-    matcher_branch_spec = re.compile("\A(?P<name>[\w\.\-\/]+):(?P<branch>[\w\.\-]+)\Z")                                                                                                                         
+    matcher_branch_spec = re.compile("\A(?P<name>[\w\.\-\/]+):(?P<branch>[\w\.\-]+)\Z")
     # special form for tagged module - for Build
     matcher_tag_spec = re.compile("\A(?P<name>[\w\.\-\/]+)@(?P<tagname>[\w\.\-]+)\Z")
 
@@ -408,7 +408,7 @@ class Module:
         if os.path.isdir(options.workdir) and not os.path.isfile(storage):
             print("""The directory {} exists and has no CONFIG file
 If this is your regular working directory, please provide another one as the
-module-* commands need a fresh working dir. Make sure that you do not use 
+module-* commands need a fresh working dir. Make sure that you do not use
 that for other purposes than tagging""".format(options.workdir))
             sys.exit(1)
 
@@ -432,7 +432,7 @@ that for other purposes than tagging""".format(options.workdir))
             with open(storage) as f:
                 for line in f.readlines():
                     key, value = re.compile("^(.+)=(.+)$").match(line).groups()
-                    Module.config[key] = value                
+                    Module.config[key] = value
 
             # owerride config variables using options.
             if options.build_module:
@@ -453,7 +453,7 @@ that for other purposes than tagging""".format(options.workdir))
                     print("Configuration changed for module-tools")
                     cls.prompt_config_option(key, message, default)
                     old_layout = True
-                    
+
             if old_layout:
                 Command("rm -rf {}".format(options.workdir), options).run_silent()
                 Command("mkdir -p {}".format(options.workdir), options).run_silent()
@@ -494,7 +494,7 @@ that for other purposes than tagging""".format(options.workdir))
                 self.repository.to_tag(self.tagname)
         else:
             raise Exception('Cannot find {} - or not a git module'.format(self.module_dir))
-                
+
 
     def revert_module_dir(self):
         if self.options.fast_checks:
@@ -502,7 +502,7 @@ that for other purposes than tagging""".format(options.workdir))
             return
         if self.options.verbose:
             print('Checking whether', self.module_dir, 'needs being reverted')
-        
+
         if not self.repository.is_clean():
             self.repository.revert()
 
@@ -562,7 +562,7 @@ that for other purposes than tagging""".format(options.workdir))
             for k, v in result.items():
                 print('{} = {}'.format(k, v))
         return result
-                
+
     # stores in self.module_name_varname the rpm variable to be used for the module's name
     # and the list of these names in self.varnames
     def spec_dict(self):
@@ -578,7 +578,7 @@ that for other purposes than tagging""".format(options.workdir))
                 varnames += [redirect_dict[varname]]
             else:
                 setattr(self, varname, default)
-                varnames += [ default ] 
+                varnames += [ default ]
         self.varnames = varnames
         result = self.parse_spec(specfile, self.varnames)
         if self.options.debug:
@@ -656,7 +656,7 @@ that for other purposes than tagging""".format(options.workdir))
                                 new.write("- " + logline)
                             new.write("\n")
             os.rename(newspecfile,specfile)
-            
+
     def show_dict(self, spec_dict):
         if self.options.verbose:
             for k, v in spec_dict.items():
@@ -672,7 +672,7 @@ that for other purposes than tagging""".format(options.workdir))
 
     def tag_name(self, spec_dict):
         return "{}-{}".format(self.name, self.last_tag(spec_dict))
-    
+
 
     pattern_format="\A\s*{module}-(GITPATH)\s*(=|:=)\s*(?P<url_main>[^\s]+)/{module}[^\s]+"
 
@@ -727,12 +727,12 @@ that for other purposes than tagging""".format(options.workdir))
                                       .format(self.name))
                                 return
                             if self.options.verbose:
-                                print(' ' + modulepath, end=' ') 
+                                print(' ' + modulepath, end=' ')
                             new.write(replacement)
                             matches += 1
                         else:
                             new.write(line)
-                            
+
         os.rename(newtagsfile,tagsfile)
         if self.options.verbose:
             print("{} changes".format(matches))
@@ -766,7 +766,7 @@ that for other purposes than tagging""".format(options.workdir))
         # parse specfile
         spec_dict = self.spec_dict()
         self.show_dict(spec_dict)
-        
+
         # compute previous tag - if not bypassed
         if not self.options.bypass:
             old_tag_name = self.tag_name(spec_dict)
@@ -796,7 +796,7 @@ that for other purposes than tagging""".format(options.workdir))
         # side effect in head's specfile
         self.patch_spec_var(spec_dict)
 
-        # prepare changelog file 
+        # prepare changelog file
         # we use the standard subversion magic string (see edit_magic_line)
         # so we can provide useful information, such as version numbers and diff
         # in the same file
@@ -810,16 +810,16 @@ that for other purposes than tagging""".format(options.workdir))
 Please write a changelog for this new tag in the section above
 """.format(Module.edit_magic_line, setting_tag_line))
 
-        if self.options.bypass: 
+        if self.options.bypass:
             pass
         elif prompt('Want to see diffs while writing changelog', True):
             with open(changelog_plain, "a") as f:
                 f.write('DIFF=========\n' + diff_output)
-        
+
         if self.options.debug:
             prompt('Proceed ?')
 
-        # edit it        
+        # edit it
         self.run("{} {}".format(self.options.editor, changelog_plain))
         # strip magic line in second file
         self.strip_magic_line_filename(changelog_plain, changelog_strip, new_tag_name)
@@ -854,7 +854,7 @@ Please write a changelog for this new tag in the section above
                 while tagsdict[tagsfile] == 'todo' :
                     choice = prompt("insert {} in {}    ".format(new_tag_name, basename),
                                      default_answer,
-                                     [ ('y','es'), ('n', 'ext'), ('f','orce'), 
+                                     [ ('y','es'), ('n', 'ext'), ('f','orce'),
                                        ('d','iff'), ('r','evert'), ('c', 'at'), ('h','elp') ] ,
                                      allow_outside=True)
                     if choice == 'y':
@@ -969,11 +969,11 @@ n: move to next file""".format(**locals()))
 
 ##############################
     # store and restitute html fragments
-    @staticmethod 
+    @staticmethod
     def html_href(url,text):
         return '<a href="{}">{}</a>'.format(url, text)
 
-    @staticmethod 
+    @staticmethod
     def html_anchor(url,text):
         return '<a name="{}">{}</a>'.format(url,text)
 
@@ -1050,12 +1050,12 @@ span.error {{text-weight:bold; color: red; }}
                 print('<hr /><h1>', self.html_anchor(self.friendly_name(),title), '</h1>')
         if hasattr(self,'body'):
             print(self.body)
-            print('<p class="top">', self.html_href('#','Back to top'), '</p>')            
+            print('<p class="top">', self.html_href('#','Back to top'), '</p>')
 
 
 
 class Build(Module):
-    
+
     def __get_modules(self, tagfile):
         self.init_module_dir()
         modules = {}
@@ -1085,20 +1085,20 @@ class Build(Module):
                     module_type = "tag"
                 elif url.find('/branches/') >= 0:
                     module_type = "branch"
-            
+
             modules[module] = {"module_type" : module_type,
                                "path_type": path_type,
                                "tag_or_branch": tag_or_branch,
                                "url":url}
         return modules
-                
-        
+
+
 
 def modules_diff(first, second):
     diff = {}
 
     for module in first:
-        if module not in second: 
+        if module not in second:
             print("=== module {} missing in right-hand side ===".format(module))
             continue
         if first[module]['tag_or_branch'] != second[module]['tag_or_branch']:
@@ -1172,7 +1172,7 @@ def release_changelog(options, buildtag_old, buildtag_new):
         specfile = m.main_specname()
         (tmpfd, tmpfile) = tempfile.mkstemp()
         os.system("cp -f /{} {}".format(specfile, tmpfile))
-        
+
         m = get_module(module, second)
         # patch for ipfw that, being managed in a separate repo, won't work for now
         try:
@@ -1204,7 +1204,7 @@ def adopt_tag(options, args):
     modules=[]
     for module in options.modules:
         modules += module.split()
-    for module in modules: 
+    for module in modules:
         modobj=Module(module,options)
         for tags_file in args:
             if options.verbose:
@@ -1221,13 +1221,13 @@ class Main:
 module-tools : a set of tools to manage subversion tags and specfile
   requires the specfile to either
   * define *version* and *taglevel*
-  OR alternatively 
+  OR alternatively
   * define redirection variables module_version_varname / module_taglevel_varname
 Master:
   by default, the 'master' branch of modules is the target
   in this case, just mention the module name as <module_desc>
 Branches:
-  if you wish to work on another branch, 
+  if you wish to work on another branch,
   you can use something like e.g. Mom:2.1 as <module_desc>
 """
     release_usage="""Usage: %prog [options] tag1 .. tagn
@@ -1251,13 +1251,13 @@ Branches:
     common_usage="""More help:
   see http://svn.planet-lab.org/wiki/ModuleTools"""
 
-    modes = { 
+    modes = {
         'list' : "displays a list of available tags or branches",
         'version' : "check latest specfile and print out details",
         'diff' : "show difference between module (trunk or branch) and latest tag",
         'tag'  : """increment taglevel in specfile, insert changelog in specfile,
                 create new tag and and monitor its adoption in build/*-tags.mk""",
-        'branch' : """create a branch for this module, from the latest tag on the trunk, 
+        'branch' : """create a branch for this module, from the latest tag on the trunk,
                   and change trunk's version number to reflect the new branch name;
                   you can specify the new branch name by using module:branch""",
         'sync' : """create a tag from the module
@@ -1305,14 +1305,14 @@ Branches:
             usage += Main.common_usage
 
         parser=OptionParser(usage=usage)
-        
+
         # the 'adopt' mode is really special and doesn't share any option
         if mode == 'adopt':
             parser.add_option("-m","--module",action="append",dest="modules",default=[],
                               help="modules, can be used several times or with quotes")
             parser.add_option("-t","--tag",action="store", dest="tag", default='master',
                               help="specify the tag to adopt, default is 'master'")
-            parser.add_option("-v","--verbose", action="store_true", dest="verbose", default=False, 
+            parser.add_option("-v","--verbose", action="store_true", dest="verbose", default=False,
                               help="run in verbose mode")
             (options, args) = parser.parse_args()
             options.workdir='unused'
@@ -1322,7 +1322,7 @@ Branches:
                 parser.print_help()
                 sys.exit(1)
             adopt_tag(options,args)
-            return 
+            return
 
         # the other commands (module-* and release-changelog) share the same skeleton
         if mode in [ 'tag', 'branch'] :
@@ -1346,7 +1346,7 @@ Branches:
         if mode == 'diff' :
             parser.add_option("-l","--list", action="store_true", dest="list", default=False,
                               help="just list modules that exhibit differences")
-            
+
         default_modules_list=os.path.dirname(sys.argv[0])+"/modules.list"
         parser.add_option("-a","--all",action="store_true",dest="all_modules",default=False,
                           help="run on all modules as found in {}".format(default_modules_list))
@@ -1359,7 +1359,7 @@ Branches:
                           help="""specify distro-tags files, e.g. onelab-tags-4.2.mk
 -- can be set multiple times, or use quotes""")
 
-        parser.add_option("-w","--workdir", action="store", dest="workdir", 
+        parser.add_option("-w","--workdir", action="store", dest="workdir",
                           default="{}/{}".format(os.getenv("HOME"),"modules"),
                           help="""name for dedicated working dir - defaults to ~/modules
 ** THIS MUST NOT ** be your usual working directory""")
@@ -1370,9 +1370,9 @@ Branches:
 
         # default verbosity depending on function - temp
         verbose_modes= ['tag', 'sync', 'branch']
-        
+
         if mode not in verbose_modes:
-            parser.add_option("-v","--verbose", action="store_true", dest="verbose", default=False, 
+            parser.add_option("-v","--verbose", action="store_true", dest="verbose", default=False,
                               help="run in verbose mode")
         else:
             parser.add_option("-q","--quiet", action="store_false", dest="verbose", default=True,
@@ -1385,7 +1385,7 @@ Branches:
             options.www=False
         options.debug=False
 
-        
+
 
         ########## module-*
         if len(args) == 0:
@@ -1397,7 +1397,7 @@ Branches:
                 parser.print_help()
                 sys.exit(1)
         Module.init_homedir(options)
-        
+
 
         if mode in Main.regular_modes:
             modules = [ Module(modname, options) for modname in args ]
@@ -1421,7 +1421,7 @@ Branches:
                         import traceback
                         traceback.print_exc()
                         print('Skipping module {}: {}'.format(module.name,e))
-    
+
             if options.www:
                 if mode == "diff":
                     modetitle="Changes to tag in {}".format(options.www)
@@ -1441,8 +1441,8 @@ Branches:
             # we typically have here latest latest-1 latest-2
             for (tag_new,tag_old) in zip ( args[:-1], args [1:]):
                 release_changelog(options, tag_old, tag_new)
-            
-    
+
+
 ####################
 if __name__ == "__main__" :
     try:
