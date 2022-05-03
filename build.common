@@ -1,3 +1,4 @@
+#!/bin/bash
 # -*-Shell-script-*-
 #
 # Common functions for build scripts used by various packages
