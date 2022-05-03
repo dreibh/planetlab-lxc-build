@@ -48,7 +48,7 @@ VIF_GUEST=eth0
 # FEDORA_MIRROR="http://mirror.onelab.eu/"
 # FEDORA_MIRROR_KEYS="http://mirror.onelab.eu/keys/"
 FEDORA_MIRROR="https://fedora.uib.no/ https://archives.fedoraproject.org/pub/"
-FEDORA_MIRROR_KEYS="http://mirror.simula.nornet/keys/"
+FEDORA_MIRROR_KEYS="https://src.fedoraproject.org/rpms/fedora-repos/raw/rawhide/f/"
 # ##### NorNet ########################
 
 FEDORA_PREINSTALLED="dnf dnf-yum passwd rsyslog vim-minimal dhclient chkconfig rootfiles policycoreutils openssh-server openssh-clients"

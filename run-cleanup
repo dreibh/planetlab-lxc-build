@@ -9,7 +9,7 @@ for driver in lxc:/// qemu:///system ; do
 
    for vm in $vmList ; do
       echo "Removing VM $vm ..."
-   
+
       #if [ "`find /vservers/ -maxdepth 1 -a -name "$vm" -a -type d`" != "" ]; then
       #   echo " existing"
       #fi
@@ -33,7 +33,7 @@ if [ -e /publish/testing/ ] ; then
          rm -rf "$ko" "$directory"
       done
    )
-   
+
    # Tests without corresponding directories
    ( find /publish/testing/ -maxdepth 2 -type f -name '*.pass' ; find /publish/testing/ -maxdepth 2 -type f -name '*.warn' ) | (
       while read name ; do
@@ -44,7 +44,7 @@ if [ -e /publish/testing/ ] ; then
          fi
       done
    )
-   
+
    # Untested directories
    find /publish/testing/ -maxdepth 2 -type d -name '20*' | (
       while read dirName ; do
