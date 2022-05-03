@@ -6,7 +6,7 @@ if [ "$1" == "" ] ; then
 fi
 
 BUILD_DIRECTORY="/root/nightly-builds"
-BUILD_REPOSITORY="git://github.com/dreibh/planetlab-lxc-build.git"
+BUILD_REPOSITORY="https://github.com/dreibh/planetlab-lxc-build.git"
 MAILTO="dreibh@simula.no"
 BASE="$1--@PLDISTRO@-@FCDISTRO@-@PERSONALITY@"
 

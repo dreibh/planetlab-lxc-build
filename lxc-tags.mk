@@ -36,4 +36,4 @@ myplc-GITPATH                   := git://git.onelab.eu/myplc.git@master
 sfa-GITPATH                     := git://git.onelab.eu/sfa.git@python2
 #
 # !!! tests-GITPATH               := git://git.onelab.eu/tests.git@master
-tests-GITPATH                   := git://github.com/dreibh/planetlab-lxc-tests.git@master
+tests-GITPATH                   := https://github.com/dreibh/planetlab-lxc-tests.git@master

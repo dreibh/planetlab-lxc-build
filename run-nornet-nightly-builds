@@ -1,7 +1,7 @@
 #!/bin/bash -e
 
 BUILD_DIRECTORY="/root/nightly-builds"
-BUILD_REPOSITORY="git://github.com/dreibh/planetlab-lxc-build.git"
+BUILD_REPOSITORY="https://github.com/dreibh/planetlab-lxc-build.git"
 MAILTO="dreibh@simula.no"
 BASE="@DATE@--nightly--@PLDISTRO@-@FCDISTRO@-@PERSONALITY@"
 

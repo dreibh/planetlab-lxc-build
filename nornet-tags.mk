@@ -15,23 +15,23 @@
 # \=========================================================================/
 
 # ###### NorNet customisation ###############################################
-nornet-ca-GITPATH               := git://github.com/dreibh/nornet-ca.git@master
-nornet-nn-GITPATH               := git://github.com/dreibh/nornet-nn.git@master
+nornet-ca-GITPATH               := https://github.com/dreibh/nornet-ca.git@master
+nornet-nn-GITPATH               := https://github.com/dreibh/nornet-nn.git@master
 
-netperfmeter-GITPATH            := git://github.com/dreibh/netperfmeter.git@master
-rsplib-GITPATH                  := git://github.com/dreibh/rsplib.git@master
-subnetcalc-GITPATH              := git://github.com/dreibh/subnetcalc.git@master
-tsctp-GITPATH                   := git://github.com/dreibh/tsctp.git@master
+netperfmeter-GITPATH            := https://github.com/dreibh/netperfmeter.git@master
+rsplib-GITPATH                  := https://github.com/dreibh/rsplib.git@master
+subnetcalc-GITPATH              := https://github.com/dreibh/subnetcalc.git@master
+tsctp-GITPATH                   := https://github.com/dreibh/tsctp.git@master
 # ###########################################################################
 
 # ##### NorNet ########################
-bootmanager-GITPATH             := git://github.com/dreibh/planetlab-bootmanager.git@master
-plcapi-GITPATH                  := git://github.com/dreibh/planetlab-lxc-plcapi.git@master
-plewww-GITPATH                  := git://github.com/dreibh/planetlab-lxc-plewww@master
-bootcd-GITPATH                  := git://github.com/dreibh/planetlab-lxc-bootcd.git@master
-nodemanager-GITPATH             := git://github.com/dreibh/planetlab-lxc-nodemanager.git@master
-tests-GITPATH                   := git://github.com/dreibh/planetlab-lxc-tests.git@master
-linux-GITPATH                   := git://github.com/dreibh/planetlab-kernel.git@kernel-v4.19
+bootmanager-GITPATH             := https://github.com/dreibh/planetlab-bootmanager.git@master
+plcapi-GITPATH                  := https://github.com/dreibh/planetlab-lxc-plcapi.git@master
+plewww-GITPATH                  := https://github.com/dreibh/planetlab-lxc-plewww@master
+bootcd-GITPATH                  := https://github.com/dreibh/planetlab-lxc-bootcd.git@master
+nodemanager-GITPATH             := https://github.com/dreibh/planetlab-lxc-nodemanager.git@master
+tests-GITPATH                   := https://github.com/dreibh/planetlab-lxc-tests.git@master
+linux-GITPATH                   := https://github.com/dreibh/planetlab-kernel.git@kernel-v4.19
 # #####################################
 
 lxc-userspace-GITPATH       := git://git.onelab.eu/lxc-userspace.git@lxc-userspace-2.0-0

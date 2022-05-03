@@ -15,7 +15,7 @@ DEFAULT_FCDISTRO=f35
 DEFAULT_PLDISTRO=lxc
 DEFAULT_PERSONALITY=linux64
 DEFAULT_MAILDEST="build at onelab.eu"
-DEFAULT_BUILD_SCM_URL="git://github.com/dreibh/planetlab-lxc-build"
+DEFAULT_BUILD_SCM_URL="https://github.com/dreibh/planetlab-lxc-build"
 DEFAULT_BASE="@DATE@--@PLDISTRO@-@FCDISTRO@-@PERSONALITY@"
 
 # default gpg path used in signing yum repo
