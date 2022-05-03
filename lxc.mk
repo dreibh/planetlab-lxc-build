@@ -10,7 +10,7 @@
 
 
 
-### starting with f31 : server-side-only
+### starting with f31 : serverside-only
 ifneq "$(DISTRONAME)" "$(filter $(DISTRONAME), f31 f33 f35)"
 ###
 
@@ -32,7 +32,7 @@ IN_NODEIMAGE += lxc-userspace
 # with 4.19, the jprobe api has gone entirely
 # https://github.com/torvalds/linux/commit/4de58696de076d9bd2745d1cbe0930635c3f5ac9
 #
-ifneq "$(DISTRONAME)" "$(filter $(DISTRONAME), f29 f31 f33 f35)"
+ifneq "$(DISTRONAME)" "$(filter $(DISTRONAME), f31 f33 f35)"
 #
 transforward-MODULES := transforward
 transforward-SPEC := transforward.spec
@@ -188,8 +188,8 @@ IN_SLICEIMAGE += bind_public
 ALL += bind_public
 
 # in fedora 29, this triggers nasty-looking compile messages
-# not trying too hard, we're mostly after the server-side of f29 and above
-ifneq "$(DISTRONAME)" "$(filter $(DISTRONAME), f29 f31 f33 f35)"
+# not trying too hard, we're mostly after the serverside of f29 and above
+ifneq "$(DISTRONAME)" "$(filter $(DISTRONAME), f31 f33 f35)"
 #
 # sliver-openvswitch
 #
@@ -201,9 +201,9 @@ endif
 
 
 
-### server-side-only
+### serverside-only
 endif
-### server-side-only
+### serverside-only
 
 
 
@@ -267,9 +267,9 @@ endif
 #IN_NODEIMAGE += monitor
 
 
-### server-side-only
+### serverside-only
 ifneq "$(DISTRONAME)" "$(filter $(DISTRONAME), f31 f33 f35)"
-### server-side-only
+### serverside-only
 
 
 #
@@ -394,9 +394,9 @@ slicerepo-RPMDATE := yes
 ALL += slicerepo
 
 
-### server-side-only
+### serverside-only
 endif
-### server-side-only
+### serverside-only
 
 
 #
@@ -429,9 +429,15 @@ ALL += release
 # to the underlying myplc, we get SSL handshake issues
 # so, let's keep this out of the way for now
 # 2019 mar 27: reinstating for hopefully connecting fed4fire
+# 2022 apr 28:
+# we currently run on r2labapi.inria.fr a hybrid f33/f34/f35
+# that has python2 (recipe from f33) + php-7.4 (from f34) and httpd-2.4.53 (from f35)
+# and we'll hold to that until end of june 2022
+# however the python2 ecosystem is too far-fetched now
+# so we're dropping for good support for sfa, last version is f33
 #
-#ifneq "$(DISTRONAME)" "$(filter $(DISTRONAME), f27 f29 f31)"
+ifeq "$(DISTRONAME)" "$(filter $(DISTRONAME), f33)"
 sfa-MODULES := sfa
 sfa-SPEC := sfa.spec
 ALL += sfa
-#endif
+endif

@@ -7,7 +7,7 @@ DATE=$(date '+%Y-%m-%d-%H-%M')
 LOG=${LOGDIR}/${DATE}.log
 
 dry_run=
-verbose=--verbose
+verbose=-i
 log=
 skip_core=true
 root=/mirror/
@@ -46,7 +46,8 @@ function mirror_distro_arch () {
     [ -n "$(rsync --help | grep no-motd)" ] && options="$options --no-motd"
     options="$options $dry_run $verbose"
     options="$options -aH --numeric-ids"
-    options="$options --delete --delete-excluded --delete-after --delay-updates"
+    options="$options --delete --delete-excluded"
+    options="$options --partial"
     for e in $excludelist; do
         options="$options --exclude $e"
     done
