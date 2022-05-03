@@ -1,6 +1,6 @@
 [fedora]
 name=Fedora 35 - $basearch
-baseurl=@MIRRORURL@/fedora/releases/35/Everything/$basearch/os/
+baseurl=@MIRRORURL@/fedora/linux/releases/35/Everything/$basearch/os/
 enabled=1
 metadata_expire=7d
 gpgcheck=1
@@ -8,7 +8,7 @@ gpgkey=https://src.fedoraproject.org/rpms/fedora-repos/raw/rawhide/f/RPM-GPG-KEY
 
 [updates]
 name=Fedora 35 - $basearch - Updates
-baseurl=@MIRRORURL@/fedora/updates/35/Everything/$basearch/
+baseurl=@MIRRORURL@/fedora/linux/updates/35/Everything/$basearch/
 enabled=1
 metadata_expire=7d
 gpgcheck=1
@@ -16,7 +16,7 @@ gpgkey=https://src.fedoraproject.org/rpms/fedora-repos/raw/rawhide/f/RPM-GPG-KEY
 
 [modular]
 name=Fedora 35 - $basearch - Updates
-baseurl=@MIRRORURL@/fedora/updates/35/Modular/$basearch/
+baseurl=@MIRRORURL@/fedora/linux/updates/35/Modular/$basearch/
 enabled=1
 metadata_expire=7d
 gpgcheck=1
