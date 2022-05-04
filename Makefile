@@ -392,9 +392,7 @@ endef
 #   $(1)/ gets cleaned up if job cannot be done
 define fetch_git_module
 	mkdir $(1) ; \
-	(git archive --remote=$($(1).gitrepo) $($(1).gittag) | tar -C $(1) -xf - ) || \
-	(echo "==================== git archive FAILED, trying git clone instead" ; \
-         git clone $($(1).gitrepo) $(1); cd $(1) ; git checkout $($(1).gittag) ; rm -rf .git ) || \
+	( git clone $($(1).gitrepo) $(1); cd $(1) ; git checkout $($(1).gittag) ; rm -rf .git ) || \
 	{ rm -rf $(1); false; }
 endef
 
