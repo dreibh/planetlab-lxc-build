@@ -109,12 +109,12 @@ ALL += hipercontracer
 IN_NODEIMAGE += hipercontracer
 
 #
-# system-tools
+# td-system-tools
 #
-system-tools-MODULES := system-tools
-system-tools-SPEC := rpm/system-tools.spec
-ALL += system-tools
-IN_NODEIMAGE += system-tools
+td-system-tools-MODULES := td-system-tools
+td-system-tools-SPEC := rpm/td-system-tools.spec
+ALL += td-system-tools
+IN_NODEIMAGE += td-system-tools
 
 # ###########################################################################
 
