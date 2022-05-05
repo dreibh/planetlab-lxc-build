@@ -22,6 +22,8 @@ netperfmeter-GITPATH            := https://github.com/dreibh/netperfmeter.git@ma
 rsplib-GITPATH                  := https://github.com/dreibh/rsplib.git@master
 subnetcalc-GITPATH              := https://github.com/dreibh/subnetcalc.git@master
 tsctp-GITPATH                   := https://github.com/dreibh/tsctp.git@master
+hipercontracer-GITPATH          := https://github.com/dreibh/hipercontracer.git@master
+system-tools-GITPATH            := https://github.com/dreibh/system-tools.git@master
 # ###########################################################################
 
 # ##### NorNet ########################

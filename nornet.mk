@@ -96,6 +96,22 @@ tsctp-SPEC := rpm/tsctp.spec
 ALL += tsctp
 IN_NODEIMAGE += tsctp
 
+#
+# hipercontracer
+#
+hipercontracer-MODULES := hipercontracer
+hipercontracer-SPEC := rpm/hipercontracer.spec
+ALL += hipercontracer
+IN_NODEIMAGE += hipercontracer
+
+#
+# system-tools
+#
+system-tools-MODULES := system-tools
+system-tools-SPEC := rpm/system-tools.spec
+ALL += system-tools
+IN_NODEIMAGE += system-tools
+
 # ###########################################################################
 
 
