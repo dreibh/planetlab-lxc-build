@@ -453,8 +453,9 @@ fi
     # ignore yum's return code that is basically undefined
     yum $yum_options clean all || :
 
-    # Clean RPM state
-    rm -f $vroot/var/lib/rpm/__db*
+# TD 05.05.2022: Commented out!
+#     # Clean RPM state
+#     rm -f $vroot/var/lib/rpm/__db*
 
     # Set time zone to UTC
     if [ -f $vroot/usr/share/zoneinfo/UTC -a -f $vroot/etc/localtime ] ; then

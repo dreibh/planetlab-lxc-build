@@ -38,7 +38,8 @@ package>=f29: python2 python-unversioned-command
 package: tar
 package: pciutils
 package: kbd
-package: authconfig
+package<=34: authconfig
+package>=f35: shadow-utils
 package: hdparm
 package: lvm2
 package: kexec-tools
@@ -58,8 +59,9 @@ package: dos2unix
 package: bind-utils
 package: sharutils
 package: vconfig
-package: ntp
-package: pypcilib
+package<=34: ntp
+package>=35: ntpsec
+package<=34: pypcilib
 package: openvpn
 #package: vim-enhanced
 package: e2fsprogs
@@ -87,43 +89,42 @@ package>=f27: NetworkManager
 # package: qemu
 # package: bridge-utils
 
-#################### formerly in prep.sh
-junk: lib/obsolete
-junk: lib/tls
-junk: usr/share/cracklib
-junk: usr/share/emacs
-junk: usr/share/gnupg
-junk: usr/share/i18n
-junk: usr/share/locale
-junk: usr/share/terminfo
-junk: usr/share/zoneinfo
-junk: usr/sbin/build-locale-archive
-junk: usr/sbin/dbconverter-2
-junk: usr/sbin/sasl*
-junk: usr/sbin/tcpslice
-junk: usr/lib/perl*
-junk: usr/lib/locale
-junk: usr/lib/sasl*
-junk: usr/lib/gconv
-junk: usr/lib/tls
-junk: usr/boot
-#
-precious: usr/share/i18n/locales/en_US
-precious: usr/share/i18n/charmaps/UTF-8.gz
-precious: usr/share/locale/en
-precious: usr/share/terminfo/l/linux
-precious: usr/share/terminfo/v/vt100
-precious: usr/share/terminfo/x/xterm
-precious: usr/share/zoneinfo/UTC
-precious: boot/*@pldistro@*
-precious: boot/config*
-precious: boot/initrd-boot*
-precious: boot/kernel-boot*
-precious: boot/grub
-precious<=f8 precious<=centos5: usr/lib/locale/en_US.utf8
-
 # ###### NorNet customisation ###############################################
-package: nornet-ca
+# #################### formerly in prep.sh
+# junk: lib/obsolete
+# junk: lib/tls
+# junk: usr/share/cracklib
+# junk: usr/share/emacs
+# junk: usr/share/gnupg
+# junk: usr/share/i18n
+# junk: usr/share/locale
+# junk: usr/share/terminfo
+# junk: usr/share/zoneinfo
+# junk: usr/sbin/build-locale-archive
+# junk: usr/sbin/dbconverter-2
+# junk: usr/sbin/sasl*
+# junk: usr/sbin/tcpslice
+# junk: usr/lib/perl*
+# junk: usr/lib/locale
+# junk: usr/lib/sasl*
+# junk: usr/lib/gconv
+# junk: usr/lib/tls
+# junk: usr/boot
+#
+# precious: usr/share/i18n/locales/en_US
+# precious: usr/share/i18n/charmaps/UTF-8.gz
+# precious: usr/share/locale/en
+# precious: usr/share/terminfo/l/linux
+# precious: usr/share/terminfo/v/vt100
+# precious: usr/share/terminfo/x/xterm
+# precious: usr/share/zoneinfo/UTC
+# precious: boot/*@pldistro@*
+# precious: boot/config*
+# precious: boot/initrd-boot*
+# precious: boot/kernel-boot*
+# precious: boot/grub
+# precious<=f8 precious<=centos5: usr/lib/locale/en_US.utf8
+
 package: joe
 package: less
 # ###########################################################################
