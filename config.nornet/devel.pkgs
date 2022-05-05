@@ -35,14 +35,16 @@ package: doxygen
 package: cronie
 package: xmlsec1 xmlsec1-openssl
 package: expat-devel
-package: db4-devel
 package: ncurses-devel
 package: readline-devel
 package: dnsmasq
+package<=f31: db4-devel
 # for spec2make / rpmlib
 package=f8: popt-devel
 # kernel
-package: gnupg
+# see myplc/plc.d/gpg
+package<=f29: gnupg
+package>=f31: gnupg1
 package: diffutils
 package: patchutils
 package: vconfig
@@ -79,7 +81,8 @@ package: ghostscript
 package: ed
 package: docbook-utils-pdf
 # plcapi
-package: postgresql postgresql-devel postgresql-python postgresql-server
+package: postgresql postgresql-devel postgresql-server
+package<=f31: postgresql-python
 # if we don't specify @arch@ for php-devel, we end up with the 2 variants (i386 and x86_64)
 # in an undetermined order, and php-config --extension-dir might return the wrong place
 package: php php-devel.@arch@ php-gd php-pgsql
@@ -108,24 +111,26 @@ package>=f8:inotify-tools-devel
 ##########
 # openvswitch
 # starting with f16 we use the stock kernel, and openvswitch needs kernel-devel
-# ====== NorNet customisation ======
-# !!! NorNet uses own kernel !!! package>=f16: kernel-devel
-# !!! NorNet uses own kernel !!! package>=f16: kernel-modules-extra
+package>=f16: kernel-devel
+package>=f16: kernel-modules-extra
 ##########
 # zabbix/monitor
 package=centos5: krb5-devel.@arch@ e2fsprogs-devel.@arch@ libidn-devel.@arch@
 ##########
 # for sfa : rebuilding wsdl index at build-time
-package<=f25: python-uuid
-package: pyOpenSSL m2crypto
-package: libxml2-python libxslt-python
-package<=f27: python-ZSI
-package: python-psycopg2
-package: python-setuptools
-package: python-dateutil
-package: python-lxml
+# removing from the build image, defer installation
+# that depends on the flavour of python2 or 3
+# + in f33 the rpms primarily are gone
+#package<=f25: python-uuid
+#package: pyOpenSSL m2crypto
+#package: libxml2-python libxslt-python
+#package<=f27: python-ZSI
+#package: python2-psycopg2
+#package: python2-setuptools
+#package: python2-dateutil
+#package: python2-lxml
 # hopefully temporary, for sfa@python2
-package>=f29: python2-dateutil python2-lxml
+#package>=f29: python2-dateutil python2-lxml
 # DistributedRateLimiting
 package: libxml2-devel
 # myplc-docs
@@ -142,7 +147,6 @@ package: pkgconfig
 # f29; and needed on f27 so the spawned container actually starts its networking
 package>=f27: NetworkManager
 package>=f29: hostname
-
 
 # ###### NorNet customisation ###############################################
 package: bzip2-devel
