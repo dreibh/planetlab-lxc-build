@@ -125,7 +125,7 @@ IN_NODEIMAGE += lxc-userspace
 # with 4.19, the jprobe api has gone entirely
 # https://github.com/torvalds/linux/commit/4de58696de076d9bd2745d1cbe0930635c3f5ac9
 #
-ifneq "$(DISTRONAME)" "$(filter $(DISTRONAME), f29 f30)"
+ifneq "$(DISTRONAME)" "$(filter $(DISTRONAME), f31 f33 f35)"
 #
 transforward-MODULES := transforward
 transforward-SPEC := transforward.spec
@@ -241,12 +241,21 @@ ALL += pf2slice
 #
 # vsys
 #
+# dropped in f33:
+#ocamlopt  -c -o inotify.cmx inotify.ml
+#File "inotify.ml", line 95, characters 27-30:
+#95 |    let toread = Unix.read fd buf 0 toread in
+#                                ^^^
+#Error: This expression has type string but an expression was expected of type bytes
+#
+ifneq "$(DISTRONAME)" "$(filter $(DISTRONAME), f33 f35)"
 vsys-MODULES := vsys
 vsys-SPEC := vsys.spec
 # ocaml-docs is not needed anymore but keep it on a tmp basis as some tags may still have it
 vsys-STOCK-DEVEL-RPMS += ocaml-ocamldoc ocaml-docs
 IN_NODEIMAGE += vsys
 ALL += vsys
+endif
 
 #
 # vsyssh : installed in slivers
@@ -280,8 +289,8 @@ ALL += vsys-wrapper
 # ##### NorNet ########################
 
 # in fedora 29, this triggers nasty-looking compile messages
-# not trying too hard, we're mostly after the server-side of f29
-ifneq "$(DISTRONAME)" "$(filter $(DISTRONAME), f29 f30)"
+# not trying too hard, we're mostly after the serverside of f29 and above
+ifneq "$(DISTRONAME)" "$(filter $(DISTRONAME), f31 f33 f35)"
 #
 # sliver-openvswitch
 #
@@ -329,9 +338,16 @@ IN_MYPLC += www-register-wizard
 #
 # WARNING: as of f27 I have to remove support for SSL in pcucontrol
 # see pcucontrol.spec for details
+# no longer builds in f33
+# stdsoap2.cpp: In function ‘char* soap_string_in(soap*, int, long int, long int)’:
+# stdsoap2.cpp:8259:18: error: narrowing conversion of ‘2147483708’ from ‘unsigned int’ to ‘int’ [-Wnarrowing]
+#  8259 |       case '<' | 0x80000000:
+#       |                  ^~~~~~~~~~
+ifneq "$(DISTRONAME)" "$(filter $(DISTRONAME), f33 f35)"
 pcucontrol-MODULES := pcucontrol
 pcucontrol-SPEC := pcucontrol.spec
 ALL += pcucontrol
+endif
 
 #
 # monitor
@@ -492,8 +508,15 @@ ALL += release
 # oddly enough, when the py2 sfa code issues xmlrpc calls over ssl
 # to the underlying myplc, we get SSL handshake issues
 # so, let's keep this out of the way for now
+# 2019 mar 27: reinstating for hopefully connecting fed4fire
+# 2022 apr 28:
+# we currently run on r2labapi.inria.fr a hybrid f33/f34/f35
+# that has python2 (recipe from f33) + php-7.4 (from f34) and httpd-2.4.53 (from f35)
+# and we'll hold to that until end of june 2022
+# however the python2 ecosystem is too far-fetched now
+# so we're dropping for good support for sfa, last version is f33
 #
-ifneq "$(DISTRONAME)" "$(filter $(DISTRONAME), f27 f29 f30)"
+ifeq "$(DISTRONAME)" "$(filter $(DISTRONAME), f33)"
 sfa-MODULES := sfa
 sfa-SPEC := sfa.spec
 ALL += sfa
