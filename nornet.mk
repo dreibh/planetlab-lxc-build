@@ -17,27 +17,31 @@
 
 # ###### NorNet customisation ###############################################
 
-kernel-MODULES := linux
-kernel-SPEC := kernel.spec
-kernel-BUILD-FROM-SRPM := yes
-ifeq "$(HOSTARCH)" "i386"
-   kernel-RPMFLAGS := --target i686
-else
-   kernel-RPMFLAGS := --target $(HOSTARCH)
-endif
-kernel-RPMFLAGS += --without smp --without pae --without debug --without doc --without debuginfo --without perf
-kernel-WHITELIST-RPMS := kernel,kernel-core,kernel-headers,kernel-devel,kernel-modules,kernel-modules-extra,kernel-tools,kernel-tools-libs,kernel-tools-libs-devel
-kernel-SPECVARS += kernelconfig=planetlab
-KERNELS += kernel
+#
+# kernel
+#
+# kernel-MODULES := linux
+# kernel-SPEC := kernel.spec
+# kernel-BUILD-FROM-SRPM := yes
+# ifeq "$(HOSTARCH)" "i386"
+#    kernel-RPMFLAGS := --target i686
+# else
+#    kernel-RPMFLAGS := --target $(HOSTARCH)
+# endif
+# kernel-RPMFLAGS += --without smp --without pae --without debug --without doc --without debuginfo --without perf
+# kernel-WHITELIST-RPMS := kernel,kernel-core,kernel-headers,kernel-devel,kernel-modules,kernel-modules-extra,kernel-tools,kernel-tools-libs,kernel-tools-libs-devel
+# kernel-SPECVARS += kernelconfig=planetlab
+# KERNELS += kernel
+#
+# kernels: $(KERNELS)
+# kernels-clean: $(foreach package,$(KERNELS),$(package)-clean)
+#
+# ALL += $(KERNELS)
+# # this is to mark on which image a given rpm is supposed to go
+# IN_BOOTCD += $(KERNELS)
+# #IN_SLICEIMAGE += $(KERNELS)
+# IN_NODEIMAGE += $(KERNELS)
 
-kernels: $(KERNELS)
-kernels-clean: $(foreach package,$(KERNELS),$(package)-clean)
-
-ALL += $(KERNELS)
-# this is to mark on which image a given rpm is supposed to go
-IN_BOOTCD += $(KERNELS)
-#IN_SLICEIMAGE += $(KERNELS)
-IN_NODEIMAGE += $(KERNELS)
 
 #
 # netperfmeter
