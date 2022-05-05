@@ -2,6 +2,6 @@
 # used to be hard-wired in build.common / mkfedora
 
 # ###### NorNet customisation ###############################################
-mirror: https://fedora.uib.no
 mirror: https://archives.fedoraproject.org/pub
+mirror: https://fedora.uib.no
 # ###########################################################################
