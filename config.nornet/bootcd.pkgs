@@ -38,7 +38,7 @@ package>=f29: python2 python-unversioned-command
 package: tar
 package: pciutils
 package: kbd
-package<=34: authconfig
+package<=f34: authconfig
 package>=f35: shadow-utils
 package: hdparm
 package: lvm2
@@ -59,9 +59,9 @@ package: dos2unix
 package: bind-utils
 package: sharutils
 package: vconfig
-package<=34: ntp
-package>=35: ntpsec
-package<=34: pypcilib
+package<=f34: ntp
+package>=f35: ntpsec
+package<=f34: pypcilib
 package: openvpn
 #package: vim-enhanced
 package: e2fsprogs
