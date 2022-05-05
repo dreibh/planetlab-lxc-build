@@ -50,7 +50,8 @@ package>=sl6: gnupg2
 package: nano
 package: parted
 package<=f27: pyparted
-package>=f29: python2-pyparted
+package=f29: python2-pyparted
+package>=f35: python3-pyparted
 package: openssh-server
 package: openssh-clients
 package: ncftp
